@@ -146,6 +146,7 @@ node tools/gallery_multiformat_test.js  # 画廊多格式专项 19 项（jpg/png
 node tools/inventory.js           # 盘点 + 覆盖缺口
 node tools/apply_alias.js --check # 别名表体检
 NODE_PATH=... node tools/verify_chrome.js  # 真实 Chrome 验证 29 项（改了显隐/尺寸/配色必跑）
+node tools/verify_live_api.js    # 线上产物验收 15 项（发布后跑：清单/图片字节/文案/Pages 状态）
 ```
 
 ## 授权与边界

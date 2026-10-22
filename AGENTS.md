@@ -115,7 +115,13 @@ node tools/gallery_multiformat_test.js # ⑥b 画廊多格式专项 19 项（jpg
 node tools/inventory.js         # ⑦ 盘点数字喂文档
 node tools/apply_alias.js --check      # ⑧ 别名表体检（数据缺 kw 时改本脚本再重跑写入）
 NODE_PATH=... node tools/verify_chrome.js  # ⑨ 真实 Chrome 验证 29 项（改了显隐/尺寸/配色必跑）
+node tools/verify_live_api.js    # ⑩ 线上产物验收 15 项（发布后跑；Pages 域名本机 Chrome 连不上，走 GitHub API 核对远端真实字节）
 ```
+
+**⑩ 为什么要用 API 而不是 playwright 访问 Pages**：`github.io` 在本机 Chrome 的网络栈里连不上
+（`page.goto` 超时；`channel:"chrome"` 还会启动即退 exitCode=9，必须用 `executablePath`
+显式指 Chrome）。但 node fetch / GitHub API 走另一条路畅通。Pages 是静态直出，
+构建产物 == main 分支内容，所以用 API 核对远端字节比截图更严格。
 
 改了 `data/cases.json` 的 tested 或 recipe → 画廊图可能过期，回第 3 节管线。
 改了 `data/gallery.json` 的槽位 → **必须重跑 `node tools/gallery_sync.js`** 重建清单，否则新槽位的图挂不上（页面只认清单里的 id）。
