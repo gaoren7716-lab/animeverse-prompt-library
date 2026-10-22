@@ -152,6 +152,25 @@ function ok(c, name, extra) {
   await page.click('[data-gs="lg"]');
   await page.waitForTimeout(200);
 
+  // 9b. 图片格式自适应：png/jpg 混排都要真的加载出来
+  // （jsdom 根本不加载 <img>，路径写错或格式不认都查不出来——必须真实浏览器）
+  const imgs = await page.evaluate(() => Array.prototype.map.call(
+    document.querySelectorAll("#gGrid .gcard img"),
+    function (i) { return { src: i.getAttribute("src"), w: i.naturalWidth, h: i.naturalHeight }; }
+  ));
+  const broken = imgs.filter(function (i) { return !i.w || !i.h; });
+  ok(imgs.length === 10 && broken.length === 0,
+    "画廊 10 张图全部真实加载成功（无碎图）",
+    imgs.length + " 张，碎图 " + broken.length + (broken.length ? "：" + broken.map(function (b) { return b.src; }).join(",") : ""));
+  const srcs = imgs.map(function (i) { return i.src; });
+  ok(srcs.some(function (s) { return /\.png$/i.test(s); }) &&
+     srcs.some(function (s) { return /\.jpe?g$/i.test(s); }),
+    "画廊 png 与 jpg 混排都被浏览器正确渲染",
+    srcs.filter(function (s) { return /\.(png|jpe?g)$/i.test(s); }).length + " 张已配图");
+  const pngImg = imgs.filter(function (i) { return /\.png$/i.test(i.src); })[0];
+  ok(pngImg && pngImg.w >= 1200, "PNG 图真实像素宽度正常（未被压坏）",
+    pngImg ? pngImg.w + "x" + pngImg.h : "无 PNG 图");
+
   // 10. 短剧抽卡（没想法就抽一部）
   await page.click('button[data-v="v-script"]');
   await page.waitForTimeout(250);

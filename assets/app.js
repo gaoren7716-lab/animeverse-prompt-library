@@ -115,7 +115,7 @@ function renderGallery() {
     var imgHtml = img
       ? '<img src="' + esc(img) + '" alt="' + esc(s.zh) + '">'
       : '<div class="colorcard"><div class="swrow">' + swHtml + '</div><span class="mut sm">待配图 · ' + esc(st ? st.zh : "") + '</span>' +
-        '<span class="mut sm" style="font-size:10.5px;opacity:.75">存成 gallery/' + esc(s.id) + '.jpg</span></div>';
+        '<span class="mut sm" style="font-size:10.5px;opacity:.75">存成 gallery/' + esc(s.id) + '.jpg / .png</span></div>';
     return '<div class="gcard" data-cs="' + s.id + '">' +
       '<div class="imgwrap" data-act="detail"><span class="gid" data-act="gid">' + s.id + '</span>' + imgHtml + "</div>" +
       '<div class="body"><h4>' + esc(s.zh) + (s.tested ? ' <span class="badge b-gr">已实测</span>' : "") + "</h4><div class=\"desc\">" + esc(s.desc) + "</div></div>" +
@@ -134,7 +134,7 @@ $("gGrid").addEventListener("click", function (e) {
   var act = e.target.getAttribute("data-act");
   if (act === "gid") {
     var img = galleryImg(cs.id);
-    copyText(img ? img.split("/").pop() : cs.id + ".jpg");
+    copyText(img ? img.split("/").pop() : cs.id + ".jpg 或 .png");
     return;
   }
   if (act === "copy") { copyText(AV.compose(cs.recipe).prompt); return; }

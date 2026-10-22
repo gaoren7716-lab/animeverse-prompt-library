@@ -106,6 +106,22 @@ function run() {
     ok(gGrid.className.indexOf("gs-sm") === -1, "画廊切回大图", gGrid.className);
     ok($$("#gGrid .gcard img")[0].getAttribute("src").indexOf("gallery/CS-") === 0, "配图 src 指向 gallery/ 目录");
     ok(typeof window.GALLERY_IMGS === "object" && Object.keys(window.GALLERY_IMGS).length === 10, "GALLERY_IMGS 清单 10 条");
+    /* 图片格式自适应：清单里的路径扩展名必须与磁盘一致，且混排（jpg+png）都要渲染出来。
+     * 早期把 .jpg 写死在文案与提示里，用户把图换成 PNG 后页面碎图、提示还教人存 .jpg。 */
+    var exts = Object.keys(window.GALLERY_IMGS).map(function (k) {
+      return (window.GALLERY_IMGS[k].match(/\.(png|jpe?g|webp)$/i) || [])[1] || "";
+    });
+    ok(exts.every(function (e) { return e; }), "清单每条都带合法图片扩展名", exts.join(","));
+    var hasPng = exts.some(function (e) { return /^png$/i.test(e); });
+    var hasJpg = exts.some(function (e) { return /^jpe?g$/i.test(e); });
+    ok(hasPng && hasJpg, "画廊混排 png 与 jpg 都被认领", exts.join(","));
+    var imgs = $$("#gGrid .gcard img");
+    ok(imgs.length === 10, "混排后仍渲染 10 张图", String(imgs.length));
+    var srcs = imgs.map(function (i) { return i.getAttribute("src"); });
+    ok(srcs.some(function (s) { return /\.png$/i.test(s); }) &&
+       srcs.some(function (s) { return /\.jpe?g$/i.test(s); }), "页面图片 src 含 png 与 jpg 两种扩展名");
+    var todoHint = $$("#gGrid .colorcard").map(function (c) { return c.textContent; }).join(" ");
+    ok(todoHint.indexOf(".jpg / .png") !== -1, "待配图提示同时列出 jpg 与 png（不再写死格式）");
     // 预留位必须自带配方：点开详情能看到词面与验证点
     var glCard = $$("#gGrid .gcard").filter(function (c) { return c.getAttribute("data-cs") === "GL-23"; })[0];
     ok(!!glCard, "画廊含 GL-23 预留位");

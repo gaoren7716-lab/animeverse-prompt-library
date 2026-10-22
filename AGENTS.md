@@ -91,8 +91,13 @@ gallery/（文件名主干 = 案例 id）──gallery_sync.js──→ assets/g
 
 ### 画廊
 
-- `gallery/` 文件名主干 = 案例 id（CS-01.jpg），母版/临时文件用 `_` 前缀（不进清单）
-- **新图管线**：ImageGen 出图 → 立刻改名成案例 id（并行出图会撞名！提示词首句唯一可避免）→ `gallery_compress.js`（1200px JPEG q88）→ `gallery_sync.js` 重建清单
+- `gallery/` 文件名主干 = 案例 id（CS-01.jpg / CS-01.png 都认），母版/临时文件用 `_` 前缀（不进清单）
+- **图片格式不限**（2026-10-22 用户把 CS-01~03 换成 PNG）：`.png/.jpg/.jpeg/.webp` 全部认，
+  同一画廊里混放没问题。`gallery_sync.js` 按 id 归组、**取 mtime 较新的一张**（早期版本 readdir 顺序直接覆盖，
+  同 id 两格式时清单随机指向哪张）；同 id 多张会打 ⚠ 并让 `--check` 失败，要人工删掉多余的
+- **新图管线**：ImageGen 出图 → 立刻改名成案例 id（并行出图会撞名！提示词首句唯一可避免）→ `gallery_compress.js`（1200px，**保留原格式**：PNG 仍出 PNG 走 256 色调色板、JPEG 仍出 JPEG q88）→ `gallery_sync.js` 重建清单
+- **压缩必须保留原格式**（旧版只处理 PNG 且一律转 JPEG 再删原 PNG，会把用户手动换的 PNG 改回去）；
+  统一转 JPEG 要显式 `--to jpg`。写盘走**临时文件 + rename**，直接覆盖被占用的文件会抛 UNKNOWN open 整批中断
 - `assets/gallery-imgs.js` 是派生物，改它无效，真动作是动 gallery/ 目录再 sync
 - **出图后必须目检**：对照案例 validates 逐条核。不符就改配方（或补冲突规则）再重出，不许留着不符的图挂 `tested=true`
 - **图幅两档**（2026-10-22 用户要求）：大图 3 列（`#gGrid` 默认 class `grid g3`）/ 小图 5 列密排（加 `gs-sm`，收起描述与按钮缩小）。切换靠换 className 后重渲染，不是靠改 CSS 变量
@@ -104,11 +109,12 @@ NODE_PATH=<jsdom workspace>/node_modules node tools/build_web.js   # ① 先同�
 node tools/check_fields.js      # ② 字段体检
 node tools/check_cases.js       # ③ 引用完整 + 覆盖矩阵
 node tools/smoke.js             # ④ 引擎冒烟 130 项
-NODE_PATH=... node tools/smoke-web.js  # ⑤ 界面冒烟 107 项（jsdom）
+NODE_PATH=... node tools/smoke-web.js  # ⑤ 界面冒烟 112 项（jsdom）
 node tools/gallery_sync.js --check     # ⑥ 画廊清单与目录一致
+node tools/gallery_multiformat_test.js # ⑥b 画廊多格式专项 19 项（jpg/png 混排、同 id 多文件取舍）
 node tools/inventory.js         # ⑦ 盘点数字喂文档
 node tools/apply_alias.js --check      # ⑧ 别名表体检（数据缺 kw 时改本脚本再重跑写入）
-NODE_PATH=... node tools/verify_chrome.js  # ⑨ 真实 Chrome 验证 26 项（改了显隐/尺寸/配色必跑）
+NODE_PATH=... node tools/verify_chrome.js  # ⑨ 真实 Chrome 验证 29 项（改了显隐/尺寸/配色必跑）
 ```
 
 改了 `data/cases.json` 的 tested 或 recipe → 画廊图可能过期，回第 3 节管线。

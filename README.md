@@ -108,8 +108,9 @@ Aniverse Prompt Library —— 覆盖全球动漫及关联创作的开放式提�
 ### 画廊的 50 个位置怎么填
 
 预留位（GL-11~GL-50）都是完整配方，**可以直接复制提示词去出图**，出完存成
-`gallery/<卡号>.jpg`（卡号见卡片左上角，如 `GL-23`）放进项目 `gallery/` 目录，
+`gallery/<卡号>.jpg` 或 `gallery/<卡号>.png`（卡号见卡片左上角，如 `GL-23`）放进项目 `gallery/` 目录，
 重跑 `node tools/gallery_sync.js` 即自动挂上，页面即时显示。
+**两种格式可混放**——同一个画廊里 JPG 和 PNG 并存没问题，同一卡号放了多个格式时取修改时间较新的一张。
 卡号规则：`CS-01~CS-10` 是已实测案例位，`GL-11~GL-50` 是预留位。
 
 **图幅可切**：画廊右上角有「图幅：大图 / 小图」——大图 3 列看细节，小图 5 列密排、收起描述，一屏扫全 50 个位置。
@@ -139,11 +140,12 @@ NODE_PATH=<jsdom 所在 node workspace>/node_modules node tools/build_web.js
 node tools/check_fields.js        # 字段体检（id 格式/prompt 禁中文/三件套/授权分级/kw 别名/story 词源）
 node tools/check_cases.js         # 引用完整 + 覆盖矩阵 + 同维度堆料
 node tools/smoke.js               # 引擎冒烟 130 项
-NODE_PATH=... node tools/smoke-web.js   # 界面冒烟 107 项（jsdom，含 CSS 绊线）
+NODE_PATH=... node tools/smoke-web.js   # 界面冒烟 112 项（jsdom，含 CSS 绊线）
 node tools/gallery_sync.js --check       # 画廊清单与目录一致
+node tools/gallery_multiformat_test.js  # 画廊多格式专项 19 项（jpg/png 混排、同 id 多文件取舍）
 node tools/inventory.js           # 盘点 + 覆盖缺口
 node tools/apply_alias.js --check # 别名表体检
-NODE_PATH=... node tools/verify_chrome.js  # 真实 Chrome 验证 26 项（改了显隐/尺寸/配色必跑）
+NODE_PATH=... node tools/verify_chrome.js  # 真实 Chrome 验证 29 项（改了显隐/尺寸/配色必跑）
 ```
 
 ## 授权与边界
