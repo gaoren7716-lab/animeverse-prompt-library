@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>动漫宇宙 · 全球动漫及关联创作提示词库</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
 <style>
 /* ===== 主题变量（暗色） ===== */
 :root{
@@ -18,17 +20,20 @@ body{background:var(--bg);color:var(--tx);font:14px/1.65 "PingFang SC","Microsof
 a{color:var(--cy);text-decoration:none}
 ::selection{background:rgba(139,92,255,.4)}
 
-/* ===== 顶部导航栏 ===== */
-#side{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:16px;padding:0 16px;height:60px;background:var(--bg2);border-bottom:1px solid var(--line)}
-#side .logo{font-size:17px;font-weight:700;white-space:nowrap;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.5px}
-#side .logo small{display:inline;font-size:10px;color:var(--tx3);font-weight:400;letter-spacing:1.5px;margin-left:7px;-webkit-text-fill-color:var(--tx3)}
-.nav{display:flex;flex-direction:row;gap:3px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+/* ===== 顶部导航栏（放大版 2026-10-22） ===== */
+#side{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:18px;padding:0 20px;height:78px;background:var(--bg2);border-bottom:1px solid var(--line)}
+#side .logo{display:flex;align-items:center;gap:11px;white-space:nowrap;flex:0 0 auto}
+#side .logo img{width:42px;height:42px;display:block;flex:0 0 42px}
+#side .logo .lt{display:flex;flex-direction:column;justify-content:center;line-height:1.15}
+#side .logo .lt b{font-size:20px;font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.5px}
+#side .logo .lt small{font-size:10.5px;color:var(--tx3);font-weight:400;letter-spacing:1.8px;margin-top:2px}
+.nav{display:flex;flex-direction:row;gap:4px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
-.nav button{display:flex;align-items:center;gap:7px;width:auto;white-space:nowrap;text-align:left;background:none;border:0;color:var(--tx2);padding:10px 14px;border-radius:9px;font-size:14px;cursor:pointer;transition:.15s}
+.nav button{display:flex;align-items:center;gap:8px;width:auto;white-space:nowrap;text-align:left;background:none;border:0;color:var(--tx2);padding:13px 17px;border-radius:10px;font-size:15.5px;cursor:pointer;transition:.15s}
 .nav button:hover{background:var(--panel);color:var(--tx)}
-.nav button.on{background:var(--panel2);color:#fff;box-shadow:inset 0 -2px 0 var(--pk)}
-.nav button .ico{width:16px;text-align:center;flex:0 0 16px}
-#side .foot{font-size:10.5px;color:var(--tx3);line-height:1.5;white-space:nowrap;text-align:right;flex:0 0 auto}
+.nav button.on{background:var(--panel2);color:#fff;box-shadow:inset 0 -3px 0 var(--pk)}
+.nav button .ico{width:20px;text-align:center;flex:0 0 20px;font-size:17px}
+#side .foot{font-size:11.5px;color:var(--tx3);line-height:1.5;white-space:nowrap;text-align:right;flex:0 0 auto}
 @media(max-width:900px){#side .foot{display:none}}
 
 /* ===== 主区与视图显隐（铁律：布局类不得设 display） ===== */
@@ -41,23 +46,29 @@ a{color:var(--cy);text-decoration:none}
 .hint{color:var(--tx3);font-size:12.5px;margin:2px 0 12px}
 .hint b{color:var(--tx2)}
 
-/* ===== 通用控件 ===== */
-.btn{background:var(--panel2);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:11px 20px;font-size:14px;line-height:1.5;min-height:42px;cursor:pointer;transition:.15s}
+/* ===== 通用控件（放大版 2026-10-22） ===== */
+.btn{background:var(--panel2);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:12px 22px;font-size:15px;line-height:1.5;min-height:46px;cursor:pointer;transition:.15s}
 .btn:hover{border-color:var(--pp);color:#fff}
 .btn.pri{background:var(--grad);border:0;color:#fff;font-weight:600}
 .btn.pri:hover{filter:brightness(1.12)}
-.btn.sm{padding:8px 15px;font-size:13px;border-radius:8px;min-height:36px}
+.btn.sm{padding:9px 17px;font-size:13.5px;border-radius:9px;min-height:40px}
 .btn.on{border-color:var(--pk);color:var(--pk);background:rgba(255,92,138,.1)}
-.gcopy{background:var(--grad);border:0;color:#fff;border-radius:10px;padding:11px 22px;font-size:14px;line-height:1.5;min-height:42px;cursor:pointer;font-weight:600}
-.gcopy:hover{filter:brightness(1.12)}
-input[type=text],textarea,select{background:var(--bg2);border:1px solid var(--line);border-radius:10px;color:var(--tx);padding:11px 15px;font-size:14.5px;line-height:1.6;min-height:44px;font-family:inherit;outline:none}
+/* 主行动（生成/出图/出分镜）：品牌粉紫渐变 */
+.gact{background:var(--grad);border:0;color:#fff;border-radius:10px;padding:12px 24px;font-size:15px;line-height:1.5;min-height:46px;cursor:pointer;font-weight:600;transition:.15s}
+.gact:hover{filter:brightness(1.12)}
+/* 复制（所有一键复制提示词）：青蓝渐变，与生成按钮视觉区分，一眼能找 */
+.cp{background:linear-gradient(135deg,#4dd0e1,#3b7bff);border:0;color:#04202c;border-radius:10px;padding:12px 24px;font-size:15px;line-height:1.5;min-height:46px;cursor:pointer;font-weight:700;transition:.15s;box-shadow:0 2px 12px rgba(77,208,225,.28)}
+.cp:hover{filter:brightness(1.1);box-shadow:0 3px 18px rgba(77,208,225,.45)}
+.cp.sm{padding:9px 17px;font-size:13.5px;border-radius:9px;min-height:40px;box-shadow:0 1px 8px rgba(77,208,225,.24)}
+.cp.sm:hover{box-shadow:0 2px 14px rgba(77,208,225,.4)}
+input[type=text],textarea,select{background:var(--bg2);border:1px solid var(--line);border-radius:11px;color:var(--tx);padding:13px 17px;font-size:16px;line-height:1.6;min-height:52px;font-family:inherit;outline:none}
 input[type=text]:focus,textarea:focus,select:focus{border-color:var(--pp)}
-textarea{width:100%;min-height:210px;resize:vertical;line-height:1.85;margin-top:6px;font-size:14.5px}
-select{padding-right:34px;cursor:pointer}
-.chip{display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--line);color:var(--tx2);border-radius:20px;padding:7px 15px;font-size:13.5px;line-height:1.5;cursor:pointer;transition:.13s;user-select:none}
+textarea{width:100%;min-height:250px;resize:vertical;line-height:1.85;margin-top:6px;font-size:16px}
+select{padding-right:40px;cursor:pointer;font-size:15.5px}
+.chip{display:inline-flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--line);color:var(--tx2);border-radius:22px;padding:9px 18px;font-size:14.5px;line-height:1.5;cursor:pointer;transition:.13s;user-select:none}
 .chip:hover{border-color:var(--pp);color:var(--tx)}
 .chip.on{background:rgba(139,92,255,.16);border-color:var(--pp);color:#fff}
-.chip .cid{color:var(--tx3);font-size:10.5px;font-family:ui-monospace,monospace}
+.chip .cid{color:var(--tx3);font-size:11px;font-family:ui-monospace,monospace}
 .row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
 .grid{display:grid;gap:14px}
 .g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
@@ -149,8 +160,12 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
 .plcard .swrow i:hover{filter:brightness(1.2)}
 
 @media(max-width:860px){
-  #side{height:48px;padding:0 10px;gap:10px}
-  #side .logo small{display:none}
+  #side{height:62px;padding:0 12px;gap:12px}
+  #side .logo img{width:34px;height:34px;flex:0 0 34px}
+  #side .logo .lt small{display:none}
+  #side .logo .lt b{font-size:17px}
+  .nav button{font-size:14px;padding:10px 13px}
+  .nav button .ico{width:17px;flex:0 0 17px;font-size:15px}
   #main{padding:14px}
 }
 </style>
@@ -158,7 +173,10 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
 <body>
 
 <aside id="side">
-  <div class="logo">动漫宇宙<small>ANIMEVERSE PROMPT LIBRARY</small></div>
+  <div class="logo">
+    <img src="assets/logo.svg" alt="动漫宇宙 ANIMEVERSE PROMPT LIBRARY" width="42" height="42">
+    <span class="lt"><b>动漫宇宙</b><small>ANIMEVERSE PROMPT LIBRARY</small></span>
+  </div>
   <nav class="nav" id="nav">
     <button data-v="v-gallery" class="on"><span class="ico">🎨</span>示例画廊</button>
     <button data-v="v-custom"><span class="ico">⚡</span>自定义出图</button>
@@ -228,7 +246,7 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
       <input type="text" id="ezTheme" placeholder="输入主题，如：雨天便利店 / 毕业季天台" style="flex:1;min-width:200px">
       <input type="text" id="ezKw" placeholder="关键词（可空），逗号分隔" style="flex:1;min-width:150px">
       <select id="ezPreset"></select>
-      <button class="gcopy" id="ezGo">生成</button>
+      <button class="gact" id="ezGo">生成</button>
       <button class="btn sm" id="ezRand">🎲 随机来一张</button>
     </div>
     <div id="ezOut"></div>
@@ -244,7 +262,7 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
     <div class="row" style="margin:4px 0 10px">
       <input type="text" id="serTheme" placeholder="输入主题，如：武道大会 / 雨天便利店 / 赛博都市" style="flex:1;min-width:200px">
       <input type="text" id="serKw" placeholder="关键词（可空），逗号分隔，如：机甲, 竹林" style="flex:1;min-width:170px">
-      <button class="gcopy" id="doSeries">生成系列</button>
+      <button class="gact" id="doSeries">生成系列</button>
       <button class="btn sm" id="serSave" title="把当前主题与关键词存进「我的主题」，下次直接点">加入主题</button>
     </div>
     <div class="row" id="serChips" style="margin-bottom:6px"></div>
@@ -255,7 +273,7 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
       <button class="btn sm sercnt on" data-n="4">4 张</button>
       <button class="btn sm sercnt" data-n="5">5 张</button>
       <button class="btn sm sercnt" data-n="6">6 张</button>
-      <button class="gcopy" id="serAll" style="margin-left:auto">一键复制全部</button>
+      <button class="cp" id="serAll" style="margin-left:auto">一键复制全部</button>
       <button class="btn sm" id="serReroll">换一批</button>
     </div>
     <div id="seriesOut"></div>
@@ -275,7 +293,7 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
         <option value="para">按段落拆</option>
         <option value="sent">按句子拆</option>
       </select>
-      <button class="gcopy" id="scGo">出分镜系列</button>
+      <button class="gact" id="scGo">出分镜系列</button>
       <button class="btn sm" id="scReroll" title="同一份文案，换一套配套">换一批</button>
     </div>
     <textarea id="scText" rows="9" placeholder="把短剧文案粘在这里。例：
@@ -320,10 +338,10 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
     <h2>抽卡 <span class="tag">要没见过组合</span></h2>
     <div class="hint">11 维全随机，冲突自动规避（最多重试 40 次）。可以锁定任意维度再抽——比如锁死画风抽世界。抽中的卡可直接复制或载入合成器细调。</div>
     <div class="row" style="margin-bottom:14px">
-      <button class="gcopy" id="gcRand">🎲 随机来一张</button>
       <button class="btn" id="gc1">抽 1 张</button>
       <button class="btn" id="gc4">抽 4 张</button>
       <button class="btn" id="gc8">抽 8 张</button>
+      <button class="gact" id="gcRand">🎲 随机来一张</button>
       <span class="mut sm" id="gcLockInfo"></span>
     </div>
     <div class="grid g4" id="gcGrid"></div>
@@ -367,7 +385,33 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
     <h2>框架与体检 <span class="tag">家底透明</span></h2>
     <div class="hint">所有数字现算（`tools/inventory.js`），不是写死的宣传语。</div>
     <div class="grid g4" id="stCards" style="margin-bottom:16px"></div>
-    <h3 style="font-size:14.5px;margin:14px 0 8px">十一个维度与决策归属</h3>
+    <h3 style="font-size:14.5px;margin:14px 0 8px">品牌标识</h3>
+    <div class="hint sm" style="margin-bottom:10px">图形标（正方形）与横版组合（图形 + 中英文名）均为矢量 SVG，可直接取用。SVG 是唯一真源，改型改 SVG 后重跑 <span class="mono">node tools/logo_export.js</span> 重新导出 PNG。</div>
+    <div class="grid g2" style="margin-bottom:10px">
+      <div class="card" style="display:flex;align-items:center;gap:18px">
+        <img src="assets/logo.svg" alt="动漫宇宙图形标" width="88" height="88" style="flex:0 0 88px">
+        <div>
+          <b>图形标</b>
+          <div class="mut sm" style="margin:4px 0 8px">深色底透明通道，适合头像、图标位、水印</div>
+          <div class="row" style="gap:6px">
+            <button class="cp sm" data-logo="assets/logo.svg">复制 SVG</button>
+            <a class="btn sm" href="assets/logo.png" download="animeverse-logo.png">下载 PNG 512</a>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="display:flex;align-items:center;gap:18px">
+        <img src="assets/logo-lockup.svg" alt="动漫宇宙 ANIMEVERSE PROMPT LIBRARY" style="flex:0 0 auto;max-width:300px;height:auto">
+        <div>
+          <b>横版组合</b>
+          <div class="mut sm" style="margin:4px 0 8px">带中英文名，适合页头、封面、横幅</div>
+          <div class="row" style="gap:6px">
+            <button class="cp sm" data-logo="assets/logo-lockup.svg">复制 SVG</button>
+            <a class="btn sm" href="assets/logo-lockup.png" download="animeverse-lockup.png">下载 PNG</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3 style="font-size:14.5px;margin:18px 0 8px">十一个维度与决策归属</h3>
     <div style="overflow-x:auto"><table class="tb" id="dimTb"></table></div>
     <h3 style="font-size:14.5px;margin:18px 0 8px">装配顺序（词面拼装）</h3>
     <div class="hint sm" id="asmOrder"></div>

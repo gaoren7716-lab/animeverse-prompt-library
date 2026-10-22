@@ -255,9 +255,30 @@ function run() {
     /* 10. 画廊复制按钮不抛错 */
     click($$("#nav button").filter(function (b) { return b.getAttribute("data-v") === "v-gallery"; })[0]);
     threw = false;
-    try { click($$("#gGrid .gcard .gcopy")[0]); } catch (e) { threw = true; }
+    try { click($$("#gGrid .gcard .cp")[0]); } catch (e) { threw = true; }
     ok(!threw, "画廊复制按钮不抛异常");
     ok($("toast").classList.contains("on"), "复制反馈 toast 出现");
+
+    /* 11. 品牌 LOGO 独立资产 + 导航放大 + 抽卡按钮顺序 + 复制按钮配色 */
+    ok($$("#side .logo img").length === 1, "导航栏带独立 LOGO 图片");
+    ok(($$("#side .logo img")[0].getAttribute("src") || "").indexOf("assets/logo") !== -1, "LOGO 指向 assets/logo", $$("#side .logo img")[0].getAttribute("src"));
+    ok($$("#v-frame [data-logo]").length === 2, "框架页提供 2 个 LOGO 复制入口");
+    // 抽卡按钮顺序：抽1张 → 抽4张 → 抽8张 → 随机来一张（用户指定顺序）
+    var gcOrder = ["gc1", "gc4", "gc8", "gcRand"].map(function (id) { return !!$(id); });
+    ok(gcOrder.every(Boolean), "抽卡四个按钮都在");
+    var gcBtns = $$("#v-gacha .row button").slice(0, 4).map(function (b) { return b.id; });
+    ok(gcBtns.join(",") === "gc1,gc4,gc8,gcRand", "抽卡按钮顺序：1张/4张/8张/随机", gcBtns.join(","));
+    // 所有「复制提示词」类按钮必须是 .cp（青蓝高亮），不能是灰底 .btn
+    var copyBtns = $$("#v-gallery .cp, #v-cases .cp, #v-entries .cp, #v-synth .cp, #v-gacha .cp, #v-series .cp, #v-script .cp, #v-custom .cp");
+    ok(copyBtns.length >= 8, "复制按钮统一为 .cp 高亮样式", String(copyBtns.length));
+    var grayCopy = $$("button.btn.sm").filter(function (b) { return /复制/.test(b.textContent); });
+    ok(grayCopy.length === 0, "无灰底复制按钮残留", grayCopy.map(function (b) { return b.textContent; }).join("|"));
+    // 选取框尺寸：输入框/下拉 min-height ≥ 50px
+    var inputH = window.getComputedStyle($("entSearch")).minHeight;
+    ok(parseFloat(inputH) >= 50, "输入框 min-height ≥ 50px", inputH);
+    // 导航栏高度 ≥ 70px
+    var sideH = window.getComputedStyle($("side")).height;
+    ok(parseFloat(sideH) >= 70, "导航栏高度 ≥ 70px", sideH);
 
     console.log("\nsmoke-web 结果：通过 " + pass + " / 失败 " + fail);
     process.exit(fail ? 1 : 0);

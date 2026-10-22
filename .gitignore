@@ -2,6 +2,6 @@ node_modules/
 *.log
 Thumbs.db
 desktop.ini
-.workbuddy/tmp_*
-.workbuddy/shot_*.png
+# .workbuddy 整个不入库：内含推送脚本（first_push.cjs 带访问凭据）与临时预览/截图
+.workbuddy/
 first_push.cjs

@@ -119,7 +119,7 @@ function renderGallery() {
       '<div class="imgwrap" data-act="detail"><span class="gid" data-act="gid">' + s.id + '</span>' + imgHtml + "</div>" +
       '<div class="body"><h4>' + esc(s.zh) + (s.tested ? ' <span class="badge b-gr">已实测</span>' : "") + "</h4><div class=\"desc\">" + esc(s.desc) + "</div></div>" +
       '<div class="acts">' +
-      '<button class="gcopy" data-act="copy">复制提示词</button>' +
+      '<button class="cp" data-act="copy">复制提示词</button>' +
       '<button class="btn sm" data-act="synth">合成器改用</button>' +
       "</div></div>";
   }).join("");
@@ -151,7 +151,7 @@ $("gGrid").addEventListener("click", function (e) {
       }).join("") + "</div>" : "") +
     '<h4 style="margin:12px 0 6px">验证点</h4><p class="sm">' + esc(cs.validates) + "</p>" +
     '<h4 style="margin:12px 0 6px">提示词</h4><pre class="mono sm" style="white-space:pre-wrap;background:var(--bg2);padding:10px;border-radius:8px">' + esc(r.prompt) + "</pre>" +
-    '<div class="row" style="margin-top:10px"><button class="gcopy" id="dtCopy">复制提示词</button>' +
+    '<div class="row" style="margin-top:10px"><button class="cp" id="dtCopy">复制提示词</button>' +
     '<button class="btn sm" id="dtSynth">合成器改用</button></div>'
   );
   $("dtCopy").addEventListener("click", function () { copyText(r.prompt); });
@@ -243,7 +243,7 @@ function showEntity(id) {
     (en.traits ? '<h4 style="margin:12px 0 6px">视觉特征</h4><p class="sm">' + esc(en.traits) + "</p>" : "") +
     '<h4 style="margin:12px 0 6px">去标识化描述（商业出图前用这个）</h4>' +
     '<pre class="mono sm" style="white-space:pre-wrap;background:var(--bg2);padding:10px;border-radius:8px">' + esc(en.deid) + "</pre>" +
-    '<button class="gcopy" id="dtDeid">复制去标识化描述</button>' +
+    '<button class="cp" id="dtDeid">复制去标识化描述</button>' +
     (rels.length ? "<h4 style=\"margin:14px 0 8px\">影响关系（" + rels.length + "）</h4>" + rels.map(relHtml).join("") : "")
   );
   $("dtDeid").addEventListener("click", function () { copyText(en.deid); });
@@ -303,7 +303,7 @@ function renderEasyOut(title, r, theme, lock) {
     : "";
   $("ezOut").innerHTML =
     '<div class="outbox" style="position:static">' +
-    '<div class="row" style="justify-content:space-between"><b>' + esc(title) + '</b><button class="gcopy" id="ezCopy">复制提示词</button></div>' +
+    '<div class="row" style="justify-content:space-between"><b>' + esc(title) + '</b><button class="cp" id="ezCopy">复制提示词</button></div>' +
     (lockTxt ? '<div class="sm mut" style="margin-top:4px">关键词锁定：' + esc(lockTxt) + "</div>" : "") +
     (r.warnings.length ? '<div class="warn">⚠ ' + r.warnings.map(function (w) { return esc(w.a + " × " + w.b + "：" + w.verdict); }).join("<br>") + "</div>" : "") +
     '<div class="prompt">' + esc(r.prompt) + "</div>" +
@@ -353,7 +353,7 @@ $("ezRand").addEventListener("click", function () {
   $("ezOut").innerHTML =
     '<div class="outbox" style="position:static">' +
     '<div class="row" style="justify-content:space-between"><b>🎲 随机一张（' + esc(p.zh) + " 底）</b>" +
-    '<button class="gcopy" id="ezCopy">复制提示词</button></div>' +
+    '<button class="cp" id="ezCopy">复制提示词</button></div>' +
     (rr.warnings.length ? '<div class="warn">⚠ ' + rr.warnings.map(function (w) { return esc(w.a + " × " + w.b + "：" + w.verdict); }).join("<br>") + "</div>" : "") +
     '<div class="prompt">' + esc(rr.prompt) + "</div>" +
     '<div class="sm mut">' + rr.zh.map(esc).join(" · ") + "</div></div>";
@@ -478,7 +478,7 @@ function renderSeries(ser) {
       '<div style="margin:8px 0">' + selChips(c.sel) + "</div>" +
       (c.warnings.length ? '<div class="warn">⚠ ' + c.warnings.map(function (w) { return esc(w.a + " × " + w.b + "：" + w.verdict); }).join("<br>") + "</div>" : "") +
       "<pre>" + esc(c.prompt) + "</pre>" +
-      '<div class="row"><button class="gcopy copy">复制这张</button>' +
+      '<div class="row"><button class="cp copy">复制这张</button>' +
       '<span class="mut sm">文案：' + esc(c.copyGuide) + "</span></div>" +
       '<div class="mut sm" style="margin-top:5px">为什么：' + esc(c.why) + "</div>" +
       "</div>";
@@ -521,7 +521,7 @@ function renderScript(ser) {
     '<div class="mut sm" style="margin-top:4px">拆分：' + (ser.mode === "sent" ? "按句" : "按段") +
     " · 全组统一：风格 " + esc(ser.style.zh) + " · 题材 " + esc(ser.subject.zh) +
     " · 角色 " + esc(ser.character.zh) + " · 世界 " + esc(ser.world.zh) + " · 地区 " + esc(ser.region.zh) + "</div></div>" +
-    '<div style="text-align:right"><button class="gcopy" id="scCopyAll">复制全部分镜</button></div>' +
+    '<div style="text-align:right"><button class="cp" id="scCopyAll">复制全部分镜</button></div>' +
     (pal ? '<div style="text-align:right;margin-top:6px"><div class="mut sm">配色 · ' + esc(pal.styleZh) + "</div>" +
       '<div class="swrow" style="display:flex;gap:5px;margin-top:5px">' + pal.swatches.map(function (s) {
         return '<i style="width:30px;height:30px;border-radius:7px;background:' + s.hex + ';cursor:pointer;display:block" data-hex="' + s.hex + '" title="' + esc(s.name) + '"></i>';
@@ -535,7 +535,7 @@ function renderScript(ser) {
       '<div style="margin:8px 0">' + selChips(c.sel) + "</div>" +
       (c.warnings.length ? '<div class="warn">⚠ ' + c.warnings.map(function (w) { return esc(w.a + " × " + w.b + "：" + w.verdict); }).join("<br>") + "</div>" : "") +
       "<pre>" + esc(c.prompt) + "</pre>" +
-      '<div class="row"><button class="gcopy copy">复制这张</button>' +
+      '<div class="row"><button class="cp copy">复制这张</button>' +
       '<span class="mut sm">文案：' + esc(c.copyGuide) + "</span></div>" +
       '<div class="mut sm" style="margin-top:5px">为什么：' + esc(c.why) + "</div>" +
       "</div>";
@@ -582,7 +582,7 @@ function renderSynth() {
   // 输出区
   var r = AV.compose(S.sel, { theme: S.theme });
   var html = '<div class="row" style="justify-content:space-between"><b>成品词面</b>' +
-    '<button class="gcopy" id="synCopy">复制</button></div>';
+    '<button class="cp" id="synCopy">复制</button></div>';
   if (r.warnings.length) {
     html += '<div class="warn">⚠ 冲突裁决：<br>' + r.warnings.map(function (w) {
       return esc(w.a + " × " + w.b + " → " + w.verdict + "（" + w.why + "）");
@@ -622,7 +622,7 @@ $("synShare").addEventListener("click", function () {
   var code = AV.encodeShare({ sel: S.sel, freeText: S.theme });
   $("synShareBox").innerHTML =
     '<input type="text" class="mono" style="flex:1;font-size:11.5px" value="' + esc(code) + '" readonly>' +
-    '<button class="btn sm" id="synShareCopy">复制分享码</button>' +
+    '<button class="cp sm" id="synShareCopy">复制分享码</button>' +
     '<span class="mut sm">粘回任意一库合成器即还原配方</span>';
   $("synShareCopy").addEventListener("click", function () { copyText(code); });
 });
@@ -672,7 +672,7 @@ function doGacha() {
         '<span class="mut sm">' + (r.warnings || "").length + " 警告</span></div>" +
         '<div class="sm" style="margin:7px 0;min-height:64px">' + selChips(r) + "</div>" +
         '<pre class="mono" style="font-size:10.5px;white-space:pre-wrap;word-break:break-all;background:var(--bg2);padding:8px;border-radius:7px;max-height:110px;overflow-y:auto">' + esc(AV.compose(r).prompt) + "</pre>" +
-        '<div class="row" style="margin-top:8px"><button class="btn sm">复制</button><button class="btn sm">载入合成器</button></div>';
+        '<div class="row" style="margin-top:8px"><button class="cp sm">复制</button><button class="btn sm">载入合成器</button></div>';
       var btns = card.querySelectorAll("button");
       btns[0].addEventListener("click", function () { copyText(AV.compose(r).prompt); });
       btns[1].addEventListener("click", function () { S.sel = r; renderSynth(); switchView("v-synth"); toast("已载入"); });
@@ -695,7 +695,7 @@ $("gcRand").addEventListener("click", function () {
     '<span class="mut sm">' + ((r.warnings || []).length) + " 警告</span></div>" +
     '<div class="sm" style="margin:9px 0">' + selChips(r) + "</div>" +
     '<pre class="mono" style="font-size:12px;white-space:pre-wrap;word-break:break-all;background:var(--bg2);padding:12px;border-radius:8px">' + esc(prompt) + "</pre>" +
-    '<div class="row" style="margin-top:10px"><button class="gcopy" id="gcRCopy">复制提示词</button>' +
+    '<div class="row" style="margin-top:10px"><button class="cp" id="gcRCopy">复制提示词</button>' +
     '<button class="btn" id="gcRSynth">载入合成器</button>' +
     '<button class="btn" id="gcRAgain">再来一张</button></div>';
   $("gcGrid").innerHTML = "";
@@ -738,7 +738,7 @@ function renderCases() {
       '<div class="desc">' + esc(cs.desc) + "</div>" +
       '<div style="margin:8px 0">' + selChips(r.sel) + "</div>" +
       '<div class="sm" style="color:var(--cy)">验证点：' + esc(cs.validates) + "</div>" +
-      '<div class="row" style="margin-top:9px"><button class="btn sm" data-cs="' + cs.id + '">复制提示词</button>' +
+      '<div class="row" style="margin-top:9px"><button class="cp sm" data-cs="' + cs.id + '">复制提示词</button>' +
       '<button class="btn sm" data-cs2="' + cs.id + '">合成器改用</button></div></div>';
   }).join("");
 }
@@ -777,7 +777,7 @@ function renderEntries() {
       '<span class="mut sm">' + esc(D[x.d].zh) + "</span></div>" +
       "<h4>" + esc(x.it.zh) + "</h4>" +
       '<div class="desc">' + esc(x.it.note || x.it.prompt.slice(0, 60) + "…") + "</div>" +
-      '<div class="row" style="margin-top:8px"><button class="btn sm" data-copy="1">复制片段</button></div></div>';
+      '<div class="row" style="margin-top:8px"><button class="cp sm" data-copy="1">复制片段</button></div></div>';
   }).join("") || '<div class="mut">没有匹配的词条</div>';
 }
 $("dimTabs").addEventListener("click", function (e) {
@@ -799,7 +799,7 @@ $("enGrid").addEventListener("click", function (e) {
     '<h4 style="margin:12px 0 6px">prompt 片段</h4>' +
     '<pre class="mono sm" style="white-space:pre-wrap;background:var(--bg2);padding:10px;border-radius:8px">' + esc(it.prompt) + "</pre>" +
     (it.children ? '<h4 style="margin:12px 0 6px">二级目录</h4><div>' + it.children.map(function (c) { return '<span class="pill">' + esc(c) + "</span>"; }).join("") + "</div>" : "") +
-    '<div class="row" style="margin-top:12px"><button class="gcopy" id="dtCopy">复制片段</button>' +
+    '<div class="row" style="margin-top:12px"><button class="cp" id="dtCopy">复制片段</button>' +
     '<button class="btn sm" id="dtPick">加入配方</button></div>'
   );
   $("dtCopy").addEventListener("click", function () { copyText(it.prompt); });
@@ -869,6 +869,23 @@ function renderFrame() {
       return "<tr><td class=\"mono\">" + r.id + "</td><td><b>" + esc(r.zh) + "</b></td><td>" + esc(r.job) + "</td><td>" + names(r.media) + "</td><td>" + names(r.shots) + "</td><td>" + esc(r.copyGuide) + "</td></tr>";
     }).join("");
 }
+
+/* ---------- 品牌标识：复制 SVG 源码 ---------- */
+/* SVG 在静态站里只能靠 fetch 读同源文件；file:// 下 fetch 会失败，此时降级为提示 */
+$$("[data-logo]").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var url = btn.getAttribute("data-logo");
+    if (typeof fetch !== "function") { toast("当前环境不支持读取源码，请直接下载 SVG 文件"); return; }
+    fetch(url).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.text();
+    }).then(function (txt) {
+      copyText(txt);
+    }).catch(function () {
+      toast("读取失败，请直接下载 SVG 文件");
+    });
+  });
+});
 
 /* ---------- 启动 ---------- */
 renderGallery();

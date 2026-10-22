@@ -76,7 +76,7 @@ Aniverse Prompt Library —— 覆盖全球动漫及关联创作的开放式提�
 |---|---|
 | 示例画廊 | **50 个位置**：10 张已配图案例 + 40 个预留位（自带配方，可直接出图） |
 | 自定义出图 | 12 预设一键出词，或「自由组合 + 关键词」自动配一套 |
-| 抽卡 | 约束随机配方，「随机来一张」/ 1 / 4 / 8 张 |
+| 抽卡 | 约束随机配方，抽 1 / 4 / 8 张，或「🎲 随机来一张」出单张大卡 |
 | 系列出图 | 主题 + 关键词 → 一套图（见上） |
 | 短剧分镜 | 短剧文案 → 一套分镜图（见上） |
 | 全球地图 | 18 地区时代 + 28 参考实体检索 |
@@ -84,7 +84,16 @@ Aniverse Prompt Library —— 覆盖全球动漫及关联创作的开放式提�
 | 验证案例 | 10 案例配方与验证点 |
 | 全部词条 | 150 条维度条目检索 + 详情抽屉 |
 | 风格配色 | 16 张配色卡（每风格一张） |
-| 框架与体检 | 维度表 + 覆盖缺口 + 实测进度 + 幕次分工表 |
+| 框架与体检 | 维度表 + 覆盖缺口 + 实测进度 + 幕次分工表 + **品牌 LOGO 下载** |
+
+### 品牌 LOGO
+
+- `assets/logo.svg` —— 图形标（正方形，透明通道）：动漫眼 + 轨道 + 星点，深色底
+- `assets/logo-lockup.svg` —— 横版组合（图形 + 「动漫宇宙」+ ANIMEVERSE PROMPT LIBRARY）
+- PNG 派生物：`assets/logo.png`（512）、`assets/logo-lockup.png`（1240×256）、`assets/favicon.png`（32）
+
+**SVG 是唯一真源**，改型只改 SVG，然后重跑 `node tools/logo_export.js` 重新导出 PNG（不要手改 PNG）。
+页面「框架与体检」页有现成的「复制 SVG / 下载 PNG」入口。
 
 ### 画廊的 50 个位置怎么填
 
@@ -100,9 +109,11 @@ data/*.json      18 个数据文件（11 维 + series/cases/conflicts/templates/
 tools/compose.js 引擎单一真源（UMD 双跑：Node CLI 与浏览器共用）
 tools/build_web.js  data → assets/data-bundle.js + compose.js → assets/engine.js
 index.html + assets/app.js  十一页单页应用（原生 JS，零依赖）
+assets/logo.svg + logo-lockup.svg  品牌 LOGO（SVG 真源）+ PNG 派生物
 gallery/         实测出图（文件名主干 = 画廊槽位 id）
 tools/gallery_sync.js / gallery_compress.js  画廊清单与压缩（派生物勿手改）
 tools/apply_alias.js  检索别名维护脚本（写 kw 字段，幂等可重跑）
+tools/logo_export.js  LOGO 导出（SVG → PNG，改型后重跑）
 ```
 
 ### 回归清单（改任何东西跑一遍）
@@ -112,9 +123,10 @@ NODE_PATH=<jsdom 所在 node workspace>/node_modules node tools/build_web.js
 node tools/check_fields.js        # 字段体检（id 格式/prompt 禁中文/三件套/授权分级/kw 别名）
 node tools/check_cases.js         # 引用完整 + 覆盖矩阵 + 同维度堆料
 node tools/smoke.js               # 引擎冒烟 103 项
-NODE_PATH=... node tools/smoke-web.js   # 界面冒烟 85 项（jsdom，含 CSS 绊线）
+NODE_PATH=... node tools/smoke-web.js   # 界面冒烟 94 项（jsdom，含 CSS 绊线）
 node tools/gallery_sync.js --check       # 画廊清单与目录一致
 node tools/inventory.js           # 盘点 + 覆盖缺口
+NODE_PATH=... node tools/verify_chrome.js  # 真实 Chrome 验证 16 项（改了显隐/尺寸/配色必跑）
 ```
 
 ## 授权与边界

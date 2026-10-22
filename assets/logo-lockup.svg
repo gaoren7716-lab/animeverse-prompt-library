@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 128" width="620" height="128" role="img" aria-label="动漫宇宙 ANIMEVERSE PROMPT LIBRARY">
+  <defs>
+    <linearGradient id="lkOrbit" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4dd0e1"/>
+      <stop offset=".55" stop-color="#8b5cff"/>
+      <stop offset="1" stop-color="#ff5c8a"/>
+    </linearGradient>
+    <linearGradient id="lkEye" x1=".08" y1="0" x2=".92" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".55" stop-color="#ffeef5"/>
+      <stop offset="1" stop-color="#ffc9dc"/>
+    </linearGradient>
+    <radialGradient id="lkIris" cx=".42" cy=".34" r=".74">
+      <stop offset="0" stop-color="#ffb0d2"/>
+      <stop offset=".4" stop-color="#c46bff"/>
+      <stop offset="1" stop-color="#4a1fc8"/>
+    </radialGradient>
+    <linearGradient id="lkWord" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff5c8a"/>
+      <stop offset="1" stop-color="#8b5cff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 图形标记 -->
+  <g transform="translate(4,8) scale(0.875)">
+    <g transform="rotate(-22 64 64)">
+      <ellipse cx="64" cy="64" rx="58" ry="19" fill="none" stroke="url(#lkOrbit)" stroke-width="4.5" stroke-linecap="round"/>
+    </g>
+    <circle cx="116" cy="48" r="5" fill="#4dd0e1"/>
+    <circle cx="114" cy="46" r="1.8" fill="#eafcff"/>
+    <path d="M17 64C28 38 100 38 111 64C100 90 28 90 17 64Z" fill="url(#lkEye)" stroke="#241b3d" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M17 64C28 38 100 38 111 64" fill="none" stroke="#241b3d" stroke-width="6" stroke-linecap="round" opacity=".9"/>
+    <circle cx="64" cy="64" r="22" fill="url(#lkIris)"/>
+    <path d="M64 46L69 59L82 64L69 69L64 82L59 69L46 64L59 59Z" fill="#fff" opacity=".95"/>
+    <circle cx="64" cy="64" r="9.6" fill="#1d1436"/>
+    <circle cx="55" cy="54.5" r="4.6" fill="#fff" opacity=".97"/>
+    <circle cx="72" cy="74" r="2.4" fill="#fff" opacity=".72"/>
+    <path d="M19 100l2.4 5.8 5.8 2.4-5.8 2.4-2.4 5.8-2.4-5.8-5.8-2.4 5.8-2.4z" fill="#ffc94d"/>
+    <path d="M106 99l1.7 4 4 1.7-4 1.7-1.7 4-1.7-4-4-1.7 4-1.7z" fill="#ff5c8a"/>
+  </g>
+
+  <!-- 文字组合 -->
+  <text x="128" y="60" font-family="'PingFang SC','Microsoft YaHei','Noto Sans SC',system-ui,sans-serif" font-size="46" font-weight="700" fill="url(#lkWord)" letter-spacing="2">动漫宇宙</text>
+  <text x="131" y="88" font-family="'PingFang SC','Microsoft YaHei','Noto Sans SC',system-ui,sans-serif" font-size="15" font-weight="500" fill="#8a8ba8" letter-spacing="4.2">ANIMEVERSE PROMPT LIBRARY</text>
+</svg>

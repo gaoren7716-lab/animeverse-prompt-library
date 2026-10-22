@@ -72,7 +72,9 @@ gallery/（文件名主干 = 案例 id）──gallery_sync.js──→ assets/g
 - `$` = getElementById（只吃裸 id），`$$` = querySelectorAll。**测试代码里给 CSS 选择器用 `$$`**（2026-10-22 smoke-web 教训：`$("#id .cls")` 恒 null）
 - `esc()` 包所有用户内容再进 innerHTML
 - 复制走 copyText()，jsdom 无剪贴板时 toast 兜底，**不许**因复制失败抛异常中断交互
-- **导航在顶部横排**（2026-10-22 用户改版）：#side 是 54px 高的 sticky 横栏，logo 左 + nav 横滚中 + slogan 右；`.nav button.on` 指示条是 `inset 0 -2px 0`（底部）。body 不再是 flex，#main 不再有 flex:1
+- **导航在顶部横排**（2026-10-22 用户改版）：#side 是 78px 高的 sticky 横栏，logo 左（图形标 assets/logo.svg + 文字组合）+ nav 横滚中 + slogan 右；`.nav button.on` 指示条是 `inset 0 -3px 0`（底部）。body 不再是 flex，#main 不再有 flex:1
+- **按钮类名语义化**（2026-10-22）：`.gact` = 主行动（生成/出图/出分镜，粉紫品牌渐变）；`.cp` = 复制（所有「一键复制提示词」，青蓝渐变 + 发光）。旧名 `.gcopy` 已全部废弃，**别再写回去**——复制按钮统一 `.cp`（小号用 `.cp sm`），生成按钮统一 `.gact`
+- **控件尺寸基线**（2026-10-22 用户放大要求）：input/select 渲染高度 ≥ 48px（min-height 52px）、textarea ≥ 240px、chip ≥ 34px、导航按钮字号 ≥ 15px、#side 高 ≥ 70px。改小任何一项都会让用户觉得"太小气"
 - **textarea 必须显式 width:100%**：默认 cols 宽度会缩成一条窄柱（2026-10-22 短剧页实测）
 - 本机存储用 localStorage（键 `av_userthemes` 存「我的主题」），读写都要 try/catch 兜底
 
@@ -90,24 +92,27 @@ NODE_PATH=<jsdom workspace>/node_modules node tools/build_web.js   # ① 先同�
 node tools/check_fields.js      # ② 字段体检
 node tools/check_cases.js       # ③ 引用完整 + 覆盖矩阵
 node tools/smoke.js             # ④ 引擎冒烟 103 项
-NODE_PATH=... node tools/smoke-web.js  # ⑤ 界面冒烟 85 项（jsdom）
+NODE_PATH=... node tools/smoke-web.js  # ⑤ 界面冒烟 94 项（jsdom）
 node tools/gallery_sync.js --check     # ⑥ 画廊清单与目录一致
 node tools/inventory.js         # ⑦ 盘点数字喂文档
 node tools/apply_alias.js --check      # ⑧ 别名表体检（数据缺 kw 时改本脚本再重跑写入）
+NODE_PATH=... node tools/verify_chrome.js  # ⑨ 真实 Chrome 验证 16 项（改了显隐/尺寸/配色必跑）
 ```
 
 改了 `data/cases.json` 的 tested 或 recipe → 画廊图可能过期，回第 3 节管线。
 改了 `data/gallery.json` 的槽位 → **必须重跑 `node tools/gallery_sync.js`** 重建清单，否则新槽位的图挂不上（页面只认清单里的 id）。
+改了 `assets/logo*.svg` → **必须重跑 `node tools/logo_export.js`** 重新导出 PNG（PNG 是派生物）。
 加了新数据文件 → **要同时改三处**：build_web.js 的 FILES 列表、compose.js 的数据加载列表、check_fields.js 的加载列表。漏一处就是「文件在但引擎看不见」的静默失败（2026-10-22 加 gallery.json 时漏了 compose.js，inventory 报「画廊槽位 0」才暴露）。
 改了 index.html 的显隐相关 CSS → ⑤ 之外加跑真实 Chrome（playwright-core，**必须 file:// URL**，本机 localhost http 服务被坏代理拦死）。
 界面显隐类 bug jsdom 查不出 CSS 级联问题的一切嫌疑，都用真实 Chrome 逐页签断言 computed display。
+**真实 Chrome 量尺寸前必须先切到目标页**（2026-10-22 踩坑）：`display:none` 的视图里 `getBoundingClientRect()` 恒为 0，会把"控件太小"误判成"控件是 0 高度"。同理 `getElementById` 拿到的可能是另一页的同名元素（#entSearch 在地图页、#enSearch 在词条页）。
 
 ## 5. 实测与文档的诚实纪律
 
 - **cases.tested=false 的案例，任何文档不许宣称有效**。出图目检通过才翻 true，翻之前对照 validates 逐条核
 - **画廊预留位（GL-xx）不算实测**：它的配方只保证「能装配、无冲突」，图没出就是没出。文档里写「引用覆盖 150/150」可以，写「实测 50/50」不行——实测分母是 cases（10），不是槽位（50）
 - 实测暴露的冲突当天补进 conflicts.json（when/notWith/verdict/why 四件套），并在 why 里记明出处（哪天哪个案例撞的）
-- README 与 FRAMEWORK 引用的数字（150 条、1.87 万亿、103/85 项冒烟）以 inventory.js 和 smoke 实跑为准，**手改数字前先重跑**
+- README 与 FRAMEWORK 引用的数字（150 条、1.87 万亿、103/94 项冒烟）以 inventory.js 和 smoke 实跑为准，**手改数字前先重跑**
 - 本项目无 build_md.js，**三份文档全手维护**（别套 art-forge 的生成链）
 
 ## 6. 本机环境坑（跨项目通用，2026-10 实测）
