@@ -61,6 +61,9 @@ function run() {
     var navOrder = $$("#nav button").map(function (b) { return b.getAttribute("data-v"); });
     ok(navOrder.slice(0, 5).join(",") === "v-gallery,v-custom,v-gacha,v-series,v-script",
       "导航顺序：画廊/自定义/抽卡/系列/短剧", navOrder.slice(0, 5).join(","));
+    ok(navOrder.indexOf("v-synth") < navOrder.indexOf("v-atlas"),
+      "导航顺序：提示词合成器在全球地图之前", navOrder.join(","));
+    ok(navOrder.length === 11, "导航共 11 项", String(navOrder.length));
     views.forEach(function (v) { ok(!!$(v), "视图存在：" + v); });
 
     /* 2. 视图显隐（CSS 级：computed display） */
@@ -93,6 +96,14 @@ function run() {
     ok($$("#gGrid .gcard img").length === 10, "画廊 10 张已配图", String($$("#gGrid .gcard img").length));
     ok($$("#gGrid .gcard .colorcard").length === 40, "画廊 40 个待配图占位", String($$("#gGrid .gcard .colorcard").length));
     ok($("gCount").textContent.indexOf("已配图 10") !== -1, "画廊计数显示已配图 10", $("gCount").textContent);
+    // 图幅切换：大图 → 小图（网格类名变化，卡片数量不变）
+    var gGrid = $("gGrid");
+    ok(gGrid.className.indexOf("gs-sm") === -1, "画廊默认大图", gGrid.className);
+    click($$("[data-gs]").filter(function (b) { return b.getAttribute("data-gs") === "sm"; })[0]);
+    ok(gGrid.className.indexOf("gs-sm") !== -1, "画廊切小图加 gs-sm 类", gGrid.className);
+    ok($$("#gGrid .gcard").length === 50, "小图下仍是 50 张", String($$("#gGrid .gcard").length));
+    click($$("[data-gs]").filter(function (b) { return b.getAttribute("data-gs") === "lg"; })[0]);
+    ok(gGrid.className.indexOf("gs-sm") === -1, "画廊切回大图", gGrid.className);
     ok($$("#gGrid .gcard img")[0].getAttribute("src").indexOf("gallery/CS-") === 0, "配图 src 指向 gallery/ 目录");
     ok(typeof window.GALLERY_IMGS === "object" && Object.keys(window.GALLERY_IMGS).length === 10, "GALLERY_IMGS 清单 10 条");
     // 预留位必须自带配方：点开详情能看到词面与验证点
@@ -189,6 +200,24 @@ function run() {
     var scThrew = false;
     try { click($("scReroll")); } catch (e) { scThrew = true; }
     ok(!scThrew && $$("#scOut .sercard").length === 3, "短剧换一批不炸且张数不变");
+    // 短剧抽卡：没想法就抽一部（骨架 + 角色/场景自动填 → 直接出分镜）
+    $("scText").value = "";
+    click($("scRand"));
+    var scRandText = $("scText").value;
+    ok(scRandText.length > 60, "短剧抽卡生成文案", String(scRandText.length) + " 字");
+    ok(scRandText.indexOf("{") === -1, "短剧抽卡文案无未替换占位符", scRandText.slice(0, 60));
+    ok(scRandText.split("\n\n").length >= 3, "短剧抽卡文案按段分行", String(scRandText.split("\n\n").length));
+    ok($$("#scOut .sercard").length >= 3, "短剧抽卡直接出分镜", String($$("#scOut .sercard").length));
+    ok($("scTheme").value.length > 0, "短剧抽卡填入主题");
+    // 抽卡文案里的角色名能被匹配器识别（维度锁定）
+    var scRandPills = $$("#scOut .sercard").map(function (c) {
+      return Array.prototype.map.call(c.querySelectorAll(".pill"), function (p) { return p.textContent; }).join("|");
+    });
+    ok(scRandPills.some(function (t) { return /角色原型·/.test(t); }), "短剧抽卡文案锁住角色维度", scRandPills[0].slice(0, 100));
+    // 换一批：同一份文案换配套，不炸
+    var scRandThrew = false;
+    try { click($("scReroll")); } catch (e) { scRandThrew = true; }
+    ok(!scRandThrew && $$("#scOut .sercard").length >= 3, "短剧抽卡后换一批不炸");
     // 自定义出图：自由组合 + 关键词
     click($$("#nav button").filter(function (b) { return b.getAttribute("data-v") === "v-custom"; })[0]);
     $("ezPreset").value = "free";

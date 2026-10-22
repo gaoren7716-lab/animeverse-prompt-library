@@ -157,6 +157,61 @@ ok(scr.cards[0].prompt.indexOf("scene:") !== -1, "分镜：原文进入词面");
 ok(scr.cards.every(function (c) { return c.warnings.length === 0; }), "分镜：无冲突告警");
 ok(AV.scriptToSeries("t", "k", "   ", {}) === null, "分镜：空文案返回 null");
 
+/* 10b. 短剧抽卡（没想法就抽一部） */
+var rs = AV.randomScript({ seed: 20261022 });
+ok(!!rs, "抽卡：返回剧本");
+ok(/^SP-\d{2}$/.test(rs.premise), "抽卡：剧本 id 格式", rs.premise);
+ok(rs.text.length > 60, "抽卡：文案有内容", String(rs.text.length));
+ok(rs.text.indexOf("{") === -1, "抽卡：占位符全部替换", rs.text.slice(0, 80));
+ok(rs.text.split("\n\n").length === 5, "抽卡：五段文案", String(rs.text.split("\n\n").length));
+ok(!!rs.cast.hero && !!rs.cast.villain && rs.cast.hero !== rs.cast.villain, "抽卡：主角与对手不同人", JSON.stringify(rs.cast));
+ok(rs.scenes.a !== rs.scenes.b, "抽卡：两个场景不同", JSON.stringify(rs.scenes));
+ok(rs.lights.a !== rs.lights.b && rs.lights.b !== rs.lights.c && rs.lights.a !== rs.lights.c, "抽卡：三处光影互不相同", JSON.stringify(rs.lights));
+ok(!!rs.style && !!rs.subject, "抽卡：带全组统一风格与题材");
+var rs2 = AV.randomScript({ seed: 20261022 });
+ok(JSON.stringify(rs2.text) === JSON.stringify(rs.text), "抽卡：同 seed 完全可复现");
+ok(AV.randomScript({ seed: 777 }).text !== rs.text, "抽卡：不同 seed 出不同剧本");
+ok(AV.randomScript({ seed: 1, keywords: "机甲" }) !== null, "抽卡：接受关键词");
+var rsKw = AV.randomScript({ seed: 1, keywords: "魔法" });
+ok(rsKw.text.indexOf("魔法") !== -1, "抽卡：关键词锁进文案", rsKw.text.slice(0, 60));
+// 关键词锁住的维度，抽出来的剧本必须用它（题材用 SU-04 魔法少女，story 落在「魔法」上）
+ok(rsKw.subject === "SU-04", "抽卡：关键词锁住题材", rsKw.subject);
+var rsKw2 = AV.randomScript({ seed: 1, keywords: "魔法少女" });
+ok(rsKw2.subject === "SU-04" && rsKw2.cast.hero === "CH-02", "抽卡：魔法少女锁到题材+角色",
+  rsKw2.subject + "/" + rsKw2.cast.hero);
+// 抽卡文案能直接进分镜：段落识别得到角色/场景
+var rsSer = AV.scriptToSeries(rs.theme, "", rs.text, { seed: 5, themeEn: rs.themeEn, style: rs.style, subject: rs.subject, locks: rs.locks });
+ok(rsSer && rsSer.cards.length === 5, "抽卡：文案直接出 5 张分镜", rsSer ? String(rsSer.cards.length) : "null");
+ok(rsSer.cards.every(function (c) { return c.sel.styles === rs.style; }), "抽卡：分镜全组统一风格");
+ok(rsSer.cards.every(function (c) { return c.sel.subjects === rs.subject; }), "抽卡：分镜全组统一题材");
+// 叙事骨架：建立=主角 → 亮相=配角 → 推进=主角 → 高潮=对手 → 收尾=主角
+ok(rsSer.cards[0].sel.characters === rs.cast.hero, "抽卡：建立幕是主角", rsSer.cards[0].sel.characters);
+ok(rsSer.cards[1].sel.characters === rs.cast.ally, "抽卡：亮相幕是配角", rsSer.cards[1].sel.characters);
+ok(rsSer.cards[2].sel.characters === rs.cast.hero, "抽卡：推进幕回到主角", rsSer.cards[2].sel.characters);
+ok(rsSer.cards[3].sel.characters === rs.cast.villain, "抽卡：高潮幕是对手", rsSer.cards[3].sel.characters);
+ok(rsSer.cards[4].sel.characters === rs.cast.hero, "抽卡：收尾幕是主角", rsSer.cards[4].sel.characters);
+ok(rsSer.cards[0].sel.worlds === rs.scenes.a && rsSer.cards[2].sel.worlds === rs.scenes.b, "抽卡：场景按段落切换");
+ok(rsSer.cards[0].sel.lights === rs.lights.a && rsSer.cards[2].sel.lights === rs.lights.b && rsSer.cards[4].sel.lights === rs.lights.c,
+  "抽卡：三段光影各自到位");
+ok(rsSer.cards.every(function (c) { return c.warnings.length === 0; }), "抽卡：分镜无冲突告警",
+  JSON.stringify(rsSer.cards.map(function (c) { return c.warnings.length; })));
+// 逐段锁是硬保证：40 个 seed × 5 段全部按剧本骨架落位
+// （story 是短词，文本反推会与别的条目打架——必须靠生成器的逐段锁）
+var lockBad = 0, lockTot = 0;
+for (var si = 1; si <= 40; si++) {
+  var rr = AV.randomScript({ seed: si });
+  var ss = AV.scriptToSeries(rr.theme, "", rr.text, { seed: si, themeEn: rr.themeEn, style: rr.style, subject: rr.subject, locks: rr.locks });
+  var plan = [rr.cast.hero, rr.cast.ally, rr.cast.hero, rr.cast.villain, rr.cast.hero];
+  var lplan = [rr.lights.a, rr.lights.a, rr.lights.b, rr.lights.b, rr.lights.c];
+  ss.cards.forEach(function (c, i) {
+    lockTot++;
+    if (c.sel.characters !== plan[i]) lockBad++;
+    if (c.sel.worlds !== (i < 2 ? rr.scenes.a : rr.scenes.b)) lockBad++;
+    if (c.sel.lights !== lplan[i]) lockBad++;
+  });
+}
+ok(lockBad === 0, "抽卡：40 seed × 5 段逐段锁全部落位", "失败 " + lockBad + "/" + lockTot);
+
 /* 11. 画廊槽位（50 位） */
 var gslots = AV.data && AV.data.gallery ? AV.data.gallery.slots : [];
 ok(gslots.length === 50, "画廊：50 个槽位", String(gslots.length));

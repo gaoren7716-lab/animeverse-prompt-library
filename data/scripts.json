@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "zh": "短剧剧本种子",
+    "desc": "短剧抽卡的素材池：10 条剧本骨架（premise）× 每条 5 段分镜文案（beats）。文案里的角色/场景/光影用维度词条的中文名填，填完后短剧匹配器能自动把它们锁住，所以抽出来的剧本天然带着一致的视觉配方。",
+    "note": "beats 用 {占位符} 标注要填的槽位：主角/配角/对手/场景/场景2/光影/光影2/光影3/道具/时间/天气/声音。前八个槽位由维度词条填，后四个由 nouns 池填。",
+    "updated": "2026-10-22"
+  },
+  "nouns": {
+    "props": ["一枚旧徽章", "半张车票", "褪色的照片", "一把生锈的钥匙", "写错的配方", "没有电池的手电", "掉漆的保温杯", "空白的信封", "断了弦的琴", "过期的一枚电影票", "老旧收音机", "一只掉漆的钥匙扣"],
+    "times": ["清晨", "正午", "黄昏", "入夜", "深夜", "凌晨", "放学时分", "暴雨将至"],
+    "weathers": ["细雨", "大雾", "闷热", "落雪", "起风", "阴天", "雷雨"],
+    "sounds": ["远处的钟声", "广播的杂音", "屋檐滴水声", "人群的喧哗", "铁轨的震动", "风穿过缝隙的呜咽", "远处的爆炸声", "孩子的笑声"]
+  },
+  "premises": [
+    {
+      "id": "SP-01",
+      "zh": "雨夜追债",
+      "en": "rain-soaked debt collection in a neon alley, an old token exchanged under a broken streetlight, two strangers and one hidden account",
+      "logline": "一枚旧信物牵出两代人都没结清的账",
+      "beats": [
+        "{时间}的{场景}，{天气}未停，{主角}独自站在{光影}里，手里攥着{道具}。",
+        "{配角}从暗处走出来，开口就喊出了一个从没人叫过的小名。",
+        "{主角}在{场景2}等了很久，{光影2}把影子拉得很长，谁都没有先开口。",
+        "{对手}出现，{道具}成了唯一的证据，{声音}盖过了所有解释。",
+        "尘埃落定，{主角}把{道具}收进口袋，转身走进{光影3}里。"
+      ]
+    },
+    {
+      "id": "SP-02",
+      "zh": "灯塔守夜",
+      "en": "a lone lighthouse keeper on an all-night watch, a boat arriving with a broken lantern, fog-bound sea and a signal that arrives too late",
+      "logline": "守了一整夜灯的人，等的是一艘不会来的船",
+      "beats": [
+        "{场景}外的浪声整夜不停，{时间}时只有{主角}一个人守着灯。",
+        "{配角}划着船靠岸，手里提着一盏坏掉的灯。",
+        "{主角}在{场景2}核对旧航海图，{光影2}把图纸照得忽明忽暗。",
+        "{对手}的船先一步亮起信号，{声音}从雾里传来。",
+        "灯重新亮起，{主角}在{光影3}里目送那条船离开。"
+      ]
+    },
+    {
+      "id": "SP-03",
+      "zh": "末班车",
+      "en": "the last train of the night, an empty carriage and a seat given up without a word, city lights sliding past the window",
+      "logline": "末班车上的一次让座，谁也没问对方去哪",
+      "beats": [
+        "{时间}的末班车空荡，{主角}抱着{道具}坐在最后一排。",
+        "{配角}抱着行李上车，{天气}让所有人都不愿意多看一眼。",
+        "车厢在{场景2}前停下，{主角}隔着座椅对上了一道目光。",
+        "{对手}挤上车，{声音}让所有人同时回头。",
+        "车到终点，{主角}把座位让出，自己走进{光影3}。"
+      ]
+    },
+    {
+      "id": "SP-04",
+      "zh": "断桥之约",
+      "en": "a broken bridge over a wide river, two people waiting at opposite ends, an old letter carried across before the crossing is repaired",
+      "logline": "桥断着，两个人还是各自赴约",
+      "beats": [
+        "{场景}断在江心，{主角}在桥这头等了整整一个{时间}。",
+        "{配角}从桥那头走来，{天气}把两个人的轮廓洗得很淡。",
+        "{主角}在{场景2}的旧路牌下停住，{光影2}落得刚刚好。",
+        "{对手}带来了一封旧信，{声音}盖过了所有解释。",
+        "桥重新连上之前，{主角}把{道具}放进对方手里，走向{光影3}。"
+      ]
+    },
+    {
+      "id": "SP-05",
+      "zh": "错写一行的配方",
+      "en": "a handwritten recipe with one line wrong, a kitchen argument that turns into a confession, the corrected line finally written",
+      "logline": "写错一行字，才把两个人拉回同一张桌子前",
+      "beats": [
+        "{场景}的厨房里，{主角}正对着{道具}发呆。",
+        "{配角}推门进来，指着{道具}上的某一行皱起眉。",
+        "{主角}在{场景2}翻遍旧账本，{光影2}把纸页照得发黄。",
+        "{对手}闯进来要抢那张纸，{声音}之后只剩呼吸声。",
+        "{主角}把改好的{道具}折起来收好，转身走进{光影3}。"
+      ]
+    },
+    {
+      "id": "SP-06",
+      "zh": "最后一首",
+      "en": "a late-night radio station playing one last song, a dial turned by hand, silence after the track ends",
+      "logline": "电台只剩最后一首歌，放完就要关掉",
+      "beats": [
+        "{时间}的电台只剩一个信号，{主角}守着{道具}听{声音}。",
+        "{配角}推门进来，说这是最后一首能放的歌。",
+        "{主角}在{场景2}的窗边坐定，{光影2}落在老旧的旋钮上。",
+        "{对手}的电话打进来说该走了，{声音}让这段旋律断在半空。",
+        "歌放完，{主角}把{道具}收进抽屉，走进{光影3}。"
+      ]
+    },
+    {
+      "id": "SP-07",
+      "zh": "面具之下",
+      "en": "a masked ball where everyone hides, two people find each other on a balcony and remove their masks, one mask thrown away",
+      "logline": "所有人都戴着面具，只有一句真话没人敢听",
+      "beats": [
+        "{场景}的灯全亮着，{主角}戴上面具走进人群。",
+        "{配角}在人群里找到他，{天气}让所有面具都长得一样。",
+        "{主角}在{场景2}的露台上摘下面具，{光影2}照出真实的脸。",
+        "{对手}带着面具靠近，{声音}让舞会忽然安静。",
+        "{主角}摘下{道具}扔进{光影3}，转身牵起对方的手。"
+      ]
+    },
+    {
+      "id": "SP-08",
+      "zh": "最后一台机甲",
+      "en": "the last retired mecha in a half-empty hangar, a young pilot touching the cockpit, a final flight ordered by someone else",
+      "logline": "最后一台机甲还能再飞一次，但没人批准",
+      "beats": [
+        "{场景}的机库空了一半，{主角}在最后一台机甲的脚边坐下。",
+        "{配角}递来一枚旧徽章，说这台还能再飞一次。",
+        "{主角}在{场景2}爬上驾驶舱，{光影2}落在生锈的仪表上。",
+        "{对手}的指令传来要求交还，{声音}在通讯里炸开。",
+        "机甲停在地上，{主角}把{道具}放进座舱，走向{光影3}。"
+      ]
+    },
+    {
+      "id": "SP-09",
+      "zh": "只投一次的信",
+      "en": "a letter written but never posted, a mailbox in a quiet street, two people deciding whether to let it go",
+      "logline": "信写好了，却谁都没有投出去",
+      "beats": [
+        "{时间}的邮筒立在{场景}边，{主角}手里捏着一封没写完的信。",
+        "{配角}从花田那头走来，{天气}把信纸吹得发抖。",
+        "{主角}在{场景2}的长椅上坐下，{光影2}落在信封的折痕上。",
+        "{对手}的身影出现在街角，{声音}让人收回了手。",
+        "信最终没有投进邮筒，{主角}把它和{道具}一起留在了{光影3}里。"
+      ]
+    },
+    {
+      "id": "SP-10",
+      "zh": "收摊前十分钟",
+      "en": "the last ten minutes before a night-market stall closes, one bowl of food served to the last customer in line",
+      "logline": "最后一个客人来了，收摊就晚了十分钟",
+      "beats": [
+        "{时间}的夜市只剩最后一个摊子，{主角}守着{道具}发呆。",
+        "{配角}排在最后，{天气}让热气蒙住了玻璃。",
+        "{主角}在{场景2}的塑料凳上坐下，{光影2}落在汤锅的边缘。",
+        "{对手}打来电话催他收摊，{声音}让锅里的汤翻了个泡。",
+        "最后一串卖完，{主角}把{道具}摆好，走进{光影3}。"
+      ]
+    }
+  ]
+}

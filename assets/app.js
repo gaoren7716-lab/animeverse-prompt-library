@@ -74,7 +74,7 @@ $("dtBody").addEventListener("click", function (e) {
 });
 
 /* ---------- 画廊 ---------- */
-var gFilter = "all";
+var gFilter = "all", gSize = "lg";
 function galleryImg(id) {
   return (typeof GALLERY_IMGS !== "undefined" && GALLERY_IMGS && GALLERY_IMGS[id]) ? GALLERY_IMGS[id] : null;
 }
@@ -104,6 +104,7 @@ function renderGallery() {
     return true;
   });
   var filled = slots.filter(function (s) { return galleryHasImg(s.id); }).length;
+  grid.className = "grid g3" + (gSize === "sm" ? " gs-sm" : "");
   $("gCount").textContent = "共 " + slots.length + " 个位置（已配图 " + filled + " · 待配图 " + (slots.length - filled) + "）";
   grid.innerHTML = shown.map(function (s) {
     var st = AV.index.styles[s.recipe.style];
@@ -162,6 +163,15 @@ $$("[data-gd]").forEach(function (b) {
     $$("[data-gd]").forEach(function (x) { x.classList.remove("on"); });
     b.classList.add("on");
     gFilter = b.getAttribute("data-gd");
+    renderGallery();
+  });
+});
+/* 图幅切换：大图（3 列，看细节）/ 小图（5 列，扫全貌） */
+$$("[data-gs]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    $$("[data-gs]").forEach(function (x) { x.classList.remove("on"); });
+    b.classList.add("on");
+    gSize = b.getAttribute("data-gs");
     renderGallery();
   });
 });
@@ -494,17 +504,41 @@ function renderSeries(ser) {
 }
 
 /* ---------- 短剧分镜（文案 → 一套分镜） ---------- */
-var SC = { seed: 20261022 };
+var SC = { seed: 20261022, opts: {} };
 function scDo() {
   var text = $("scText").value;
-  if (!text.trim()) { toast("先把短剧文案粘进来"); return; }
-  var ser = AV.scriptToSeries($("scTheme").value.trim(), $("scKw").value.trim(), text, {
-    seed: SC.seed, mode: $("scMode").value
-  });
+  if (!text.trim()) { toast("先把短剧文案粘进来，或点「抽一部短剧」"); return; }
+  var o = { seed: SC.seed, mode: $("scMode").value };
+  // 抽卡产生的统一项（风格/题材/英文主题/逐段锁）沿用；用户手写文案时为空，不干预
+  if (SC.opts) {
+    ["style", "subject", "themeEn"].forEach(function (k) { if (SC.opts[k]) o[k] = SC.opts[k]; });
+    if (SC.opts.locks) o.locks = SC.opts.locks;
+  }
+  var ser = AV.scriptToSeries($("scTheme").value.trim(), $("scKw").value.trim(), text, o);
   if (!ser) { toast("没拆出内容，检查一下文案"); return; }
   renderScript(ser);
 }
 $("scGo").addEventListener("click", scDo);
+/* 抽一部短剧：没想法时按剧本骨架随机生成一份完整文案（含角色/场景/光影），可直接出图。
+ * 生成的是中文文案，会填进同一个文本框——有想法的用户可以直接改。 */
+$("scRand").addEventListener("click", function () {
+  var r = AV.randomScript({ seed: SC.seed, keywords: $("scKw").value.trim() });
+  if (!r) { toast("剧本库为空，检查 data/scripts.json"); return; }
+  $("scTheme").value = r.theme;
+  $("scText").value = r.text;
+  $("scMode").value = "para";
+  // 抽卡抽定的全组统一项带进分镜：风格/题材/英文主题词/逐段锁
+  SC.opts = { style: r.style, subject: r.subject, themeEn: r.themeEn, locks: r.locks };
+  SC.seed = (SC.seed * 1103515245 + 12345) % 2147483647;
+  scDo();
+  toast("抽到《" + r.title + "》· " + r.logline);
+});
+/* 用户手改文案/主题 → 抽卡定的英文主题词与逐段锁都不再适用，清掉
+ * （风格与题材保留：那是一致的画面契约；逐段锁按段数对应，改了文案就会错位） */
+$("scText").addEventListener("input", function () {
+  if (SC.opts) { SC.opts.themeEn = ""; SC.opts.locks = null; }
+});
+$("scTheme").addEventListener("input", function () { if (SC.opts) SC.opts.themeEn = ""; });
 $("scReroll").addEventListener("click", function () {
   SC.seed = (SC.seed * 1103515245 + 12345) % 2147483647;
   if ($("scText").value.trim()) { scDo(); toast("已换一批配套"); }

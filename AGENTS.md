@@ -77,6 +77,17 @@ gallery/（文件名主干 = 案例 id）──gallery_sync.js──→ assets/g
 - **控件尺寸基线**（2026-10-22 用户放大要求）：input/select 渲染高度 ≥ 48px（min-height 52px）、textarea ≥ 240px、chip ≥ 34px、导航按钮字号 ≥ 15px、#side 高 ≥ 70px。改小任何一项都会让用户觉得"太小气"
 - **textarea 必须显式 width:100%**：默认 cols 宽度会缩成一条窄柱（2026-10-22 短剧页实测）
 - 本机存储用 localStorage（键 `av_userthemes` 存「我的主题」），读写都要 try/catch 兜底
+- **导航顺序是用户定的**（2026-10-22 第二轮）：画廊→自定义出图→抽卡→系列出图→短剧分镜→**提示词合成器**→全球地图→其余。smoke-web 有断言挡着，改顺序会红
+
+### 短剧抽卡（2026-10-22 新增）
+
+- **剧本种子在 `data/scripts.json`**：10 条骨架（SP-01~10），每条 5 段 beats + nouns 词表（道具/时间/天气/声音）。beats 用中文占位符 `{主角}{配角}{对手}{场景}{场景2}{光影}{光影2}{光影3}{道具}{时间}{天气}{声音}`
+- **占位符正则不能用 `\w`**（JS 的 `\w` 只认 ASCII，中文占位符永远匹配不上）——用 `\{([^}]+)\}`。2026-10-22 踩过：抽卡文案原样输出 `{主角}` 就是这个坑
+- **一段只能点一个角色**：匹配器同维度只留一个命中，多点谁胜出取决于词条顺序，不确定。check_fields 强制
+- **抽卡抽定的维度必须逐段硬锁**（`scriptToSeries` 的 `opts.locks`），不靠从文案反推：story 是短词（「面具客」），反推会和别的条目打架
+- **`story` 字段**（worlds/lights 有，characters 没有）：中文叙事句里最自然的说法（场景「霓虹都市」、光影「夜色」）。**角色不用 story**——「少年主角」读得通，削成「少年」反而丢信息
+- **story 词源硬约束**：story 的每个有效 2-gram 必须落在该条目的 zh/kw 内，check_fields 强制。否则匹配器锁不住，抽出来的分镜就散了
+- **用户手改文案/主题 → 清掉 locks 与 themeEn**（按段数对应的锁会错位），风格与题材保留（那是一致的画面契约）
 
 ### 画廊
 
@@ -84,6 +95,7 @@ gallery/（文件名主干 = 案例 id）──gallery_sync.js──→ assets/g
 - **新图管线**：ImageGen 出图 → 立刻改名成案例 id（并行出图会撞名！提示词首句唯一可避免）→ `gallery_compress.js`（1200px JPEG q88）→ `gallery_sync.js` 重建清单
 - `assets/gallery-imgs.js` 是派生物，改它无效，真动作是动 gallery/ 目录再 sync
 - **出图后必须目检**：对照案例 validates 逐条核。不符就改配方（或补冲突规则）再重出，不许留着不符的图挂 `tested=true`
+- **图幅两档**（2026-10-22 用户要求）：大图 3 列（`#gGrid` 默认 class `grid g3`）/ 小图 5 列密排（加 `gs-sm`，收起描述与按钮缩小）。切换靠换 className 后重渲染，不是靠改 CSS 变量
 
 ## 4. 回归清单（按序跑，全绿才算完）
 
@@ -91,12 +103,12 @@ gallery/（文件名主干 = 案例 id）──gallery_sync.js──→ assets/g
 NODE_PATH=<jsdom workspace>/node_modules node tools/build_web.js   # ① 先同步派生物
 node tools/check_fields.js      # ② 字段体检
 node tools/check_cases.js       # ③ 引用完整 + 覆盖矩阵
-node tools/smoke.js             # ④ 引擎冒烟 103 项
-NODE_PATH=... node tools/smoke-web.js  # ⑤ 界面冒烟 94 项（jsdom）
+node tools/smoke.js             # ④ 引擎冒烟 130 项
+NODE_PATH=... node tools/smoke-web.js  # ⑤ 界面冒烟 107 项（jsdom）
 node tools/gallery_sync.js --check     # ⑥ 画廊清单与目录一致
 node tools/inventory.js         # ⑦ 盘点数字喂文档
 node tools/apply_alias.js --check      # ⑧ 别名表体检（数据缺 kw 时改本脚本再重跑写入）
-NODE_PATH=... node tools/verify_chrome.js  # ⑨ 真实 Chrome 验证 16 项（改了显隐/尺寸/配色必跑）
+NODE_PATH=... node tools/verify_chrome.js  # ⑨ 真实 Chrome 验证 26 项（改了显隐/尺寸/配色必跑）
 ```
 
 改了 `data/cases.json` 的 tested 或 recipe → 画廊图可能过期，回第 3 节管线。
@@ -112,7 +124,7 @@ NODE_PATH=... node tools/verify_chrome.js  # ⑨ 真实 Chrome 验证 16 项（�
 - **cases.tested=false 的案例，任何文档不许宣称有效**。出图目检通过才翻 true，翻之前对照 validates 逐条核
 - **画廊预留位（GL-xx）不算实测**：它的配方只保证「能装配、无冲突」，图没出就是没出。文档里写「引用覆盖 150/150」可以，写「实测 50/50」不行——实测分母是 cases（10），不是槽位（50）
 - 实测暴露的冲突当天补进 conflicts.json（when/notWith/verdict/why 四件套），并在 why 里记明出处（哪天哪个案例撞的）
-- README 与 FRAMEWORK 引用的数字（150 条、1.87 万亿、103/94 项冒烟）以 inventory.js 和 smoke 实跑为准，**手改数字前先重跑**
+- README 与 FRAMEWORK 引用的数字（150 条、1.87 万亿、130/107 项冒烟）以 inventory.js 和 smoke 实跑为准，**手改数字前先重跑**
 - 本项目无 build_md.js，**三份文档全手维护**（别套 art-forge 的生成链）
 
 ## 6. 本机环境坑（跨项目通用，2026-10 实测）

@@ -23,7 +23,7 @@
     var fs = require("fs"), path = require("path");
     var DATA_DIR = path.join(__dirname, "..", "data");
     data = {};
-    DIM_KEYS.concat(["series", "cases", "conflicts", "templates", "palettes", "entities", "gallery"]).forEach(function (n) {
+    DIM_KEYS.concat(["series", "cases", "conflicts", "templates", "palettes", "entities", "gallery", "scripts"]).forEach(function (n) {
       data[n] = JSON.parse(fs.readFileSync(path.join(DATA_DIR, n + ".json"), "utf8"));
     });
   }
@@ -570,7 +570,9 @@
   }
   /* scriptToSeries(theme, keywords, script, opts)
    * 主题定基调（可用 TH-xx 预设或自由文本），关键词锁维度，文案拆段一段一张。
-   * 全组统一：风格 / 配色 / 地区；段落里明确提到的场景·角色·光影可逐段覆盖。 */
+   * 全组统一：风格 / 配色 / 地区；段落里明确提到的场景·角色·光影可逐段覆盖。
+   * opts.locks：逐段预锁（数组，按段落序）。抽卡场景用——生成器本来就知道每段配了谁，
+   * 不该指望从文本反推（story 词是短词，反推会与别的条目打架）。 */
   function scriptToSeries(theme, keywords, script, opts) {
     var o = opts || {};
     var blocks = parseScript(script, { mode: o.mode || "auto" });
@@ -578,7 +580,7 @@
     var rnd = mulberry32(o.seed == null ? 20261022 : o.seed);
     var th = (typeof theme === "string" && /^TH-\d\d$/.test(theme)) ? themeById(theme) : null;
     var themeZh = th ? th.zh : String(theme || "").trim();
-    var themeEn = th ? th.en : (themeZh || "original theme");
+    var themeEn = o.themeEn || (th ? th.en : (themeZh || "original theme"));
     var lock = matchKeywords(keywords);
     var styleId = o.style || (th ? th.style : (lock.styles ? lock.styles.id : pickFrom(data.styles.items, rnd).id));
     var subjectId = o.subject || (th ? th.subject : (lock.subjects ? lock.subjects.id : pickFrom(data.subjects.items, rnd).id));
@@ -591,19 +593,22 @@
     var actIds = pickActs(blocks.length);
     // 叙事继承：段落没明说的角色/场景/光影沿用上一段，短剧才像一部片子而不是一组散图
     var carry = { subjects: null, characters: null, worlds: null, lights: null };
+    var preLocks = o.locks || [];
     var cards = blocks.map(function (b, i) {
       var role = scriptRoleById(actIds[i]) || scriptRoleById("SR-S1");
       var local = matchText(b.text, { mode: "loose" });
-      var subjects = (local.subjects || lock.subjects || { id: subjectId }).id;
-      var characters = (local.characters || lock.characters || { id: carry.characters || characterId }).id;
-      var worlds = (local.worlds || lock.worlds || { id: carry.worlds || worldId }).id;
-      var lights = local.lights ? local.lights.id
-        : (lock.lights ? lock.lights.id : (carry.lights || pickFrom(role.lights, rnd)));
+      // 逐段预锁（抽卡用）：生成器知道每段配了谁，比文本反推可靠
+      var pre = preLocks[i] || {};
+      var subjects = pre.subjects || (local.subjects || lock.subjects || { id: subjectId }).id;
+      var characters = pre.characters || (local.characters || lock.characters || { id: carry.characters || characterId }).id;
+      var worlds = pre.worlds || (local.worlds || lock.worlds || { id: carry.worlds || worldId }).id;
+      var lights = pre.lights || (local.lights ? local.lights.id
+        : (lock.lights ? lock.lights.id : (carry.lights || pickFrom(role.lights, rnd))));
       var sel = {
         sizes: pickFrom(role.sizes, rnd),
         media: pickFrom(role.media, rnd),
         subjects: subjects, characters: characters, worlds: worlds,
-        shots: local.shots ? local.shots.id : pickFrom(role.shots, rnd),
+        shots: pre.shots || (local.shots ? local.shots.id : pickFrom(role.shots, rnd)),
         lights: lights,
         styles: styleId, regions: regionId,
         layouts: pickFrom(role.layouts, rnd)
@@ -611,10 +616,10 @@
       carry.subjects = subjects; carry.characters = characters;
       carry.worlds = worlds; carry.lights = lights;
       // 逐位冲突感知重抽：只动幕次池维度。
-      // 已被段落明确指定、被关键词锁定、或从上一段继承来的维度不再重抽（重抽会覆盖用户意图）
+      // 已被段落明确指定、被关键词锁定、被预锁、或从上一段继承来的维度不再重抽（重抽会覆盖用户意图）
       var lockedDims = {};
       ["subjects", "characters", "worlds", "lights", "shots"].forEach(function (d) {
-        if (local[d] || lock[d] || carry[d]) lockedDims[d] = true;
+        if (local[d] || lock[d] || pre[d] || carry[d]) lockedDims[d] = true;
       });
       ["sizes", "shots", "lights", "layouts"].forEach(function (d) {
         if (lockedDims[d]) return;
@@ -642,6 +647,92 @@
       character: { id: characterId, zh: index.characters[characterId] ? index.characters[characterId].zh : characterId },
       world: { id: worldId, zh: index.worlds[worldId] ? index.worlds[worldId].zh : worldId },
       cards: cards
+    };
+  }
+
+  /* ---------- 短剧抽卡（随机生成一部短剧文案） ----------
+   * 从 data/scripts.json 的剧本骨架池里抽一条，把角色/场景/光影用维度词条的中文名填进去。
+   * 关键是填维度词条的**原名**：生成出来的文案天然带着可识别的维度线索，
+   * scriptToSeries 匹配时能直接锁住，抽出来的分镜才是一套而不是散图。 */
+  var VILLAIN_POOL = ["CH-06", "CH-16", "CH-10", "CH-13"];
+  function fillTemplate(tpl, vars) {
+    // 占位符名是中文（{主角}/{场景}…），不能用 \w——JS 的 \w 只认 ASCII 字母数字下划线
+    return String(tpl).replace(/\{([^}]+)\}/g, function (m, k) {
+      return vars[k] != null ? vars[k] : m;
+    });
+  }
+  function randomScript(opts) {
+    var o = opts || {};
+    var sc = data.scripts;
+    if (!sc || !sc.premises || !sc.premises.length) return null;
+    var rnd = mulberry32(o.seed == null ? 20261022 : o.seed);
+    var premise = pickFrom(sc.premises, rnd);
+    // 关键词锁定：用户点名过的维度优先（抽卡也尊重用户意图）
+    var lock = o.keywords ? matchKeywords(o.keywords) : {};
+    var chars = data.characters.items;
+    var hero = (lock.characters && index.characters[lock.characters.id])
+      ? index.characters[lock.characters.id]
+      : pickFrom(chars, rnd);
+    var rest = chars.filter(function (c) { return c.id !== hero.id; });
+    var villainPool = rest.filter(function (c) { return VILLAIN_POOL.indexOf(c.id) !== -1; });
+    var villain = (villainPool.length && rnd() < 0.7) ? pickFrom(villainPool, rnd) : pickFrom(rest, rnd);
+    var ally = pickFrom(rest.filter(function (c) { return c.id !== villain.id; }), rnd);
+    var worlds = data.worlds.items;
+    var w1 = (lock.worlds && index.worlds[lock.worlds.id])
+      ? index.worlds[lock.worlds.id]
+      : pickFrom(worlds, rnd);
+    var w2 = pickFrom(worlds.filter(function (w) { return w.id !== w1.id; }), rnd);
+    var lights = data.lights.items;
+    var l1 = (lock.lights && index.lights[lock.lights.id])
+      ? index.lights[lock.lights.id]
+      : pickFrom(lights, rnd);
+    var l2 = pickFrom(lights.filter(function (l) { return l.id !== l1.id; }), rnd);
+    var l3 = pickFrom(lights.filter(function (l) { return l.id !== l1.id && l.id !== l2.id; }), rnd);
+    var nouns = sc.nouns || {};
+    // story：该词条在中文叙事句里最自然的说法（词源限定在 zh/kw 内，匹配器照样锁得住）
+    // 关键词命中的维度用关键词原词（"魔法少女"比"少女"信息更多），其余用 story
+    var kwHit = lock;
+    var say = function (dim, id) {
+      var it = index[dim][id];
+      if (!it) return id;
+      var h = kwHit && kwHit[dim] && kwHit[dim].id === id ? kwHit[dim] : null;
+      if (h && h.zh) return h.zh;
+      return it.story || it.zh;
+    };
+    var vars = {
+      "主角": say("characters", hero.id), "配角": say("characters", ally.id), "对手": say("characters", villain.id),
+      "场景": say("worlds", w1.id), "场景2": say("worlds", w2.id),
+      "光影": say("lights", l1.id), "光影2": say("lights", l2.id), "光影3": say("lights", l3.id),
+      "道具": pickFrom(nouns.props || ["一件旧物"], rnd),
+      "时间": pickFrom(nouns.times || ["黄昏"], rnd),
+      "天气": pickFrom(nouns.weathers || ["细雨"], rnd),
+      "声音": pickFrom(nouns.sounds || ["远处的声响"], rnd)
+    };
+    var text = premise.beats.map(function (b) { return fillTemplate(b, vars); }).join("\n\n");
+    // 全组统一项：风格与题材一次抽定，分镜整套一个调子
+    var style = (lock.styles && index.styles[lock.styles.id])
+      ? index.styles[lock.styles.id]
+      : pickFrom(data.styles.items, rnd);
+    var subject = (lock.subjects && index.subjects[lock.subjects.id])
+      ? index.subjects[lock.subjects.id]
+      : pickFrom(data.subjects.items, rnd);
+    /* 逐段锁：生成器本来就知道每段配了谁/在哪/什么光。
+     * 不靠文本反推——story 是短词（「面具客」「逆光」），反推会和别的条目打架。 */
+    var actPlan = [
+      { characters: hero.id, worlds: w1.id, lights: l1.id },
+      { characters: ally.id, worlds: w1.id, lights: l1.id },
+      { characters: hero.id, worlds: w2.id, lights: l2.id },
+      { characters: villain.id, worlds: w2.id, lights: l2.id },
+      { characters: hero.id, worlds: w2.id, lights: l3.id }
+    ];
+    return {
+      premise: premise.id, title: premise.zh, logline: premise.logline,
+      theme: premise.zh, themeEn: premise.en,
+      text: text, locks: actPlan,
+      cast: { hero: hero.id, ally: ally.id, villain: villain.id },
+      scenes: { a: w1.id, b: w2.id },
+      lights: { a: l1.id, b: l2.id, c: l3.id },
+      style: style.id, subject: subject.id
     };
   }
 
@@ -759,6 +850,7 @@
     buildSeries: buildSeries, seriesRoleById: seriesRoleById, themeById: themeById, paletteOf: paletteOf,
     parseScript: parseScript, matchText: matchText, matchKeywords: matchKeywords,
     scriptToSeries: scriptToSeries, scriptRoleById: scriptRoleById, pickActs: pickActs,
+    randomScript: randomScript,
     random: random, stats: stats, gaps: gaps,
     SHARE_PREFIX: SHARE_PREFIX, encodeShare: encodeShare, decodeShare: decodeShare,
     entityById: entityById, relationsOf: relationsOf, REL_ZH: REL_ZH

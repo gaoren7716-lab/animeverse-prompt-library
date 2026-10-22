@@ -101,6 +101,18 @@ select{padding-right:40px;cursor:pointer;font-size:15.5px}
 .gcard .body h4{font-size:13.5px;margin-bottom:3px}
 .gcard .body .desc{font-size:11.5px;color:var(--tx3);line-height:1.55;min-height:34px}
 .gcard .acts{display:flex;gap:6px;padding:0 13px 12px}
+/* 小图模式：5 列密排 + 收起描述，缩略图扫得快 */
+#gGrid.gs-sm{grid-template-columns:repeat(5,1fr);gap:10px}
+#gGrid.gs-sm .gcard .body{padding:8px 10px}
+#gGrid.gs-sm .gcard .body h4{font-size:12px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#gGrid.gs-sm .gcard .body .desc{display:none}
+#gGrid.gs-sm .gcard .acts{padding:0 10px 9px;gap:5px}
+#gGrid.gs-sm .gcard .acts .btn,#gGrid.gs-sm .gcard .acts .cp{padding:5px 9px;font-size:11px;min-height:26px;border-radius:7px;box-shadow:none}
+#gGrid.gs-sm .gcard .gid{font-size:9.5px;padding:1px 5px;left:5px;top:5px}
+#gGrid.gs-sm .gcard .swrow i{width:20px;height:20px}
+@media(max-width:1500px){#gGrid.gs-sm{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:1200px){#gGrid.gs-sm{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){#gGrid.gs-sm{grid-template-columns:repeat(2,1fr)}}
 
 /* 系列卡 */
 .sercard{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px 15px}
@@ -183,8 +195,8 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
     <button data-v="v-gacha"><span class="ico">🎲</span>抽卡</button>
     <button data-v="v-series"><span class="ico">🧩</span>系列出图</button>
     <button data-v="v-script"><span class="ico">🎬</span>短剧分镜</button>
-    <button data-v="v-atlas"><span class="ico">🗺️</span>全球地图</button>
     <button data-v="v-synth"><span class="ico">🛠️</span>提示词合成器</button>
+    <button data-v="v-atlas"><span class="ico">🗺️</span>全球地图</button>
     <button data-v="v-cases"><span class="ico">📋</span>验证案例</button>
     <button data-v="v-entries"><span class="ico">📚</span>全部词条</button>
     <button data-v="v-pairs"><span class="ico">🎯</span>风格配色</button>
@@ -204,6 +216,11 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
       <button class="btn on" data-gd="all">全部</button>
       <button class="btn" data-gd="img">已配图</button>
       <button class="btn" data-gd="todo">待配图</button>
+      <span class="row" style="gap:5px;margin-left:12px">
+        <span class="mut sm">图幅：</span>
+        <button class="btn sm on" data-gs="lg">大图</button>
+        <button class="btn sm" data-gs="sm">小图</button>
+      </span>
       <span class="mut sm" id="gCount"></span>
     </div>
     <div class="hint sm" style="margin:0 0 14px;padding:9px 12px;border:1px dashed var(--line);border-radius:9px">放图方式：把图片存成 <span class="mono">gallery/&lt;卡号&gt;.jpg</span>（卡号见卡片左上角，如 GL-23）放进项目 <span class="mono">gallery/</span> 目录，重跑 <span class="mono">node tools/gallery_sync.js</span> 即自动挂上。</div>
@@ -285,6 +302,7 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
   <div class="panel">
     <h2>短剧分镜 <span class="tag">写文案 → 一套分镜</span></h2>
     <div class="hint">把短剧文案粘进来，<b>有空行按段拆、无空行按句拆</b>，一段出一张图，按叙事顺序分幕：<b>建立 → 亮相 → 推进 → 高潮 → 收尾</b>。段落里写到的场景·角色·光影会被识别并锁定；没写到的沿用上一段——所以这套图像一部片子，不是一组散图。风格与配色全组统一。</div>
+    <div class="hint sm">有想法就自己写；<b>没想法就抽一部</b>——从 10 条剧本骨架里随机抽一条，角色/场景/光影自动填成维度词条，生成的是能直接出图的完整文案。</div>
     <div class="row" style="margin:4px 0 10px">
       <input type="text" id="scTheme" placeholder="主题（可空），如：雨夜信 / 武道大会" style="flex:1;min-width:180px">
       <input type="text" id="scKw" placeholder="关键词（可空），逗号分隔，如：赛博朋克, 霓虹" style="flex:1;min-width:180px">
@@ -294,6 +312,7 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
         <option value="sent">按句子拆</option>
       </select>
       <button class="gact" id="scGo">出分镜系列</button>
+      <button class="btn" id="scRand" title="没想法？随机抽一部短剧：骨架 + 角色 + 场景自动填好">🎲 抽一部短剧</button>
       <button class="btn sm" id="scReroll" title="同一份文案，换一套配套">换一批</button>
     </div>
     <textarea id="scText" rows="9" placeholder="把短剧文案粘在这里。例：

@@ -16,7 +16,7 @@ function load(name) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, "data", name + ".json"), "utf8"));
 }
 const data = {};
-DIMS.concat(["series", "cases", "conflicts", "templates", "palettes", "entities", "gallery"]).forEach(d => { data[d] = load(d); });
+DIMS.concat(["series", "cases", "conflicts", "templates", "palettes", "entities", "gallery", "scripts"]).forEach(d => { data[d] = load(d); });
 
 // 坏字符：西里尔、零宽、BOM、非 ASCII 控制符
 function badChars(s) {
@@ -29,6 +29,23 @@ function badChars(s) {
 
 const knownIds = {};
 const idOwner = {};
+// 有 story 字段的维度：中文叙事句里要用的自然说法（短剧抽卡填文案靠它）
+// 注意：角色不用 story——「少年主角」这类名字本身读得通，削成「少年」反而丢信息
+const STORY_DIMS = ["worlds", "lights"];
+// 2-gram 切分（含停用字过滤，与引擎 matchIndex 的 cnGrams 同规则）
+const STOP_CH = "的了是在有和就都而及与也很不我你他她它们个么什么可以能会要想说去来被把让给对从向到过吗呢吧啊哦嗯很更最又再才只都";
+function cnGrams2(s) {
+  const out = [];
+  const runs = String(s || "").match(/[\u4e00-\u9fff]+/g) || [];
+  runs.forEach(function (run) {
+    for (let i = 0; i + 2 <= run.length; i++) {
+      const g = run.slice(i, i + 2);
+      if (STOP_CH.indexOf(g[0]) !== -1 || STOP_CH.indexOf(g[1]) !== -1) continue;
+      out.push(g);
+    }
+  });
+  return out;
+}
 DIMS.forEach(d => {
   data[d].items.forEach(it => {
     if (knownIds[it.id]) { errors.push(it.id + " id 跨维度重复（已有 " + idOwner[it.id] + "）"); return; }
@@ -58,6 +75,18 @@ DIMS.forEach(d => {
         var en = (String(w).match(/[A-Za-z]/g) || []).length;
         if (cn < 2 && en < 3) errors.push(it.id + " kw 词过短（匹配不到）：" + w);
       });
+    }
+    // story：中文叙事句里最自然的说法（短剧抽卡填文案用）。
+    // 硬规则——story 的每个有效 2-gram 必须落在本条目的 zh 或 kw 里：
+    // 否则匹配器锁不住这个维度，抽卡出来的分镜就散了。
+    if (STORY_DIMS.indexOf(d) !== -1) {
+      if (!it.story) errors.push(it.id + " 缺 story（中文叙事用词）");
+      else {
+        var srcGrams = {};
+        cnGrams2(it.zh + " " + (it.kw || []).join(" ")).forEach(function (g) { srcGrams[g] = 1; });
+        var miss = cnGrams2(it.story).filter(function (g) { return !srcGrams[g]; });
+        if (miss.length) errors.push(it.id + " story「" + it.story + "」含本条目 zh/kw 之外的词：" + miss.join(","));
+      }
     }
   });
 });
@@ -240,6 +269,40 @@ data.entities.relations.forEach(r => {
   if (r.from === r.to) errors.push("关系自指：" + r.from);
   if (REL_TYPES.indexOf(r.type) === -1) errors.push("关系类型非法：" + r.type);
   if (!r.note) errors.push("关系缺 note：" + r.from + "→" + r.to);
+});
+
+// scripts：短剧剧本种子（抽卡素材）
+var SCRIPTS = data.scripts;
+if (!Array.isArray(SCRIPTS.premises) || !SCRIPTS.premises.length) errors.push("scripts.premises 为空（短剧抽卡没有素材）");
+var ALLOWED_SLOTS = ["主角", "配角", "对手", "场景", "场景2", "光影", "光影2", "光影3", "道具", "时间", "天气", "声音"];
+var NOUN_SLOTS = ["道具", "时间", "天气", "声音"];
+SCRIPTS.premises.forEach(function (p) {
+  if (!/^SP-\d{2}$/.test(p.id)) errors.push(p.id + " 剧本 id 格式非法（应为 SP-两位数字）");
+  if (!p.zh || !p.en || !p.logline) errors.push(p.id + " 缺 zh/en/logline");
+  if (/[\u4e00-\u9fff]/.test(p.en)) errors.push(p.id + " en 字段混入中文");
+  if (!Array.isArray(p.beats) || p.beats.length < 3) errors.push(p.id + " beats 至少 3 段");
+  (p.beats || []).forEach(function (b, i) {
+    // 占位符名是中文，\w 只认 ASCII——必须用 [^}]+ 才能抓到（用 \w 等于没检查）
+    var slots = b.match(/\{([^}]+)\}/g) || [];
+    slots.forEach(function (s) {
+      var k = s.slice(1, -1);
+      if (ALLOWED_SLOTS.indexOf(k) === -1) errors.push(p.id + " beats[" + i + "] 占位符非法：" + s);
+    });
+    // 一段只能点一个角色：匹配器同维度只留一个命中，多点谁胜出取决于词条顺序，不确定
+    var chSlots = slots.filter(function (s) {
+      return ["主角", "配角", "对手"].indexOf(s.slice(1, -1)) !== -1;
+    });
+    if (chSlots.length > 1) errors.push(p.id + " beats[" + i + "] 点了多个角色（" + chSlots.join(" ") + "），应只点一个");
+  });
+  // 每条剧本至少要有一个维度槽（角色/场景/光影），否则抽出来锁不住维度
+  var dimSlots = ["主角", "配角", "对手", "场景", "场景2", "光影", "光影2", "光影3"];
+  var hasDim = (p.beats || []).some(function (b) {
+    return dimSlots.some(function (k) { return b.indexOf("{" + k + "}") !== -1; });
+  });
+  if (!hasDim) errors.push(p.id + " beats 里没有维度槽（角色/场景/光影），抽卡会锁不住视觉一致性");
+});
+["props", "times", "weathers", "sounds"].forEach(function (k) {
+  if (!Array.isArray(SCRIPTS.nouns && SCRIPTS.nouns[k]) || !SCRIPTS.nouns[k].length) errors.push("scripts.nouns." + k + " 为空");
 });
 
 if (errors.length) {

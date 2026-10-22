@@ -9,7 +9,7 @@ const ROOT = path.join(__dirname, "..");
 const FILES = [
   "regions", "styles", "media", "subjects", "characters",
   "worlds", "shots", "lights", "layouts", "sizes", "decors",
-  "series", "cases", "conflicts", "templates", "palettes", "entities", "gallery",
+  "series", "cases", "conflicts", "templates", "palettes", "entities", "gallery", "scripts",
 ];
 
 function main() {
@@ -21,6 +21,7 @@ function main() {
     const n = out[name].items ? out[name].items.length
       : out[name].conflicts ? out[name].conflicts.length
       : out[name].entities ? out[name].entities.length
+      : out[name].premises ? out[name].premises.length
       : out[name].slots ? out[name].slots.length : 0;
     counts.push(name + "=" + n);
   }

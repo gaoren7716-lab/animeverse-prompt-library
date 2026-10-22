@@ -123,6 +123,55 @@ function ok(c, name, extra) {
   }), views);
   ok(leak.length === 1 && leak[0] === "v-frame", "只有当前页可见（无布局类泄露）", leak.join(","));
 
+  // 8. 导航顺序：提示词合成器在全球地图之前
+  const navOrder = await page.evaluate(() => Array.prototype.map.call(
+    document.querySelectorAll("#nav button"), function (b) { return b.getAttribute("data-v"); }
+  ));
+  ok(navOrder.indexOf("v-synth") < navOrder.indexOf("v-atlas"),
+    "导航顺序：合成器在地图之前", navOrder.join(","));
+
+  // 9. 画廊大小图切换（真实渲染宽度才说明白）
+  await page.click('button[data-v="v-gallery"]');
+  await page.waitForTimeout(300);
+  const wLarge = await page.evaluate(() => {
+    var c = document.querySelector("#gGrid .gcard");
+    return c ? Math.round(c.getBoundingClientRect().width) : 0;
+  });
+  await page.click('[data-gs="sm"]');
+  await page.waitForTimeout(300);
+  const wSmall = await page.evaluate(() => {
+    var c = document.querySelector("#gGrid .gcard");
+    var g = document.getElementById("gGrid");
+    return { w: c ? Math.round(c.getBoundingClientRect().width) : 0, cls: g.className };
+  });
+  ok(wLarge > 0 && wSmall.w > 0, "画廊两种图幅都渲染出卡片", wLarge + " → " + wSmall.w);
+  ok(wSmall.w < wLarge, "小图确实更小", wLarge + " → " + wSmall.w);
+  ok(wSmall.cls.indexOf("gs-sm") !== -1, "小图模式挂 gs-sm 类", wSmall.cls);
+  const cols = await page.evaluate(() => getComputedStyle(document.getElementById("gGrid")).gridTemplateColumns.split(" ").length);
+  ok(cols >= 4, "小图模式列数 ≥ 4", String(cols));
+  await page.click('[data-gs="lg"]');
+  await page.waitForTimeout(200);
+
+  // 10. 短剧抽卡（没想法就抽一部）
+  await page.click('button[data-v="v-script"]');
+  await page.waitForTimeout(250);
+  await page.evaluate(() => { document.getElementById("scText").value = ""; });
+  await page.click("#scRand");
+  await page.waitForTimeout(500);
+  const sc = await page.evaluate(() => ({
+    text: document.getElementById("scText").value,
+    theme: document.getElementById("scTheme").value,
+    cards: document.querySelectorAll("#scOut .sercard").length,
+    roles: Array.prototype.map.call(document.querySelectorAll("#scOut .sercard .role"), function (r) { return r.textContent; }),
+  }));
+  ok(sc.text.length > 60, "短剧抽卡生成文案", String(sc.text.length) + " 字");
+  ok(sc.text.indexOf("{") === -1, "抽卡文案无残留占位符", sc.text.slice(0, 60));
+  ok(sc.theme.length > 0, "抽卡填入主题", sc.theme);
+  ok(sc.cards === 5, "抽卡直接出 5 张分镜", String(sc.cards));
+  ok(sc.roles.join(",") === "建立镜头,角色亮相,冲突推进,高潮,收尾留白",
+    "抽卡分镜按五幕叙事顺序", sc.roles.join(","));
+  await page.screenshot({ path: path.join(ROOT, ".workbuddy", "shot_script.png") });
+
   // 截图留证
   await page.click('button[data-v="v-gallery"]');
   await page.waitForTimeout(400);

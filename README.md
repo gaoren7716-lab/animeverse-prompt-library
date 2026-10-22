@@ -45,6 +45,16 @@ Aniverse Prompt Library —— 覆盖全球动漫及关联创作的开放式提�
 
 关键词在短剧页同样可用：写「赛博朋克, 霓虹」会锁定全组的题材、场景与光影基调。
 
+### 没想法就抽一部短剧
+
+短剧页除了手写文案，还有「**🎲 抽一部短剧**」——从 **10 条剧本骨架**（`data/scripts.json`）里随机抽一条，角色/场景/光影/道具/时间/天气/声音自动填好，生成的就是一份能直接出图的完整文案（填进同一个文本框，可以继续手改）。
+
+- **骨架是结构，不是随机句子**：每条 5 段，对应「建立→亮相→推进→高潮→收尾」，叙事骨架固定（主角出场→配角登场→主角对峙→对手现身→主角收尾）。
+- **抽卡抽定的维度是硬锁**：生成器本来就知道每段配了谁、什么场景、什么光，逐段传给分镜构建器（`locks` 参数），不靠从文案反推——反推会打架（「面具客」是 CH-16 还是 CH-12 靠词序定，说不准）。
+- **中文词用「叙事用词」**：场景写「霓虹都市」、光影写「夜色」而不是条目原名「霓虹夜光」；这些词的每个 2-gram 都被约束在词条的 `zh`/`kw` 之内（`check_fields` 强制），所以照样能被匹配器锁住。
+- **关键词优先**：写「魔法少女」再抽，抽出来的就是魔法少女题材 + 少女主角。
+- 抽卡可复现：同 seed 同结果（mulberry32）。
+
 ## 受控变形算子
 
 10 个算子，每个声明 preserve（保持）/ change（改写）/ forbid（硬边界）三件事，元数据在页面上可见：
@@ -74,13 +84,13 @@ Aniverse Prompt Library —— 覆盖全球动漫及关联创作的开放式提�
 
 | 页面 | 内容 |
 |---|---|
-| 示例画廊 | **50 个位置**：10 张已配图案例 + 40 个预留位（自带配方，可直接出图） |
+| 示例画廊 | **50 个位置**：10 张已配图案例 + 40 个预留位（自带配方，可直接出图）；**大图 / 小图两种图幅**可切 |
 | 自定义出图 | 12 预设一键出词，或「自由组合 + 关键词」自动配一套 |
 | 抽卡 | 约束随机配方，抽 1 / 4 / 8 张，或「🎲 随机来一张」出单张大卡 |
 | 系列出图 | 主题 + 关键词 → 一套图（见上） |
-| 短剧分镜 | 短剧文案 → 一套分镜图（见上） |
-| 全球地图 | 18 地区时代 + 28 参考实体检索 |
+| 短剧分镜 | 短剧文案 → 一套分镜图；**没想法就「🎲 抽一部短剧」**（见上） |
 | 提示词合成器 | 11 维 chips + 算子工具条 + 分享码 |
+| 全球地图 | 18 地区时代 + 28 参考实体检索 |
 | 验证案例 | 10 案例配方与验证点 |
 | 全部词条 | 150 条维度条目检索 + 详情抽屉 |
 | 风格配色 | 16 张配色卡（每风格一张） |
@@ -102,10 +112,12 @@ Aniverse Prompt Library —— 覆盖全球动漫及关联创作的开放式提�
 重跑 `node tools/gallery_sync.js` 即自动挂上，页面即时显示。
 卡号规则：`CS-01~CS-10` 是已实测案例位，`GL-11~GL-50` 是预留位。
 
+**图幅可切**：画廊右上角有「图幅：大图 / 小图」——大图 3 列看细节，小图 5 列密排、收起描述，一屏扫全 50 个位置。
+
 ## 数据与代码
 
 ```
-data/*.json      18 个数据文件（11 维 + series/cases/conflicts/templates/palettes/entities/gallery）
+data/*.json      19 个数据文件（11 维 + series/cases/conflicts/templates/palettes/entities/gallery/scripts）
 tools/compose.js 引擎单一真源（UMD 双跑：Node CLI 与浏览器共用）
 tools/build_web.js  data → assets/data-bundle.js + compose.js → assets/engine.js
 index.html + assets/app.js  十一页单页应用（原生 JS，零依赖）
@@ -116,17 +128,22 @@ tools/apply_alias.js  检索别名维护脚本（写 kw 字段，幂等可重跑
 tools/logo_export.js  LOGO 导出（SVG → PNG，改型后重跑）
 ```
 
+`data/scripts.json` 是短剧抽卡的剧本种子池（10 条骨架 × 5 段 beats + 道具/时间/天气/声音词表）。
+`data/{worlds,lights}.json` 里的 `story` 字段是**中文叙事用词**（场景写「霓虹都市」、光影写「夜色」），
+词源必须落在该条目的 `zh`/`kw` 内——`check_fields` 强制这条，否则匹配器锁不住，抽出来的分镜就散了。
+
 ### 回归清单（改任何东西跑一遍）
 
 ```bash
 NODE_PATH=<jsdom 所在 node workspace>/node_modules node tools/build_web.js
-node tools/check_fields.js        # 字段体检（id 格式/prompt 禁中文/三件套/授权分级/kw 别名）
+node tools/check_fields.js        # 字段体检（id 格式/prompt 禁中文/三件套/授权分级/kw 别名/story 词源）
 node tools/check_cases.js         # 引用完整 + 覆盖矩阵 + 同维度堆料
-node tools/smoke.js               # 引擎冒烟 103 项
-NODE_PATH=... node tools/smoke-web.js   # 界面冒烟 94 项（jsdom，含 CSS 绊线）
+node tools/smoke.js               # 引擎冒烟 130 项
+NODE_PATH=... node tools/smoke-web.js   # 界面冒烟 107 项（jsdom，含 CSS 绊线）
 node tools/gallery_sync.js --check       # 画廊清单与目录一致
 node tools/inventory.js           # 盘点 + 覆盖缺口
-NODE_PATH=... node tools/verify_chrome.js  # 真实 Chrome 验证 16 项（改了显隐/尺寸/配色必跑）
+node tools/apply_alias.js --check # 别名表体检
+NODE_PATH=... node tools/verify_chrome.js  # 真实 Chrome 验证 26 项（改了显隐/尺寸/配色必跑）
 ```
 
 ## 授权与边界
