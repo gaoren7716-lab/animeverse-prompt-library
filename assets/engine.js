@@ -352,10 +352,12 @@
     var th = (typeof theme === "string" && /^TH-\d\d$/.test(theme)) ? themeById(theme) : null;
     var themeZh = th ? th.zh : String(theme || "").trim();
     var themeEn = th ? th.en : (themeZh ? themeZh : "original theme");
-    var styleId = o.style || (th ? th.style : "ST-01");
-    var subjectId = o.subject || (th ? th.subject : pickFrom(data.subjects.items, rnd).id);
-    var characterId = o.character || (th ? pickFrom(th.characters, rnd) : pickFrom(data.characters.items, rnd).id);
-    var worldId = o.world || (th ? pickFrom(th.worlds, rnd) : pickFrom(data.worlds.items, rnd).id);
+    // 关键词锁定：只锁用户点名过的维度，其余照常抽
+    var lock = o.keywords ? matchKeywords(o.keywords) : {};
+    var styleId = o.style || (th ? th.style : (lock.styles ? lock.styles.id : "ST-01"));
+    var subjectId = o.subject || (th ? th.subject : (lock.subjects ? lock.subjects.id : pickFrom(data.subjects.items, rnd).id));
+    var characterId = o.character || (th ? pickFrom(th.characters, rnd).id : (lock.characters ? lock.characters.id : pickFrom(data.characters.items, rnd).id));
+    var worldId = o.world || (th ? pickFrom(th.worlds, rnd).id : (lock.worlds ? lock.worlds.id : pickFrom(data.worlds.items, rnd).id));
     // 地区一次抽定（CF-06 守卫：水墨传统年代不配霓虹/三维）
     var regionId = o.region || pickFrom(data.regions.items.filter(function (r) {
       return !(r.id === "RG-11" && (styleId === "ST-14" || styleId === "ST-11"));
@@ -397,6 +399,243 @@
     });
     return {
       theme: themeZh, themeEn: themeEn, count: cards.length,
+      style: { id: styleId, zh: index.styles[styleId] ? index.styles[styleId].zh : styleId },
+      palette: pal, region: { id: regionId, zh: index.regions[regionId] ? index.regions[regionId].zh : regionId },
+      subject: { id: subjectId, zh: index.subjects[subjectId] ? index.subjects[subjectId].zh : subjectId },
+      character: { id: characterId, zh: index.characters[characterId] ? index.characters[characterId].zh : characterId },
+      world: { id: worldId, zh: index.worlds[worldId] ? index.worlds[worldId].zh : worldId },
+      cards: cards
+    };
+  }
+
+  /* ---------- 文本拆解与语义匹配 ----------
+   * 三件事：
+   *   parseScript(text)  短剧/文案 → 段落块（有空行按段，无空行按句）
+   *   matchKeywords(kw)  关键词串 → 维度锁定（短词，查询覆盖为主）
+   *   matchText(text)    任意文本 → 维度建议（长文本，条目覆盖为主）
+   * 匹配原理：中文 2-gram 双边归一化打分（查询覆盖率 × 条目覆盖率）+ 英文整词交集。
+   * 条目核心 gram 只取 zh（短且准），note 只用于整串包含判断——否则长 note 稀释覆盖率。 */
+  var STOP_CH = "的了是在有和就都而及与也很不我你他她它们个么什么可以能会要想说去来被把让给对从向到过吗呢吧啊哦嗯很更最又再才只都";
+  function cnGrams(s) {
+    var out = [], m, re = /[\u4e00-\u9fff]+/g, run, i;
+    while ((m = re.exec(String(s || "")))) {
+      run = m[0];
+      for (i = 0; i + 2 <= run.length; i++) {
+        var g = run.slice(i, i + 2);
+        if (STOP_CH.indexOf(g.charAt(0)) !== -1 || STOP_CH.indexOf(g.charAt(1)) !== -1) continue;
+        out.push(g);
+      }
+    }
+    return out;
+  }
+  var STOP_EN = { the: 1, a: 1, an: 1, of: 1, with: 1, and: 1, in: 1, on: 1, at: 1, to: 1, for: 1, no: 1, its: 1, it: 1, is: 1, as: 1, by: 1, from: 1, that: 1, this: 1, be: 1, are: 1, was: 1 };
+  function enWords(s) {
+    var out = [], m, re = /[A-Za-z][A-Za-z'-]{2,}/g, w;
+    while ((m = re.exec(String(s || "")))) {
+      w = m[0].toLowerCase();
+      if (!STOP_EN[w]) out.push(w);
+    }
+    return out;
+  }
+  function uniq(arr) { var seen = {}, out = []; arr.forEach(function (x) { if (!seen[x]) { seen[x] = 1; out.push(x); } }); return out; }
+
+  // 匹配索引：每个维度每个条目一份核心 gram + 别名 gram + 英文词 + 整串文本
+  var MATCH_INDEX = null;
+  function matchIndex() {
+    if (MATCH_INDEX) return MATCH_INDEX;
+    MATCH_INDEX = {};
+    DIM_KEYS.forEach(function (d) {
+      var rows = [];
+      data[d].items.forEach(function (it) {
+        var kwGrams = [];
+        (it.kw || []).forEach(function (w) { kwGrams = kwGrams.concat(cnGrams(w)); });
+        kwGrams = uniq(kwGrams);
+        var core = uniq(cnGrams(it.zh).concat(cnGrams(it.kw || "")));
+        rows.push({
+          id: it.id, zh: it.zh,
+          core: core, coreSet: core.reduce(function (m, g) { m[g] = 1; return m; }, {}),
+          kwSet: kwGrams.reduce(function (m, g) { m[g] = 1; return m; }, {}),
+          text: String(it.zh || "") + " " + String(it.note || ""),
+          words: enWords(String(it.en || "") + " " + String(it.prompt || "")).reduce(function (m, w) { m[w] = 1; return m; }, {})
+        });
+      });
+      MATCH_INDEX[d] = rows;
+    });
+    return MATCH_INDEX;
+  }
+  function scoreItem(row, qSet, qG, qWords, text, strict) {
+    if (text && row.text && text.indexOf(row.zh) !== -1) return 1.2; // 整串命中：最强信号
+    var hit = 0;
+    for (var i = 0; i < row.core.length; i++) if (qSet[row.core[i]]) hit++;
+    // 别名强信号：用户口语词命中 kw 声明的词，比 zh 拆出来的 gram 可信得多
+    // （"机甲少女"要落到机甲题材而不是魔法少女，靠的就是这一条）
+    var kwHit = 0;
+    for (var k in row.kwSet) if (qSet[k]) kwHit++;
+    var enHit = false;
+    for (var j = 0; j < qWords.length; j++) if (row.words[qWords[j]]) { enHit = true; break; }
+    if (!hit) return (kwHit || enHit) ? 0.9 + Math.min(0.2, kwHit * 0.1) : 0;
+    var iCov = hit / row.core.length;
+    var qCov = hit / Math.max(1, qG.length);
+    var s;
+    if (hit === 1) {
+      // 单个 gram 命中：短词靠查询覆盖背书（"机甲"→机甲题材），长句靠条目够短背书
+      if (strict) s = qCov * 0.9 + iCov * 0.1;
+      else {
+        if (row.core.length > 4) return (kwHit || enHit) ? 0.9 : 0;
+        s = iCov * 0.85 + qCov * 0.15;
+      }
+    } else {
+      s = strict ? (qCov * 0.65 + iCov * 0.35) : (iCov * 0.7 + qCov * 0.3);
+    }
+    if (kwHit) s += kwHit >= 2 ? 0.7 : 0.5;
+    if (enHit) s += 0.15;
+    return s;
+  }
+  /* matchText(text, opts)
+   * opts.mode: "strict" 短词（查询覆盖为主，阈值 0.5）| "loose" 长文本（条目覆盖为主，阈值 0.42）
+   * 返回 {dim: {id, score, zh}}，每个维度最多一个命中。 */
+  function matchText(text, opts) {
+    var o = opts || {};
+    var t = String(text || "").trim();
+    if (!t) return {};
+    var strict = o.mode !== "loose";
+    var qG = uniq(cnGrams(t));
+    var qWords = uniq(enWords(t));
+    if (!qG.length && !qWords.length) return {};
+    var qSet = qG.reduce(function (m, g) { m[g] = 1; return m; }, {});
+    var idx = matchIndex(), out = {};
+    DIM_KEYS.forEach(function (d) {
+      var best = null;
+      idx[d].forEach(function (row) {
+        var s = scoreItem(row, qSet, qG, qWords, t, strict);
+        if (s <= 0) return;
+        if (!best || s > best.score + 1e-9) best = { id: row.id, score: s, zh: row.zh };
+      });
+      if (best && best.score >= (strict ? 0.5 : 0.42)) out[d] = best;
+    });
+    return out;
+  }
+  /* matchKeywords(kw)：关键词串（逗号/顿号/分号/空格/换行分隔）→ 维度锁定。
+   * 每个词独立打分，某维度取所有词里的最高分。 */
+  function matchKeywords(kw) {
+    var words = String(kw || "").split(/[,，、;；\s]+/).map(function (w) { return w.trim(); }).filter(Boolean);
+    if (!words.length) return {};
+    var perWord = words.map(function (w) { return matchText(w, { mode: "strict" }); });
+    var out = {};
+    perWord.forEach(function (m) {
+      Object.keys(m).forEach(function (d) {
+        if (!out[d] || m[d].score > out[d].score) out[d] = m[d];
+      });
+    });
+    return out;
+  }
+
+  /* parseScript(text, opts)：短剧/文案 → 段落块
+   * opts.mode: "auto"（默认，有空行按段、无空行按句）| "para" 强制按段 | "sent" 强制按句 */
+  function splitSentences(t) {
+    var lines = String(t || "").split(/[\n\r]+/).map(function (l) { return l.trim(); }).filter(Boolean);
+    var out = [];
+    lines.forEach(function (line) {
+      var raw = line.split(/([。！？!?…；;])/);
+      for (var i = 0; i < raw.length; i += 2) {
+        var s = ((raw[i] || "") + (raw[i + 1] || "")).trim();
+        if (s) out.push(s);
+      }
+    });
+    return out;
+  }
+  function parseScript(text, opts) {
+    var o = opts || {};
+    var mode = o.mode || "auto";
+    var t = String(text || "").replace(/\r\n?/g, "\n").trim();
+    if (!t) return [];
+    var hasBlank = /\n[ \t]*\n/.test(t);
+    var blocks, kind;
+    if (mode === "sent" || (mode === "auto" && !hasBlank)) { blocks = splitSentences(t); kind = "sent"; }
+    else { blocks = t.split(/\n[ \t]*\n+/).map(function (b) { return b.trim(); }).filter(Boolean); kind = "para"; }
+    return blocks.map(function (b, i) { return { index: i, text: b, kind: kind }; });
+  }
+  function scriptRoleById(id) {
+    var roles = data.series.scriptRoles || [];
+    for (var i = 0; i < roles.length; i++) if (roles[i].id === id) return roles[i];
+    return null;
+  }
+  /* 幕次分配：段数 → 叙事顺序的幕次角色序列（建立→亮相→推进→高潮→收尾） */
+  function pickActs(n) {
+    var order = data.series.actOrder || {};
+    if (n <= 5) return (order[String(n)] || ["SR-S1"]).slice(0, n);
+    var mid = [];
+    for (var i = 0; i < n - 4; i++) mid.push("SR-S3");
+    return ["SR-S1", "SR-S2"].concat(mid, ["SR-S4", "SR-S5"]);
+  }
+  /* scriptToSeries(theme, keywords, script, opts)
+   * 主题定基调（可用 TH-xx 预设或自由文本），关键词锁维度，文案拆段一段一张。
+   * 全组统一：风格 / 配色 / 地区；段落里明确提到的场景·角色·光影可逐段覆盖。 */
+  function scriptToSeries(theme, keywords, script, opts) {
+    var o = opts || {};
+    var blocks = parseScript(script, { mode: o.mode || "auto" });
+    if (!blocks.length) return null;
+    var rnd = mulberry32(o.seed == null ? 20261022 : o.seed);
+    var th = (typeof theme === "string" && /^TH-\d\d$/.test(theme)) ? themeById(theme) : null;
+    var themeZh = th ? th.zh : String(theme || "").trim();
+    var themeEn = th ? th.en : (themeZh || "original theme");
+    var lock = matchKeywords(keywords);
+    var styleId = o.style || (th ? th.style : (lock.styles ? lock.styles.id : pickFrom(data.styles.items, rnd).id));
+    var subjectId = o.subject || (th ? th.subject : (lock.subjects ? lock.subjects.id : pickFrom(data.subjects.items, rnd).id));
+    var characterId = o.character || (th ? pickFrom(th.characters, rnd).id : (lock.characters ? lock.characters.id : pickFrom(data.characters.items, rnd).id));
+    var worldId = o.world || (th ? pickFrom(th.worlds, rnd).id : (lock.worlds ? lock.worlds.id : pickFrom(data.worlds.items, rnd).id));
+    var regionId = o.region || pickFrom(data.regions.items.filter(function (r) {
+      return !(r.id === "RG-11" && (styleId === "ST-14" || styleId === "ST-11"));
+    }), rnd).id;
+    var pal = paletteOf(styleId);
+    var actIds = pickActs(blocks.length);
+    // 叙事继承：段落没明说的角色/场景/光影沿用上一段，短剧才像一部片子而不是一组散图
+    var carry = { subjects: null, characters: null, worlds: null, lights: null };
+    var cards = blocks.map(function (b, i) {
+      var role = scriptRoleById(actIds[i]) || scriptRoleById("SR-S1");
+      var local = matchText(b.text, { mode: "loose" });
+      var subjects = (local.subjects || lock.subjects || { id: subjectId }).id;
+      var characters = (local.characters || lock.characters || { id: carry.characters || characterId }).id;
+      var worlds = (local.worlds || lock.worlds || { id: carry.worlds || worldId }).id;
+      var lights = local.lights ? local.lights.id
+        : (lock.lights ? lock.lights.id : (carry.lights || pickFrom(role.lights, rnd)));
+      var sel = {
+        sizes: pickFrom(role.sizes, rnd),
+        media: pickFrom(role.media, rnd),
+        subjects: subjects, characters: characters, worlds: worlds,
+        shots: local.shots ? local.shots.id : pickFrom(role.shots, rnd),
+        lights: lights,
+        styles: styleId, regions: regionId,
+        layouts: pickFrom(role.layouts, rnd)
+      };
+      carry.subjects = subjects; carry.characters = characters;
+      carry.worlds = worlds; carry.lights = lights;
+      // 逐位冲突感知重抽：只动幕次池维度。
+      // 已被段落明确指定、被关键词锁定、或从上一段继承来的维度不再重抽（重抽会覆盖用户意图）
+      var lockedDims = {};
+      ["subjects", "characters", "worlds", "lights", "shots"].forEach(function (d) {
+        if (local[d] || lock[d] || carry[d]) lockedDims[d] = true;
+      });
+      ["sizes", "shots", "lights", "layouts"].forEach(function (d) {
+        if (lockedDims[d]) return;
+        var pool = role[d];
+        if (pool && pool.length > 1) sel[d] = pickClean(pool, sel, rnd);
+      });
+      var r = compose(sel, { theme: themeEn, freeText: b.text ? "scene: " + b.text : "" });
+      var title = role.titleFormula.indexOf("{theme}") !== -1
+        ? role.titleFormula.replace(/\{theme\}/g, themeZh)
+        : themeZh + " · " + role.titleFormula;
+      return {
+        role: role.id, zh: role.zh, job: role.job,
+        title: title + " · 第" + (i + 1) + "段",
+        copyGuide: role.copyGuide, why: role.why,
+        text: b.text, kind: b.kind,
+        sel: r.sel, prompt: r.prompt, zhList: r.zh, warnings: r.warnings
+      };
+    });
+    return {
+      theme: themeZh, themeEn: themeEn, count: cards.length,
+      mode: blocks[0].kind,
       style: { id: styleId, zh: index.styles[styleId] ? index.styles[styleId].zh : styleId },
       palette: pal, region: { id: regionId, zh: index.regions[regionId] ? index.regions[regionId].zh : regionId },
       subject: { id: subjectId, zh: index.subjects[subjectId] ? index.subjects[subjectId].zh : subjectId },
@@ -509,6 +748,8 @@
     compose: compose, conflicts: conflicts, changesList: changesList,
     OPERATORS: OPERATORS, applyOperator: applyOperator,
     buildSeries: buildSeries, seriesRoleById: seriesRoleById, themeById: themeById, paletteOf: paletteOf,
+    parseScript: parseScript, matchText: matchText, matchKeywords: matchKeywords,
+    scriptToSeries: scriptToSeries, scriptRoleById: scriptRoleById, pickActs: pickActs,
     random: random, stats: stats, gaps: gaps,
     SHARE_PREFIX: SHARE_PREFIX, encodeShare: encodeShare, decodeShare: decodeShare,
     entityById: entityById, relationsOf: relationsOf, REL_ZH: REL_ZH

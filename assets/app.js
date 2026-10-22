@@ -266,7 +266,8 @@ function renderPresets() {
       '<div style="margin-top:7px">' + selChips(AV.normalize ? AV.normalize(p.sel) : p.sel) + "</div></div>";
   }).join("");
   var sel = $("ezPreset");
-  sel.innerHTML = PRESETS.map(function (p, i) { return '<option value="' + i + '">' + esc(p.zh) + "</option>"; }).join("");
+  sel.innerHTML = '<option value="free">自由组合（按关键词自动配）</option>' +
+    PRESETS.map(function (p, i) { return '<option value="' + i + '">' + esc(p.zh) + "</option>"; }).join("");
 }
 $("preGrid").addEventListener("click", function (e) {
   var card = e.target.closest("[data-pre]");
@@ -276,15 +277,15 @@ $("preGrid").addEventListener("click", function (e) {
   $("ezTheme").value = p.theme;
   runEasy();
 });
-function runEasy() {
-  var i = +$("ezPreset").value || 0;
-  var p = PRESETS[i];
-  var theme = $("ezTheme").value.trim() || p.theme;
-  var r = AV.compose(p.sel, { theme: theme });
-  var pal = AV.paletteOf(p.sel.style);
+function renderEasyOut(title, r, theme, lock) {
+  var pal = AV.paletteOf(r.sel.styles);
+  var lockTxt = lock && Object.keys(lock).length
+    ? Object.keys(lock).map(function (d) { return dimZh(d) + "·" + lock[d].zh; }).join(" · ")
+    : "";
   $("ezOut").innerHTML =
     '<div class="outbox" style="position:static">' +
-    '<div class="row" style="justify-content:space-between"><b>' + esc(p.zh) + '</b><button class="gcopy" id="ezCopy">复制提示词</button></div>' +
+    '<div class="row" style="justify-content:space-between"><b>' + esc(title) + '</b><button class="gcopy" id="ezCopy">复制提示词</button></div>' +
+    (lockTxt ? '<div class="sm mut" style="margin-top:4px">关键词锁定：' + esc(lockTxt) + "</div>" : "") +
     (r.warnings.length ? '<div class="warn">⚠ ' + r.warnings.map(function (w) { return esc(w.a + " × " + w.b + "：" + w.verdict); }).join("<br>") + "</div>" : "") +
     '<div class="prompt">' + esc(r.prompt) + "</div>" +
     '<div class="sm mut">' + r.zh.map(esc).join(" · ") + "</div>" +
@@ -300,7 +301,28 @@ function runEasy() {
     el.addEventListener("click", function () { copyText(el.getAttribute("data-hex")); });
   });
 }
+function runEasy() {
+  var pv = $("ezPreset").value;
+  var theme = $("ezTheme").value.trim();
+  var kw = $("ezKw").value.trim();
+  // 自由组合：关键词锁定的维度固定，其余维度按约束随机配一套
+  if (pv === "free") {
+    var lock = AV.matchKeywords(kw);
+    var lockIds = {};
+    Object.keys(lock).forEach(function (d) { lockIds[d] = lock[d].id; });
+    var sel = AV.random(lockIds);
+    var r = AV.compose(sel, { theme: theme });
+    renderEasyOut("自由组合" + (theme ? " · " + theme : "") + (kw ? "（关键词：" + kw + "）" : ""), r, theme, lock);
+    return;
+  }
+  var i = +pv || 0;
+  var p = PRESETS[i];
+  var th = theme || p.theme;
+  var rr = AV.compose(p.sel, { theme: th });
+  renderEasyOut(p.zh, rr, th);
+}
 $("ezGo").addEventListener("click", runEasy);
+$("ezKw").addEventListener("keydown", function (e) { if (e.key === "Enter") runEasy(); });
 $("ezRand").addEventListener("click", function () {
   var r = AV.random();
   var i = Math.floor(Math.random() * PRESETS.length);
@@ -321,6 +343,58 @@ $("ezRand").addEventListener("click", function () {
 
 /* ---------- 系列出图 ---------- */
 var S = { sel: {}, theme: "", serCount: 4, serSeed: 20261022 };
+/* 我的主题：存本机 localStorage（不上传、不入库），存主题名 + 关键词 */
+var MY_THEME_KEY = "av_userthemes";
+function loadMyThemes() {
+  try { var v = JSON.parse(localStorage.getItem(MY_THEME_KEY) || "[]"); return Array.isArray(v) ? v : []; }
+  catch (e) { return []; }
+}
+function saveMyThemes(list) {
+  try { localStorage.setItem(MY_THEME_KEY, JSON.stringify(list)); } catch (e) { toast("本机存储不可用"); }
+}
+function renderMyChips() {
+  var list = loadMyThemes();
+  if (!list.length) {
+    $("myChips").innerHTML = '<span class="mut sm">我的主题：还没有（填好主题与关键词后点「加入主题」，之后一键复用）</span>';
+    return;
+  }
+  $("myChips").innerHTML = '<span class="mut sm">我的主题：</span>' + list.map(function (t, i) {
+    return '<span class="chip" data-mt="' + i + '">' + esc(t.name) +
+      (t.kw ? '<span class="cid">' + esc(t.kw) + "</span>" : "") +
+      '<span class="cid" data-mtdel="' + i + '" title="删除">×</span></span>';
+  }).join("");
+}
+$("serSave").addEventListener("click", function () {
+  var name = $("serTheme").value.trim();
+  if (!name) { toast("先给主题起个名"); return; }
+  var kw = $("serKw").value.trim();
+  var list = loadMyThemes();
+  var exist = -1;
+  list.forEach(function (t, i) { if (t.name === name) exist = i; });
+  var item = { name: name, kw: kw, at: new Date().toISOString().slice(0, 10) };
+  if (exist >= 0) list[exist] = item; else list.push(item);
+  saveMyThemes(list);
+  renderMyChips();
+  toast(exist >= 0 ? "已更新主题：" + name : "已加入主题：" + name);
+});
+$("myChips").addEventListener("click", function (e) {
+  var del = e.target.closest("[data-mtdel]");
+  if (del) {
+    var list = loadMyThemes();
+    list.splice(+del.getAttribute("data-mtdel"), 1);
+    saveMyThemes(list);
+    renderMyChips();
+    toast("已删除");
+    return;
+  }
+  var chip = e.target.closest("[data-mt]");
+  if (!chip) return;
+  var t = loadMyThemes()[+chip.getAttribute("data-mt")];
+  if (!t) return;
+  $("serTheme").value = t.name;
+  $("serKw").value = t.kw || "";
+  doSeries();
+});
 function serThemeChips() {
   $("serChips").innerHTML = D.series.themes.map(function (t) {
     return '<span class="chip" data-th="' + t.id + '">' + esc(t.zh) + "</span>";
@@ -343,7 +417,7 @@ $$(".sercnt").forEach(function (b) {
 function doSeries() {
   var raw = $("serTheme").value.trim();
   if (!raw) { toast("先输入主题，或点一个主题卡片"); return; }
-  var ser = AV.buildSeries(raw, S.serCount, { seed: S.serSeed });
+  var ser = AV.buildSeries(raw, S.serCount, { seed: S.serSeed, keywords: $("serKw").value.trim() });
   renderSeries(ser);
 }
 $("doSeries").addEventListener("click", doSeries);
@@ -397,6 +471,71 @@ function renderSeries(ser) {
     btn.addEventListener("click", function () {
       copyText(btn.closest(".sercard").querySelector("pre").textContent);
     });
+  });
+}
+
+/* ---------- 短剧分镜（文案 → 一套分镜） ---------- */
+var SC = { seed: 20261022 };
+function scDo() {
+  var text = $("scText").value;
+  if (!text.trim()) { toast("先把短剧文案粘进来"); return; }
+  var ser = AV.scriptToSeries($("scTheme").value.trim(), $("scKw").value.trim(), text, {
+    seed: SC.seed, mode: $("scMode").value
+  });
+  if (!ser) { toast("没拆出内容，检查一下文案"); return; }
+  renderScript(ser);
+}
+$("scGo").addEventListener("click", scDo);
+$("scReroll").addEventListener("click", function () {
+  SC.seed = (SC.seed * 1103515245 + 12345) % 2147483647;
+  if ($("scText").value.trim()) { scDo(); toast("已换一批配套"); }
+});
+$("scMode").addEventListener("change", function () {
+  if ($("scText").value.trim()) scDo();
+});
+function renderScript(ser) {
+  var pal = ser.palette;
+  var head =
+    '<div class="panel" style="background:var(--panel2);margin-bottom:14px">' +
+    '<div class="row" style="justify-content:space-between;flex-wrap:wrap;gap:10px">' +
+    "<div><b style=\"font-size:15px\">" + (ser.theme ? "「" + esc(ser.theme) + "」· " : "") + ser.count + " 张分镜</b>" +
+    '<div class="mut sm" style="margin-top:4px">拆分：' + (ser.mode === "sent" ? "按句" : "按段") +
+    " · 全组统一：风格 " + esc(ser.style.zh) + " · 题材 " + esc(ser.subject.zh) +
+    " · 角色 " + esc(ser.character.zh) + " · 世界 " + esc(ser.world.zh) + " · 地区 " + esc(ser.region.zh) + "</div></div>" +
+    '<div style="text-align:right"><button class="gcopy" id="scCopyAll">复制全部分镜</button></div>' +
+    (pal ? '<div style="text-align:right;margin-top:6px"><div class="mut sm">配色 · ' + esc(pal.styleZh) + "</div>" +
+      '<div class="swrow" style="display:flex;gap:5px;margin-top:5px">' + pal.swatches.map(function (s) {
+        return '<i style="width:30px;height:30px;border-radius:7px;background:' + s.hex + ';cursor:pointer;display:block" data-hex="' + s.hex + '" title="' + esc(s.name) + '"></i>';
+      }).join("") + "</div></div>" : "") +
+    "</div></div>";
+  $("scOut").innerHTML = head + '<div class="grid g2" id="scCards">' + ser.cards.map(function (c) {
+    return '<div class="sercard">' +
+      '<span class="role">' + esc(c.zh) + "</span>" +
+      "<h4>" + esc(c.title) + "</h4>" +
+      '<div class="job">' + esc(c.text) + "</div>" +
+      '<div style="margin:8px 0">' + selChips(c.sel) + "</div>" +
+      (c.warnings.length ? '<div class="warn">⚠ ' + c.warnings.map(function (w) { return esc(w.a + " × " + w.b + "：" + w.verdict); }).join("<br>") + "</div>" : "") +
+      "<pre>" + esc(c.prompt) + "</pre>" +
+      '<div class="row"><button class="gcopy copy">复制这张</button>' +
+      '<span class="mut sm">文案：' + esc(c.copyGuide) + "</span></div>" +
+      '<div class="mut sm" style="margin-top:5px">为什么：' + esc(c.why) + "</div>" +
+      "</div>";
+  }).join("") + "</div>";
+  $$("#scOut [data-hex]").forEach(function (el) {
+    el.addEventListener("click", function () { copyText(el.getAttribute("data-hex")); });
+  });
+  $$("#scCards .copy").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      copyText(btn.closest(".sercard").querySelector("pre").textContent);
+    });
+  });
+  $("scCopyAll").addEventListener("click", function () {
+    var blocks = $$("#scCards .sercard pre");
+    var all = blocks.map(function (pre) {
+      var card = pre.closest(".sercard");
+      return "【" + card.querySelector("h4").textContent + "】\n" + pre.textContent;
+    }).join("\n\n");
+    copyText(all);
   });
 }
 
@@ -684,6 +823,11 @@ function renderFrame() {
     D.series.roles.map(function (r) {
       return "<tr><td class=\"mono\">" + r.id + "</td><td><b>" + esc(r.zh) + "</b></td><td>" + esc(r.job) + "</td><td>" + esc(r.titleFormula) + "</td><td>" + esc(r.why) + "</td></tr>";
     }).join("");
+  $("scTb").innerHTML = "<tr><th>id</th><th>幕次</th><th>职责</th><th>可用载体</th><th>可用机位</th><th>文案提示</th></tr>" +
+    (D.series.scriptRoles || []).map(function (r) {
+      var names = function (ids) { return (ids || []).map(function (id) { return esc(AV.byId[id] ? AV.byId[id].zh : id); }).join(" / "); };
+      return "<tr><td class=\"mono\">" + r.id + "</td><td><b>" + esc(r.zh) + "</b></td><td>" + esc(r.job) + "</td><td>" + names(r.media) + "</td><td>" + names(r.shots) + "</td><td>" + esc(r.copyGuide) + "</td></tr>";
+    }).join("");
 }
 
 /* ---------- 启动 ---------- */
@@ -692,6 +836,7 @@ renderRegions();
 renderEntities();
 renderPresets();
 serThemeChips();
+renderMyChips();
 renderSynth();
 renderOps();
 renderCases();

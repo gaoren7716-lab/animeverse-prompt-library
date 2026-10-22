@@ -11,109 +11,199 @@ window.AV_DATA = {
         "id": "RG-01",
         "zh": "日本 · 70年代复古机器人",
         "prompt": "retro 1970s Japanese super-robot animation aesthetic, flat hand-painted poster skies, heavy uniform ink outlines, simplified primary color plating with visible panel gaps, coarse 16mm film grain",
-        "note": "有限动画 + 海报级背景，机体敦实方正"
+        "note": "有限动画 + 海报级背景，机体敦实方正",
+        "kw": [
+          "复古机器人",
+          "七十年代",
+          "早期动画",
+          "铁皮"
+        ]
       },
       {
         "id": "RG-02",
         "zh": "日本 · 80年代黄金赛璐璐",
         "prompt": "golden-age 1980s Japanese cel animation aesthetic, opaque poster-color background art with real atmospheric depth, characters in crisp two-tone cel shading over it, photographic cel grain and gentle specular bloom",
-        "note": "水粉背景 × 赛璐璐角色的叠合是年代签名"
+        "note": "水粉背景 × 赛璐璐角色的叠合是年代签名",
+        "kw": [
+          "八十年代",
+          "黄金年代",
+          "黄金赛璐璐"
+        ]
       },
       {
         "id": "RG-03",
         "zh": "日本 · 90年代OVA深夜作画",
         "prompt": "1990s Japanese OVA late-night animation aesthetic, high-contrast shadowy key frames, meticulously detailed mechanical and architectural linework, deep saturated palette, restrained bloom on highlights",
-        "note": "深夜档作画张力：细节密度与暗部控制"
+        "note": "深夜档作画张力：细节密度与暗部控制",
+        "kw": [
+          "九十年代",
+          "ova",
+          "深夜动画"
+        ]
       },
       {
         "id": "RG-04",
         "zh": "日本 · 00年代过渡期数码",
         "prompt": "early 2000s transitional anime aesthetic, uniform digital lineart and flat cel shading on characters against hybrid matte-painted backgrounds, soft glow bloom across every highlight, mild composite edge aliasing",
-        "note": "胶片感退场、锐利登场的交界质感"
+        "note": "胶片感退场、锐利登场的交界质感",
+        "kw": [
+          "千禧年",
+          "过渡期",
+          "数码时代"
+        ]
       },
       {
         "id": "RG-05",
         "zh": "日本 · 2010后高清电视动画",
         "prompt": "modern high-definition Japanese TV anime aesthetic, razor-clean digital lineart, two-layer shadow separation, luminous gradient hair and eye highlights, 16:9 broadcast framing with subtle grain",
-        "note": "「看起来像新番」的制式感"
+        "note": "「看起来像新番」的制式感",
+        "kw": [
+          "高清电视",
+          "现代tv",
+          "新番",
+          "电视动画"
+        ]
       },
       {
         "id": "RG-06",
         "zh": "日本 · 独立艺术动画",
         "prompt": "Japanese independent art animation aesthetic, hand-cam paper and pencil textures, experimental watercolor or pastel fields, deliberate line wobble, quiet unconventional framing",
-        "note": "作者性优先，拒绝工业光鲜"
+        "note": "作者性优先，拒绝工业光鲜",
+        "kw": [
+          "艺术动画",
+          "独立动画",
+          "实验动画"
+        ]
       },
       {
         "id": "RG-07",
         "zh": "北美 · 黄金时代橡胶管",
         "prompt": "1930s American rubber-hose cartoon aesthetic, endlessly bendable pie-cut limbs, white gloves, pie eyes, bouncy squash-and-stretch timing poses, thick even ink outlines on flat watercolor grounds",
-        "note": "程式化弯曲而轮廓不断线"
+        "note": "程式化弯曲而轮廓不断线",
+        "kw": [
+          "橡胶管",
+          "黄金时代",
+          "美式早期"
+        ]
       },
       {
         "id": "RG-08",
         "zh": "北美 · 90年代动画电影复兴",
         "prompt": "1990s American animated feature renaissance aesthetic, lush painted backgrounds with strong atmospheric depth, expressive broad-shouldered character designs, sweeping musical staging, warm classic palette",
-        "note": "手绘背景 + 表演驱动构图"
+        "note": "手绘背景 + 表演驱动构图",
+        "kw": [
+          "动画电影",
+          "复兴",
+          "迪士尼黄金年代"
+        ]
       },
       {
         "id": "RG-09",
         "zh": "北美 · 21世纪剧集动画",
         "prompt": "modern western television cartoon aesthetic, bold graphic shapes, thick clean outlines, bright saturated flat colors with geometric shadow shapes, snappy comic staging built for 11-minute beats",
-        "note": "图形化、色块化、节奏快"
+        "note": "图形化、色块化、节奏快",
+        "kw": [
+          "剧集动画",
+          "美剧",
+          "二十一世纪"
+        ]
       },
       {
         "id": "RG-10",
         "zh": "北美 · 成人动画",
         "prompt": "adult western animation aesthetic, semi-realistic proportions with worn lived-in faces, muted desaturated palette, deadpan sitcom staging, flat lighting with minimal stylization",
-        "note": "反卡通化：真实比例与生活疲态"
+        "note": "反卡通化：真实比例与生活疲态",
+        "kw": [
+          "成人动画",
+          "深夜动画"
+        ]
       },
       {
         "id": "RG-11",
         "zh": "中国 · 上美影水墨胶片",
         "prompt": "Shanghai Animation Film Studio ink-wash tradition aesthetic, brush-painted figures on xuan paper, water-ink bleeding edges, opera-inspired gesture and facial pattern, single warm seal accent",
-        "note": "水墨、剪纸、戏曲身段的胶片年代"
+        "note": "水墨、剪纸、戏曲身段的胶片年代",
+        "kw": [
+          "水墨胶片",
+          "上美影",
+          "国产水墨"
+        ]
       },
       {
         "id": "RG-12",
         "zh": "中国 · 90年代电视动画",
         "prompt": "1990s Chinese television animation aesthetic, clean heroic linework, mythic costume design with opera silhouettes, opaque gouache coloring, warm primary palette with gold trim",
-        "note": "电视系列黄金年代的美术片底子"
+        "note": "电视系列黄金年代的美术片底子",
+        "kw": [
+          "国产电视",
+          "九十年代国漫"
+        ]
       },
       {
         "id": "RG-13",
         "zh": "中国 · 当代网络番剧",
         "prompt": "contemporary Chinese donghua web-series aesthetic, immortal-cultivator costume with flowing silk ribbons, fine calligraphic linework, celadon and vermilion scheme with gold ink accents, vertical composition with generous sky",
-        "note": "国漫 2D 主流：仙侠 + 水墨影响"
+        "note": "国漫 2D 主流：仙侠 + 水墨影响",
+        "kw": [
+          "网络番剧",
+          "国创",
+          "网番"
+        ]
       },
       {
         "id": "RG-14",
         "zh": "中国 · 三维动画电影",
         "prompt": "contemporary Chinese 3D CG animated feature aesthetic, subsurface-scattered stylized skin, physically based silk and armor materials, volumetric cloud and mist, cinematic slow orbiting camera",
-        "note": "国产 3D 电影级：次表面 + 体积光"
+        "note": "国产 3D 电影级：次表面 + 体积光",
+        "kw": [
+          "三维动画电影",
+          "国产三维"
+        ]
       },
       {
         "id": "RG-15",
         "zh": "韩国 · 条漫网漫",
         "prompt": "Korean webtoon vertical-scroll aesthetic, fashion-realistic proportions, flawlessly airbrushed skin with almost no hard edges, dozens of eye highlight shapes, contemporary street fashion, background dissolved into gradient fog",
-        "note": "竖屏优先，一切元素避开侧边距"
+        "note": "竖屏优先，一切元素避开侧边距",
+        "kw": [
+          "条漫",
+          "韩漫",
+          "网漫",
+          "韩国漫"
+        ]
       },
       {
         "id": "RG-16",
         "zh": "欧洲 · 法比漫画",
         "prompt": "Franco-Belgian bandes dessinées aesthetic, clear-line uniform outlines, flat poster colors with no modeling, meticulous architectural draftsmanship, generous white gutters and panel discipline",
-        "note": "清晰线条派：人物简、环境繁"
+        "note": "清晰线条派：人物简、环境繁",
+        "kw": [
+          "法比",
+          "欧洲漫画",
+          "欧洲动画"
+        ]
       },
       {
         "id": "RG-17",
         "zh": "苏联东欧 · 手绘胶片",
         "prompt": "Soviet and Eastern European hand-drawn animation aesthetic, gouache and oil painted directly on glass, soft smeared edges, multiplane foreground layers, Slavic folk ornament inside natural forms, cold palette with one warm accent",
-        "note": "玻璃上的油画：缓慢、庄严、童话感"
+        "note": "玻璃上的油画：缓慢、庄严、童话感",
+        "kw": [
+          "东欧",
+          "手绘胶片",
+          "苏联动画"
+        ]
       },
       {
         "id": "RG-18",
         "zh": "全球 · 游戏CG跨界",
         "prompt": "global game cinematic CG aesthetic, semi-realistic stylized characters in photographic worlds, rim-lit dramatic key art, particle effects and atmospheric haze, 16:9 or wider cinematic framing",
-        "note": "动画与游戏美术的杂交地带"
+        "note": "动画与游戏美术的杂交地带",
+        "kw": [
+          "游戏cg",
+          "跨界",
+          "游戏宣传"
+        ]
       }
     ]
   },
@@ -127,97 +217,195 @@ window.AV_DATA = {
         "id": "ST-01",
         "zh": "赛璐璐平涂",
         "prompt": "classic cel-shaded anime illustration, one flat base tone per lit surface with a single crisp second shadow whose boundary stays razor sharp, even-weight dark lineart, background reduced to large flat unmodulated color blocks",
-        "note": "暗部只有一层、边界锐利无渐变"
+        "note": "暗部只有一层、边界锐利无渐变",
+        "kw": [
+          "赛璐璐",
+          "平涂",
+          "传统动画",
+          "手绘赛璐璐"
+        ]
       },
       {
         "id": "ST-02",
         "zh": "现代数码柔光",
         "prompt": "contemporary digital anime illustration with soft airbrush shading, many layered gradients with no hard cel boundaries, blurred highlight rings through hair, multiple overlapping iris highlight discs, natural bokeh background with drifting dust",
-        "note": "亮部连续渐变、阴影通透"
+        "note": "亮部连续渐变、阴影通透",
+        "kw": [
+          "数码",
+          "柔和光",
+          "新赛璐璐",
+          "现代动画"
+        ]
       },
       {
         "id": "ST-03",
         "zh": "厚涂油绘",
         "prompt": "painterly anime illustration in thick impasto oil technique, visible directional strokes with physical paint ridges, shadows built from dense warm brown underlayers, old-master value structure with deep integrated shadow masses, broken searching edges",
-        "note": "笔触有物理厚度，暗部暖棕非纯黑"
+        "note": "笔触有物理厚度，暗部暖棕非纯黑",
+        "kw": [
+          "厚涂",
+          "油画",
+          "质感厚涂",
+          "笔刷厚涂"
+        ]
       },
       {
         "id": "ST-04",
         "zh": "透明水彩",
         "prompt": "transparent watercolor anime illustration, nothing but diluted transparent washes with the paper white as brightest highlight, wet-on-wet blooms and pooling at hems, granulation settling into shadows, faint graphite under-drawing visible",
-        "note": "最亮处是纸本身的白，颜色光学混合"
+        "note": "最亮处是纸本身的白，颜色光学混合",
+        "kw": [
+          "水彩",
+          "透明水彩",
+          "淡彩",
+          "水彩风"
+        ]
       },
       {
         "id": "ST-05",
         "zh": "粗描线稿",
         "prompt": "bold lineart-driven anime illustration with almost no applied color, decisive line-weight variation with heavy black strokes near the viewer thinning into the distance, deliberate open gaps and slight overshoot where a hand breaks contour, rough pencil accents",
-        "note": "线重变化是手绘感第一来源"
+        "note": "线重变化是手绘感第一来源",
+        "kw": [
+          "线稿",
+          "粗描",
+          "素描",
+          "手稿",
+          "草图"
+        ]
       },
       {
         "id": "ST-06",
         "zh": "二头身Q版",
         "prompt": "chibi super-deformed anime style, proportions compressed to roughly two head-lengths, enormous rounded head with small stubby limbs and mitten hands, huge sparkling eyes set low on the face, simple clean shapes with minimal shading and toy-like saturated colors",
-        "note": "比例逻辑与正常头身完全不同"
+        "note": "比例逻辑与正常头身完全不同",
+        "kw": [
+          "q版化",
+          "二头身",
+          "萌系",
+          "变形",
+          "chibi"
+        ]
       },
       {
         "id": "ST-07",
         "zh": "黑白漫画墨线",
         "prompt": "black-and-white manga ink aesthetic, solid black fills with precise cross-hatching, blown highlight shapes and mechanical screentone gradients for mid-values, clean panel borders with generous gutters, silhouette separation so black masses never muddy",
-        "note": "网点纸灰阶与集中线是语言不是滤镜"
+        "note": "网点纸灰阶与集中线是语言不是滤镜",
+        "kw": [
+          "墨线",
+          "漫画黑白",
+          "网点",
+          "黑白漫画"
+        ]
       },
       {
         "id": "ST-08",
         "zh": "水墨墨绘",
         "prompt": "sumi-e ink wash anime aesthetic, unhesitating single strokes tapering from loaded bristle to dry tip, absorbent rice paper drinking the pigment so edges feather naturally, vast untouched white standing in for mist and water, one small red seal accent",
-        "note": "负空间是水墨语言，不是没画完"
+        "note": "负空间是水墨语言，不是没画完",
+        "kw": [
+          "水墨",
+          "国画",
+          "写意",
+          "传统水墨",
+          "水墨风"
+        ]
       },
       {
         "id": "ST-09",
         "zh": "浮世绘木版画",
         "prompt": "ukiyo-e woodblock print anime aesthetic, flat blocks of hand-mixed mineral color bounded by confident black key lines with no modeling, fibrous washi paper tooth showing through ink, faint horizontal bokashi banding, slight misregistration between blocks",
-        "note": "工艺痕迹要留在画面里"
+        "note": "工艺痕迹要留在画面里",
+        "kw": [
+          "浮世绘",
+          "木版画",
+          "日本版画",
+          "和风版画"
+        ]
       },
       {
         "id": "ST-10",
         "zh": "像素画",
         "prompt": "pixel art anime aesthetic at true one-to-one resolution, palette restricted to roughly sixteen deliberate colors with no anti-aliasing, every pixel placed individually with ordered dithering for light falloff, dark outline and exactly three shades per material, readable silhouette at thumbnail size",
-        "note": "16-bit 不是模糊的小图"
+        "note": "16-bit 不是模糊的小图",
+        "kw": [
+          "像素",
+          "像素风",
+          "像素图"
+        ]
       },
       {
         "id": "ST-11",
         "zh": "三维半写实",
         "prompt": "semi-realistic 3D CG anime aesthetic, subsurface-scattered skin with visible pore detail, physically based fabric sheen, groomed hair with individual strand highlights, cinematic volumetric lighting, stylized faces against photographic environments",
-        "note": "脸向动画理想化、世界保持真实"
+        "note": "脸向动画理想化、世界保持真实",
+        "kw": [
+          "三维",
+          "半写实",
+          "cg风格",
+          "三维渲染"
+        ]
       },
       {
         "id": "ST-12",
         "zh": "三渲二融合",
         "prompt": "hybrid 2D-3D anime aesthetic, hand-drawn characters integrated into dimensionally correct rendered environments, true camera volume and believable light falloff with matching highlight direction so nothing floats, photographic depth of field",
-        "note": "2D 线条与 3D 渲染融在同一片光里"
+        "note": "2D 线条与 3D 渲染融在同一片光里",
+        "kw": [
+          "三渲二",
+          "三维转二维",
+          "三维卡通"
+        ]
       },
       {
         "id": "ST-13",
         "zh": "剪影负空间",
         "prompt": "silhouette and negative-space anime composition, subject rendered almost entirely as black shape with only a thin rim of hair and shoulder picked out by backlight, surrounding space carrying information through reflections and atmosphere, scheme limited to deep blue-black plus one accent",
-        "note": "负空间是被主动经营的构图"
+        "note": "负空间是被主动经营的构图",
+        "kw": [
+          "剪影",
+          "负空间",
+          "极简",
+          "简约"
+        ]
       },
       {
         "id": "ST-14",
         "zh": "高对比霓虹",
         "prompt": "high-contrast neon night anime aesthetic with photographic camera feel, scene lit almost entirely from practical signage in competing magenta and cyan, shadows crushed toward black, every wet surface a broken mirror of colored reflections, gentle lens bloom with chromatic fringing",
-        "note": "靠光源颜色说话，不靠滤镜"
+        "note": "靠光源颜色说话，不靠滤镜",
+        "kw": [
+          "霓虹",
+          "高对比",
+          "赛博配色",
+          "霓虹色"
+        ]
       },
       {
         "id": "ST-15",
         "zh": "拼贴混合媒介",
         "prompt": "collage and mixed-media anime aesthetic, portrait assembled from torn paper, fabric swatches and cut photographic fragments, torn fiber edges catching light with real thickness, mismatched paste scales, visible glue sheen and buckling paper, seams left unresolved",
-        "note": "每一块纸来自不同的世界"
+        "note": "每一块纸来自不同的世界",
+        "kw": [
+          "拼贴",
+          "混合媒介",
+          "拼贴画",
+          "材料拼贴"
+        ]
       },
       {
         "id": "ST-16",
         "zh": "复古做旧胶片",
         "prompt": "vintage anime film aesthetic, coarse 16mm grain with faint gate weave, highlights faded warm toward red as old prints do, slightly milky lifted shadows, gentle color registration drift, muted saturation with period-accurate palette",
-        "note": "做旧是介质记忆，不是统一加黄"
+        "note": "做旧是介质记忆，不是统一加黄",
+        "kw": [
+          "复古",
+          "做旧",
+          "胶片",
+          "怀旧",
+          "老照片"
+        ]
       }
     ]
   },
@@ -244,6 +432,12 @@ window.AV_DATA = {
           "日常过场帧",
           "片头印象帧",
           "片尾定格帧"
+        ],
+        "kw": [
+          "动画",
+          "关键帧",
+          "动画帧",
+          "动画截图"
         ]
       },
       {
@@ -261,6 +455,12 @@ window.AV_DATA = {
           "服装细节分解",
           "年龄成长对比",
           "换装变体"
+        ],
+        "kw": [
+          "设定图",
+          "立绘",
+          "角色设定",
+          "设定集"
         ]
       },
       {
@@ -278,6 +478,12 @@ window.AV_DATA = {
           "战斗集中特写",
           "Q版表情包",
           "语音状态图标"
+        ],
+        "kw": [
+          "表情",
+          "表情差分",
+          "差分图",
+          "表情集"
         ]
       },
       {
@@ -296,6 +502,12 @@ window.AV_DATA = {
           "跨页大格",
           "高潮连拍",
           "拟声词特写"
+        ],
+        "kw": [
+          "漫画",
+          "黑白漫画",
+          "漫画页",
+          "分镜漫画"
         ]
       },
       {
@@ -313,6 +525,12 @@ window.AV_DATA = {
           "战斗条漫格",
           "日常条漫格",
           "结尾钩子格"
+        ],
+        "kw": [
+          "条漫",
+          "竖屏漫画",
+          "竖版漫画",
+          "竖屏条漫"
         ]
       },
       {
@@ -330,6 +548,12 @@ window.AV_DATA = {
           "卷首彩页",
           "文中黑白插图",
           "角色介绍页"
+        ],
+        "kw": [
+          "轻小说",
+          "插画",
+          "书籍插图",
+          "小说插图"
         ]
       },
       {
@@ -347,6 +571,12 @@ window.AV_DATA = {
           "看板娘立绘",
           "对话框立绘",
           "战斗待机立绘"
+        ],
+        "kw": [
+          "游戏立绘",
+          "角色立绘",
+          "游戏角色",
+          "手游立绘"
         ]
       },
       {
@@ -364,6 +594,12 @@ window.AV_DATA = {
           "消耗品图标",
           "材料碎片图标",
           "技能图标"
+        ],
+        "kw": [
+          "图标",
+          "道具图标",
+          "物品图标",
+          "图标素材"
         ]
       },
       {
@@ -381,6 +617,12 @@ window.AV_DATA = {
           "生物卡",
           "法术陷阱卡",
           "闪卡工艺"
+        ],
+        "kw": [
+          "卡牌",
+          "牌面",
+          "卡片",
+          "卡牌设计"
         ]
       },
       {
@@ -398,6 +640,12 @@ window.AV_DATA = {
           " Live2D 拆分参考",
           "表情差分",
           "睡衣/节日皮"
+        ],
+        "kw": [
+          "虚拟主播",
+          "直播立绘",
+          "主播",
+          "live2d"
         ]
       },
       {
@@ -415,6 +663,12 @@ window.AV_DATA = {
           "亚克力挂件",
           "痛贴痛包",
           "T恤图案"
+        ],
+        "kw": [
+          "周边",
+          "商品",
+          "周边设计",
+          "谷子"
         ]
       },
       {
@@ -432,6 +686,12 @@ window.AV_DATA = {
           "活动宣传图",
           "季节问候图",
           "联动海报"
+        ],
+        "kw": [
+          "海报",
+          "主视觉",
+          "视觉主图",
+          "海报主图"
         ]
       },
       {
@@ -449,6 +709,12 @@ window.AV_DATA = {
           "对话分镜",
           "运镜设计",
           "节奏喘息格"
+        ],
+        "kw": [
+          "分镜",
+          "故事板",
+          "分镜稿",
+          "storyboard"
         ]
       },
       {
@@ -466,6 +732,11 @@ window.AV_DATA = {
           "战斗向封面",
           "全员贺图",
           "内页插图"
+        ],
+        "kw": [
+          "同人志",
+          "同人封面",
+          "同人本"
         ]
       }
     ]
@@ -480,109 +751,233 @@ window.AV_DATA = {
         "id": "SU-01",
         "zh": "热血战斗",
         "prompt": "battle shonen subject matter, one extreme dynamic action pose with readable weight transfer and a single fully extended limb, radial debris implying the impact frame, hard ink speed lines converging on the point of contact, layered aura in a hot secondary hue wrapping the silhouette",
-        "note": "决定性一击四件套：姿势、集中线、冲击帧、气场"
+        "note": "决定性一击四件套：姿势、集中线、冲击帧、气场",
+        "kw": [
+          "热血",
+          "战斗",
+          "格斗",
+          "打斗",
+          "对战"
+        ]
       },
       {
         "id": "SU-02",
         "zh": "机甲萝卜",
         "prompt": "mecha subject matter, heavy mechanical panel construction with real thickness and articulation, warning stencil markings and numbered hatches, scale contrast between hand-painted pilot silhouette and towering machine, dramatic low camera against sky",
-        "note": "机械要有被制造出来的理由"
+        "note": "机械要有被制造出来的理由",
+        "kw": [
+          "机甲",
+          "机器人",
+          "高达",
+          "机械",
+          "战舰"
+        ]
       },
       {
         "id": "SU-03",
         "zh": "异世界转生",
         "prompt": "isekai subject matter, a modern-clothed visitor staged against a fully realized fantasy town, collision cues like a fading summoning circle or a convenience-store item clutched in hand, genuinely nonhuman townsfolk going about ordinary business, signage rendered without readable characters",
-        "note": "穿越者刚落地的错位感是核心叙事"
+        "note": "穿越者刚落地的错位感是核心叙事",
+        "kw": [
+          "异世界",
+          "转生",
+          "穿越",
+          "重生异世"
+        ]
       },
       {
         "id": "SU-04",
         "zh": "魔法少女",
         "prompt": "magical girl subject matter, elaborate frilled transformation costume with ribbon and gem accents, sparkling magical circle stage, rose petals and heart-shaped light particles, pastel-to-jewel gradient palette, dynamic twirl pose",
-        "note": "变身是仪式：光、花瓣、缎带一个不能少"
+        "note": "变身是仪式：光、花瓣、缎带一个不能少",
+        "kw": [
+          "魔法",
+          "变身",
+          "魔杖",
+          "魔法使"
+        ]
       },
       {
         "id": "SU-05",
         "zh": "赛博朋克",
         "prompt": "cyberpunk subject matter, signage layered six or seven storeys overhead with exposed cabling and bolted fire escapes, steam venting from street grates, every wet surface mirroring the neon above it, chrome prosthetic limbs, competing magenta and cyan key light",
-        "note": "高密度都市要「发霉」才对"
+        "note": "高密度都市要「发霉」才对",
+        "kw": [
+          "赛博朋克",
+          "赛博",
+          "未来都市",
+          "黑客",
+          "科技都市"
+        ]
       },
       {
         "id": "SU-06",
         "zh": "仙侠武侠",
         "prompt": "xianxia wuxia subject matter, layered hanfu with wide sleeves streaming in altitude wind, fine straight sword rather than fantasy broadsword, mountain forms drawn with vertical Chinese landscape logic, drifting mist as genuine negative space, faint talisman glow along the blade edge",
-        "note": "东方空间观：画面要能呼吸"
+        "note": "东方空间观：画面要能呼吸",
+        "kw": [
+          "仙侠",
+          "武侠",
+          "修真",
+          "修仙",
+          "古风",
+          "剑仙"
+        ]
       },
       {
         "id": "SU-07",
         "zh": "校园日常",
         "prompt": "school slice-of-life subject matter, after-class classroom or rooftop in late afternoon light, uniform details with correct collar and ribbon construction, scattered personal props telling small stories, unhurried composition with no urgency",
-        "note": "日常感来自道具叙事，不是摆拍"
+        "note": "日常感来自道具叙事，不是摆拍",
+        "kw": [
+          "校园",
+          "学校",
+          "日常",
+          "青春校园",
+          "学生"
+        ]
       },
       {
         "id": "SU-08",
         "zh": "恋爱青春",
         "prompt": "romance subject matter, two figures staged on restraint rather than declaration, eye contact only half completed, one hand hesitating near a sleeve, background dissolved into gentle bokeh so the pair separates cleanly from the world, soft gradients and genuine blush",
-        "note": "距离感：近到能听见呼吸，又还没牵手"
+        "note": "距离感：近到能听见呼吸，又还没牵手",
+        "kw": [
+          "恋爱",
+          "爱情",
+          "心动",
+          "纯爱",
+          "青春恋爱"
+        ]
       },
       {
         "id": "SU-09",
         "zh": "治愈慢生活",
         "prompt": "healing slice-of-life subject matter, small comforts like worn furniture carrying use marks, steam lifting from a kettle caught in the light, layered blankets, soft north daylight with no harsh contrast, warm low-saturation palette, generous negative space",
-        "note": "全靠信息密度低加温度对比"
+        "note": "全靠信息密度低加温度对比",
+        "kw": [
+          "治愈",
+          "温馨",
+          "慢生活",
+          "田园",
+          "小确幸"
+        ]
       },
       {
         "id": "SU-10",
         "zh": "恐怖灵异",
         "prompt": "horror occult subject matter, dread kept structural rather than graphic, negative space doing most of the work, shadows falling a few degrees wrong relative to the visible light source, subtle proportion distortion the eye registers before the mind, grainy low-light texture concealing what would resolve",
-        "note": "留白越多越慌；不用血浆与跳杀"
+        "note": "留白越多越慌；不用血浆与跳杀",
+        "kw": [
+          "恐怖",
+          "灵异",
+          "鬼怪",
+          "怪谈",
+          "惊悚"
+        ]
       },
       {
         "id": "SU-11",
         "zh": "美食料理",
         "prompt": "food and cooking subject matter, glossy broth with convincing specular highlight and floating beads of rendered oil, steam rising in soft readable plumes, noodles with individual strand definition, ingredients placed deliberately, warm practical kitchen bokeh with hanging bulbs",
-        "note": "第一定律：把食物当主角拍"
+        "note": "第一定律：把食物当主角拍",
+        "kw": [
+          "美食",
+          "料理",
+          "做饭",
+          "厨艺",
+          "食物"
+        ]
       },
       {
         "id": "SU-12",
         "zh": "体育竞技",
         "prompt": "sports subject matter, one athlete caught at the peak of a real athletic motion with correct muscle engagement, sweat and dynamic hair, stadium atmosphere with depth-layered crowd, low camera making the body feel monumental, crisp afternoon light",
-        "note": "运动瞬间的真实力学是可信度来源"
+        "note": "运动瞬间的真实力学是可信度来源",
+        "kw": [
+          "体育",
+          "竞技",
+          "运动",
+          "比赛",
+          "赛场"
+        ]
       },
       {
         "id": "SU-13",
         "zh": "音乐偶像",
         "prompt": "music idol subject matter, stage performance moment with microphone and layered costume frills, colored spotlights cutting through haze, audience glow sticks as a field of distant points, one singer silhouetted against a giant screen, lens flare on the key beam",
-        "note": "舞台光的层次：主光、轮廓光、观众点"
+        "note": "舞台光的层次：主光、轮廓光、观众点",
+        "kw": [
+          "音乐",
+          "偶像",
+          "唱跳",
+          "演出",
+          "演唱会"
+        ]
       },
       {
         "id": "SU-14",
         "zh": "推理悬疑",
         "prompt": "mystery subject matter, a clue or anomaly staged for scrutiny, cool desaturated palette with one unnatural detail in wrong color, evidence laid out with forensic care, shadowed interior with a single hard practical light source, composition inviting the viewer to look twice",
-        "note": "错误的那一点颜色就是线索"
+        "note": "错误的那一点颜色就是线索",
+        "kw": [
+          "推理",
+          "悬疑",
+          "侦探",
+          "谜题",
+          "刑侦"
+        ]
       },
       {
         "id": "SU-15",
         "zh": "太空歌剧",
         "prompt": "space opera subject matter, starship bridge crew silhouetted against a colored nebula filling the forward viewport, believable instrumentation and structural ribs overhead, grime ground into floor plating, every face half in darkness, one small figure at the rail for scale",
-        "note": "浪漫全在人的渺小对星海的宏大"
+        "note": "浪漫全在人的渺小对星海的宏大",
+        "kw": [
+          "太空",
+          "星际",
+          "宇宙",
+          "科幻",
+          "飞船"
+        ]
       },
       {
         "id": "SU-16",
         "zh": "蒸汽朋克",
         "prompt": "steampunk subject matter, machined brass gearing with real tooth counts through open inspection plates, riveted pressure vessels, copper piping in believable service routes, Victorian tailoring cut for actual labor, coal soot streaking every vertical surface, warm sepia lit by hanging filament bulbs",
-        "note": "关键不是装饰，是机器要「活」"
+        "note": "关键不是装饰，是机器要「活」",
+        "kw": [
+          "蒸汽朋克",
+          "蒸汽",
+          "齿轮",
+          "机械朋克"
+        ]
       },
       {
         "id": "SU-17",
         "zh": "末世废土",
         "prompt": "post-apocalyptic subject matter, environmental recovery rather than ruin cliche, road surface split by tree roots, vehicle hulks half buried in weeds, oxidized corrugated steel, dust haze flattening the horizon into pale layers, mismatched repaired survival clothing",
-        "note": "废墟上长出自然比纯末日更耐看"
+        "note": "废墟上长出自然比纯末日更耐看",
+        "kw": [
+          "末世",
+          "废土",
+          "丧尸",
+          "生存",
+          "末日"
+        ]
       },
       {
         "id": "SU-18",
         "zh": "忍者武士",
         "prompt": "ninja and samurai subject matter, layered kosode and hakama with correct wrapped seams and tied obi, blade in a genuine ready position with visible temper line, low shafts of sunlight through dense bamboo with dust suspended in every beam, tension held unspent with the blade still sheathed",
-        "note": "静中的紧绷：环境越安静杀气越重"
+        "note": "静中的紧绷：环境越安静杀气越重",
+        "kw": [
+          "忍者",
+          "武士",
+          "剑客",
+          "忍道",
+          "samurai"
+        ]
       }
     ]
   },
@@ -596,97 +991,201 @@ window.AV_DATA = {
         "id": "CH-01",
         "zh": "少年主角",
         "prompt": "shonen hero protagonist, teenage build with slightly oversized expressive eyes, windswept hair with deliberate spike clusters, determination readable in brow and jaw, practical adventure clothing with worn edges",
-        "note": "头身比与眼神是年龄感的锚"
+        "note": "头身比与眼神是年龄感的锚",
+        "kw": [
+          "少年",
+          "男主",
+          "主人公",
+          "男主角"
+        ]
       },
       {
         "id": "CH-02",
         "zh": "少女主角",
         "prompt": "shoujo heroine protagonist, slender figure with large luminous eyes carrying multiple highlight shapes, finely detailed hair with soft gradient ends, layered skirt and ribbon construction, gentle posture with one hand near the collarbone",
-        "note": "高光形状数量决定「闪度」"
+        "note": "高光形状数量决定「闪度」",
+        "kw": [
+          "少女",
+          "女主",
+          "女主人公",
+          "女主角"
+        ]
       },
       {
         "id": "CH-03",
         "zh": "冷峻御姐",
         "prompt": "cool composed mature woman, sharp narrowed eyes with heavy upper lid line, long straight hair with a single accent strand, tailored silhouette with clean vertical folds, relaxed but guarded stance",
-        "note": "气场靠眼型与垂直线，不靠化妆"
+        "note": "气场靠眼型与垂直线，不靠化妆",
+        "kw": [
+          "御姐",
+          "成熟女性",
+          "冷艳",
+          "大姐"
+        ]
       },
       {
         "id": "CH-04",
         "zh": "元气后辈",
         "prompt": "energetic kouhai junior, bouncy twin tails or short bob with motion sweep, bright wide eyes and open-mouthed grin, slightly loose uniform with rolled sleeves, mid-gesture pose with forward lean",
-        "note": "动感来自发型轨迹与身体前倾"
+        "note": "动感来自发型轨迹与身体前倾",
+        "kw": [
+          "后辈",
+          "学妹",
+          "元气",
+          "元气少女",
+          " junior"
+        ]
       },
       {
         "id": "CH-05",
         "zh": "智慧长者",
         "prompt": "wise elderly mentor, deeply lined face with kind procedural eyebrows, long beard or topknot with silver-to-white gradient, layered robes with weighty drape, staff or scroll held loose in one hand",
-        "note": "皱纹走向要服从表情，不是均匀网格"
+        "note": "皱纹走向要服从表情，不是均匀网格",
+        "kw": [
+          "长者",
+          "老者",
+          "老师",
+          "师傅",
+          "智慧"
+        ]
       },
       {
         "id": "CH-06",
         "zh": "宿敌反派",
         "prompt": "rival antagonist, angular face with asymmetric hair and one sharp canines showing, high-collared cape or coat with dramatic interior lining, half-lidded confident eyes, stance occupying more space than needed",
-        "note": "反派构图占位要超出必要，才有压迫感"
+        "note": "反派构图占位要超出必要，才有压迫感",
+        "kw": [
+          "反派",
+          "敌人",
+          "宿敌",
+          "恶役",
+          "对手"
+        ]
       },
       {
         "id": "CH-07",
         "zh": "机甲驾驶员",
         "prompt": "mecha pilot, tight-fitting plugsuit with seam lines and helmet under one arm, short practical hair with sweat at the temple, youthful face carrying unusual composure, harness straps over the chest",
-        "note": "驾驶服是第二层皮肤，不是紧身衣"
+        "note": "驾驶服是第二层皮肤，不是紧身衣",
+        "kw": [
+          "驾驶员",
+          "机师",
+          "飞行员",
+          "机甲驾驶员"
+        ]
       },
       {
         "id": "CH-08",
         "zh": "杖咏法师",
         "prompt": "staff-wielding mage, long layered robe with celestial pattern trim, pointed hat or hood with deep shadow over the eyes, both hands on a carved wooden staff with a glowing focal gem, floating runes orbiting the shaft",
-        "note": "法力可视化：光从法杖焦点溢出"
+        "note": "法力可视化：光从法杖焦点溢出",
+        "kw": [
+          "法师",
+          "魔法使",
+          "巫女",
+          "杖咏",
+          "魔术师"
+        ]
       },
       {
         "id": "CH-09",
         "zh": "精灵族",
         "prompt": "elven figure, elongated ears with delicate vein suggestion, ethereal features with slightly large eyes, nature-motif jewelry and leaf-shaped cloak clasps, forest-toned palette with bioluminescent accents, weightless posture",
-        "note": "尖耳只是入口，气质要轻"
+        "note": "尖耳只是入口，气质要轻",
+        "kw": [
+          "精灵",
+          "妖精族",
+          "森精灵",
+          "精灵族"
+        ]
       },
       {
         "id": "CH-10",
         "zh": "兽人伙伴",
         "prompt": "beast companion creature, anthropomorphic animal with correct quadruped-to-biped joint logic, fur direction following muscle masses, expressive ears and tail communicating mood, simple harness or scarf as the only clothing",
-        "note": "关节逻辑错了，萌度归零"
+        "note": "关节逻辑错了，萌度归零",
+        "kw": [
+          "兽人",
+          "兽娘",
+          "兽耳",
+          "伙伴"
+        ]
       },
       {
         "id": "CH-11",
         "zh": "机器人仿生",
         "prompt": "android figure, synthetic skin panels with subtle seam lines at joints, one glowing optical sensor or visor, mechanical hand with visible articulation cables, synthetic hair with unnatural uniformity, posture slightly too precise to be human",
-        "note": "太完美本身就是非人信号"
+        "note": "太完美本身就是非人信号",
+        "kw": [
+          "机器人",
+          "仿生人",
+          "人造人",
+          "机械生命"
+        ]
       },
       {
         "id": "CH-12",
         "zh": "小妖精宠物",
         "prompt": "fairy pet mascot, palm-sized round body with oversized head and tiny translucent wings, dust-trail sparkle behind, enormous pleading eyes with catchlights, one accessory like a leaf hat or bell collar",
-        "note": "吉祥物的剪影要能在图标尺寸存活"
+        "note": "吉祥物的剪影要能在图标尺寸存活",
+        "kw": [
+          "小妖精",
+          "宠物",
+          "妖精",
+          "吉祥物",
+          "小精灵"
+        ]
       },
       {
         "id": "CH-13",
         "zh": "武僧剑客",
         "prompt": "swordsman figure, topknot with a trailing headband strand, dark indigo hakama with tied obi, iaijutsu ready stance with knees softly bent and weight low, blade held with correct grip geometry",
-        "note": "重心压低才有「静中的紧绷」"
+        "note": "重心压低才有「静中的紧绷」",
+        "kw": [
+          "武僧",
+          "剑客",
+          "剑士",
+          "武士刀客",
+          "剑豪"
+        ]
       },
       {
         "id": "CH-14",
         "zh": "偶像歌姬",
         "prompt": "idol singer, stage costume with layered frills and gem clips, microphone held with correct hand shape, twin-tail or long wave hair catching stage light, wide sparkling eyes and an open singing mouth, confetti and light beams behind",
-        "note": "握麦手势错一点，整张图就假"
+        "note": "握麦手势错一点，整张图就假",
+        "kw": [
+          "偶像",
+          "歌姬",
+          "歌手",
+          "主唱",
+          "偶像歌手"
+        ]
       },
       {
         "id": "CH-15",
         "zh": "科学家研究员",
         "prompt": "scientist researcher, lab coat over casual clothes with a pocket protector and safety goggles pushed up on the forehead, chalk dust on the sleeves, eager slightly unfocused expression, clipboard or flask in hand",
-        "note": "白大褂的褶皱要像穿过很多次"
+        "note": "白大褂的褶皱要像穿过很多次",
+        "kw": [
+          "科学家",
+          "研究员",
+          "博士",
+          "学者"
+        ]
       },
       {
         "id": "CH-16",
         "zh": "神秘面具客",
         "prompt": "masked mysterious figure, smooth featureless mask or Noh-like carved expression mask, wide sleeves hiding the hands, no readable body language, still posture at the frame edge, one patterned obi as the only color accent",
-        "note": "不可读是角色本身，构图要给悬念让位"
+        "note": "不可读是角色本身，构图要给悬念让位",
+        "kw": [
+          "面具",
+          "神秘人",
+          "面具客",
+          "蒙面",
+          "神秘角色"
+        ]
       }
     ]
   },
@@ -700,97 +1199,209 @@ window.AV_DATA = {
         "id": "WD-01",
         "zh": "午后教室",
         "prompt": "afternoon classroom interior, low sun through west windows with dust in the beams, scattered desks with personal clutter, blackboard with erased chalk ghosts, long shadows across the floor, unhurried emptiness",
-        "note": "空教室的叙事感来自残留物"
+        "note": "空教室的叙事感来自残留物",
+        "kw": [
+          "教室",
+          "学校",
+          "课桌",
+          "讲台",
+          "校园"
+        ]
       },
       {
         "id": "WD-02",
         "zh": "日式神社",
         "prompt": "shinto shrine approach, vermilion torii and railing with correct wood aging, stone steps worn at the center, offering box and rope with shide paper streamers, forest pressing close on both sides, dappled light",
-        "note": "木头的老化方向要对"
+        "note": "木头的老化方向要对",
+        "kw": [
+          "神社",
+          "庙宇",
+          "鸟居",
+          "参拜",
+          "稻荷"
+        ]
       },
       {
         "id": "WD-03",
         "zh": "霓虹都市",
         "prompt": "dense neon city street, signage stacked six storeys overhead with exposed cabling and bolted fire escapes, wet asphalt mirroring colored light, steam from street grates, distant traffic light trails, narrow vertical canyon between buildings",
-        "note": "垂直方向的信息密度是关键"
+        "note": "垂直方向的信息密度是关键",
+        "kw": [
+          "都市",
+          "城市",
+          "街道",
+          "巷子",
+          "夜景",
+          "摩天楼"
+        ]
       },
       {
         "id": "WD-04",
         "zh": "云海山巅",
         "prompt": "cloud sea between jade mountain peaks, floating rock islands with waterfalls dissolving into mist, vertical Chinese landscape logic in the rock forms, sunlight shafts through cloud gaps, temple roof just visible above the vapor",
-        "note": "留白处理：雾是负空间不是空白"
+        "note": "留白处理：雾是负空间不是空白",
+        "kw": [
+          "山巅",
+          "高山",
+          "云海",
+          "峰顶",
+          "山顶"
+        ]
       },
       {
         "id": "WD-05",
         "zh": "宇宙舰桥",
         "prompt": "starship command bridge, wide console run with believable instrumentation, heavy structural ribs overhead, layered deck levels, grime ground into floor plating, deep starfield and glowing nebula filling the forward viewport",
-        "note": "舰桥要像被住过，不像展厅"
+        "note": "舰桥要像被住过，不像展厅",
+        "kw": [
+          "宇宙",
+          "舰桥",
+          "飞船",
+          "太空舱",
+          "舰船"
+        ]
       },
       {
         "id": "WD-06",
         "zh": "末日废桥",
         "prompt": "ruined highway overpass reclaimed by nature, road surface split apart by tree roots, vehicle hulks half buried in weeds, oxidized corrugated steel, dust haze flattening the horizon into pale layers, tall grass moving in one wind direction",
-        "note": "植被吞掉一半建筑才有时间感"
+        "note": "植被吞掉一半建筑才有时间感",
+        "kw": [
+          "废桥",
+          "废墟",
+          "断桥",
+          "末日",
+          "残骸"
+        ]
       },
       {
         "id": "WD-07",
         "zh": "蒸汽工坊",
         "prompt": "steampunk workshop interior, machined brass gearing through open inspection plates, riveted pressure vessels, copper piping in believable service routes, coal soot streaking every vertical surface, oil sheen on floor plates, hanging filament bulbs",
-        "note": "管道走向要符合服务逻辑"
+        "note": "管道走向要符合服务逻辑",
+        "kw": [
+          "工坊",
+          "车间",
+          "机械间",
+          "齿轮房",
+          "作坊"
+        ]
       },
       {
         "id": "WD-08",
         "zh": "海边小镇",
         "prompt": "seaside town at low sun, whitewashed walls with weathered blue trim, fishing boats drawn up on shingle, laundry lines and rusting antennas, gulls as small dark accents, calm water holding a broken light path",
-        "note": "生活痕迹：晾衣绳、天线、锈迹"
+        "note": "生活痕迹：晾衣绳、天线、锈迹",
+        "kw": [
+          "海边",
+          "小镇",
+          "港口",
+          "渔村",
+          "海岸",
+          "海港"
+        ]
       },
       {
         "id": "WD-09",
         "zh": "竹林深处",
         "prompt": "dense bamboo grove, tall trunks receding into green depth with layered foreground stems, low shafts of sunlight cutting through with dust suspended, wind-bent upper canopy, path of trodden leaves",
-        "note": "前后景滑轨：前景粗、远处细"
+        "note": "前后景滑轨：前景粗、远处细",
+        "kw": [
+          "竹林",
+          "竹子",
+          "竹林小径",
+          "竹丛"
+        ]
       },
       {
         "id": "WD-10",
         "zh": "魔法图书馆",
         "prompt": "arcane library interior, bookshelves rising beyond sight with rolling ladders, floating tomes and slowly turning pages, candle sconces and self-lit crystals, dust in warm shafts through a high arched window",
-        "note": "悬浮元素要有重心暗示，不能乱飘"
+        "note": "悬浮元素要有重心暗示，不能乱飘",
+        "kw": [
+          "图书馆",
+          "藏书馆",
+          "魔法书",
+          "书架"
+        ]
       },
       {
         "id": "WD-11",
         "zh": "夜市祭典",
         "prompt": "summer festival night market, paper lantern strings converging overhead, stall awnings with fabric dye patterns, steam and smoke from grills, crowd silhouettes holding sparklers, firework burst opening above the roofs",
-        "note": "暖光源集群：灯笼、炭火、烟花"
+        "note": "暖光源集群：灯笼、炭火、烟花",
+        "kw": [
+          "夜市",
+          "祭典",
+          "庙会",
+          "集市",
+          "烟花",
+          "夏日祭"
+        ]
       },
       {
         "id": "WD-12",
         "zh": "雪原森林",
         "prompt": "snow-heavy pine forest at blue twilight, branches bowed under accumulated snow, single set of footprints breaking the pristine surface, cold blue and umber palette broken by one distant warm window glow, muffled depth",
-        "note": "雪的反光要冷，窗的光要暖"
+        "note": "雪的反光要冷，窗的光要暖",
+        "kw": [
+          "雪原",
+          "雪地",
+          "森林",
+          "雪林",
+          "林海"
+        ]
       },
       {
         "id": "WD-13",
         "zh": "咖啡馆内景",
         "prompt": "quiet cafe interior, worn wooden tables with use rings, steam lifting from a cup caught in window light, books stacked on the floor rather than shelved, soft north daylight, a cat-shaped shadow on one chair",
-        "note": "治愈系场景：使用痕迹就是温度"
+        "note": "治愈系场景：使用痕迹就是温度",
+        "kw": [
+          "咖啡馆",
+          "咖啡厅",
+          "店内",
+          "咖啡店"
+        ]
       },
       {
         "id": "WD-14",
         "zh": "古堡遗迹",
         "prompt": "castle ruins overgrown by forest, weathered stone with weathered carvings barely legible, forest slowly reclaiming the floor, collapsed ceiling letting in one strong light shaft, vines threading through broken arches",
-        "note": "光从破口进来，遗迹才有戏剧"
+        "note": "光从破口进来，遗迹才有戏剧",
+        "kw": [
+          "古堡",
+          "城堡",
+          "遗迹",
+          "废墟",
+          "庄园"
+        ]
       },
       {
         "id": "WD-15",
         "zh": "地下竞技场",
         "prompt": "underground arena, tiered stone seating rising into darkness, torch brackets as the only practical light, sand floor with scuff marks and old stains, banners hanging from the upper rim, one spotlit center",
-        "note": "黑暗中看台的眼睛比人群更有效"
+        "note": "黑暗中看台的眼睛比人群更有效",
+        "kw": [
+          "竞技场",
+          "斗技场",
+          "地下",
+          "擂台",
+          "斗场"
+        ]
       },
       {
         "id": "WD-16",
         "zh": "花田庭院",
         "prompt": "cottage garden in full bloom, flowers drawn as distinct species with correct petal structure, bees as small motion accents, weathered fence and a watering can left out, warm late-afternoon side light",
-        "note": "花的品种结构要经得起近看"
+        "note": "花的品种结构要经得起近看",
+        "kw": [
+          "花田",
+          "庭院",
+          "花海",
+          "花园",
+          "花圃"
+        ]
       }
     ]
   },
@@ -804,73 +1415,133 @@ window.AV_DATA = {
         "id": "SH-01",
         "zh": "仰拍英雄角",
         "prompt": "heroic low-angle shot looking up at the subject, camera at knee height with strong perspective convergence, subject feeling larger than the frame, sky or ceiling dominating the upper half",
-        "note": "机位越低，主体越神性"
+        "note": "机位越低，主体越神性",
+        "kw": [
+          "仰拍",
+          "英雄角度",
+          "低角度"
+        ]
       },
       {
         "id": "SH-02",
         "zh": "俯拍全局角",
         "prompt": "high bird's-eye overhead view, entire scene flattened into a readable diagram, figures small within a large environment, long shadows revealing spatial layout",
-        "note": "俯瞰适合交代关系与位置"
+        "note": "俯瞰适合交代关系与位置",
+        "kw": [
+          "俯拍",
+          "全局角度",
+          "鸟瞰"
+        ]
       },
       {
         "id": "SH-03",
         "zh": "面部特写",
         "prompt": "tight facial close-up, eyes placed on the upper third following portrait convention, shallow depth softening the ears and shoulders, every highlight shape in the iris deliberate",
-        "note": "特写的纪律：眼神光要有一个主源"
+        "note": "特写的纪律：眼神光要有一个主源",
+        "kw": [
+          "特写",
+          "面部特写",
+          "脸部特写"
+        ]
       },
       {
         "id": "SH-04",
         "zh": "全景环境交代",
         "prompt": "wide establishing shot, subject placed small within a large legible environment, deep layered recession from foreground to horizon, scale communicated by recognizable reference objects",
-        "note": "环境是主角，人是比例尺"
+        "note": "环境是主角，人是比例尺",
+        "kw": [
+          "全景",
+          "环境交代",
+          "远景"
+        ]
       },
       {
         "id": "SH-05",
         "zh": "过肩双人",
         "prompt": "over-the-shoulder two-shot, one shoulder and head in the near foreground framing the other figure, focus on the facing character, conversation staging with clear eyeline geometry",
-        "note": "过肩是对话戏的默认机位"
+        "note": "过肩是对话戏的默认机位",
+        "kw": [
+          "过肩",
+          "双人",
+          "对话镜头"
+        ]
       },
       {
         "id": "SH-06",
         "zh": "荷兰斜角",
         "prompt": "dutch tilt composition with the horizon deliberately off-level, diagonal stress in vertical architecture, unease built from geometry rather than content",
-        "note": "斜角是情绪警告，别滥用"
+        "note": "斜角是情绪警告，别滥用",
+        "kw": [
+          "荷兰斜角",
+          "斜角",
+          "倾斜构图"
+        ]
       },
       {
         "id": "SH-07",
         "zh": "第一人称视角",
         "prompt": "first-person point of view, the viewer's own hands or equipment visible at the frame edge, subject facing the camera directly, wide lens slight distortion at the corners",
-        "note": "POV 的代入感来自「自己的身体」"
+        "note": "POV 的代入感来自「自己的身体」",
+        "kw": [
+          "第一人称",
+          "主观视角",
+          "pov"
+        ]
       },
       {
         "id": "SH-08",
         "zh": "背影追随",
         "prompt": "chased-from-behind shot following the subject's back, destination occupying the frame ahead, shoulders and hair carrying the emotion, viewer positioned as companion rather than observer",
-        "note": "背影把情绪让给观众去填"
+        "note": "背影把情绪让给观众去填",
+        "kw": [
+          "背影",
+          "追随",
+          "背面"
+        ]
       },
       {
         "id": "SH-09",
         "zh": "对角线冲刺",
         "prompt": "diagonal motion composition, subject crossing the frame on a strong diagonal with motion lines trailing, camera slightly rotated to match the momentum, empty space ahead receiving the movement",
-        "note": "运动方向的前方必须留空"
+        "note": "运动方向的前方必须留空",
+        "kw": [
+          "对角线冲刺",
+          "冲刺",
+          "速度构图"
+        ]
       },
       {
         "id": "SH-10",
         "zh": "对称构图",
         "prompt": "strictly symmetrical composition, subject centered on the vertical axis with mirrored architecture or crowd on both sides, formal ritual-like stillness",
-        "note": "对称给仪式感，也給压抑"
+        "note": "对称给仪式感，也給压抑",
+        "kw": [
+          "对称",
+          "对称构图",
+          "中心对称"
+        ]
       },
       {
         "id": "SH-11",
         "zh": "微距细节",
         "prompt": "macro detail shot of a single small element, extremely shallow focus with the rest of the frame dissolved into bokeh, surface texture and material truth as the subject",
-        "note": "细节镜头的材质必须扛住放大"
+        "note": "细节镜头的材质必须扛住放大",
+        "kw": [
+          "微距",
+          "特写细节",
+          "细节放大"
+        ]
       },
       {
         "id": "SH-12",
         "zh": "跟随摇镜",
         "prompt": "tracking shot composition with motion blur on the background only, subject sharp against horizontal streaks, camera velocity implied by background smearing",
-        "note": "只糊背景不糊主体，速度感才对"
+        "note": "只糊背景不糊主体，速度感才对",
+        "kw": [
+          "跟随摇镜",
+          "摇镜",
+          "运动镜头"
+        ]
       }
     ]
   },
@@ -884,61 +1555,129 @@ window.AV_DATA = {
         "id": "LT-01",
         "zh": "黄金时段",
         "prompt": "golden hour side light, long warm shadows raking across surfaces, low sun angle with honey-colored rim on hair and shoulders, sky gradient from amber to pale blue",
-        "note": "低日角的暖色轮廓光是签名"
+        "note": "低日角的暖色轮廓光是签名",
+        "kw": [
+          "黄昏",
+          "傍晚",
+          "夕阳",
+          "黄金",
+          "日落"
+        ]
       },
       {
         "id": "LT-02",
         "zh": "霓虹夜光",
         "prompt": "neon practical lighting, competing magenta and cyan sources from opposite sides rimming the subject, shadows crushed toward black with almost no fill, colored reflections in every wet surface",
-        "note": "夜戏靠光源颜色说话"
+        "note": "夜戏靠光源颜色说话",
+        "kw": [
+          "夜晚",
+          "夜光",
+          "雨夜",
+          "霓虹",
+          "夜景",
+          "夜色"
+        ]
       },
       {
         "id": "LT-03",
         "zh": "阴天柔光",
         "prompt": "soft overcast daylight, shadowless even illumination from the whole sky, muted gentle contrast, colors at their true value without directional drama",
-        "note": "无影光适合日常与情绪内戏"
+        "note": "无影光适合日常与情绪内戏",
+        "kw": [
+          "阴天",
+          "柔和",
+          "灰调",
+          "阴雨",
+          "多云"
+        ]
       },
       {
         "id": "LT-04",
         "zh": "舞台聚光",
         "prompt": "stage spotlight lighting, one hard key beam from above with visible haze volume, sharp falloff into surrounding darkness, audience area completely unlit, one accent colored wash from the side",
-        "note": "聚光的体积靠雾让光有形"
+        "note": "聚光的体积靠雾让光有形",
+        "kw": [
+          "聚光",
+          "舞台",
+          "演唱会",
+          "追光"
+        ]
       },
       {
         "id": "LT-05",
         "zh": "烛火暖光",
         "prompt": "candlelight interior, small flickering warm source with irrational dancing shadows, deep brown falloff into corners, everything within one meter lit and beyond swallowed",
-        "note": "火光的 flicker 与短衰减是签名"
+        "note": "火光的 flicker 与短衰减是签名",
+        "kw": [
+          "烛光",
+          "蜡烛",
+          "暖光",
+          "壁炉"
+        ]
       },
       {
         "id": "LT-06",
         "zh": "逆光剪影",
         "prompt": "strong backlight from behind the subject, silhouette with only a thin rim of hair and shoulder picked out, background light source visible or implied, foreground crushed to near-black",
-        "note": "逆光先牺牲细节，换轮廓"
+        "note": "逆光先牺牲细节，换轮廓",
+        "kw": [
+          "逆光",
+          "剪影",
+          "背光",
+          "轮廓光"
+        ]
       },
       {
         "id": "LT-07",
         "zh": "正午强光",
         "prompt": "harsh midday sun directly overhead, short dark shadows under the brow and nose, bleached highlights, saturated unmodulated colors, sharp-edged contact shadows",
-        "note": "顶光的压迫感来自眼下三角阴影"
+        "note": "顶光的压迫感来自眼下三角阴影",
+        "kw": [
+          "正午",
+          "中午",
+          "烈日",
+          "白天",
+          "阳光"
+        ]
       },
       {
         "id": "LT-08",
         "zh": "月光蓝调",
         "prompt": "moonlit blue night lighting, cool desaturated palette with one small warm practical accent, soft shadowless ambient from the sky, stars faintly visible in deep blue upper tones",
-        "note": "冷调里留一个暖点，夜就不冷"
+        "note": "冷调里留一个暖点，夜就不冷",
+        "kw": [
+          "月光",
+          "夜晚",
+          "蓝调",
+          "冷调",
+          "月夜"
+        ]
       },
       {
         "id": "LT-09",
         "zh": "清晨薄雾",
         "prompt": "morning mist lighting, diffuse pale light with low saturation, air carrying visible depth between layered forms, distant shapes dissolving first, gentle dew sparkle on foreground edges",
-        "note": "雾是按距离溶解的，不是均匀加白"
+        "note": "雾是按距离溶解的，不是均匀加白",
+        "kw": [
+          "清晨",
+          "早晨",
+          "薄雾",
+          "晨雾",
+          "破晓"
+        ]
       },
       {
         "id": "LT-10",
         "zh": "体积光穿透",
         "prompt": "volumetric god rays through gaps in cloud or canopy, distinct shafts with visible dust motes inside, strong contrast between lit air and unlit air, one grounded bounce filling shadows",
-        "note": "丁达尔效应的关键是有介质"
+        "note": "丁达尔效应的关键是有介质",
+        "kw": [
+          "体积光",
+          "丁达尔",
+          "神光",
+          "光柱",
+          "耶稣光"
+        ]
       }
     ]
   },
@@ -952,85 +1691,155 @@ window.AV_DATA = {
         "id": "LO-01",
         "zh": "单人主视觉",
         "prompt": "single-subject hero composition, figure occupying the central vertical mass with clear breathing room around, background simplified to support, one unobstructed focal path to the face",
-        "note": "立绘与封面的默认底"
+        "note": "立绘与封面的默认底",
+        "kw": [
+          "居中",
+          "主视觉构图",
+          "单人构图"
+        ]
       },
       {
         "id": "LO-02",
         "zh": "三角群像",
         "prompt": "triangle group composition, three figures arranged with the central one highest and largest, overlapping shoulders creating depth, unified eyeline toward one off-frame point",
-        "note": "三人队的经典稳定结构"
+        "note": "三人队的经典稳定结构",
+        "kw": [
+          "群像",
+          "三角构图",
+          "三人构图"
+        ]
       },
       {
         "id": "LO-03",
         "zh": "三视图转面",
         "prompt": "character turnaround grid, the same figure shown front, three-quarter and side in three equal vertical columns, identical height and ground line across all views, construction marks faintly visible",
-        "note": "等高等距是纪律，高低错一像素就废"
+        "note": "等高等距是纪律，高低错一像素就废",
+        "kw": [
+          "三视图",
+          "转面",
+          "设定转面"
+        ]
       },
       {
         "id": "LO-04",
         "zh": "表情九宫格",
         "prompt": "expression grid composition, nine equal cells each holding one head-and-shoulders portrait of the same character under identical lighting, clean gutters between cells, one emotion per cell",
-        "note": "格子之间必须完全一致，只换表情"
+        "note": "格子之间必须完全一致，只换表情",
+        "kw": [
+          "九宫格",
+          "表情九宫格",
+          "网格表情"
+        ]
       },
       {
         "id": "LO-05",
         "zh": "三格漫画",
         "prompt": "three-panel manga layout, stacked rectangular panels with generous gutters narrating one continuous beat top to bottom, border thickness uniform, one panel allowed a tighter crop for emphasis",
-        "note": "格子服务节奏：起承转一屏读完"
+        "note": "格子服务节奏：起承转一屏读完",
+        "kw": [
+          "三格漫画",
+          "漫画格",
+          "分格"
+        ]
       },
       {
         "id": "LO-06",
         "zh": "跨页大格",
         "prompt": "full-bleed splash page composition, borderless image running the entire frame with maximum impact, subject staged for scale against the largest possible environment, no panel furniture",
-        "note": "跨页是高潮专属，别当常态"
+        "note": "跨页是高潮专属，别当常态",
+        "kw": [
+          "跨页",
+          "大格",
+          "跨页大格"
+        ]
       },
       {
         "id": "LO-07",
         "zh": "双联对比",
         "prompt": "diptych composition, two halves or two frames sharing identical camera angle and lighting with one decisive variable changed, clean dividing line, matched tonal weight so neither half dominates",
-        "note": "对比成立的前提是其他变量全同"
+        "note": "对比成立的前提是其他变量全同",
+        "kw": [
+          "双联",
+          "对比",
+          "双联对比"
+        ]
       },
       {
         "id": "LO-08",
         "zh": "横幅宽画幅",
         "prompt": "wide banner composition with strong horizontal thrust, subject or title mass on one side balancing layered depth on the other, clear horizon or architectural line organizing the width",
-        "note": "宽幅的呼吸点在竖线上"
+        "note": "宽幅的呼吸点在竖线上",
+        "kw": [
+          "横幅",
+          "宽画幅",
+          "宽幅构图"
+        ]
       },
       {
         "id": "LO-09",
         "zh": "竖幅长图",
         "prompt": "tall vertical composition built for scrolling, visual beats stacked top to bottom with generous gaps, all critical shapes kept clear of the side margins, ending beat as the hook",
-        "note": "竖屏先想停在哪，再想画什么"
+        "note": "竖屏先想停在哪，再想画什么",
+        "kw": [
+          "竖幅",
+          "长图",
+          "竖构图"
+        ]
       },
       {
         "id": "LO-10",
         "zh": "徽标收尾",
         "prompt": "emblem end-card composition, simplified motif or character mark centered inside a shaped frame, flat colors with one metallic accent, generous margins, readable as a small icon",
-        "note": "收尾卡要在缩略图尺寸还认得出"
+        "note": "收尾卡要在缩略图尺寸还认得出",
+        "kw": [
+          "徽标",
+          "标志",
+          "徽章"
+        ]
       },
       {
         "id": "LO-11",
         "zh": "道具平铺",
         "prompt": "flat-lay prop composition, several objects arranged in a grid or radial pattern on one plane, identical top-down light, even spacing, each object fully visible without overlap",
-        "note": "平铺的间距要能被复现"
+        "note": "平铺的间距要能被复现",
+        "kw": [
+          "平铺",
+          "道具平铺",
+          "网格平铺"
+        ]
       },
       {
         "id": "LO-12",
         "zh": "对话框预留",
         "prompt": "composition with speech balloon zones deliberately reserved as clean negative space, subject placed to one side, empty areas planned for later dialogue overlay, tail direction implied by gaze",
-        "note": "留白的位置就是对话的位置"
+        "note": "留白的位置就是对话的位置",
+        "kw": [
+          "对话框",
+          "对话预留",
+          "留白框"
+        ]
       },
       {
         "id": "LO-13",
         "zh": "框架式前景",
         "prompt": "framing foreground composition, dark architectural or foliage shapes bordering the frame with the subject seen through the opening, layered depth between foreground and subject, light gradient across the frame edge",
-        "note": "前景压暗才有窥视感"
+        "note": "前景压暗才有窥视感",
+        "kw": [
+          "框架",
+          "前景框",
+          "框景"
+        ]
       },
       {
         "id": "LO-14",
         "zh": "密集信息图",
         "prompt": "dense infographic composition, visual organized into labeled zones with numbered callouts and leader lines, consistent margin grid, one dominant anchor image with supporting detail blocks",
-        "note": "信息图先分区，后填图"
+        "note": "信息图先分区，后填图",
+        "kw": [
+          "信息图",
+          "密集版式",
+          "拼贴信息"
+        ]
       }
     ]
   },
@@ -1044,37 +1853,67 @@ window.AV_DATA = {
         "id": "SZ-01",
         "zh": "1:1 方图",
         "prompt": "square 1:1 frame, subject centered with symmetric margins, safe for avatar and icon crops",
-        "note": "头像、图标、周边图案默认"
+        "note": "头像、图标、周边图案默认",
+        "kw": [
+          "方形",
+          "正方",
+          "方图"
+        ]
       },
       {
         "id": "SZ-02",
         "zh": "3:4 竖版",
         "prompt": "portrait 3:4 frame, vertical emphasis with the figure or title occupying the upper two thirds, stable for illustration and light novel plates",
-        "note": "插画与轻小说彩页默认"
+        "note": "插画与轻小说彩页默认",
+        "kw": [
+          "竖版",
+          "三比四",
+          "竖构图"
+        ]
       },
       {
         "id": "SZ-03",
         "zh": "16:9 横版",
         "prompt": "landscape 16:9 frame, broadcast and cinematic default, horizon placed on the upper or lower third, side margins clear of critical shapes",
-        "note": "动画帧与视频封面默认"
+        "note": "动画帧与视频封面默认",
+        "kw": [
+          "横版",
+          "十六比九",
+          "宽屏"
+        ]
       },
       {
         "id": "SZ-04",
         "zh": "9:16 全屏竖",
         "prompt": "full-screen vertical 9:16 frame, built for phone scrolling, top third reserved for the hook, bottom third clear of essential detail under UI overlay zones",
-        "note": "条漫与竖屏内容铁律"
+        "note": "条漫与竖屏内容铁律",
+        "kw": [
+          "竖屏",
+          "全屏竖",
+          "手机屏"
+        ]
       },
       {
         "id": "SZ-05",
         "zh": "2:3 海报竖",
         "prompt": "tall 2:3 poster frame, vertical thrust with generous sky or ceiling, title band across the upper third, stable for print and key visual",
-        "note": "海报与卡牌默认"
+        "note": "海报与卡牌默认",
+        "kw": [
+          "海报竖",
+          "二比三",
+          "海报比例"
+        ]
       },
       {
         "id": "SZ-06",
         "zh": "21:9 宽银幕",
         "prompt": "ultra-wide 21:9 cinematic frame, extreme horizontal recession with layered depth planes, subject small against the environment scale",
-        "note": "宽银幕专属：史诗感来自比例本身"
+        "note": "宽银幕专属：史诗感来自比例本身",
+        "kw": [
+          "宽银幕",
+          "二十一比九",
+          "影院宽幅"
+        ]
       }
     ]
   },
@@ -1088,61 +1927,111 @@ window.AV_DATA = {
         "id": "DC-01",
         "zh": "漫画网点",
         "prompt": "screentone texture applied as mechanical dot gradients for mid-values, consistent dot density per tonal zone, clean edges where tone meets ink line",
-        "note": "网点替代灰阶，是漫画语言"
+        "note": "网点替代灰阶，是漫画语言",
+        "kw": [
+          "网点",
+          "漫画网点",
+          "丝网印"
+        ]
       },
       {
         "id": "DC-02",
         "zh": "速度集中线",
         "prompt": "converging speed lines focused on the action point, line density thinning toward the frame edges, white gaps left around the subject for readability",
-        "note": "集中线把观众的视线钉在冲击点"
+        "note": "集中线把观众的视线钉在冲击点",
+        "kw": [
+          "速度线",
+          "集中线",
+          "放射线"
+        ]
       },
       {
         "id": "DC-03",
         "zh": "闪光星屑",
         "prompt": "sparkle star accents in four-point and two-point shapes placed on highlights, varying scale with depth, restrained to two or three focal points",
-        "note": "闪点是奖品感，多了变噪点"
+        "note": "闪点是奖品感，多了变噪点",
+        "kw": [
+          "星屑",
+          "闪光",
+          "闪耀"
+        ]
       },
       {
         "id": "DC-04",
         "zh": "胶片颗粒",
         "prompt": "coarse film grain over the whole frame with faint gate weave, highlights faded warm, shadows slightly milky and lifted",
-        "note": "颗粒要均匀，局部加颗粒是脏"
+        "note": "颗粒要均匀，局部加颗粒是脏",
+        "kw": [
+          "颗粒",
+          "胶片颗粒",
+          "噪点纹理"
+        ]
       },
       {
         "id": "DC-05",
         "zh": "录像带噪波",
         "prompt": "VHS analog artifacts, chroma bleed smearing color right of bright edges, horizontal tracking distortion bands across the lower third, scanlines over the whole picture, curved CRT vignetting",
-        "note": "介质损伤本身就是画面语言"
+        "note": "介质损伤本身就是画面语言",
+        "kw": [
+          "录像带",
+          "噪波",
+          "vhs"
+        ]
       },
       {
         "id": "DC-06",
         "zh": "花瓣飘散",
         "prompt": "drifting petals and leaves in varied scale and rotation, sharp near the camera and dissolving into bokeh with distance, wind direction consistent across all particles",
-        "note": "粒子的风向必须一致"
+        "note": "粒子的风向必须一致",
+        "kw": [
+          "花瓣",
+          "飘散",
+          "落樱"
+        ]
       },
       {
         "id": "DC-07",
         "zh": "镜头光晕",
         "prompt": "lens flare from a hard light source, hexagonal or anamorphic streak across the frame, gentle bloom haloing bright edges, slight chromatic fringing toward the corners",
-        "note": "光晕要有物理来源，别凭空加"
+        "note": "光晕要有物理来源，别凭空加",
+        "kw": [
+          "光晕",
+          "镜头光晕",
+          "耀斑"
+        ]
       },
       {
         "id": "DC-08",
         "zh": "尘埃粒子",
         "prompt": "suspended dust motes visible inside light beams, density falling off with distance from the source, slow implied drift",
-        "note": "尘埃让光有了体积"
+        "note": "尘埃让光有了体积",
+        "kw": [
+          "尘埃",
+          "浮尘",
+          "空气粒子"
+        ]
       },
       {
         "id": "DC-09",
         "zh": "对话框气泡",
         "prompt": "empty speech and thought balloons with clean tails pointing at the correct speaker, uniform stroke weight, reserved as empty space for later text",
-        "note": "气泡尾巴的指向不能错"
+        "note": "气泡尾巴的指向不能错",
+        "kw": [
+          "气泡",
+          "对话框气泡",
+          "对白框"
+        ]
       },
       {
         "id": "DC-10",
         "zh": "拟声词字迹",
         "prompt": "hand-lettered onomatopoeia marks as graphic shapes, ink-brushed katakana-style strokes integrated into the action, treated as texture rather than readable text",
-        "note": "拟声词是图形，不要求真读"
+        "note": "拟声词是图形，不要求真读",
+        "kw": [
+          "拟声词",
+          "字迹",
+          "手写音效"
+        ]
       }
     ]
   },
@@ -1361,6 +2250,182 @@ window.AV_DATA = {
         "why": "收尾卡承担识别度：缩小到头像尺寸还要认得出"
       }
     ],
+    "scriptRoles": [
+      {
+        "id": "SR-S1",
+        "zh": "建立镜头",
+        "job": "交代地点、天气与时间感，第一眼把观众放进故事里",
+        "media": [
+          "MD-01",
+          "MD-13"
+        ],
+        "shots": [
+          "SH-04",
+          "SH-02"
+        ],
+        "layouts": [
+          "LO-08",
+          "LO-13"
+        ],
+        "sizes": [
+          "SZ-03",
+          "SZ-06"
+        ],
+        "lights": [
+          "LT-01",
+          "LT-09"
+        ],
+        "titleFormula": "{theme}·第一幕 建立",
+        "copyGuide": "开篇一句定时空，不放人物动作细节",
+        "why": "先给世界再给人：观众要有地方可以想象"
+      },
+      {
+        "id": "SR-S2",
+        "zh": "角色亮相",
+        "job": "让主角站出来，把形象和身份一次锁住",
+        "media": [
+          "MD-02",
+          "MD-01"
+        ],
+        "shots": [
+          "SH-03",
+          "SH-01"
+        ],
+        "layouts": [
+          "LO-01",
+          "LO-03"
+        ],
+        "sizes": [
+          "SZ-02",
+          "SZ-01"
+        ],
+        "lights": [
+          "LT-05",
+          "LT-02"
+        ],
+        "titleFormula": "{theme}·第二幕 亮相",
+        "copyGuide": "一句话说清他是谁、想要什么",
+        "why": "系列要有记忆点，角色卡是最容易被单独转发的"
+      },
+      {
+        "id": "SR-S3",
+        "zh": "冲突推进",
+        "job": "把矛盾摆上台面，画面开始有方向和张力",
+        "media": [
+          "MD-01",
+          "MD-13"
+        ],
+        "shots": [
+          "SH-05",
+          "SH-06"
+        ],
+        "layouts": [
+          "LO-07",
+          "LO-13"
+        ],
+        "sizes": [
+          "SZ-03",
+          "SZ-04"
+        ],
+        "lights": [
+          "LT-02",
+          "LT-08"
+        ],
+        "titleFormula": "{theme}·第三幕 推进",
+        "copyGuide": "一句写清谁和谁对上了",
+        "why": "叙事中段是留存点：这一张决定观众要不要看下去"
+      },
+      {
+        "id": "SR-S4",
+        "zh": "高潮",
+        "job": "把力量与情绪推到顶，画面要有冲击",
+        "media": [
+          "MD-01",
+          "MD-13"
+        ],
+        "shots": [
+          "SH-09",
+          "SH-02"
+        ],
+        "layouts": [
+          "LO-08",
+          "LO-02"
+        ],
+        "sizes": [
+          "SZ-03",
+          "SZ-06"
+        ],
+        "lights": [
+          "LT-06",
+          "LT-10"
+        ],
+        "titleFormula": "{theme}·第四幕 高潮",
+        "copyGuide": "一句喊出来的台词或动作提示",
+        "why": "全套最燃的一张，通常也是被单独转发的那张"
+      },
+      {
+        "id": "SR-S5",
+        "zh": "收尾留白",
+        "job": "给一个余韵和记忆点，可以是象征画面或片尾定格",
+        "media": [
+          "MD-12",
+          "MD-01"
+        ],
+        "shots": [
+          "SH-08",
+          "SH-12"
+        ],
+        "layouts": [
+          "LO-01",
+          "LO-10"
+        ],
+        "sizes": [
+          "SZ-05",
+          "SZ-01"
+        ],
+        "lights": [
+          "LT-08",
+          "LT-09"
+        ],
+        "titleFormula": "{theme}·第五幕 收尾",
+        "copyGuide": "一句留白的独白，不写完",
+        "why": "留白让人愿意二刷，也是配乐起手的位置"
+      }
+    ],
+    "actOrder": {
+      "1": [
+        "SR-S1"
+      ],
+      "2": [
+        "SR-S1",
+        "SR-S5"
+      ],
+      "3": [
+        "SR-S1",
+        "SR-S3",
+        "SR-S5"
+      ],
+      "4": [
+        "SR-S1",
+        "SR-S2",
+        "SR-S3",
+        "SR-S5"
+      ],
+      "5": [
+        "SR-S1",
+        "SR-S2",
+        "SR-S3",
+        "SR-S4",
+        "SR-S5"
+      ],
+      "many": [
+        "SR-S1",
+        "SR-S2",
+        "SR-S3",
+        "SR-S4",
+        "SR-S5"
+      ]
+    },
     "themes": [
       {
         "id": "TH-01",

@@ -4,15 +4,115 @@
   "who": "收尾按需",
   "decides": "点睛的那一笔——网点、速度线、粒子、颗粒。装饰是调味料，密度超三个就删",
   "items": [
-    { "id": "DC-01", "zh": "漫画网点", "prompt": "screentone texture applied as mechanical dot gradients for mid-values, consistent dot density per tonal zone, clean edges where tone meets ink line", "note": "网点替代灰阶，是漫画语言" },
-    { "id": "DC-02", "zh": "速度集中线", "prompt": "converging speed lines focused on the action point, line density thinning toward the frame edges, white gaps left around the subject for readability", "note": "集中线把观众的视线钉在冲击点" },
-    { "id": "DC-03", "zh": "闪光星屑", "prompt": "sparkle star accents in four-point and two-point shapes placed on highlights, varying scale with depth, restrained to two or three focal points", "note": "闪点是奖品感，多了变噪点" },
-    { "id": "DC-04", "zh": "胶片颗粒", "prompt": "coarse film grain over the whole frame with faint gate weave, highlights faded warm, shadows slightly milky and lifted", "note": "颗粒要均匀，局部加颗粒是脏" },
-    { "id": "DC-05", "zh": "录像带噪波", "prompt": "VHS analog artifacts, chroma bleed smearing color right of bright edges, horizontal tracking distortion bands across the lower third, scanlines over the whole picture, curved CRT vignetting", "note": "介质损伤本身就是画面语言" },
-    { "id": "DC-06", "zh": "花瓣飘散", "prompt": "drifting petals and leaves in varied scale and rotation, sharp near the camera and dissolving into bokeh with distance, wind direction consistent across all particles", "note": "粒子的风向必须一致" },
-    { "id": "DC-07", "zh": "镜头光晕", "prompt": "lens flare from a hard light source, hexagonal or anamorphic streak across the frame, gentle bloom haloing bright edges, slight chromatic fringing toward the corners", "note": "光晕要有物理来源，别凭空加" },
-    { "id": "DC-08", "zh": "尘埃粒子", "prompt": "suspended dust motes visible inside light beams, density falling off with distance from the source, slow implied drift", "note": "尘埃让光有了体积" },
-    { "id": "DC-09", "zh": "对话框气泡", "prompt": "empty speech and thought balloons with clean tails pointing at the correct speaker, uniform stroke weight, reserved as empty space for later text", "note": "气泡尾巴的指向不能错" },
-    { "id": "DC-10", "zh": "拟声词字迹", "prompt": "hand-lettered onomatopoeia marks as graphic shapes, ink-brushed katakana-style strokes integrated into the action, treated as texture rather than readable text", "note": "拟声词是图形，不要求真读" }
+    {
+      "id": "DC-01",
+      "zh": "漫画网点",
+      "prompt": "screentone texture applied as mechanical dot gradients for mid-values, consistent dot density per tonal zone, clean edges where tone meets ink line",
+      "note": "网点替代灰阶，是漫画语言",
+      "kw": [
+        "网点",
+        "漫画网点",
+        "丝网印"
+      ]
+    },
+    {
+      "id": "DC-02",
+      "zh": "速度集中线",
+      "prompt": "converging speed lines focused on the action point, line density thinning toward the frame edges, white gaps left around the subject for readability",
+      "note": "集中线把观众的视线钉在冲击点",
+      "kw": [
+        "速度线",
+        "集中线",
+        "放射线"
+      ]
+    },
+    {
+      "id": "DC-03",
+      "zh": "闪光星屑",
+      "prompt": "sparkle star accents in four-point and two-point shapes placed on highlights, varying scale with depth, restrained to two or three focal points",
+      "note": "闪点是奖品感，多了变噪点",
+      "kw": [
+        "星屑",
+        "闪光",
+        "闪耀"
+      ]
+    },
+    {
+      "id": "DC-04",
+      "zh": "胶片颗粒",
+      "prompt": "coarse film grain over the whole frame with faint gate weave, highlights faded warm, shadows slightly milky and lifted",
+      "note": "颗粒要均匀，局部加颗粒是脏",
+      "kw": [
+        "颗粒",
+        "胶片颗粒",
+        "噪点纹理"
+      ]
+    },
+    {
+      "id": "DC-05",
+      "zh": "录像带噪波",
+      "prompt": "VHS analog artifacts, chroma bleed smearing color right of bright edges, horizontal tracking distortion bands across the lower third, scanlines over the whole picture, curved CRT vignetting",
+      "note": "介质损伤本身就是画面语言",
+      "kw": [
+        "录像带",
+        "噪波",
+        "vhs"
+      ]
+    },
+    {
+      "id": "DC-06",
+      "zh": "花瓣飘散",
+      "prompt": "drifting petals and leaves in varied scale and rotation, sharp near the camera and dissolving into bokeh with distance, wind direction consistent across all particles",
+      "note": "粒子的风向必须一致",
+      "kw": [
+        "花瓣",
+        "飘散",
+        "落樱"
+      ]
+    },
+    {
+      "id": "DC-07",
+      "zh": "镜头光晕",
+      "prompt": "lens flare from a hard light source, hexagonal or anamorphic streak across the frame, gentle bloom haloing bright edges, slight chromatic fringing toward the corners",
+      "note": "光晕要有物理来源，别凭空加",
+      "kw": [
+        "光晕",
+        "镜头光晕",
+        "耀斑"
+      ]
+    },
+    {
+      "id": "DC-08",
+      "zh": "尘埃粒子",
+      "prompt": "suspended dust motes visible inside light beams, density falling off with distance from the source, slow implied drift",
+      "note": "尘埃让光有了体积",
+      "kw": [
+        "尘埃",
+        "浮尘",
+        "空气粒子"
+      ]
+    },
+    {
+      "id": "DC-09",
+      "zh": "对话框气泡",
+      "prompt": "empty speech and thought balloons with clean tails pointing at the correct speaker, uniform stroke weight, reserved as empty space for later text",
+      "note": "气泡尾巴的指向不能错",
+      "kw": [
+        "气泡",
+        "对话框气泡",
+        "对白框"
+      ]
+    },
+    {
+      "id": "DC-10",
+      "zh": "拟声词字迹",
+      "prompt": "hand-lettered onomatopoeia marks as graphic shapes, ink-brushed katakana-style strokes integrated into the action, treated as texture rather than readable text",
+      "note": "拟声词是图形，不要求真读",
+      "kw": [
+        "拟声词",
+        "字迹",
+        "手写音效"
+      ]
+    }
   ]
 }

@@ -4,11 +4,71 @@
   "who": "平台铁律",
   "decides": "出多大、什么比例——载体决定比例，比例反过来约束构图。这是铁律层，不为风格让步",
   "items": [
-    { "id": "SZ-01", "zh": "1:1 方图", "prompt": "square 1:1 frame, subject centered with symmetric margins, safe for avatar and icon crops", "note": "头像、图标、周边图案默认" },
-    { "id": "SZ-02", "zh": "3:4 竖版", "prompt": "portrait 3:4 frame, vertical emphasis with the figure or title occupying the upper two thirds, stable for illustration and light novel plates", "note": "插画与轻小说彩页默认" },
-    { "id": "SZ-03", "zh": "16:9 横版", "prompt": "landscape 16:9 frame, broadcast and cinematic default, horizon placed on the upper or lower third, side margins clear of critical shapes", "note": "动画帧与视频封面默认" },
-    { "id": "SZ-04", "zh": "9:16 全屏竖", "prompt": "full-screen vertical 9:16 frame, built for phone scrolling, top third reserved for the hook, bottom third clear of essential detail under UI overlay zones", "note": "条漫与竖屏内容铁律" },
-    { "id": "SZ-05", "zh": "2:3 海报竖", "prompt": "tall 2:3 poster frame, vertical thrust with generous sky or ceiling, title band across the upper third, stable for print and key visual", "note": "海报与卡牌默认" },
-    { "id": "SZ-06", "zh": "21:9 宽银幕", "prompt": "ultra-wide 21:9 cinematic frame, extreme horizontal recession with layered depth planes, subject small against the environment scale", "note": "宽银幕专属：史诗感来自比例本身" }
+    {
+      "id": "SZ-01",
+      "zh": "1:1 方图",
+      "prompt": "square 1:1 frame, subject centered with symmetric margins, safe for avatar and icon crops",
+      "note": "头像、图标、周边图案默认",
+      "kw": [
+        "方形",
+        "正方",
+        "方图"
+      ]
+    },
+    {
+      "id": "SZ-02",
+      "zh": "3:4 竖版",
+      "prompt": "portrait 3:4 frame, vertical emphasis with the figure or title occupying the upper two thirds, stable for illustration and light novel plates",
+      "note": "插画与轻小说彩页默认",
+      "kw": [
+        "竖版",
+        "三比四",
+        "竖构图"
+      ]
+    },
+    {
+      "id": "SZ-03",
+      "zh": "16:9 横版",
+      "prompt": "landscape 16:9 frame, broadcast and cinematic default, horizon placed on the upper or lower third, side margins clear of critical shapes",
+      "note": "动画帧与视频封面默认",
+      "kw": [
+        "横版",
+        "十六比九",
+        "宽屏"
+      ]
+    },
+    {
+      "id": "SZ-04",
+      "zh": "9:16 全屏竖",
+      "prompt": "full-screen vertical 9:16 frame, built for phone scrolling, top third reserved for the hook, bottom third clear of essential detail under UI overlay zones",
+      "note": "条漫与竖屏内容铁律",
+      "kw": [
+        "竖屏",
+        "全屏竖",
+        "手机屏"
+      ]
+    },
+    {
+      "id": "SZ-05",
+      "zh": "2:3 海报竖",
+      "prompt": "tall 2:3 poster frame, vertical thrust with generous sky or ceiling, title band across the upper third, stable for print and key visual",
+      "note": "海报与卡牌默认",
+      "kw": [
+        "海报竖",
+        "二比三",
+        "海报比例"
+      ]
+    },
+    {
+      "id": "SZ-06",
+      "zh": "21:9 宽银幕",
+      "prompt": "ultra-wide 21:9 cinematic frame, extreme horizontal recession with layered depth planes, subject small against the environment scale",
+      "note": "宽银幕专属：史诗感来自比例本身",
+      "kw": [
+        "宽银幕",
+        "二十一比九",
+        "影院宽幅"
+      ]
+    }
   ]
 }

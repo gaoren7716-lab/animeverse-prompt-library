@@ -4,21 +4,205 @@
   "who": "你（谁在画面里）",
   "decides": "主体的身份与形体契约——年龄、体格、服饰逻辑、气质，观众先认出「这是什么角色」",
   "items": [
-    { "id": "CH-01", "zh": "少年主角", "prompt": "shonen hero protagonist, teenage build with slightly oversized expressive eyes, windswept hair with deliberate spike clusters, determination readable in brow and jaw, practical adventure clothing with worn edges", "note": "头身比与眼神是年龄感的锚" },
-    { "id": "CH-02", "zh": "少女主角", "prompt": "shoujo heroine protagonist, slender figure with large luminous eyes carrying multiple highlight shapes, finely detailed hair with soft gradient ends, layered skirt and ribbon construction, gentle posture with one hand near the collarbone", "note": "高光形状数量决定「闪度」" },
-    { "id": "CH-03", "zh": "冷峻御姐", "prompt": "cool composed mature woman, sharp narrowed eyes with heavy upper lid line, long straight hair with a single accent strand, tailored silhouette with clean vertical folds, relaxed but guarded stance", "note": "气场靠眼型与垂直线，不靠化妆" },
-    { "id": "CH-04", "zh": "元气后辈", "prompt": "energetic kouhai junior, bouncy twin tails or short bob with motion sweep, bright wide eyes and open-mouthed grin, slightly loose uniform with rolled sleeves, mid-gesture pose with forward lean", "note": "动感来自发型轨迹与身体前倾" },
-    { "id": "CH-05", "zh": "智慧长者", "prompt": "wise elderly mentor, deeply lined face with kind procedural eyebrows, long beard or topknot with silver-to-white gradient, layered robes with weighty drape, staff or scroll held loose in one hand", "note": "皱纹走向要服从表情，不是均匀网格" },
-    { "id": "CH-06", "zh": "宿敌反派", "prompt": "rival antagonist, angular face with asymmetric hair and one sharp canines showing, high-collared cape or coat with dramatic interior lining, half-lidded confident eyes, stance occupying more space than needed", "note": "反派构图占位要超出必要，才有压迫感" },
-    { "id": "CH-07", "zh": "机甲驾驶员", "prompt": "mecha pilot, tight-fitting plugsuit with seam lines and helmet under one arm, short practical hair with sweat at the temple, youthful face carrying unusual composure, harness straps over the chest", "note": "驾驶服是第二层皮肤，不是紧身衣" },
-    { "id": "CH-08", "zh": "杖咏法师", "prompt": "staff-wielding mage, long layered robe with celestial pattern trim, pointed hat or hood with deep shadow over the eyes, both hands on a carved wooden staff with a glowing focal gem, floating runes orbiting the shaft", "note": "法力可视化：光从法杖焦点溢出" },
-    { "id": "CH-09", "zh": "精灵族", "prompt": "elven figure, elongated ears with delicate vein suggestion, ethereal features with slightly large eyes, nature-motif jewelry and leaf-shaped cloak clasps, forest-toned palette with bioluminescent accents, weightless posture", "note": "尖耳只是入口，气质要轻" },
-    { "id": "CH-10", "zh": "兽人伙伴", "prompt": "beast companion creature, anthropomorphic animal with correct quadruped-to-biped joint logic, fur direction following muscle masses, expressive ears and tail communicating mood, simple harness or scarf as the only clothing", "note": "关节逻辑错了，萌度归零" },
-    { "id": "CH-11", "zh": "机器人仿生", "prompt": "android figure, synthetic skin panels with subtle seam lines at joints, one glowing optical sensor or visor, mechanical hand with visible articulation cables, synthetic hair with unnatural uniformity, posture slightly too precise to be human", "note": "太完美本身就是非人信号" },
-    { "id": "CH-12", "zh": "小妖精宠物", "prompt": "fairy pet mascot, palm-sized round body with oversized head and tiny translucent wings, dust-trail sparkle behind, enormous pleading eyes with catchlights, one accessory like a leaf hat or bell collar", "note": "吉祥物的剪影要能在图标尺寸存活" },
-    { "id": "CH-13", "zh": "武僧剑客", "prompt": "swordsman figure, topknot with a trailing headband strand, dark indigo hakama with tied obi, iaijutsu ready stance with knees softly bent and weight low, blade held with correct grip geometry", "note": "重心压低才有「静中的紧绷」" },
-    { "id": "CH-14", "zh": "偶像歌姬", "prompt": "idol singer, stage costume with layered frills and gem clips, microphone held with correct hand shape, twin-tail or long wave hair catching stage light, wide sparkling eyes and an open singing mouth, confetti and light beams behind", "note": "握麦手势错一点，整张图就假" },
-    { "id": "CH-15", "zh": "科学家研究员", "prompt": "scientist researcher, lab coat over casual clothes with a pocket protector and safety goggles pushed up on the forehead, chalk dust on the sleeves, eager slightly unfocused expression, clipboard or flask in hand", "note": "白大褂的褶皱要像穿过很多次" },
-    { "id": "CH-16", "zh": "神秘面具客", "prompt": "masked mysterious figure, smooth featureless mask or Noh-like carved expression mask, wide sleeves hiding the hands, no readable body language, still posture at the frame edge, one patterned obi as the only color accent", "note": "不可读是角色本身，构图要给悬念让位" }
+    {
+      "id": "CH-01",
+      "zh": "少年主角",
+      "prompt": "shonen hero protagonist, teenage build with slightly oversized expressive eyes, windswept hair with deliberate spike clusters, determination readable in brow and jaw, practical adventure clothing with worn edges",
+      "note": "头身比与眼神是年龄感的锚",
+      "kw": [
+        "少年",
+        "男主",
+        "主人公",
+        "男主角"
+      ]
+    },
+    {
+      "id": "CH-02",
+      "zh": "少女主角",
+      "prompt": "shoujo heroine protagonist, slender figure with large luminous eyes carrying multiple highlight shapes, finely detailed hair with soft gradient ends, layered skirt and ribbon construction, gentle posture with one hand near the collarbone",
+      "note": "高光形状数量决定「闪度」",
+      "kw": [
+        "少女",
+        "女主",
+        "女主人公",
+        "女主角"
+      ]
+    },
+    {
+      "id": "CH-03",
+      "zh": "冷峻御姐",
+      "prompt": "cool composed mature woman, sharp narrowed eyes with heavy upper lid line, long straight hair with a single accent strand, tailored silhouette with clean vertical folds, relaxed but guarded stance",
+      "note": "气场靠眼型与垂直线，不靠化妆",
+      "kw": [
+        "御姐",
+        "成熟女性",
+        "冷艳",
+        "大姐"
+      ]
+    },
+    {
+      "id": "CH-04",
+      "zh": "元气后辈",
+      "prompt": "energetic kouhai junior, bouncy twin tails or short bob with motion sweep, bright wide eyes and open-mouthed grin, slightly loose uniform with rolled sleeves, mid-gesture pose with forward lean",
+      "note": "动感来自发型轨迹与身体前倾",
+      "kw": [
+        "后辈",
+        "学妹",
+        "元气",
+        "元气少女",
+        " junior"
+      ]
+    },
+    {
+      "id": "CH-05",
+      "zh": "智慧长者",
+      "prompt": "wise elderly mentor, deeply lined face with kind procedural eyebrows, long beard or topknot with silver-to-white gradient, layered robes with weighty drape, staff or scroll held loose in one hand",
+      "note": "皱纹走向要服从表情，不是均匀网格",
+      "kw": [
+        "长者",
+        "老者",
+        "老师",
+        "师傅",
+        "智慧"
+      ]
+    },
+    {
+      "id": "CH-06",
+      "zh": "宿敌反派",
+      "prompt": "rival antagonist, angular face with asymmetric hair and one sharp canines showing, high-collared cape or coat with dramatic interior lining, half-lidded confident eyes, stance occupying more space than needed",
+      "note": "反派构图占位要超出必要，才有压迫感",
+      "kw": [
+        "反派",
+        "敌人",
+        "宿敌",
+        "恶役",
+        "对手"
+      ]
+    },
+    {
+      "id": "CH-07",
+      "zh": "机甲驾驶员",
+      "prompt": "mecha pilot, tight-fitting plugsuit with seam lines and helmet under one arm, short practical hair with sweat at the temple, youthful face carrying unusual composure, harness straps over the chest",
+      "note": "驾驶服是第二层皮肤，不是紧身衣",
+      "kw": [
+        "驾驶员",
+        "机师",
+        "飞行员",
+        "机甲驾驶员"
+      ]
+    },
+    {
+      "id": "CH-08",
+      "zh": "杖咏法师",
+      "prompt": "staff-wielding mage, long layered robe with celestial pattern trim, pointed hat or hood with deep shadow over the eyes, both hands on a carved wooden staff with a glowing focal gem, floating runes orbiting the shaft",
+      "note": "法力可视化：光从法杖焦点溢出",
+      "kw": [
+        "法师",
+        "魔法使",
+        "巫女",
+        "杖咏",
+        "魔术师"
+      ]
+    },
+    {
+      "id": "CH-09",
+      "zh": "精灵族",
+      "prompt": "elven figure, elongated ears with delicate vein suggestion, ethereal features with slightly large eyes, nature-motif jewelry and leaf-shaped cloak clasps, forest-toned palette with bioluminescent accents, weightless posture",
+      "note": "尖耳只是入口，气质要轻",
+      "kw": [
+        "精灵",
+        "妖精族",
+        "森精灵",
+        "精灵族"
+      ]
+    },
+    {
+      "id": "CH-10",
+      "zh": "兽人伙伴",
+      "prompt": "beast companion creature, anthropomorphic animal with correct quadruped-to-biped joint logic, fur direction following muscle masses, expressive ears and tail communicating mood, simple harness or scarf as the only clothing",
+      "note": "关节逻辑错了，萌度归零",
+      "kw": [
+        "兽人",
+        "兽娘",
+        "兽耳",
+        "伙伴"
+      ]
+    },
+    {
+      "id": "CH-11",
+      "zh": "机器人仿生",
+      "prompt": "android figure, synthetic skin panels with subtle seam lines at joints, one glowing optical sensor or visor, mechanical hand with visible articulation cables, synthetic hair with unnatural uniformity, posture slightly too precise to be human",
+      "note": "太完美本身就是非人信号",
+      "kw": [
+        "机器人",
+        "仿生人",
+        "人造人",
+        "机械生命"
+      ]
+    },
+    {
+      "id": "CH-12",
+      "zh": "小妖精宠物",
+      "prompt": "fairy pet mascot, palm-sized round body with oversized head and tiny translucent wings, dust-trail sparkle behind, enormous pleading eyes with catchlights, one accessory like a leaf hat or bell collar",
+      "note": "吉祥物的剪影要能在图标尺寸存活",
+      "kw": [
+        "小妖精",
+        "宠物",
+        "妖精",
+        "吉祥物",
+        "小精灵"
+      ]
+    },
+    {
+      "id": "CH-13",
+      "zh": "武僧剑客",
+      "prompt": "swordsman figure, topknot with a trailing headband strand, dark indigo hakama with tied obi, iaijutsu ready stance with knees softly bent and weight low, blade held with correct grip geometry",
+      "note": "重心压低才有「静中的紧绷」",
+      "kw": [
+        "武僧",
+        "剑客",
+        "剑士",
+        "武士刀客",
+        "剑豪"
+      ]
+    },
+    {
+      "id": "CH-14",
+      "zh": "偶像歌姬",
+      "prompt": "idol singer, stage costume with layered frills and gem clips, microphone held with correct hand shape, twin-tail or long wave hair catching stage light, wide sparkling eyes and an open singing mouth, confetti and light beams behind",
+      "note": "握麦手势错一点，整张图就假",
+      "kw": [
+        "偶像",
+        "歌姬",
+        "歌手",
+        "主唱",
+        "偶像歌手"
+      ]
+    },
+    {
+      "id": "CH-15",
+      "zh": "科学家研究员",
+      "prompt": "scientist researcher, lab coat over casual clothes with a pocket protector and safety goggles pushed up on the forehead, chalk dust on the sleeves, eager slightly unfocused expression, clipboard or flask in hand",
+      "note": "白大褂的褶皱要像穿过很多次",
+      "kw": [
+        "科学家",
+        "研究员",
+        "博士",
+        "学者"
+      ]
+    },
+    {
+      "id": "CH-16",
+      "zh": "神秘面具客",
+      "prompt": "masked mysterious figure, smooth featureless mask or Noh-like carved expression mask, wide sleeves hiding the hands, no readable body language, still posture at the frame edge, one patterned obi as the only color accent",
+      "note": "不可读是角色本身，构图要给悬念让位",
+      "kw": [
+        "面具",
+        "神秘人",
+        "面具客",
+        "蒙面",
+        "神秘角色"
+      ]
+    }
   ]
 }

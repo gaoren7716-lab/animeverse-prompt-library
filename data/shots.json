@@ -4,17 +4,137 @@
   "who": "随载体定",
   "decides": "摄影机站在哪、朝哪指——同一个场景换机位就是另一张图、另一种情绪",
   "items": [
-    { "id": "SH-01", "zh": "仰拍英雄角", "prompt": "heroic low-angle shot looking up at the subject, camera at knee height with strong perspective convergence, subject feeling larger than the frame, sky or ceiling dominating the upper half", "note": "机位越低，主体越神性" },
-    { "id": "SH-02", "zh": "俯拍全局角", "prompt": "high bird's-eye overhead view, entire scene flattened into a readable diagram, figures small within a large environment, long shadows revealing spatial layout", "note": "俯瞰适合交代关系与位置" },
-    { "id": "SH-03", "zh": "面部特写", "prompt": "tight facial close-up, eyes placed on the upper third following portrait convention, shallow depth softening the ears and shoulders, every highlight shape in the iris deliberate", "note": "特写的纪律：眼神光要有一个主源" },
-    { "id": "SH-04", "zh": "全景环境交代", "prompt": "wide establishing shot, subject placed small within a large legible environment, deep layered recession from foreground to horizon, scale communicated by recognizable reference objects", "note": "环境是主角，人是比例尺" },
-    { "id": "SH-05", "zh": "过肩双人", "prompt": "over-the-shoulder two-shot, one shoulder and head in the near foreground framing the other figure, focus on the facing character, conversation staging with clear eyeline geometry", "note": "过肩是对话戏的默认机位" },
-    { "id": "SH-06", "zh": "荷兰斜角", "prompt": "dutch tilt composition with the horizon deliberately off-level, diagonal stress in vertical architecture, unease built from geometry rather than content", "note": "斜角是情绪警告，别滥用" },
-    { "id": "SH-07", "zh": "第一人称视角", "prompt": "first-person point of view, the viewer's own hands or equipment visible at the frame edge, subject facing the camera directly, wide lens slight distortion at the corners", "note": "POV 的代入感来自「自己的身体」" },
-    { "id": "SH-08", "zh": "背影追随", "prompt": "chased-from-behind shot following the subject's back, destination occupying the frame ahead, shoulders and hair carrying the emotion, viewer positioned as companion rather than observer", "note": "背影把情绪让给观众去填" },
-    { "id": "SH-09", "zh": "对角线冲刺", "prompt": "diagonal motion composition, subject crossing the frame on a strong diagonal with motion lines trailing, camera slightly rotated to match the momentum, empty space ahead receiving the movement", "note": "运动方向的前方必须留空" },
-    { "id": "SH-10", "zh": "对称构图", "prompt": "strictly symmetrical composition, subject centered on the vertical axis with mirrored architecture or crowd on both sides, formal ritual-like stillness", "note": "对称给仪式感，也給压抑" },
-    { "id": "SH-11", "zh": "微距细节", "prompt": "macro detail shot of a single small element, extremely shallow focus with the rest of the frame dissolved into bokeh, surface texture and material truth as the subject", "note": "细节镜头的材质必须扛住放大" },
-    { "id": "SH-12", "zh": "跟随摇镜", "prompt": "tracking shot composition with motion blur on the background only, subject sharp against horizontal streaks, camera velocity implied by background smearing", "note": "只糊背景不糊主体，速度感才对" }
+    {
+      "id": "SH-01",
+      "zh": "仰拍英雄角",
+      "prompt": "heroic low-angle shot looking up at the subject, camera at knee height with strong perspective convergence, subject feeling larger than the frame, sky or ceiling dominating the upper half",
+      "note": "机位越低，主体越神性",
+      "kw": [
+        "仰拍",
+        "英雄角度",
+        "低角度"
+      ]
+    },
+    {
+      "id": "SH-02",
+      "zh": "俯拍全局角",
+      "prompt": "high bird's-eye overhead view, entire scene flattened into a readable diagram, figures small within a large environment, long shadows revealing spatial layout",
+      "note": "俯瞰适合交代关系与位置",
+      "kw": [
+        "俯拍",
+        "全局角度",
+        "鸟瞰"
+      ]
+    },
+    {
+      "id": "SH-03",
+      "zh": "面部特写",
+      "prompt": "tight facial close-up, eyes placed on the upper third following portrait convention, shallow depth softening the ears and shoulders, every highlight shape in the iris deliberate",
+      "note": "特写的纪律：眼神光要有一个主源",
+      "kw": [
+        "特写",
+        "面部特写",
+        "脸部特写"
+      ]
+    },
+    {
+      "id": "SH-04",
+      "zh": "全景环境交代",
+      "prompt": "wide establishing shot, subject placed small within a large legible environment, deep layered recession from foreground to horizon, scale communicated by recognizable reference objects",
+      "note": "环境是主角，人是比例尺",
+      "kw": [
+        "全景",
+        "环境交代",
+        "远景"
+      ]
+    },
+    {
+      "id": "SH-05",
+      "zh": "过肩双人",
+      "prompt": "over-the-shoulder two-shot, one shoulder and head in the near foreground framing the other figure, focus on the facing character, conversation staging with clear eyeline geometry",
+      "note": "过肩是对话戏的默认机位",
+      "kw": [
+        "过肩",
+        "双人",
+        "对话镜头"
+      ]
+    },
+    {
+      "id": "SH-06",
+      "zh": "荷兰斜角",
+      "prompt": "dutch tilt composition with the horizon deliberately off-level, diagonal stress in vertical architecture, unease built from geometry rather than content",
+      "note": "斜角是情绪警告，别滥用",
+      "kw": [
+        "荷兰斜角",
+        "斜角",
+        "倾斜构图"
+      ]
+    },
+    {
+      "id": "SH-07",
+      "zh": "第一人称视角",
+      "prompt": "first-person point of view, the viewer's own hands or equipment visible at the frame edge, subject facing the camera directly, wide lens slight distortion at the corners",
+      "note": "POV 的代入感来自「自己的身体」",
+      "kw": [
+        "第一人称",
+        "主观视角",
+        "pov"
+      ]
+    },
+    {
+      "id": "SH-08",
+      "zh": "背影追随",
+      "prompt": "chased-from-behind shot following the subject's back, destination occupying the frame ahead, shoulders and hair carrying the emotion, viewer positioned as companion rather than observer",
+      "note": "背影把情绪让给观众去填",
+      "kw": [
+        "背影",
+        "追随",
+        "背面"
+      ]
+    },
+    {
+      "id": "SH-09",
+      "zh": "对角线冲刺",
+      "prompt": "diagonal motion composition, subject crossing the frame on a strong diagonal with motion lines trailing, camera slightly rotated to match the momentum, empty space ahead receiving the movement",
+      "note": "运动方向的前方必须留空",
+      "kw": [
+        "对角线冲刺",
+        "冲刺",
+        "速度构图"
+      ]
+    },
+    {
+      "id": "SH-10",
+      "zh": "对称构图",
+      "prompt": "strictly symmetrical composition, subject centered on the vertical axis with mirrored architecture or crowd on both sides, formal ritual-like stillness",
+      "note": "对称给仪式感，也給压抑",
+      "kw": [
+        "对称",
+        "对称构图",
+        "中心对称"
+      ]
+    },
+    {
+      "id": "SH-11",
+      "zh": "微距细节",
+      "prompt": "macro detail shot of a single small element, extremely shallow focus with the rest of the frame dissolved into bokeh, surface texture and material truth as the subject",
+      "note": "细节镜头的材质必须扛住放大",
+      "kw": [
+        "微距",
+        "特写细节",
+        "细节放大"
+      ]
+    },
+    {
+      "id": "SH-12",
+      "zh": "跟随摇镜",
+      "prompt": "tracking shot composition with motion blur on the background only, subject sharp against horizontal streaks, camera velocity implied by background smearing",
+      "note": "只糊背景不糊主体，速度感才对",
+      "kw": [
+        "跟随摇镜",
+        "摇镜",
+        "运动镜头"
+      ]
+    }
   ]
 }

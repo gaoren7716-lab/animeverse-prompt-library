@@ -5,19 +5,328 @@
   "decides": "成品长什么样、给谁看——动画帧、设定图、漫画、游戏、周边，每种载体有自己的规格与铁律。一切的根",
   "note": "这是「关联创作」的主维度：同一套视觉模块，载体不同成品形态完全不同",
   "items": [
-    { "id": "MD-01", "zh": "动画关键帧", "prompt": "animation key visual frame staged as a single story beat, cinematic composition with clear subject hierarchy, motion implied through line and pose rather than blur, broadcast-quality framing", "note": "一帧一个节拍，构图服务叙事", "suggest": ["RG-05", "ST-01", "SH-04", "LT-01"], "children": ["高潮对决帧", "日常过场帧", "片头印象帧", "片尾定格帧"] },
-    { "id": "MD-02", "zh": "角色设定图", "prompt": "anime character design sheet, full-body frontal view with proportional construction marks, costume broken into labeled detail callouts, consistent line weight, neutral standing pose on empty ground", "note": "可复现性优先：比例、服装结构、配色都要能被另一个画师抄走", "suggest": ["ST-01", "LO-03", "SZ-02"], "children": ["三视图转面", "服装细节分解", "年龄成长对比", "换装变体"] },
-    { "id": "MD-03", "zh": "表情合集", "prompt": "anime expression sheet, the same character repeated in a grid of nine head-and-shoulders portraits, each carrying one clean emotion with distinct eye and brow shapes, identical lighting and angle across all cells", "note": "同角度同光线是纪律，变的是眉眼嘴", "suggest": ["LO-04", "ST-01", "LT-03"], "children": ["喜怒哀乐基础九宫格", "战斗集中特写", "Q版表情包", "语音状态图标"] },
-    { "id": "MD-04", "zh": "漫画页", "prompt": "black-and-white manga page layout, stacked rectangular panels narrating one continuous beat, ink solid fills with cross-hatching and screentone gradients, converging speed lines driving the eye, clean borders with generous gutters, speech balloons left empty", "note": "文字一律后期排版，画面留白给对话框", "suggest": ["ST-07", "LO-05", "DC-01", "DC-09"], "children": ["三格过场", "跨页大格", "高潮连拍", "拟声词特写"] },
-    { "id": "MD-05", "zh": "条漫竖屏", "prompt": "vertical-scroll webtoon episode layout, one tall continuous composition built for phone scrolling, cinematic pacing with generous vertical gaps between beats, all important shapes clear of side margins", "note": "竖屏是铁律：任何关键形状不碰侧边", "suggest": ["RG-15", "LO-09", "SZ-04"], "children": ["恋爱条漫格", "战斗条漫格", "日常条漫格", "结尾钩子格"] },
-    { "id": "MD-06", "zh": "轻小说插画", "prompt": "light novel illustration, one character staged in a narrative moment with soft atmospheric background, color composition tuned to sit beside a page of text, restrained palette with one accent, generous uncluttered area around the figure", "note": "插图让位给文字：视觉重量克制", "suggest": ["ST-02", "LO-01", "SZ-02"], "children": ["封面插图", "卷首彩页", "文中黑白插图", "角色介绍页"] },
-    { "id": "MD-07", "zh": "游戏角色立绘", "prompt": "game character key art, dynamic three-quarter pose with costume readable at UI scale, rim-lit separation from background, polished finish with clean silhouette, composed to survive thumbnail reduction", "note": "小尺寸可读性是第一纪律", "suggest": ["ST-11", "SH-01", "LT-02"], "children": ["抽卡立绘", "看板娘立绘", "对话框立绘", "战斗待机立绘"] },
-    { "id": "MD-08", "zh": "游戏道具图标", "prompt": "game item icon, single object centered in a circular or rounded-square frame, readable silhouette at 64 pixels, exactly three value shades per material, subtle inner glow, no text on the icon itself", "note": "图标不是小画，是符号", "suggest": ["ST-10", "SH-11", "LO-11"], "children": ["武器装备图标", "消耗品图标", "材料碎片图标", "技能图标"] },
-    { "id": "MD-09", "zh": "卡牌牌面", "prompt": "trading card game art, central character or creature in a dramatic stance, layered frame zones reserved for name and rules text, rich illustration bleeding to card edges, consistent lighting direction across a set", "note": "画面给文字框让位，系列内光线必须一致", "suggest": ["LO-01", "LT-04", "SZ-05"], "children": ["角色卡", "生物卡", "法术陷阱卡", "闪卡工艺"] },
-    { "id": "MD-10", "zh": "虚拟主播立绘", "prompt": "VTuber Live2D character key art, bright design appealing at thumbnail size, highly saturated coordinated scheme with two dominant hues plus white and one accent, layered accessories, large expressive eyes with multiple sparkle highlights, open frontal pose on a simple gradient circle", "note": "直播框里看板娘的标准规格", "suggest": ["ST-02", "SH-04", "LT-03"], "children": ["出道立绘", " Live2D 拆分参考", "表情差分", "睡衣/节日皮"] },
-    { "id": "MD-11", "zh": "周边商品设计", "prompt": "merchandise design illustration for physical goods, character or motif simplified into clean reproducible shapes, limited palette matching print process, transparent or single-color background, no fine detail that dies at small print size", "note": "印刷工艺说了算：细线会并、渐变会脏", "suggest": ["ST-06", "LO-11", "SZ-01"], "children": ["徽章吧唧", "亚克力挂件", "痛贴痛包", "T恤图案"] },
-    { "id": "MD-12", "zh": "海报主视觉", "prompt": "anime poster key visual, theatrical composition with strong vertical or diagonal thrust, layered depth from foreground character to distant world, title space reserved at top or center, saturated theatrical palette", "note": "一张图扛一部作品的印象", "suggest": ["SH-01", "LO-08", "LT-01"], "children": ["剧场版主视觉", "活动宣传图", "季节问候图", "联动海报"] },
-    { "id": "MD-13", "zh": "故事分镜", "prompt": "anime storyboard frame, rough gestural drawing prioritizing camera language and staging over finish, shot type and movement annotated visually, simplified figures with clear silhouettes, sequential reading order", "note": "分镜是给剧组看的，不是给观众看的", "suggest": ["SH-05", "LO-12", "ST-05"], "children": ["动作分镜", "对话分镜", "运镜设计", "节奏喘息格"] },
-    { "id": "MD-14", "zh": "同人志封面", "prompt": "doujinshi cover illustration, fan-art staging of a beloved pairing or character in an original moment, expressive dynamic pose, decorative border frame, palette tuned to the pairing mood", "note": "二次创作的情绪浓度优先", "suggest": ["ST-02", "LO-13", "SZ-02"], "children": ["恋爱向封面", "战斗向封面", "全员贺图", "内页插图"] }
+    {
+      "id": "MD-01",
+      "zh": "动画关键帧",
+      "prompt": "animation key visual frame staged as a single story beat, cinematic composition with clear subject hierarchy, motion implied through line and pose rather than blur, broadcast-quality framing",
+      "note": "一帧一个节拍，构图服务叙事",
+      "suggest": [
+        "RG-05",
+        "ST-01",
+        "SH-04",
+        "LT-01"
+      ],
+      "children": [
+        "高潮对决帧",
+        "日常过场帧",
+        "片头印象帧",
+        "片尾定格帧"
+      ],
+      "kw": [
+        "动画",
+        "关键帧",
+        "动画帧",
+        "动画截图"
+      ]
+    },
+    {
+      "id": "MD-02",
+      "zh": "角色设定图",
+      "prompt": "anime character design sheet, full-body frontal view with proportional construction marks, costume broken into labeled detail callouts, consistent line weight, neutral standing pose on empty ground",
+      "note": "可复现性优先：比例、服装结构、配色都要能被另一个画师抄走",
+      "suggest": [
+        "ST-01",
+        "LO-03",
+        "SZ-02"
+      ],
+      "children": [
+        "三视图转面",
+        "服装细节分解",
+        "年龄成长对比",
+        "换装变体"
+      ],
+      "kw": [
+        "设定图",
+        "立绘",
+        "角色设定",
+        "设定集"
+      ]
+    },
+    {
+      "id": "MD-03",
+      "zh": "表情合集",
+      "prompt": "anime expression sheet, the same character repeated in a grid of nine head-and-shoulders portraits, each carrying one clean emotion with distinct eye and brow shapes, identical lighting and angle across all cells",
+      "note": "同角度同光线是纪律，变的是眉眼嘴",
+      "suggest": [
+        "LO-04",
+        "ST-01",
+        "LT-03"
+      ],
+      "children": [
+        "喜怒哀乐基础九宫格",
+        "战斗集中特写",
+        "Q版表情包",
+        "语音状态图标"
+      ],
+      "kw": [
+        "表情",
+        "表情差分",
+        "差分图",
+        "表情集"
+      ]
+    },
+    {
+      "id": "MD-04",
+      "zh": "漫画页",
+      "prompt": "black-and-white manga page layout, stacked rectangular panels narrating one continuous beat, ink solid fills with cross-hatching and screentone gradients, converging speed lines driving the eye, clean borders with generous gutters, speech balloons left empty",
+      "note": "文字一律后期排版，画面留白给对话框",
+      "suggest": [
+        "ST-07",
+        "LO-05",
+        "DC-01",
+        "DC-09"
+      ],
+      "children": [
+        "三格过场",
+        "跨页大格",
+        "高潮连拍",
+        "拟声词特写"
+      ],
+      "kw": [
+        "漫画",
+        "黑白漫画",
+        "漫画页",
+        "分镜漫画"
+      ]
+    },
+    {
+      "id": "MD-05",
+      "zh": "条漫竖屏",
+      "prompt": "vertical-scroll webtoon episode layout, one tall continuous composition built for phone scrolling, cinematic pacing with generous vertical gaps between beats, all important shapes clear of side margins",
+      "note": "竖屏是铁律：任何关键形状不碰侧边",
+      "suggest": [
+        "RG-15",
+        "LO-09",
+        "SZ-04"
+      ],
+      "children": [
+        "恋爱条漫格",
+        "战斗条漫格",
+        "日常条漫格",
+        "结尾钩子格"
+      ],
+      "kw": [
+        "条漫",
+        "竖屏漫画",
+        "竖版漫画",
+        "竖屏条漫"
+      ]
+    },
+    {
+      "id": "MD-06",
+      "zh": "轻小说插画",
+      "prompt": "light novel illustration, one character staged in a narrative moment with soft atmospheric background, color composition tuned to sit beside a page of text, restrained palette with one accent, generous uncluttered area around the figure",
+      "note": "插图让位给文字：视觉重量克制",
+      "suggest": [
+        "ST-02",
+        "LO-01",
+        "SZ-02"
+      ],
+      "children": [
+        "封面插图",
+        "卷首彩页",
+        "文中黑白插图",
+        "角色介绍页"
+      ],
+      "kw": [
+        "轻小说",
+        "插画",
+        "书籍插图",
+        "小说插图"
+      ]
+    },
+    {
+      "id": "MD-07",
+      "zh": "游戏角色立绘",
+      "prompt": "game character key art, dynamic three-quarter pose with costume readable at UI scale, rim-lit separation from background, polished finish with clean silhouette, composed to survive thumbnail reduction",
+      "note": "小尺寸可读性是第一纪律",
+      "suggest": [
+        "ST-11",
+        "SH-01",
+        "LT-02"
+      ],
+      "children": [
+        "抽卡立绘",
+        "看板娘立绘",
+        "对话框立绘",
+        "战斗待机立绘"
+      ],
+      "kw": [
+        "游戏立绘",
+        "角色立绘",
+        "游戏角色",
+        "手游立绘"
+      ]
+    },
+    {
+      "id": "MD-08",
+      "zh": "游戏道具图标",
+      "prompt": "game item icon, single object centered in a circular or rounded-square frame, readable silhouette at 64 pixels, exactly three value shades per material, subtle inner glow, no text on the icon itself",
+      "note": "图标不是小画，是符号",
+      "suggest": [
+        "ST-10",
+        "SH-11",
+        "LO-11"
+      ],
+      "children": [
+        "武器装备图标",
+        "消耗品图标",
+        "材料碎片图标",
+        "技能图标"
+      ],
+      "kw": [
+        "图标",
+        "道具图标",
+        "物品图标",
+        "图标素材"
+      ]
+    },
+    {
+      "id": "MD-09",
+      "zh": "卡牌牌面",
+      "prompt": "trading card game art, central character or creature in a dramatic stance, layered frame zones reserved for name and rules text, rich illustration bleeding to card edges, consistent lighting direction across a set",
+      "note": "画面给文字框让位，系列内光线必须一致",
+      "suggest": [
+        "LO-01",
+        "LT-04",
+        "SZ-05"
+      ],
+      "children": [
+        "角色卡",
+        "生物卡",
+        "法术陷阱卡",
+        "闪卡工艺"
+      ],
+      "kw": [
+        "卡牌",
+        "牌面",
+        "卡片",
+        "卡牌设计"
+      ]
+    },
+    {
+      "id": "MD-10",
+      "zh": "虚拟主播立绘",
+      "prompt": "VTuber Live2D character key art, bright design appealing at thumbnail size, highly saturated coordinated scheme with two dominant hues plus white and one accent, layered accessories, large expressive eyes with multiple sparkle highlights, open frontal pose on a simple gradient circle",
+      "note": "直播框里看板娘的标准规格",
+      "suggest": [
+        "ST-02",
+        "SH-04",
+        "LT-03"
+      ],
+      "children": [
+        "出道立绘",
+        " Live2D 拆分参考",
+        "表情差分",
+        "睡衣/节日皮"
+      ],
+      "kw": [
+        "虚拟主播",
+        "直播立绘",
+        "主播",
+        "live2d"
+      ]
+    },
+    {
+      "id": "MD-11",
+      "zh": "周边商品设计",
+      "prompt": "merchandise design illustration for physical goods, character or motif simplified into clean reproducible shapes, limited palette matching print process, transparent or single-color background, no fine detail that dies at small print size",
+      "note": "印刷工艺说了算：细线会并、渐变会脏",
+      "suggest": [
+        "ST-06",
+        "LO-11",
+        "SZ-01"
+      ],
+      "children": [
+        "徽章吧唧",
+        "亚克力挂件",
+        "痛贴痛包",
+        "T恤图案"
+      ],
+      "kw": [
+        "周边",
+        "商品",
+        "周边设计",
+        "谷子"
+      ]
+    },
+    {
+      "id": "MD-12",
+      "zh": "海报主视觉",
+      "prompt": "anime poster key visual, theatrical composition with strong vertical or diagonal thrust, layered depth from foreground character to distant world, title space reserved at top or center, saturated theatrical palette",
+      "note": "一张图扛一部作品的印象",
+      "suggest": [
+        "SH-01",
+        "LO-08",
+        "LT-01"
+      ],
+      "children": [
+        "剧场版主视觉",
+        "活动宣传图",
+        "季节问候图",
+        "联动海报"
+      ],
+      "kw": [
+        "海报",
+        "主视觉",
+        "视觉主图",
+        "海报主图"
+      ]
+    },
+    {
+      "id": "MD-13",
+      "zh": "故事分镜",
+      "prompt": "anime storyboard frame, rough gestural drawing prioritizing camera language and staging over finish, shot type and movement annotated visually, simplified figures with clear silhouettes, sequential reading order",
+      "note": "分镜是给剧组看的，不是给观众看的",
+      "suggest": [
+        "SH-05",
+        "LO-12",
+        "ST-05"
+      ],
+      "children": [
+        "动作分镜",
+        "对话分镜",
+        "运镜设计",
+        "节奏喘息格"
+      ],
+      "kw": [
+        "分镜",
+        "故事板",
+        "分镜稿",
+        "storyboard"
+      ]
+    },
+    {
+      "id": "MD-14",
+      "zh": "同人志封面",
+      "prompt": "doujinshi cover illustration, fan-art staging of a beloved pairing or character in an original moment, expressive dynamic pose, decorative border frame, palette tuned to the pairing mood",
+      "note": "二次创作的情绪浓度优先",
+      "suggest": [
+        "ST-02",
+        "LO-13",
+        "SZ-02"
+      ],
+      "children": [
+        "恋爱向封面",
+        "战斗向封面",
+        "全员贺图",
+        "内页插图"
+      ],
+      "kw": [
+        "同人志",
+        "同人封面",
+        "同人本"
+      ]
+    }
   ]
 }

@@ -48,6 +48,17 @@ DIMS.forEach(d => {
       var restC = String(ch).replace(WHITELIST, "");
       if (/[A-Za-z]{3,}/.test(restC)) errors.push(it.id + " children[" + i + "] 混入英文单词：" + ch);
     });
+    // 检索别名：口语词入口，匹配器靠它区分同粒度候选（"机甲少女"要落到机甲而不是魔法）
+    if (!Array.isArray(it.kw) || !it.kw.length) errors.push(it.id + " 缺 kw 检索别名");
+    else {
+      it.kw.forEach(function (w) {
+        if (!String(w).trim()) errors.push(it.id + " kw 含空词");
+        // 匹配索引只吃 2 字以上的中文词或 3 字母以上的英文词，短词永远匹配不上
+        var cn = (String(w).match(/[\u4e00-\u9fff]/g) || []).length;
+        var en = (String(w).match(/[A-Za-z]/g) || []).length;
+        if (cn < 2 && en < 3) errors.push(it.id + " kw 词过短（匹配不到）：" + w);
+      });
+    }
   });
 });
 
@@ -73,6 +84,29 @@ SER.roles.forEach(function (r) {
         if (idOwner[id] !== expect) errors.push(r.id + " 池 " + f + " 引用错维度：" + id + "（属于 " + idOwner[id] + "）");
       }
     });
+  });
+});
+// series：幕次角色（短剧分镜用）+ 幕次分配表
+var SCR = SER.scriptRoles || [];
+if (SCR.length !== 5) errors.push("series.scriptRoles 应为 5 个幕次角色，实为 " + SCR.length);
+SCR.forEach(function (r) {
+  if (!/^SR-S\d$/.test(r.id)) errors.push(r.id + " 幕次角色 id 格式非法");
+  if (!r.zh || !r.job || !r.why) errors.push(r.id + " 缺 zh/job/why");
+  if (!r.titleFormula || !r.copyGuide) errors.push(r.id + " 缺 titleFormula/copyGuide");
+  ["media", "shots", "layouts", "sizes", "lights"].forEach(function (f) {
+    if (!(r[f] || []).length) errors.push(r.id + " 池 " + f + " 为空");
+    (r[f] || []).forEach(function (id) {
+      if (!knownIds[id]) errors.push(r.id + " 池 " + f + " 引用不存在：" + id);
+      else {
+        var expect = { media: "media", shots: "shots", layouts: "layouts", sizes: "sizes", lights: "lights" }[f];
+        if (idOwner[id] !== expect) errors.push(r.id + " 池 " + f + " 引用错维度：" + id + "（属于 " + idOwner[id] + "）");
+      }
+    });
+  });
+});
+Object.keys(SER.actOrder || {}).forEach(function (k) {
+  (SER.actOrder[k] || []).forEach(function (rid) {
+    if (!SCR.some(function (r) { return r.id === rid; })) errors.push("series.actOrder[" + k + "] 引用不存在幕次：" + rid);
   });
 });
 SER.themes.forEach(function (t) {

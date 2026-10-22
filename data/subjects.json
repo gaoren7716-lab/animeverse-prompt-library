@@ -4,23 +4,237 @@
   "who": "你（讲什么故事）",
   "decides": "画面的叙事类型与情绪契约——观众带着类型期待进来，题材决定什么算「对的味道」",
   "items": [
-    { "id": "SU-01", "zh": "热血战斗", "prompt": "battle shonen subject matter, one extreme dynamic action pose with readable weight transfer and a single fully extended limb, radial debris implying the impact frame, hard ink speed lines converging on the point of contact, layered aura in a hot secondary hue wrapping the silhouette", "note": "决定性一击四件套：姿势、集中线、冲击帧、气场" },
-    { "id": "SU-02", "zh": "机甲萝卜", "prompt": "mecha subject matter, heavy mechanical panel construction with real thickness and articulation, warning stencil markings and numbered hatches, scale contrast between hand-painted pilot silhouette and towering machine, dramatic low camera against sky", "note": "机械要有被制造出来的理由" },
-    { "id": "SU-03", "zh": "异世界转生", "prompt": "isekai subject matter, a modern-clothed visitor staged against a fully realized fantasy town, collision cues like a fading summoning circle or a convenience-store item clutched in hand, genuinely nonhuman townsfolk going about ordinary business, signage rendered without readable characters", "note": "穿越者刚落地的错位感是核心叙事" },
-    { "id": "SU-04", "zh": "魔法少女", "prompt": "magical girl subject matter, elaborate frilled transformation costume with ribbon and gem accents, sparkling magical circle stage, rose petals and heart-shaped light particles, pastel-to-jewel gradient palette, dynamic twirl pose", "note": "变身是仪式：光、花瓣、缎带一个不能少" },
-    { "id": "SU-05", "zh": "赛博朋克", "prompt": "cyberpunk subject matter, signage layered six or seven storeys overhead with exposed cabling and bolted fire escapes, steam venting from street grates, every wet surface mirroring the neon above it, chrome prosthetic limbs, competing magenta and cyan key light", "note": "高密度都市要「发霉」才对" },
-    { "id": "SU-06", "zh": "仙侠武侠", "prompt": "xianxia wuxia subject matter, layered hanfu with wide sleeves streaming in altitude wind, fine straight sword rather than fantasy broadsword, mountain forms drawn with vertical Chinese landscape logic, drifting mist as genuine negative space, faint talisman glow along the blade edge", "note": "东方空间观：画面要能呼吸" },
-    { "id": "SU-07", "zh": "校园日常", "prompt": "school slice-of-life subject matter, after-class classroom or rooftop in late afternoon light, uniform details with correct collar and ribbon construction, scattered personal props telling small stories, unhurried composition with no urgency", "note": "日常感来自道具叙事，不是摆拍" },
-    { "id": "SU-08", "zh": "恋爱青春", "prompt": "romance subject matter, two figures staged on restraint rather than declaration, eye contact only half completed, one hand hesitating near a sleeve, background dissolved into gentle bokeh so the pair separates cleanly from the world, soft gradients and genuine blush", "note": "距离感：近到能听见呼吸，又还没牵手" },
-    { "id": "SU-09", "zh": "治愈慢生活", "prompt": "healing slice-of-life subject matter, small comforts like worn furniture carrying use marks, steam lifting from a kettle caught in the light, layered blankets, soft north daylight with no harsh contrast, warm low-saturation palette, generous negative space", "note": "全靠信息密度低加温度对比" },
-    { "id": "SU-10", "zh": "恐怖灵异", "prompt": "horror occult subject matter, dread kept structural rather than graphic, negative space doing most of the work, shadows falling a few degrees wrong relative to the visible light source, subtle proportion distortion the eye registers before the mind, grainy low-light texture concealing what would resolve", "note": "留白越多越慌；不用血浆与跳杀" },
-    { "id": "SU-11", "zh": "美食料理", "prompt": "food and cooking subject matter, glossy broth with convincing specular highlight and floating beads of rendered oil, steam rising in soft readable plumes, noodles with individual strand definition, ingredients placed deliberately, warm practical kitchen bokeh with hanging bulbs", "note": "第一定律：把食物当主角拍" },
-    { "id": "SU-12", "zh": "体育竞技", "prompt": "sports subject matter, one athlete caught at the peak of a real athletic motion with correct muscle engagement, sweat and dynamic hair, stadium atmosphere with depth-layered crowd, low camera making the body feel monumental, crisp afternoon light", "note": "运动瞬间的真实力学是可信度来源" },
-    { "id": "SU-13", "zh": "音乐偶像", "prompt": "music idol subject matter, stage performance moment with microphone and layered costume frills, colored spotlights cutting through haze, audience glow sticks as a field of distant points, one singer silhouetted against a giant screen, lens flare on the key beam", "note": "舞台光的层次：主光、轮廓光、观众点" },
-    { "id": "SU-14", "zh": "推理悬疑", "prompt": "mystery subject matter, a clue or anomaly staged for scrutiny, cool desaturated palette with one unnatural detail in wrong color, evidence laid out with forensic care, shadowed interior with a single hard practical light source, composition inviting the viewer to look twice", "note": "错误的那一点颜色就是线索" },
-    { "id": "SU-15", "zh": "太空歌剧", "prompt": "space opera subject matter, starship bridge crew silhouetted against a colored nebula filling the forward viewport, believable instrumentation and structural ribs overhead, grime ground into floor plating, every face half in darkness, one small figure at the rail for scale", "note": "浪漫全在人的渺小对星海的宏大" },
-    { "id": "SU-16", "zh": "蒸汽朋克", "prompt": "steampunk subject matter, machined brass gearing with real tooth counts through open inspection plates, riveted pressure vessels, copper piping in believable service routes, Victorian tailoring cut for actual labor, coal soot streaking every vertical surface, warm sepia lit by hanging filament bulbs", "note": "关键不是装饰，是机器要「活」" },
-    { "id": "SU-17", "zh": "末世废土", "prompt": "post-apocalyptic subject matter, environmental recovery rather than ruin cliche, road surface split by tree roots, vehicle hulks half buried in weeds, oxidized corrugated steel, dust haze flattening the horizon into pale layers, mismatched repaired survival clothing", "note": "废墟上长出自然比纯末日更耐看" },
-    { "id": "SU-18", "zh": "忍者武士", "prompt": "ninja and samurai subject matter, layered kosode and hakama with correct wrapped seams and tied obi, blade in a genuine ready position with visible temper line, low shafts of sunlight through dense bamboo with dust suspended in every beam, tension held unspent with the blade still sheathed", "note": "静中的紧绷：环境越安静杀气越重" }
+    {
+      "id": "SU-01",
+      "zh": "热血战斗",
+      "prompt": "battle shonen subject matter, one extreme dynamic action pose with readable weight transfer and a single fully extended limb, radial debris implying the impact frame, hard ink speed lines converging on the point of contact, layered aura in a hot secondary hue wrapping the silhouette",
+      "note": "决定性一击四件套：姿势、集中线、冲击帧、气场",
+      "kw": [
+        "热血",
+        "战斗",
+        "格斗",
+        "打斗",
+        "对战"
+      ]
+    },
+    {
+      "id": "SU-02",
+      "zh": "机甲萝卜",
+      "prompt": "mecha subject matter, heavy mechanical panel construction with real thickness and articulation, warning stencil markings and numbered hatches, scale contrast between hand-painted pilot silhouette and towering machine, dramatic low camera against sky",
+      "note": "机械要有被制造出来的理由",
+      "kw": [
+        "机甲",
+        "机器人",
+        "高达",
+        "机械",
+        "战舰"
+      ]
+    },
+    {
+      "id": "SU-03",
+      "zh": "异世界转生",
+      "prompt": "isekai subject matter, a modern-clothed visitor staged against a fully realized fantasy town, collision cues like a fading summoning circle or a convenience-store item clutched in hand, genuinely nonhuman townsfolk going about ordinary business, signage rendered without readable characters",
+      "note": "穿越者刚落地的错位感是核心叙事",
+      "kw": [
+        "异世界",
+        "转生",
+        "穿越",
+        "重生异世"
+      ]
+    },
+    {
+      "id": "SU-04",
+      "zh": "魔法少女",
+      "prompt": "magical girl subject matter, elaborate frilled transformation costume with ribbon and gem accents, sparkling magical circle stage, rose petals and heart-shaped light particles, pastel-to-jewel gradient palette, dynamic twirl pose",
+      "note": "变身是仪式：光、花瓣、缎带一个不能少",
+      "kw": [
+        "魔法",
+        "变身",
+        "魔杖",
+        "魔法使"
+      ]
+    },
+    {
+      "id": "SU-05",
+      "zh": "赛博朋克",
+      "prompt": "cyberpunk subject matter, signage layered six or seven storeys overhead with exposed cabling and bolted fire escapes, steam venting from street grates, every wet surface mirroring the neon above it, chrome prosthetic limbs, competing magenta and cyan key light",
+      "note": "高密度都市要「发霉」才对",
+      "kw": [
+        "赛博朋克",
+        "赛博",
+        "未来都市",
+        "黑客",
+        "科技都市"
+      ]
+    },
+    {
+      "id": "SU-06",
+      "zh": "仙侠武侠",
+      "prompt": "xianxia wuxia subject matter, layered hanfu with wide sleeves streaming in altitude wind, fine straight sword rather than fantasy broadsword, mountain forms drawn with vertical Chinese landscape logic, drifting mist as genuine negative space, faint talisman glow along the blade edge",
+      "note": "东方空间观：画面要能呼吸",
+      "kw": [
+        "仙侠",
+        "武侠",
+        "修真",
+        "修仙",
+        "古风",
+        "剑仙"
+      ]
+    },
+    {
+      "id": "SU-07",
+      "zh": "校园日常",
+      "prompt": "school slice-of-life subject matter, after-class classroom or rooftop in late afternoon light, uniform details with correct collar and ribbon construction, scattered personal props telling small stories, unhurried composition with no urgency",
+      "note": "日常感来自道具叙事，不是摆拍",
+      "kw": [
+        "校园",
+        "学校",
+        "日常",
+        "青春校园",
+        "学生"
+      ]
+    },
+    {
+      "id": "SU-08",
+      "zh": "恋爱青春",
+      "prompt": "romance subject matter, two figures staged on restraint rather than declaration, eye contact only half completed, one hand hesitating near a sleeve, background dissolved into gentle bokeh so the pair separates cleanly from the world, soft gradients and genuine blush",
+      "note": "距离感：近到能听见呼吸，又还没牵手",
+      "kw": [
+        "恋爱",
+        "爱情",
+        "心动",
+        "纯爱",
+        "青春恋爱"
+      ]
+    },
+    {
+      "id": "SU-09",
+      "zh": "治愈慢生活",
+      "prompt": "healing slice-of-life subject matter, small comforts like worn furniture carrying use marks, steam lifting from a kettle caught in the light, layered blankets, soft north daylight with no harsh contrast, warm low-saturation palette, generous negative space",
+      "note": "全靠信息密度低加温度对比",
+      "kw": [
+        "治愈",
+        "温馨",
+        "慢生活",
+        "田园",
+        "小确幸"
+      ]
+    },
+    {
+      "id": "SU-10",
+      "zh": "恐怖灵异",
+      "prompt": "horror occult subject matter, dread kept structural rather than graphic, negative space doing most of the work, shadows falling a few degrees wrong relative to the visible light source, subtle proportion distortion the eye registers before the mind, grainy low-light texture concealing what would resolve",
+      "note": "留白越多越慌；不用血浆与跳杀",
+      "kw": [
+        "恐怖",
+        "灵异",
+        "鬼怪",
+        "怪谈",
+        "惊悚"
+      ]
+    },
+    {
+      "id": "SU-11",
+      "zh": "美食料理",
+      "prompt": "food and cooking subject matter, glossy broth with convincing specular highlight and floating beads of rendered oil, steam rising in soft readable plumes, noodles with individual strand definition, ingredients placed deliberately, warm practical kitchen bokeh with hanging bulbs",
+      "note": "第一定律：把食物当主角拍",
+      "kw": [
+        "美食",
+        "料理",
+        "做饭",
+        "厨艺",
+        "食物"
+      ]
+    },
+    {
+      "id": "SU-12",
+      "zh": "体育竞技",
+      "prompt": "sports subject matter, one athlete caught at the peak of a real athletic motion with correct muscle engagement, sweat and dynamic hair, stadium atmosphere with depth-layered crowd, low camera making the body feel monumental, crisp afternoon light",
+      "note": "运动瞬间的真实力学是可信度来源",
+      "kw": [
+        "体育",
+        "竞技",
+        "运动",
+        "比赛",
+        "赛场"
+      ]
+    },
+    {
+      "id": "SU-13",
+      "zh": "音乐偶像",
+      "prompt": "music idol subject matter, stage performance moment with microphone and layered costume frills, colored spotlights cutting through haze, audience glow sticks as a field of distant points, one singer silhouetted against a giant screen, lens flare on the key beam",
+      "note": "舞台光的层次：主光、轮廓光、观众点",
+      "kw": [
+        "音乐",
+        "偶像",
+        "唱跳",
+        "演出",
+        "演唱会"
+      ]
+    },
+    {
+      "id": "SU-14",
+      "zh": "推理悬疑",
+      "prompt": "mystery subject matter, a clue or anomaly staged for scrutiny, cool desaturated palette with one unnatural detail in wrong color, evidence laid out with forensic care, shadowed interior with a single hard practical light source, composition inviting the viewer to look twice",
+      "note": "错误的那一点颜色就是线索",
+      "kw": [
+        "推理",
+        "悬疑",
+        "侦探",
+        "谜题",
+        "刑侦"
+      ]
+    },
+    {
+      "id": "SU-15",
+      "zh": "太空歌剧",
+      "prompt": "space opera subject matter, starship bridge crew silhouetted against a colored nebula filling the forward viewport, believable instrumentation and structural ribs overhead, grime ground into floor plating, every face half in darkness, one small figure at the rail for scale",
+      "note": "浪漫全在人的渺小对星海的宏大",
+      "kw": [
+        "太空",
+        "星际",
+        "宇宙",
+        "科幻",
+        "飞船"
+      ]
+    },
+    {
+      "id": "SU-16",
+      "zh": "蒸汽朋克",
+      "prompt": "steampunk subject matter, machined brass gearing with real tooth counts through open inspection plates, riveted pressure vessels, copper piping in believable service routes, Victorian tailoring cut for actual labor, coal soot streaking every vertical surface, warm sepia lit by hanging filament bulbs",
+      "note": "关键不是装饰，是机器要「活」",
+      "kw": [
+        "蒸汽朋克",
+        "蒸汽",
+        "齿轮",
+        "机械朋克"
+      ]
+    },
+    {
+      "id": "SU-17",
+      "zh": "末世废土",
+      "prompt": "post-apocalyptic subject matter, environmental recovery rather than ruin cliche, road surface split by tree roots, vehicle hulks half buried in weeds, oxidized corrugated steel, dust haze flattening the horizon into pale layers, mismatched repaired survival clothing",
+      "note": "废墟上长出自然比纯末日更耐看",
+      "kw": [
+        "末世",
+        "废土",
+        "丧尸",
+        "生存",
+        "末日"
+      ]
+    },
+    {
+      "id": "SU-18",
+      "zh": "忍者武士",
+      "prompt": "ninja and samurai subject matter, layered kosode and hakama with correct wrapped seams and tied obi, blade in a genuine ready position with visible temper line, low shafts of sunlight through dense bamboo with dust suspended in every beam, tension held unspent with the blade still sheathed",
+      "note": "静中的紧绷：环境越安静杀气越重",
+      "kw": [
+        "忍者",
+        "武士",
+        "剑客",
+        "忍道",
+        "samurai"
+      ]
+    }
   ]
 }

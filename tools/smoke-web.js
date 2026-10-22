@@ -54,9 +54,9 @@ window.addEventListener("load", function () {
 
 function run() {
   try {
-    /* 1. 十页骨架 */
-    var views = ["v-gallery", "v-atlas", "v-custom", "v-series", "v-synth", "v-gacha", "v-cases", "v-entries", "v-pairs", "v-frame"];
-    ok($$("#nav button").length === 10, "导航 10 个按钮");
+    /* 1. 十一页骨架 */
+    var views = ["v-gallery", "v-atlas", "v-custom", "v-series", "v-script", "v-synth", "v-gacha", "v-cases", "v-entries", "v-pairs", "v-frame"];
+    ok($$("#nav button").length === 11, "导航 11 个按钮");
     views.forEach(function (v) { ok(!!$(v), "视图存在：" + v); });
 
     /* 2. 视图显隐（CSS 级：computed display） */
@@ -134,6 +134,57 @@ function run() {
     var threw = false;
     try { click($("serAll")); } catch (e) { threw = true; }
     ok(!threw, "一键复制不抛异常");
+    // 关键词锁定 + 加入主题
+    $("serTheme").value = "雨夜信";
+    $("serKw").value = "赛博朋克, 霓虹";
+    click($("doSeries"));
+    var kwPills = $$("#seriesOut .sercard")[0].querySelectorAll(".pill");
+    var kwText = Array.prototype.map.call(kwPills, function (p) { return p.textContent; }).join("|");
+    ok(kwText.indexOf("赛博朋克") !== -1, "系列关键词锁定题材（赛博朋克）", kwText.slice(0, 120));
+    ok(kwText.indexOf("霓虹都市") !== -1 || kwText.indexOf("霓虹夜光") !== -1, "系列关键词锁定场景/光影（霓虹）");
+    $("serTheme").value = "我的短剧主题";
+    $("serKw").value = "竹林";
+    click($("serSave"));
+    ok($$("#myChips [data-mt]").length >= 1, "加入主题后我的主题出现条目");
+
+    /* 5b. 短剧分镜：文案 → 一套分镜 */
+    click($$("#nav button").filter(function (b) { return b.getAttribute("data-v") === "v-script"; })[0]);
+    ok(window.getComputedStyle($("v-script")).display === "block", "短剧分镜页可切换");
+    $("scTheme").value = "雨夜信";
+    $("scKw").value = "赛博朋克, 霓虹";
+    $("scText").value = "雨夜的霓虹都市，少年主角站在便利店门口。\n\n他抬起头，远处传来爆炸声。\n\n神秘面具客从阴影里走出。";
+    click($("scGo"));
+    var scCards = $$("#scOut .sercard");
+    ok(scCards.length === 3, "短剧按段拆出 3 张", String(scCards.length));
+    ok(scCards[0].querySelector(".job").textContent.indexOf("便利店") !== -1, "分镜卡带原文段落");
+    ok(scCards[0].querySelector("pre").textContent.indexOf("no watermark") !== -1, "分镜词面含硬约束");
+    var scActs = scCards.map(function (c) { return c.querySelector(".role").textContent; });
+    ok(scActs[0] === "建立镜头" && scActs[2] === "收尾留白", "分镜按叙事顺序分幕", scActs.join("→"));
+    // 段落继承：第 2 段没提角色 → 沿用第 1 段的少年主角
+    var scPills = scCards.map(function (c) {
+      return Array.prototype.map.call(c.querySelectorAll(".pill"), function (p) { return p.textContent; }).join("|");
+    });
+    var ch1 = (scPills[0].match(/角色原型·[^|]*/) || [""])[0];
+    var ch2 = (scPills[1].match(/角色原型·[^|]*/) || [""])[0];
+    ok(ch1 && ch1 === ch2, "分镜角色跨段继承", ch1 + " / " + ch2);
+    // 按句拆
+    $("scMode").value = "sent";
+    $("scText").value = "他抬起头。远处传来爆炸声。神秘面具客走出。";
+    click($("scGo"));
+    ok($$("#scOut .sercard").length === 3, "短剧按句拆出 3 张");
+    // 换一批不炸
+    var scThrew = false;
+    try { click($("scReroll")); } catch (e) { scThrew = true; }
+    ok(!scThrew && $$("#scOut .sercard").length === 3, "短剧换一批不炸且张数不变");
+    // 自定义出图：自由组合 + 关键词
+    click($$("#nav button").filter(function (b) { return b.getAttribute("data-v") === "v-custom"; })[0]);
+    $("ezPreset").value = "free";
+    $("ezKw").value = "机甲, 竹林";
+    $("ezTheme").value = "机甲少女的竹林";
+    click($("ezGo"));
+    var ezTxt = $("ezOut").textContent;
+    ok(ezTxt.indexOf("关键词锁定") !== -1, "自由组合显示关键词锁定结果", ezTxt.slice(0, 100));
+    ok(ezTxt.indexOf("机甲") !== -1, "自由组合锁定机甲题材");
 
     /* 6. 合成器：点 chip 出词 / 冲突警告 / 算子 */
     click($$("#nav button").filter(function (b) { return b.getAttribute("data-v") === "v-synth"; })[0]);

@@ -5,23 +5,203 @@
   "decides": "画面取自哪片动画土壤、哪个制作年代——决定线条习惯、上色逻辑与放映质感。这是全球地图层：先定坐标，再谈风格",
   "note": "本维度是风格的地域与年代坐标，与 styles（完成效果）叠加使用；实体与关系见 entities.json（参考层，不进提示词）",
   "items": [
-    { "id": "RG-01", "zh": "日本 · 70年代复古机器人", "prompt": "retro 1970s Japanese super-robot animation aesthetic, flat hand-painted poster skies, heavy uniform ink outlines, simplified primary color plating with visible panel gaps, coarse 16mm film grain", "note": "有限动画 + 海报级背景，机体敦实方正" },
-    { "id": "RG-02", "zh": "日本 · 80年代黄金赛璐璐", "prompt": "golden-age 1980s Japanese cel animation aesthetic, opaque poster-color background art with real atmospheric depth, characters in crisp two-tone cel shading over it, photographic cel grain and gentle specular bloom", "note": "水粉背景 × 赛璐璐角色的叠合是年代签名" },
-    { "id": "RG-03", "zh": "日本 · 90年代OVA深夜作画", "prompt": "1990s Japanese OVA late-night animation aesthetic, high-contrast shadowy key frames, meticulously detailed mechanical and architectural linework, deep saturated palette, restrained bloom on highlights", "note": "深夜档作画张力：细节密度与暗部控制" },
-    { "id": "RG-04", "zh": "日本 · 00年代过渡期数码", "prompt": "early 2000s transitional anime aesthetic, uniform digital lineart and flat cel shading on characters against hybrid matte-painted backgrounds, soft glow bloom across every highlight, mild composite edge aliasing", "note": "胶片感退场、锐利登场的交界质感" },
-    { "id": "RG-05", "zh": "日本 · 2010后高清电视动画", "prompt": "modern high-definition Japanese TV anime aesthetic, razor-clean digital lineart, two-layer shadow separation, luminous gradient hair and eye highlights, 16:9 broadcast framing with subtle grain", "note": "「看起来像新番」的制式感" },
-    { "id": "RG-06", "zh": "日本 · 独立艺术动画", "prompt": "Japanese independent art animation aesthetic, hand-cam paper and pencil textures, experimental watercolor or pastel fields, deliberate line wobble, quiet unconventional framing", "note": "作者性优先，拒绝工业光鲜" },
-    { "id": "RG-07", "zh": "北美 · 黄金时代橡胶管", "prompt": "1930s American rubber-hose cartoon aesthetic, endlessly bendable pie-cut limbs, white gloves, pie eyes, bouncy squash-and-stretch timing poses, thick even ink outlines on flat watercolor grounds", "note": "程式化弯曲而轮廓不断线" },
-    { "id": "RG-08", "zh": "北美 · 90年代动画电影复兴", "prompt": "1990s American animated feature renaissance aesthetic, lush painted backgrounds with strong atmospheric depth, expressive broad-shouldered character designs, sweeping musical staging, warm classic palette", "note": "手绘背景 + 表演驱动构图" },
-    { "id": "RG-09", "zh": "北美 · 21世纪剧集动画", "prompt": "modern western television cartoon aesthetic, bold graphic shapes, thick clean outlines, bright saturated flat colors with geometric shadow shapes, snappy comic staging built for 11-minute beats", "note": "图形化、色块化、节奏快" },
-    { "id": "RG-10", "zh": "北美 · 成人动画", "prompt": "adult western animation aesthetic, semi-realistic proportions with worn lived-in faces, muted desaturated palette, deadpan sitcom staging, flat lighting with minimal stylization", "note": "反卡通化：真实比例与生活疲态" },
-    { "id": "RG-11", "zh": "中国 · 上美影水墨胶片", "prompt": "Shanghai Animation Film Studio ink-wash tradition aesthetic, brush-painted figures on xuan paper, water-ink bleeding edges, opera-inspired gesture and facial pattern, single warm seal accent", "note": "水墨、剪纸、戏曲身段的胶片年代" },
-    { "id": "RG-12", "zh": "中国 · 90年代电视动画", "prompt": "1990s Chinese television animation aesthetic, clean heroic linework, mythic costume design with opera silhouettes, opaque gouache coloring, warm primary palette with gold trim", "note": "电视系列黄金年代的美术片底子" },
-    { "id": "RG-13", "zh": "中国 · 当代网络番剧", "prompt": "contemporary Chinese donghua web-series aesthetic, immortal-cultivator costume with flowing silk ribbons, fine calligraphic linework, celadon and vermilion scheme with gold ink accents, vertical composition with generous sky", "note": "国漫 2D 主流：仙侠 + 水墨影响" },
-    { "id": "RG-14", "zh": "中国 · 三维动画电影", "prompt": "contemporary Chinese 3D CG animated feature aesthetic, subsurface-scattered stylized skin, physically based silk and armor materials, volumetric cloud and mist, cinematic slow orbiting camera", "note": "国产 3D 电影级：次表面 + 体积光" },
-    { "id": "RG-15", "zh": "韩国 · 条漫网漫", "prompt": "Korean webtoon vertical-scroll aesthetic, fashion-realistic proportions, flawlessly airbrushed skin with almost no hard edges, dozens of eye highlight shapes, contemporary street fashion, background dissolved into gradient fog", "note": "竖屏优先，一切元素避开侧边距" },
-    { "id": "RG-16", "zh": "欧洲 · 法比漫画", "prompt": "Franco-Belgian bandes dessinées aesthetic, clear-line uniform outlines, flat poster colors with no modeling, meticulous architectural draftsmanship, generous white gutters and panel discipline", "note": "清晰线条派：人物简、环境繁" },
-    { "id": "RG-17", "zh": "苏联东欧 · 手绘胶片", "prompt": "Soviet and Eastern European hand-drawn animation aesthetic, gouache and oil painted directly on glass, soft smeared edges, multiplane foreground layers, Slavic folk ornament inside natural forms, cold palette with one warm accent", "note": "玻璃上的油画：缓慢、庄严、童话感" },
-    { "id": "RG-18", "zh": "全球 · 游戏CG跨界", "prompt": "global game cinematic CG aesthetic, semi-realistic stylized characters in photographic worlds, rim-lit dramatic key art, particle effects and atmospheric haze, 16:9 or wider cinematic framing", "note": "动画与游戏美术的杂交地带" }
+    {
+      "id": "RG-01",
+      "zh": "日本 · 70年代复古机器人",
+      "prompt": "retro 1970s Japanese super-robot animation aesthetic, flat hand-painted poster skies, heavy uniform ink outlines, simplified primary color plating with visible panel gaps, coarse 16mm film grain",
+      "note": "有限动画 + 海报级背景，机体敦实方正",
+      "kw": [
+        "复古机器人",
+        "七十年代",
+        "早期动画",
+        "铁皮"
+      ]
+    },
+    {
+      "id": "RG-02",
+      "zh": "日本 · 80年代黄金赛璐璐",
+      "prompt": "golden-age 1980s Japanese cel animation aesthetic, opaque poster-color background art with real atmospheric depth, characters in crisp two-tone cel shading over it, photographic cel grain and gentle specular bloom",
+      "note": "水粉背景 × 赛璐璐角色的叠合是年代签名",
+      "kw": [
+        "八十年代",
+        "黄金年代",
+        "黄金赛璐璐"
+      ]
+    },
+    {
+      "id": "RG-03",
+      "zh": "日本 · 90年代OVA深夜作画",
+      "prompt": "1990s Japanese OVA late-night animation aesthetic, high-contrast shadowy key frames, meticulously detailed mechanical and architectural linework, deep saturated palette, restrained bloom on highlights",
+      "note": "深夜档作画张力：细节密度与暗部控制",
+      "kw": [
+        "九十年代",
+        "ova",
+        "深夜动画"
+      ]
+    },
+    {
+      "id": "RG-04",
+      "zh": "日本 · 00年代过渡期数码",
+      "prompt": "early 2000s transitional anime aesthetic, uniform digital lineart and flat cel shading on characters against hybrid matte-painted backgrounds, soft glow bloom across every highlight, mild composite edge aliasing",
+      "note": "胶片感退场、锐利登场的交界质感",
+      "kw": [
+        "千禧年",
+        "过渡期",
+        "数码时代"
+      ]
+    },
+    {
+      "id": "RG-05",
+      "zh": "日本 · 2010后高清电视动画",
+      "prompt": "modern high-definition Japanese TV anime aesthetic, razor-clean digital lineart, two-layer shadow separation, luminous gradient hair and eye highlights, 16:9 broadcast framing with subtle grain",
+      "note": "「看起来像新番」的制式感",
+      "kw": [
+        "高清电视",
+        "现代tv",
+        "新番",
+        "电视动画"
+      ]
+    },
+    {
+      "id": "RG-06",
+      "zh": "日本 · 独立艺术动画",
+      "prompt": "Japanese independent art animation aesthetic, hand-cam paper and pencil textures, experimental watercolor or pastel fields, deliberate line wobble, quiet unconventional framing",
+      "note": "作者性优先，拒绝工业光鲜",
+      "kw": [
+        "艺术动画",
+        "独立动画",
+        "实验动画"
+      ]
+    },
+    {
+      "id": "RG-07",
+      "zh": "北美 · 黄金时代橡胶管",
+      "prompt": "1930s American rubber-hose cartoon aesthetic, endlessly bendable pie-cut limbs, white gloves, pie eyes, bouncy squash-and-stretch timing poses, thick even ink outlines on flat watercolor grounds",
+      "note": "程式化弯曲而轮廓不断线",
+      "kw": [
+        "橡胶管",
+        "黄金时代",
+        "美式早期"
+      ]
+    },
+    {
+      "id": "RG-08",
+      "zh": "北美 · 90年代动画电影复兴",
+      "prompt": "1990s American animated feature renaissance aesthetic, lush painted backgrounds with strong atmospheric depth, expressive broad-shouldered character designs, sweeping musical staging, warm classic palette",
+      "note": "手绘背景 + 表演驱动构图",
+      "kw": [
+        "动画电影",
+        "复兴",
+        "迪士尼黄金年代"
+      ]
+    },
+    {
+      "id": "RG-09",
+      "zh": "北美 · 21世纪剧集动画",
+      "prompt": "modern western television cartoon aesthetic, bold graphic shapes, thick clean outlines, bright saturated flat colors with geometric shadow shapes, snappy comic staging built for 11-minute beats",
+      "note": "图形化、色块化、节奏快",
+      "kw": [
+        "剧集动画",
+        "美剧",
+        "二十一世纪"
+      ]
+    },
+    {
+      "id": "RG-10",
+      "zh": "北美 · 成人动画",
+      "prompt": "adult western animation aesthetic, semi-realistic proportions with worn lived-in faces, muted desaturated palette, deadpan sitcom staging, flat lighting with minimal stylization",
+      "note": "反卡通化：真实比例与生活疲态",
+      "kw": [
+        "成人动画",
+        "深夜动画"
+      ]
+    },
+    {
+      "id": "RG-11",
+      "zh": "中国 · 上美影水墨胶片",
+      "prompt": "Shanghai Animation Film Studio ink-wash tradition aesthetic, brush-painted figures on xuan paper, water-ink bleeding edges, opera-inspired gesture and facial pattern, single warm seal accent",
+      "note": "水墨、剪纸、戏曲身段的胶片年代",
+      "kw": [
+        "水墨胶片",
+        "上美影",
+        "国产水墨"
+      ]
+    },
+    {
+      "id": "RG-12",
+      "zh": "中国 · 90年代电视动画",
+      "prompt": "1990s Chinese television animation aesthetic, clean heroic linework, mythic costume design with opera silhouettes, opaque gouache coloring, warm primary palette with gold trim",
+      "note": "电视系列黄金年代的美术片底子",
+      "kw": [
+        "国产电视",
+        "九十年代国漫"
+      ]
+    },
+    {
+      "id": "RG-13",
+      "zh": "中国 · 当代网络番剧",
+      "prompt": "contemporary Chinese donghua web-series aesthetic, immortal-cultivator costume with flowing silk ribbons, fine calligraphic linework, celadon and vermilion scheme with gold ink accents, vertical composition with generous sky",
+      "note": "国漫 2D 主流：仙侠 + 水墨影响",
+      "kw": [
+        "网络番剧",
+        "国创",
+        "网番"
+      ]
+    },
+    {
+      "id": "RG-14",
+      "zh": "中国 · 三维动画电影",
+      "prompt": "contemporary Chinese 3D CG animated feature aesthetic, subsurface-scattered stylized skin, physically based silk and armor materials, volumetric cloud and mist, cinematic slow orbiting camera",
+      "note": "国产 3D 电影级：次表面 + 体积光",
+      "kw": [
+        "三维动画电影",
+        "国产三维"
+      ]
+    },
+    {
+      "id": "RG-15",
+      "zh": "韩国 · 条漫网漫",
+      "prompt": "Korean webtoon vertical-scroll aesthetic, fashion-realistic proportions, flawlessly airbrushed skin with almost no hard edges, dozens of eye highlight shapes, contemporary street fashion, background dissolved into gradient fog",
+      "note": "竖屏优先，一切元素避开侧边距",
+      "kw": [
+        "条漫",
+        "韩漫",
+        "网漫",
+        "韩国漫"
+      ]
+    },
+    {
+      "id": "RG-16",
+      "zh": "欧洲 · 法比漫画",
+      "prompt": "Franco-Belgian bandes dessinées aesthetic, clear-line uniform outlines, flat poster colors with no modeling, meticulous architectural draftsmanship, generous white gutters and panel discipline",
+      "note": "清晰线条派：人物简、环境繁",
+      "kw": [
+        "法比",
+        "欧洲漫画",
+        "欧洲动画"
+      ]
+    },
+    {
+      "id": "RG-17",
+      "zh": "苏联东欧 · 手绘胶片",
+      "prompt": "Soviet and Eastern European hand-drawn animation aesthetic, gouache and oil painted directly on glass, soft smeared edges, multiplane foreground layers, Slavic folk ornament inside natural forms, cold palette with one warm accent",
+      "note": "玻璃上的油画：缓慢、庄严、童话感",
+      "kw": [
+        "东欧",
+        "手绘胶片",
+        "苏联动画"
+      ]
+    },
+    {
+      "id": "RG-18",
+      "zh": "全球 · 游戏CG跨界",
+      "prompt": "global game cinematic CG aesthetic, semi-realistic stylized characters in photographic worlds, rim-lit dramatic key art, particle effects and atmospheric haze, 16:9 or wider cinematic framing",
+      "note": "动画与游戏美术的杂交地带",
+      "kw": [
+        "游戏cg",
+        "跨界",
+        "游戏宣传"
+      ]
+    }
   ]
 }

@@ -4,21 +4,213 @@
   "who": "随题材定",
   "decides": "角色站在什么世界里——空间逻辑、材质年代、空气感，场景要能讲一个没讲的故事",
   "items": [
-    { "id": "WD-01", "zh": "午后教室", "prompt": "afternoon classroom interior, low sun through west windows with dust in the beams, scattered desks with personal clutter, blackboard with erased chalk ghosts, long shadows across the floor, unhurried emptiness", "note": "空教室的叙事感来自残留物" },
-    { "id": "WD-02", "zh": "日式神社", "prompt": "shinto shrine approach, vermilion torii and railing with correct wood aging, stone steps worn at the center, offering box and rope with shide paper streamers, forest pressing close on both sides, dappled light", "note": "木头的老化方向要对" },
-    { "id": "WD-03", "zh": "霓虹都市", "prompt": "dense neon city street, signage stacked six storeys overhead with exposed cabling and bolted fire escapes, wet asphalt mirroring colored light, steam from street grates, distant traffic light trails, narrow vertical canyon between buildings", "note": "垂直方向的信息密度是关键" },
-    { "id": "WD-04", "zh": "云海山巅", "prompt": "cloud sea between jade mountain peaks, floating rock islands with waterfalls dissolving into mist, vertical Chinese landscape logic in the rock forms, sunlight shafts through cloud gaps, temple roof just visible above the vapor", "note": "留白处理：雾是负空间不是空白" },
-    { "id": "WD-05", "zh": "宇宙舰桥", "prompt": "starship command bridge, wide console run with believable instrumentation, heavy structural ribs overhead, layered deck levels, grime ground into floor plating, deep starfield and glowing nebula filling the forward viewport", "note": "舰桥要像被住过，不像展厅" },
-    { "id": "WD-06", "zh": "末日废桥", "prompt": "ruined highway overpass reclaimed by nature, road surface split apart by tree roots, vehicle hulks half buried in weeds, oxidized corrugated steel, dust haze flattening the horizon into pale layers, tall grass moving in one wind direction", "note": "植被吞掉一半建筑才有时间感" },
-    { "id": "WD-07", "zh": "蒸汽工坊", "prompt": "steampunk workshop interior, machined brass gearing through open inspection plates, riveted pressure vessels, copper piping in believable service routes, coal soot streaking every vertical surface, oil sheen on floor plates, hanging filament bulbs", "note": "管道走向要符合服务逻辑" },
-    { "id": "WD-08", "zh": "海边小镇", "prompt": "seaside town at low sun, whitewashed walls with weathered blue trim, fishing boats drawn up on shingle, laundry lines and rusting antennas, gulls as small dark accents, calm water holding a broken light path", "note": "生活痕迹：晾衣绳、天线、锈迹" },
-    { "id": "WD-09", "zh": "竹林深处", "prompt": "dense bamboo grove, tall trunks receding into green depth with layered foreground stems, low shafts of sunlight cutting through with dust suspended, wind-bent upper canopy, path of trodden leaves", "note": "前后景滑轨：前景粗、远处细" },
-    { "id": "WD-10", "zh": "魔法图书馆", "prompt": "arcane library interior, bookshelves rising beyond sight with rolling ladders, floating tomes and slowly turning pages, candle sconces and self-lit crystals, dust in warm shafts through a high arched window", "note": "悬浮元素要有重心暗示，不能乱飘" },
-    { "id": "WD-11", "zh": "夜市祭典", "prompt": "summer festival night market, paper lantern strings converging overhead, stall awnings with fabric dye patterns, steam and smoke from grills, crowd silhouettes holding sparklers, firework burst opening above the roofs", "note": "暖光源集群：灯笼、炭火、烟花" },
-    { "id": "WD-12", "zh": "雪原森林", "prompt": "snow-heavy pine forest at blue twilight, branches bowed under accumulated snow, single set of footprints breaking the pristine surface, cold blue and umber palette broken by one distant warm window glow, muffled depth", "note": "雪的反光要冷，窗的光要暖" },
-    { "id": "WD-13", "zh": "咖啡馆内景", "prompt": "quiet cafe interior, worn wooden tables with use rings, steam lifting from a cup caught in window light, books stacked on the floor rather than shelved, soft north daylight, a cat-shaped shadow on one chair", "note": "治愈系场景：使用痕迹就是温度" },
-    { "id": "WD-14", "zh": "古堡遗迹", "prompt": "castle ruins overgrown by forest, weathered stone with weathered carvings barely legible, forest slowly reclaiming the floor, collapsed ceiling letting in one strong light shaft, vines threading through broken arches", "note": "光从破口进来，遗迹才有戏剧" },
-    { "id": "WD-15", "zh": "地下竞技场", "prompt": "underground arena, tiered stone seating rising into darkness, torch brackets as the only practical light, sand floor with scuff marks and old stains, banners hanging from the upper rim, one spotlit center", "note": "黑暗中看台的眼睛比人群更有效" },
-    { "id": "WD-16", "zh": "花田庭院", "prompt": "cottage garden in full bloom, flowers drawn as distinct species with correct petal structure, bees as small motion accents, weathered fence and a watering can left out, warm late-afternoon side light", "note": "花的品种结构要经得起近看" }
+    {
+      "id": "WD-01",
+      "zh": "午后教室",
+      "prompt": "afternoon classroom interior, low sun through west windows with dust in the beams, scattered desks with personal clutter, blackboard with erased chalk ghosts, long shadows across the floor, unhurried emptiness",
+      "note": "空教室的叙事感来自残留物",
+      "kw": [
+        "教室",
+        "学校",
+        "课桌",
+        "讲台",
+        "校园"
+      ]
+    },
+    {
+      "id": "WD-02",
+      "zh": "日式神社",
+      "prompt": "shinto shrine approach, vermilion torii and railing with correct wood aging, stone steps worn at the center, offering box and rope with shide paper streamers, forest pressing close on both sides, dappled light",
+      "note": "木头的老化方向要对",
+      "kw": [
+        "神社",
+        "庙宇",
+        "鸟居",
+        "参拜",
+        "稻荷"
+      ]
+    },
+    {
+      "id": "WD-03",
+      "zh": "霓虹都市",
+      "prompt": "dense neon city street, signage stacked six storeys overhead with exposed cabling and bolted fire escapes, wet asphalt mirroring colored light, steam from street grates, distant traffic light trails, narrow vertical canyon between buildings",
+      "note": "垂直方向的信息密度是关键",
+      "kw": [
+        "都市",
+        "城市",
+        "街道",
+        "巷子",
+        "夜景",
+        "摩天楼"
+      ]
+    },
+    {
+      "id": "WD-04",
+      "zh": "云海山巅",
+      "prompt": "cloud sea between jade mountain peaks, floating rock islands with waterfalls dissolving into mist, vertical Chinese landscape logic in the rock forms, sunlight shafts through cloud gaps, temple roof just visible above the vapor",
+      "note": "留白处理：雾是负空间不是空白",
+      "kw": [
+        "山巅",
+        "高山",
+        "云海",
+        "峰顶",
+        "山顶"
+      ]
+    },
+    {
+      "id": "WD-05",
+      "zh": "宇宙舰桥",
+      "prompt": "starship command bridge, wide console run with believable instrumentation, heavy structural ribs overhead, layered deck levels, grime ground into floor plating, deep starfield and glowing nebula filling the forward viewport",
+      "note": "舰桥要像被住过，不像展厅",
+      "kw": [
+        "宇宙",
+        "舰桥",
+        "飞船",
+        "太空舱",
+        "舰船"
+      ]
+    },
+    {
+      "id": "WD-06",
+      "zh": "末日废桥",
+      "prompt": "ruined highway overpass reclaimed by nature, road surface split apart by tree roots, vehicle hulks half buried in weeds, oxidized corrugated steel, dust haze flattening the horizon into pale layers, tall grass moving in one wind direction",
+      "note": "植被吞掉一半建筑才有时间感",
+      "kw": [
+        "废桥",
+        "废墟",
+        "断桥",
+        "末日",
+        "残骸"
+      ]
+    },
+    {
+      "id": "WD-07",
+      "zh": "蒸汽工坊",
+      "prompt": "steampunk workshop interior, machined brass gearing through open inspection plates, riveted pressure vessels, copper piping in believable service routes, coal soot streaking every vertical surface, oil sheen on floor plates, hanging filament bulbs",
+      "note": "管道走向要符合服务逻辑",
+      "kw": [
+        "工坊",
+        "车间",
+        "机械间",
+        "齿轮房",
+        "作坊"
+      ]
+    },
+    {
+      "id": "WD-08",
+      "zh": "海边小镇",
+      "prompt": "seaside town at low sun, whitewashed walls with weathered blue trim, fishing boats drawn up on shingle, laundry lines and rusting antennas, gulls as small dark accents, calm water holding a broken light path",
+      "note": "生活痕迹：晾衣绳、天线、锈迹",
+      "kw": [
+        "海边",
+        "小镇",
+        "港口",
+        "渔村",
+        "海岸",
+        "海港"
+      ]
+    },
+    {
+      "id": "WD-09",
+      "zh": "竹林深处",
+      "prompt": "dense bamboo grove, tall trunks receding into green depth with layered foreground stems, low shafts of sunlight cutting through with dust suspended, wind-bent upper canopy, path of trodden leaves",
+      "note": "前后景滑轨：前景粗、远处细",
+      "kw": [
+        "竹林",
+        "竹子",
+        "竹林小径",
+        "竹丛"
+      ]
+    },
+    {
+      "id": "WD-10",
+      "zh": "魔法图书馆",
+      "prompt": "arcane library interior, bookshelves rising beyond sight with rolling ladders, floating tomes and slowly turning pages, candle sconces and self-lit crystals, dust in warm shafts through a high arched window",
+      "note": "悬浮元素要有重心暗示，不能乱飘",
+      "kw": [
+        "图书馆",
+        "藏书馆",
+        "魔法书",
+        "书架"
+      ]
+    },
+    {
+      "id": "WD-11",
+      "zh": "夜市祭典",
+      "prompt": "summer festival night market, paper lantern strings converging overhead, stall awnings with fabric dye patterns, steam and smoke from grills, crowd silhouettes holding sparklers, firework burst opening above the roofs",
+      "note": "暖光源集群：灯笼、炭火、烟花",
+      "kw": [
+        "夜市",
+        "祭典",
+        "庙会",
+        "集市",
+        "烟花",
+        "夏日祭"
+      ]
+    },
+    {
+      "id": "WD-12",
+      "zh": "雪原森林",
+      "prompt": "snow-heavy pine forest at blue twilight, branches bowed under accumulated snow, single set of footprints breaking the pristine surface, cold blue and umber palette broken by one distant warm window glow, muffled depth",
+      "note": "雪的反光要冷，窗的光要暖",
+      "kw": [
+        "雪原",
+        "雪地",
+        "森林",
+        "雪林",
+        "林海"
+      ]
+    },
+    {
+      "id": "WD-13",
+      "zh": "咖啡馆内景",
+      "prompt": "quiet cafe interior, worn wooden tables with use rings, steam lifting from a cup caught in window light, books stacked on the floor rather than shelved, soft north daylight, a cat-shaped shadow on one chair",
+      "note": "治愈系场景：使用痕迹就是温度",
+      "kw": [
+        "咖啡馆",
+        "咖啡厅",
+        "店内",
+        "咖啡店"
+      ]
+    },
+    {
+      "id": "WD-14",
+      "zh": "古堡遗迹",
+      "prompt": "castle ruins overgrown by forest, weathered stone with weathered carvings barely legible, forest slowly reclaiming the floor, collapsed ceiling letting in one strong light shaft, vines threading through broken arches",
+      "note": "光从破口进来，遗迹才有戏剧",
+      "kw": [
+        "古堡",
+        "城堡",
+        "遗迹",
+        "废墟",
+        "庄园"
+      ]
+    },
+    {
+      "id": "WD-15",
+      "zh": "地下竞技场",
+      "prompt": "underground arena, tiered stone seating rising into darkness, torch brackets as the only practical light, sand floor with scuff marks and old stains, banners hanging from the upper rim, one spotlit center",
+      "note": "黑暗中看台的眼睛比人群更有效",
+      "kw": [
+        "竞技场",
+        "斗技场",
+        "地下",
+        "擂台",
+        "斗场"
+      ]
+    },
+    {
+      "id": "WD-16",
+      "zh": "花田庭院",
+      "prompt": "cottage garden in full bloom, flowers drawn as distinct species with correct petal structure, bees as small motion accents, weathered fence and a watering can left out, warm late-afternoon side light",
+      "note": "花的品种结构要经得起近看",
+      "kw": [
+        "花田",
+        "庭院",
+        "花海",
+        "花园",
+        "花圃"
+      ]
+    }
   ]
 }

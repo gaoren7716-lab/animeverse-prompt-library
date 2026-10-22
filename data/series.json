@@ -95,6 +95,81 @@
       "why": "收尾卡承担识别度：缩小到头像尺寸还要认得出"
     }
   ],
+  "scriptRoles": [
+    {
+      "id": "SR-S1",
+      "zh": "建立镜头",
+      "job": "交代地点、天气与时间感，第一眼把观众放进故事里",
+      "media": ["MD-01", "MD-13"],
+      "shots": ["SH-04", "SH-02"],
+      "layouts": ["LO-08", "LO-13"],
+      "sizes": ["SZ-03", "SZ-06"],
+      "lights": ["LT-01", "LT-09"],
+      "titleFormula": "{theme}·第一幕 建立",
+      "copyGuide": "开篇一句定时空，不放人物动作细节",
+      "why": "先给世界再给人：观众要有地方可以想象"
+    },
+    {
+      "id": "SR-S2",
+      "zh": "角色亮相",
+      "job": "让主角站出来，把形象和身份一次锁住",
+      "media": ["MD-02", "MD-01"],
+      "shots": ["SH-03", "SH-01"],
+      "layouts": ["LO-01", "LO-03"],
+      "sizes": ["SZ-02", "SZ-01"],
+      "lights": ["LT-05", "LT-02"],
+      "titleFormula": "{theme}·第二幕 亮相",
+      "copyGuide": "一句话说清他是谁、想要什么",
+      "why": "系列要有记忆点，角色卡是最容易被单独转发的"
+    },
+    {
+      "id": "SR-S3",
+      "zh": "冲突推进",
+      "job": "把矛盾摆上台面，画面开始有方向和张力",
+      "media": ["MD-01", "MD-13"],
+      "shots": ["SH-05", "SH-06"],
+      "layouts": ["LO-07", "LO-13"],
+      "sizes": ["SZ-03", "SZ-04"],
+      "lights": ["LT-02", "LT-08"],
+      "titleFormula": "{theme}·第三幕 推进",
+      "copyGuide": "一句写清谁和谁对上了",
+      "why": "叙事中段是留存点：这一张决定观众要不要看下去"
+    },
+    {
+      "id": "SR-S4",
+      "zh": "高潮",
+      "job": "把力量与情绪推到顶，画面要有冲击",
+      "media": ["MD-01", "MD-13"],
+      "shots": ["SH-09", "SH-02"],
+      "layouts": ["LO-08", "LO-02"],
+      "sizes": ["SZ-03", "SZ-06"],
+      "lights": ["LT-06", "LT-10"],
+      "titleFormula": "{theme}·第四幕 高潮",
+      "copyGuide": "一句喊出来的台词或动作提示",
+      "why": "全套最燃的一张，通常也是被单独转发的那张"
+    },
+    {
+      "id": "SR-S5",
+      "zh": "收尾留白",
+      "job": "给一个余韵和记忆点，可以是象征画面或片尾定格",
+      "media": ["MD-12", "MD-01"],
+      "shots": ["SH-08", "SH-12"],
+      "layouts": ["LO-01", "LO-10"],
+      "sizes": ["SZ-05", "SZ-01"],
+      "lights": ["LT-08", "LT-09"],
+      "titleFormula": "{theme}·第五幕 收尾",
+      "copyGuide": "一句留白的独白，不写完",
+      "why": "留白让人愿意二刷，也是配乐起手的位置"
+    }
+  ],
+  "actOrder": {
+    "1": ["SR-S1"],
+    "2": ["SR-S1", "SR-S5"],
+    "3": ["SR-S1", "SR-S3", "SR-S5"],
+    "4": ["SR-S1", "SR-S2", "SR-S3", "SR-S5"],
+    "5": ["SR-S1", "SR-S2", "SR-S3", "SR-S4", "SR-S5"],
+    "many": ["SR-S1", "SR-S2", "SR-S3", "SR-S4", "SR-S5"]
+  },
   "themes": [
     { "id": "TH-01", "zh": "春日校园", "en": "spring campus, cherry blossoms drifting across a schoolyard, late afternoon light through new leaves, uniform sleeves rolled for warmth", "style": "ST-02", "subject": "SU-07", "characters": ["CH-02", "CH-04"], "worlds": ["WD-01", "WD-16"], "hooks": ["春日的第一次告白，从樱树下开始", "学院春假·青春限定图鉴", "樱花季的放学路，光都变慢了"] },
     { "id": "TH-02", "zh": "盛夏海边", "en": "midsummer seaside, blinding sunlight on wet sand, ice-cold soda condensation, wave edges backlit green-gold, cicada haze over the road", "style": "ST-01", "subject": "SU-09", "characters": ["CH-02", "CH-04"], "worlds": ["WD-08", "WD-16"], "hooks": ["盛夏海边的第一口冰汽水", "夏日终章·潮声与烟火倒计时", "八月巷口的橘子味晚风"] },

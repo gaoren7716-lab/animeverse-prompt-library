@@ -2,4 +2,6 @@ node_modules/
 *.log
 Thumbs.db
 desktop.ini
-.workbuddy/tmp_*.js
+.workbuddy/tmp_*
+.workbuddy/shot_*.png
+first_push.cjs

@@ -121,5 +121,41 @@ var rel = AV.relationsOf("EN-14");
 ok(rel.length >= 2, "实体：关系反查", "n=" + rel.length);
 ok(AV.REL_ZH.student_of === "师承", "实体：关系中文名");
 
+/* 9. 文本拆解与语义匹配 */
+var pPara = AV.parseScript("第一段第一句。\n第一段第二句。\n\n第二段。");
+ok(pPara.length === 2 && pPara[0].kind === "para", "拆解：有空行按段", JSON.stringify(pPara.map(function (b) { return b.text; })));
+ok(pPara[0].text.indexOf("第一段第二句") !== -1, "拆解：段内换行保留");
+var pSent = AV.parseScript("第一句。第二句。第三句。");
+ok(pSent.length === 3 && pSent[0].kind === "sent", "拆解：无空行按句", "n=" + pSent.length);
+ok(AV.parseScript("第一句。\n\n第二句。", { mode: "sent" }).length === 2, "拆解：强制按句");
+ok(AV.parseScript("").length === 0, "拆解：空文本不炸");
+
+var mk = AV.matchKeywords("机甲少女");
+ok(mk.subjects && mk.subjects.id === "SU-02", "匹配：机甲少女→机甲题材", JSON.stringify(mk.subjects));
+ok(mk.characters && mk.characters.id === "CH-02", "匹配：机甲少女→少女主角");
+var mk2 = AV.matchKeywords("雨夜, 神社");
+ok(mk2.lights && mk2.lights.id === "LT-02", "匹配：雨夜→霓虹夜光");
+ok(mk2.worlds && mk2.worlds.id === "WD-02", "匹配：神社→日式神社");
+ok(Object.keys(AV.matchKeywords("")).length === 0, "匹配：空关键词不炸");
+ok(AV.matchKeywords("齐白石").subjects === undefined, "匹配：无关词不乱锁");
+
+/* 10. 短剧分镜 */
+var acts5 = AV.pickActs(5);
+ok(acts5.length === 5 && acts5[0] === "SR-S1" && acts5[4] === "SR-S5", "幕次：5 段对应五幕", acts5.join(","));
+ok(AV.pickActs(2).length === 2 && AV.pickActs(2)[1] === "SR-S5", "幕次：2 段为建立+收尾");
+ok(AV.pickActs(8).length === 8 && AV.pickActs(8)[0] === "SR-S1" && AV.pickActs(8)[7] === "SR-S5", "幕次：超 5 段首尾不变");
+var scr = AV.scriptToSeries("雨夜信", "赛博朋克, 霓虹",
+  "雨夜的霓虹都市，少年主角站在便利店门口。\n\n他抬起头，远处传来爆炸声。\n\n神秘面具客从阴影里走出。",
+  { seed: 20261022 });
+ok(scr && scr.cards.length === 3, "分镜：3 段出 3 张", scr ? String(scr.cards.length) : "null");
+ok(scr.cards[0].sel.styles === scr.cards[2].sel.styles, "分镜：全组统一风格");
+ok(scr.cards[0].sel.characters === "CH-01", "分镜：段落点名的角色被识别", scr.cards[0].sel.characters);
+ok(scr.cards[1].sel.characters === "CH-01", "分镜：未点名角色跨段继承", scr.cards[1].sel.characters);
+ok(scr.cards[2].sel.characters === "CH-16", "分镜：段落点名的面具客覆盖继承", scr.cards[2].sel.characters);
+ok(scr.cards[0].sel.worlds === "WD-03", "分镜：场景被识别", scr.cards[0].sel.worlds);
+ok(scr.cards[0].prompt.indexOf("scene:") !== -1, "分镜：原文进入词面");
+ok(scr.cards.every(function (c) { return c.warnings.length === 0; }), "分镜：无冲突告警");
+ok(AV.scriptToSeries("t", "k", "   ", {}) === null, "分镜：空文案返回 null");
+
 console.log("\n冒烟结果：通过 " + pass + " / 失败 " + fail);
 process.exit(fail ? 1 : 0);

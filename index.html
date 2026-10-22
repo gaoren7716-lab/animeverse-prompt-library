@@ -14,23 +14,25 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{background:var(--bg);color:var(--tx);font:14px/1.65 "PingFang SC","Microsoft YaHei",system-ui,sans-serif;display:flex;min-height:100vh}
+body{background:var(--bg);color:var(--tx);font:14px/1.65 "PingFang SC","Microsoft YaHei",system-ui,sans-serif;min-height:100vh}
 a{color:var(--cy);text-decoration:none}
 ::selection{background:rgba(139,92,255,.4)}
 
-/* ===== 侧栏 ===== */
-#side{width:212px;flex:0 0 212px;background:var(--bg2);border-right:1px solid var(--line);padding:18px 12px;position:sticky;top:0;height:100vh;overflow-y:auto}
-#side .logo{font-size:17px;font-weight:700;padding:4px 8px 14px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.5px}
-#side .logo small{display:block;font-size:10px;color:var(--tx3);font-weight:400;letter-spacing:2px;margin-top:2px;-webkit-text-fill-color:var(--tx3)}
-.nav{display:flex;flex-direction:column;gap:3px}
-.nav button{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:none;border:0;color:var(--tx2);padding:9px 11px;border-radius:9px;font-size:13.5px;cursor:pointer;transition:.15s}
+/* ===== 顶部导航栏 ===== */
+#side{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:16px;padding:0 16px;height:54px;background:var(--bg2);border-bottom:1px solid var(--line)}
+#side .logo{font-size:16px;font-weight:700;white-space:nowrap;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.5px}
+#side .logo small{display:inline;font-size:9.5px;color:var(--tx3);font-weight:400;letter-spacing:1.5px;margin-left:7px;-webkit-text-fill-color:var(--tx3)}
+.nav{display:flex;flex-direction:row;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav button{display:flex;align-items:center;gap:6px;width:auto;white-space:nowrap;text-align:left;background:none;border:0;color:var(--tx2);padding:7px 11px;border-radius:8px;font-size:13px;cursor:pointer;transition:.15s}
 .nav button:hover{background:var(--panel);color:var(--tx)}
-.nav button.on{background:var(--panel2);color:#fff;box-shadow:inset 2px 0 0 var(--pk)}
-.nav button .ico{width:18px;text-align:center;flex:0 0 18px}
-#side .foot{margin-top:16px;padding:10px 8px 0;border-top:1px solid var(--line);font-size:11px;color:var(--tx3);line-height:1.7}
+.nav button.on{background:var(--panel2);color:#fff;box-shadow:inset 0 -2px 0 var(--pk)}
+.nav button .ico{width:16px;text-align:center;flex:0 0 16px}
+#side .foot{font-size:10.5px;color:var(--tx3);line-height:1.5;white-space:nowrap;text-align:right;flex:0 0 auto}
+@media(max-width:900px){#side .foot{display:none}}
 
 /* ===== 主区与视图显隐（铁律：布局类不得设 display） ===== */
-#main{flex:1;min-width:0;padding:26px 30px 60px}
+#main{min-width:0;padding:22px 28px 60px}
 .view{display:none}
 .view.on{display:block}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:18px}
@@ -50,6 +52,7 @@ a{color:var(--cy);text-decoration:none}
 .gcopy:hover{filter:brightness(1.12)}
 input[type=text],textarea,select{background:var(--bg2);border:1px solid var(--line);border-radius:9px;color:var(--tx);padding:9px 12px;font-size:13.5px;font-family:inherit;outline:none}
 input[type=text]:focus,textarea:focus{border-color:var(--pp)}
+textarea{width:100%;min-height:150px;resize:vertical;line-height:1.75;margin-top:4px}
 .chip{display:inline-flex;align-items:center;gap:5px;background:var(--bg2);border:1px solid var(--line);color:var(--tx2);border-radius:20px;padding:4px 12px;font-size:12.5px;cursor:pointer;transition:.13s;user-select:none}
 .chip:hover{border-color:var(--pp);color:var(--tx)}
 .chip.on{background:rgba(139,92,255,.16);border-color:var(--pp);color:#fff}
@@ -145,10 +148,9 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
 .plcard .swrow i:hover{filter:brightness(1.2)}
 
 @media(max-width:860px){
-  body{flex-direction:column}
-  #side{width:100%;flex:none;height:auto;position:static;display:flex;flex-wrap:wrap;gap:6px}
-  #side .logo{width:100%}.nav{flex-direction:row;flex-wrap:wrap}#side .foot{display:none}
-  #main{padding:16px}
+  #side{height:48px;padding:0 10px;gap:10px}
+  #side .logo small{display:none}
+  #main{padding:14px}
 }
 </style>
 </head>
@@ -161,6 +163,7 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
     <button data-v="v-atlas"><span class="ico">🗺️</span>全球地图</button>
     <button data-v="v-custom"><span class="ico">⚡</span>自定义出图</button>
     <button data-v="v-series"><span class="ico">🧩</span>系列出图</button>
+    <button data-v="v-script"><span class="ico">🎬</span>短剧分镜</button>
     <button data-v="v-synth"><span class="ico">🛠️</span>提示词合成器</button>
     <button data-v="v-gacha"><span class="ico">🎲</span>抽卡</button>
     <button data-v="v-cases"><span class="ico">📋</span>验证案例</button>
@@ -168,7 +171,7 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
     <button data-v="v-pairs"><span class="ico">🎯</span>风格配色</button>
     <button data-v="v-frame"><span class="ico">🧭</span>框架与体检</button>
   </nav>
-  <div class="foot">已知内容可检索<br>未收录可拆解<br>新需求可组合与受控变形<br><br>本地离线可用 · 无需密钥</div>
+  <div class="foot">可检索 · 可组合 · 可变形 · 本地离线免密钥</div>
 </aside>
 
 <main id="main">
@@ -220,7 +223,8 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
     <h2>我的主题</h2>
     <div class="hint">输入任何主题（如「雨天便利店」「机甲樱花」），选一个底子预设，立刻得到成品词面。未收录的主题按原文注入，其余维度仍按预设组合。</div>
     <div class="row" style="margin-bottom:12px">
-      <input type="text" id="ezTheme" placeholder="输入主题，如：雨天便利店 / 毕业季天台" style="flex:1;min-width:240px">
+      <input type="text" id="ezTheme" placeholder="输入主题，如：雨天便利店 / 毕业季天台" style="flex:1;min-width:200px">
+      <input type="text" id="ezKw" placeholder="关键词（可空），逗号分隔" style="flex:1;min-width:150px">
       <select id="ezPreset"></select>
       <button class="gcopy" id="ezGo">生成</button>
       <button class="btn sm" id="ezRand">🎲 随机来一张</button>
@@ -236,10 +240,13 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
     <div class="hint">给一个主题，按动漫视觉生产节奏自动建一组图：<b>主视觉定调 → 角色卡立人 → 场景卡立世界 → 道具卡添细节 → 情节帧叙事 → 徽标收尾</b>。全组统一风格与配色，看起来是一套；每张自带完整提示词与中文文案框架。</div>
     <div class="hint sm">角色分工与节奏是结构骨架；每张的具体机型/版式在角色指定范围内抽——抽到不满意的点「换一批」。未收录的主题按原文注入，风格与配色仍全组统一。</div>
     <div class="row" style="margin:4px 0 10px">
-      <input type="text" id="serTheme" placeholder="输入主题，如：武道大会 / 雨天便利店 / 赛博都市" style="flex:1;min-width:240px">
+      <input type="text" id="serTheme" placeholder="输入主题，如：武道大会 / 雨天便利店 / 赛博都市" style="flex:1;min-width:200px">
+      <input type="text" id="serKw" placeholder="关键词（可空），逗号分隔，如：机甲, 竹林" style="flex:1;min-width:170px">
       <button class="gcopy" id="doSeries">生成系列</button>
+      <button class="btn sm" id="serSave" title="把当前主题与关键词存进「我的主题」，下次直接点">加入主题</button>
     </div>
-    <div class="row" id="serChips" style="margin-bottom:10px"></div>
+    <div class="row" id="serChips" style="margin-bottom:6px"></div>
+    <div class="row" id="myChips" style="margin-bottom:10px"></div>
     <div class="row" style="margin-bottom:8px">
       <span class="mut sm">张数：</span>
       <button class="btn sm sercnt" data-n="3">3 张</button>
@@ -250,6 +257,33 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
       <button class="btn sm" id="serReroll">换一批</button>
     </div>
     <div id="seriesOut"></div>
+  </div>
+</div>
+
+<!-- 4 短剧分镜 -->
+<div class="view" id="v-script">
+  <div class="panel">
+    <h2>短剧分镜 <span class="tag">写文案 → 一套分镜</span></h2>
+    <div class="hint">把短剧文案粘进来，<b>有空行按段拆、无空行按句拆</b>，一段出一张图，按叙事顺序分幕：<b>建立 → 亮相 → 推进 → 高潮 → 收尾</b>。段落里写到的场景·角色·光影会被识别并锁定；没写到的沿用上一段——所以这套图像一部片子，不是一组散图。风格与配色全组统一。</div>
+    <div class="row" style="margin:4px 0 10px">
+      <input type="text" id="scTheme" placeholder="主题（可空），如：雨夜信 / 武道大会" style="flex:1;min-width:180px">
+      <input type="text" id="scKw" placeholder="关键词（可空），逗号分隔，如：赛博朋克, 霓虹" style="flex:1;min-width:180px">
+      <select id="scMode">
+        <option value="auto">自动拆分（有空行按段）</option>
+        <option value="para">按段落拆</option>
+        <option value="sent">按句子拆</option>
+      </select>
+      <button class="gcopy" id="scGo">出分镜系列</button>
+      <button class="btn sm" id="scReroll" title="同一份文案，换一套配套">换一批</button>
+    </div>
+    <textarea id="scText" rows="9" placeholder="把短剧文案粘在这里。例：
+
+雨夜的霓虹都市，少年主角站在便利店门口，手里攥着信纸。
+
+他抬起头，远处传来爆炸声。
+
+神秘面具客从阴影里走出。"></textarea>
+    <div id="scOut"></div>
   </div>
 </div>
 
@@ -338,6 +372,9 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
     <div style="overflow-x:auto"><table class="tb" id="cfTb"></table></div>
     <h3 style="font-size:14.5px;margin:18px 0 8px">系列角色分工</h3>
     <div style="overflow-x:auto"><table class="tb" id="srTb"></table></div>
+    <h3 style="font-size:14.5px;margin:18px 0 8px">短剧幕次分工（文案 → 分镜）</h3>
+    <div class="hint sm">短剧模式不按随机分工，按叙事顺序：段落数决定用哪几幕——2 段是「建立+收尾」，3 段是「建立+推进+收尾」，4 段加「亮相」，5 段是完整五幕，超过 5 段时中段重复「推进」。</div>
+    <div style="overflow-x:auto"><table class="tb" id="scTb"></table></div>
     <h3 style="font-size:14.5px;margin:18px 0 8px">已知边界（不掩盖）</h3>
     <ul class="hint" style="line-height:2">
       <li>提示词条目是<b>视觉观察 + 通用动画常识</b>（seen），不是模型实测（test）：案例全部 tested=false，先跑通一条案例配方再扩展。</li>

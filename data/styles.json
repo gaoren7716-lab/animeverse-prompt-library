@@ -4,21 +4,199 @@
   "who": "你（完成效果）",
   "decides": "线怎么描、色怎么上、光怎么落——同一角色换风格就是另一张图。这是「画面完成度」维度，与地区时代坐标叠加",
   "items": [
-    { "id": "ST-01", "zh": "赛璐璐平涂", "prompt": "classic cel-shaded anime illustration, one flat base tone per lit surface with a single crisp second shadow whose boundary stays razor sharp, even-weight dark lineart, background reduced to large flat unmodulated color blocks", "note": "暗部只有一层、边界锐利无渐变" },
-    { "id": "ST-02", "zh": "现代数码柔光", "prompt": "contemporary digital anime illustration with soft airbrush shading, many layered gradients with no hard cel boundaries, blurred highlight rings through hair, multiple overlapping iris highlight discs, natural bokeh background with drifting dust", "note": "亮部连续渐变、阴影通透" },
-    { "id": "ST-03", "zh": "厚涂油绘", "prompt": "painterly anime illustration in thick impasto oil technique, visible directional strokes with physical paint ridges, shadows built from dense warm brown underlayers, old-master value structure with deep integrated shadow masses, broken searching edges", "note": "笔触有物理厚度，暗部暖棕非纯黑" },
-    { "id": "ST-04", "zh": "透明水彩", "prompt": "transparent watercolor anime illustration, nothing but diluted transparent washes with the paper white as brightest highlight, wet-on-wet blooms and pooling at hems, granulation settling into shadows, faint graphite under-drawing visible", "note": "最亮处是纸本身的白，颜色光学混合" },
-    { "id": "ST-05", "zh": "粗描线稿", "prompt": "bold lineart-driven anime illustration with almost no applied color, decisive line-weight variation with heavy black strokes near the viewer thinning into the distance, deliberate open gaps and slight overshoot where a hand breaks contour, rough pencil accents", "note": "线重变化是手绘感第一来源" },
-    { "id": "ST-06", "zh": "二头身Q版", "prompt": "chibi super-deformed anime style, proportions compressed to roughly two head-lengths, enormous rounded head with small stubby limbs and mitten hands, huge sparkling eyes set low on the face, simple clean shapes with minimal shading and toy-like saturated colors", "note": "比例逻辑与正常头身完全不同" },
-    { "id": "ST-07", "zh": "黑白漫画墨线", "prompt": "black-and-white manga ink aesthetic, solid black fills with precise cross-hatching, blown highlight shapes and mechanical screentone gradients for mid-values, clean panel borders with generous gutters, silhouette separation so black masses never muddy", "note": "网点纸灰阶与集中线是语言不是滤镜" },
-    { "id": "ST-08", "zh": "水墨墨绘", "prompt": "sumi-e ink wash anime aesthetic, unhesitating single strokes tapering from loaded bristle to dry tip, absorbent rice paper drinking the pigment so edges feather naturally, vast untouched white standing in for mist and water, one small red seal accent", "note": "负空间是水墨语言，不是没画完" },
-    { "id": "ST-09", "zh": "浮世绘木版画", "prompt": "ukiyo-e woodblock print anime aesthetic, flat blocks of hand-mixed mineral color bounded by confident black key lines with no modeling, fibrous washi paper tooth showing through ink, faint horizontal bokashi banding, slight misregistration between blocks", "note": "工艺痕迹要留在画面里" },
-    { "id": "ST-10", "zh": "像素画", "prompt": "pixel art anime aesthetic at true one-to-one resolution, palette restricted to roughly sixteen deliberate colors with no anti-aliasing, every pixel placed individually with ordered dithering for light falloff, dark outline and exactly three shades per material, readable silhouette at thumbnail size", "note": "16-bit 不是模糊的小图" },
-    { "id": "ST-11", "zh": "三维半写实", "prompt": "semi-realistic 3D CG anime aesthetic, subsurface-scattered skin with visible pore detail, physically based fabric sheen, groomed hair with individual strand highlights, cinematic volumetric lighting, stylized faces against photographic environments", "note": "脸向动画理想化、世界保持真实" },
-    { "id": "ST-12", "zh": "三渲二融合", "prompt": "hybrid 2D-3D anime aesthetic, hand-drawn characters integrated into dimensionally correct rendered environments, true camera volume and believable light falloff with matching highlight direction so nothing floats, photographic depth of field", "note": "2D 线条与 3D 渲染融在同一片光里" },
-    { "id": "ST-13", "zh": "剪影负空间", "prompt": "silhouette and negative-space anime composition, subject rendered almost entirely as black shape with only a thin rim of hair and shoulder picked out by backlight, surrounding space carrying information through reflections and atmosphere, scheme limited to deep blue-black plus one accent", "note": "负空间是被主动经营的构图" },
-    { "id": "ST-14", "zh": "高对比霓虹", "prompt": "high-contrast neon night anime aesthetic with photographic camera feel, scene lit almost entirely from practical signage in competing magenta and cyan, shadows crushed toward black, every wet surface a broken mirror of colored reflections, gentle lens bloom with chromatic fringing", "note": "靠光源颜色说话，不靠滤镜" },
-    { "id": "ST-15", "zh": "拼贴混合媒介", "prompt": "collage and mixed-media anime aesthetic, portrait assembled from torn paper, fabric swatches and cut photographic fragments, torn fiber edges catching light with real thickness, mismatched paste scales, visible glue sheen and buckling paper, seams left unresolved", "note": "每一块纸来自不同的世界" },
-    { "id": "ST-16", "zh": "复古做旧胶片", "prompt": "vintage anime film aesthetic, coarse 16mm grain with faint gate weave, highlights faded warm toward red as old prints do, slightly milky lifted shadows, gentle color registration drift, muted saturation with period-accurate palette", "note": "做旧是介质记忆，不是统一加黄" }
+    {
+      "id": "ST-01",
+      "zh": "赛璐璐平涂",
+      "prompt": "classic cel-shaded anime illustration, one flat base tone per lit surface with a single crisp second shadow whose boundary stays razor sharp, even-weight dark lineart, background reduced to large flat unmodulated color blocks",
+      "note": "暗部只有一层、边界锐利无渐变",
+      "kw": [
+        "赛璐璐",
+        "平涂",
+        "传统动画",
+        "手绘赛璐璐"
+      ]
+    },
+    {
+      "id": "ST-02",
+      "zh": "现代数码柔光",
+      "prompt": "contemporary digital anime illustration with soft airbrush shading, many layered gradients with no hard cel boundaries, blurred highlight rings through hair, multiple overlapping iris highlight discs, natural bokeh background with drifting dust",
+      "note": "亮部连续渐变、阴影通透",
+      "kw": [
+        "数码",
+        "柔和光",
+        "新赛璐璐",
+        "现代动画"
+      ]
+    },
+    {
+      "id": "ST-03",
+      "zh": "厚涂油绘",
+      "prompt": "painterly anime illustration in thick impasto oil technique, visible directional strokes with physical paint ridges, shadows built from dense warm brown underlayers, old-master value structure with deep integrated shadow masses, broken searching edges",
+      "note": "笔触有物理厚度，暗部暖棕非纯黑",
+      "kw": [
+        "厚涂",
+        "油画",
+        "质感厚涂",
+        "笔刷厚涂"
+      ]
+    },
+    {
+      "id": "ST-04",
+      "zh": "透明水彩",
+      "prompt": "transparent watercolor anime illustration, nothing but diluted transparent washes with the paper white as brightest highlight, wet-on-wet blooms and pooling at hems, granulation settling into shadows, faint graphite under-drawing visible",
+      "note": "最亮处是纸本身的白，颜色光学混合",
+      "kw": [
+        "水彩",
+        "透明水彩",
+        "淡彩",
+        "水彩风"
+      ]
+    },
+    {
+      "id": "ST-05",
+      "zh": "粗描线稿",
+      "prompt": "bold lineart-driven anime illustration with almost no applied color, decisive line-weight variation with heavy black strokes near the viewer thinning into the distance, deliberate open gaps and slight overshoot where a hand breaks contour, rough pencil accents",
+      "note": "线重变化是手绘感第一来源",
+      "kw": [
+        "线稿",
+        "粗描",
+        "素描",
+        "手稿",
+        "草图"
+      ]
+    },
+    {
+      "id": "ST-06",
+      "zh": "二头身Q版",
+      "prompt": "chibi super-deformed anime style, proportions compressed to roughly two head-lengths, enormous rounded head with small stubby limbs and mitten hands, huge sparkling eyes set low on the face, simple clean shapes with minimal shading and toy-like saturated colors",
+      "note": "比例逻辑与正常头身完全不同",
+      "kw": [
+        "q版化",
+        "二头身",
+        "萌系",
+        "变形",
+        "chibi"
+      ]
+    },
+    {
+      "id": "ST-07",
+      "zh": "黑白漫画墨线",
+      "prompt": "black-and-white manga ink aesthetic, solid black fills with precise cross-hatching, blown highlight shapes and mechanical screentone gradients for mid-values, clean panel borders with generous gutters, silhouette separation so black masses never muddy",
+      "note": "网点纸灰阶与集中线是语言不是滤镜",
+      "kw": [
+        "墨线",
+        "漫画黑白",
+        "网点",
+        "黑白漫画"
+      ]
+    },
+    {
+      "id": "ST-08",
+      "zh": "水墨墨绘",
+      "prompt": "sumi-e ink wash anime aesthetic, unhesitating single strokes tapering from loaded bristle to dry tip, absorbent rice paper drinking the pigment so edges feather naturally, vast untouched white standing in for mist and water, one small red seal accent",
+      "note": "负空间是水墨语言，不是没画完",
+      "kw": [
+        "水墨",
+        "国画",
+        "写意",
+        "传统水墨",
+        "水墨风"
+      ]
+    },
+    {
+      "id": "ST-09",
+      "zh": "浮世绘木版画",
+      "prompt": "ukiyo-e woodblock print anime aesthetic, flat blocks of hand-mixed mineral color bounded by confident black key lines with no modeling, fibrous washi paper tooth showing through ink, faint horizontal bokashi banding, slight misregistration between blocks",
+      "note": "工艺痕迹要留在画面里",
+      "kw": [
+        "浮世绘",
+        "木版画",
+        "日本版画",
+        "和风版画"
+      ]
+    },
+    {
+      "id": "ST-10",
+      "zh": "像素画",
+      "prompt": "pixel art anime aesthetic at true one-to-one resolution, palette restricted to roughly sixteen deliberate colors with no anti-aliasing, every pixel placed individually with ordered dithering for light falloff, dark outline and exactly three shades per material, readable silhouette at thumbnail size",
+      "note": "16-bit 不是模糊的小图",
+      "kw": [
+        "像素",
+        "像素风",
+        "像素图"
+      ]
+    },
+    {
+      "id": "ST-11",
+      "zh": "三维半写实",
+      "prompt": "semi-realistic 3D CG anime aesthetic, subsurface-scattered skin with visible pore detail, physically based fabric sheen, groomed hair with individual strand highlights, cinematic volumetric lighting, stylized faces against photographic environments",
+      "note": "脸向动画理想化、世界保持真实",
+      "kw": [
+        "三维",
+        "半写实",
+        "cg风格",
+        "三维渲染"
+      ]
+    },
+    {
+      "id": "ST-12",
+      "zh": "三渲二融合",
+      "prompt": "hybrid 2D-3D anime aesthetic, hand-drawn characters integrated into dimensionally correct rendered environments, true camera volume and believable light falloff with matching highlight direction so nothing floats, photographic depth of field",
+      "note": "2D 线条与 3D 渲染融在同一片光里",
+      "kw": [
+        "三渲二",
+        "三维转二维",
+        "三维卡通"
+      ]
+    },
+    {
+      "id": "ST-13",
+      "zh": "剪影负空间",
+      "prompt": "silhouette and negative-space anime composition, subject rendered almost entirely as black shape with only a thin rim of hair and shoulder picked out by backlight, surrounding space carrying information through reflections and atmosphere, scheme limited to deep blue-black plus one accent",
+      "note": "负空间是被主动经营的构图",
+      "kw": [
+        "剪影",
+        "负空间",
+        "极简",
+        "简约"
+      ]
+    },
+    {
+      "id": "ST-14",
+      "zh": "高对比霓虹",
+      "prompt": "high-contrast neon night anime aesthetic with photographic camera feel, scene lit almost entirely from practical signage in competing magenta and cyan, shadows crushed toward black, every wet surface a broken mirror of colored reflections, gentle lens bloom with chromatic fringing",
+      "note": "靠光源颜色说话，不靠滤镜",
+      "kw": [
+        "霓虹",
+        "高对比",
+        "赛博配色",
+        "霓虹色"
+      ]
+    },
+    {
+      "id": "ST-15",
+      "zh": "拼贴混合媒介",
+      "prompt": "collage and mixed-media anime aesthetic, portrait assembled from torn paper, fabric swatches and cut photographic fragments, torn fiber edges catching light with real thickness, mismatched paste scales, visible glue sheen and buckling paper, seams left unresolved",
+      "note": "每一块纸来自不同的世界",
+      "kw": [
+        "拼贴",
+        "混合媒介",
+        "拼贴画",
+        "材料拼贴"
+      ]
+    },
+    {
+      "id": "ST-16",
+      "zh": "复古做旧胶片",
+      "prompt": "vintage anime film aesthetic, coarse 16mm grain with faint gate weave, highlights faded warm toward red as old prints do, slightly milky lifted shadows, gentle color registration drift, muted saturation with period-accurate palette",
+      "note": "做旧是介质记忆，不是统一加黄",
+      "kw": [
+        "复古",
+        "做旧",
+        "胶片",
+        "怀旧",
+        "老照片"
+      ]
+    }
   ]
 }
