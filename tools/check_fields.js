@@ -57,6 +57,12 @@ DIMS.forEach(d => {
     });
     if (/[\u4e00-\u9fff]/.test(it.prompt)) errors.push(it.id + " prompt 混入中文（prompt 必须是英文视觉指令）");
     if (it.prompt && it.prompt !== it.prompt.trim()) errors.push(it.id + " prompt 首尾有空白");
+    // 词面层禁真实品牌/作品/角色名——这一层会直接送进出图模型。
+    // R2/R3 实体只许待在参考层（entities.json），且要先做 deid 视觉等价替换。
+    // 注意：kw 检索别名不受此限（kw 只做匹配，绝不进词面），品牌名当检索入口是合理的。
+    var BRAND_IN_PROMPT = /disney|disney|pixar|ghibli|miyazaki|toei|warn\s+bros|universal\s+pictures|dreamworks|marvel|bandai|ghibli|nintendo|sega|akira|totoro|howl|spirited|evangelion|naruto|one\s+piece|detective\s+conan|pokemon|pok[eé]mon|final\s+fantasy|pokemon|\bGundam\b|\bGhibli\b|\bNezuko\b|\bNaruto\b|\bLuffy\b|\bSonic\s+the\s+Hedgehog\b|\bMario\b|\bZelda\b|\bPokemon\b/i;
+    var brandHit = (it.prompt || "").match(BRAND_IN_PROMPT);
+    if (brandHit) errors.push(it.id + " prompt 含真实品牌/作品名（词面层禁入，须先 deid）：" + brandHit[0]);
     // 中文名混英文单词（中英串味），专有名词白名单除外
     var WHITELIST = /\bQ\b|CG|VTuber|Live2D|OVA|VHS|ins|IP/gi;
     var rest = it.zh.replace(WHITELIST, "");

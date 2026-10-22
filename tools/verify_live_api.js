@@ -7,14 +7,30 @@
  * 远端仓库字节 == 验线上效果，且比截图更严格（看的是真实发布的文件）。
  *
  * 用法：node tools/verify_live_api.js
+ *   环境变量：AV_REPO=<owner/name>  指定仓库（默认本项目）
+ *             GITHUB_TOKEN=<token>  GitHub 访问令牌（也兼容 GH_TOKEN）
+ *   没有令牌时匿名访问（只读公开内容仍可跑，但读不到 Pages 状态等私有字段）。
  */
 "use strict";
 const fs = require("fs");
 const path = require("path");
 
 const REPO = process.env.AV_REPO || "gaoren7716-lab/animeverse-prompt-library";
-const TOKEN = fs.readFileSync(path.join(process.env.TEMP || "/tmp", "gh_tok.txt"), "utf8").trim();
-const H = { Authorization: "token " + TOKEN, Accept: "application/vnd.github+json", "User-Agent": "av-verify" };
+// 令牌来源：环境变量优先 → 本机临时目录的 gh_tok.txt → 匿名
+function readToken() {
+  const env = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+  if (env && env.trim()) return env.trim();
+  const tmp = process.env.TEMP || process.env.TMPDIR || "/tmp";
+  try {
+    const t = fs.readFileSync(path.join(tmp, "gh_tok.txt"), "utf8").trim();
+    if (t) return t;
+  } catch (e) { /* 匿名模式 */ }
+  return "";
+}
+const TOKEN = readToken();
+const H = { Accept: "application/vnd.github+json", "User-Agent": "av-verify" };
+if (TOKEN) H.Authorization = "token " + TOKEN;
+else console.log("（未找到 GitHub 令牌，以匿名模式访问公开接口）");
 
 let pass = 0, fail = 0;
 function ok(cond, name, extra) {

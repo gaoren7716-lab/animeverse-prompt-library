@@ -1,8 +1,16 @@
 # 动漫宇宙 · 全球动漫及关联创作提示词库
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Pages](https://img.shields.io/badge/在线体验-Pages-2ea44f)](https://gaoren7716-lab.github.io/animeverse-prompt-library/)
+[![词条](https://img.shields.io/badge/词条-150-2ea44f)](data)
+[![组合空间](https://img.shields.io/badge/组合空间-1.87%20万亿-2ea44f)](#这个库是什么)
+
 Aniverse Prompt Library —— 覆盖全球动漫及关联创作的开放式提示词知识库。一个主题一套系列图，模块组合与受控变形构建新需求，三档使用境界：**现在有的直接复制 · 想要的可以组合 · 多组合生成无限想象空间**。
 
-在线访问：https://gaoren7716-lab.github.io/animeverse-prompt-library/ （Pages 部署后生效）
+在线访问：https://gaoren7716-lab.github.io/animeverse-prompt-library/
+
+源码：[github.com/gaoren7716-lab/animeverse-prompt-library](https://github.com/gaoren7716-lab/animeverse-prompt-library) · MIT 协议开源 · 欢迎提 PR（见 [CONTRIBUTING.md](CONTRIBUTING.md)）
+
 
 ## 这个库是什么
 
@@ -115,6 +123,23 @@ Aniverse Prompt Library —— 覆盖全球动漫及关联创作的开放式提�
 
 **图幅可切**：画廊右上角有「图幅：大图 / 小图」——大图 3 列看细节，小图 5 列密排、收起描述，一屏扫全 50 个位置。
 
+## 本地运行
+
+这是纯静态项目，**没有构建步骤、没有运行时依赖**——克隆下来直接开就行：
+
+```bash
+git clone https://github.com/gaoren7716-lab/animeverse-prompt-library.git
+cd animeverse-prompt-library
+```
+
+- **看效果**：双击 `index.html`（浏览器直接打开即可，本地不需要起服务器）
+- **改数据**：编辑 `data/*.json` → 跑 `node tools/build_web.js` 重新生成 `assets/data-bundle.js`
+- **跑测试**：需要 Node 18+；界面冒烟与真实 Chrome 验证额外需要 `jsdom` 与 `playwright-core`
+  （`NODE_PATH` 指向装有这两个包的 `node_modules`）
+
+> ⚠️ 改动**界面显隐 / 尺寸 / 配色**后必须加跑 `tools/verify_chrome.js`——
+> jsdom 不加载 `<img>`、也不做 CSS 级联计算，这类问题它一条都查不出来（本库踩过多次）。
+
 ## 数据与代码
 
 ```
@@ -151,7 +176,13 @@ node tools/verify_live_api.js    # 线上产物验收 15 项（发布后跑：�
 
 ## 授权与边界
 
-参考实体层分 R0-R3 四级：R0 自由 / R1 署名 / R2 仅参考（在世创作者与品牌名，出图前先改写为 deid 视觉特征）/ R3 禁止直接商用（作品名与角色名）。实体条目是研究坐标，不是词面——把 R2/R3 实体送进商业出图前，先做视觉等价替换。
+**代码与数据以 MIT 协议开源**（见 [LICENSE](LICENSE)），可自由使用、修改、再分发。
+
+但**词面层与实体层的授权是分开的**——MIT 覆盖的是本库的代码与原创提示词，不覆盖它引用的第三方 IP：
+
+- 参考实体层分 R0-R3 四级：R0 自由 / R1 署名 / R2 仅参考（在世创作者与品牌名，出图前先改写为 deid 视觉特征）/ R3 禁止直接商用（作品名与角色名）。实体条目是研究坐标，不是词面——把 R2/R3 实体送进商业出图前，先做视觉等价替换。
+- **词面层（`prompt` 字段）不含任何真实品牌、作品或角色名**——`tools/check_fields.js` 会硬拦（disney / pixar / ghibli 等专名一律不许进 `prompt`）。检索别名 `kw` 不受限，它只做匹配、绝不进词面。
+- 画廊图片是本项目为验证配方而出图的作品，随仓库以 MIT 协议分发；**出图模型的服务条款另算**，换模型重出请自行确认。
 
 ## 路线图
 
@@ -160,6 +191,11 @@ node tools/verify_live_api.js    # 线上产物验收 15 项（发布后跑：�
 - 更多地区坐标（东南亚、中东、拉美动画脉络）
 - 出图模型的实测结论只对被测模型有效，换模型需重测（cases.tested 的语义边界）
 
+## 参与贡献
+
+欢迎提 PR、加词条、修 bug。规矩不多但有五条不可让步的（id 不改、词面禁品牌名、授权分级独立、中文不进 prompt、信息四类不混）——详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
 ## 致谢
 
 思想来源：art-prompt-forge 的六层结构与 preserve/change/forbid 受控变形算子、ecommerce-prompt-library 的引擎与回归工程、xhs-prompt-library 的系列出图。实现独立编写。
+

@@ -1,13 +1,39 @@
 /* 真实 Chrome 验证：LOGO 加载 / 导航放大 / 抽卡按钮顺序 / 复制按钮配色 / 控件尺寸
  * 必须走 file:// URL（本机 localhost http 被坏代理拦死）
- * 跑法：NODE_PATH=<workspace>/node_modules node tools/verify_chrome.js */
+ *
+ * 跑法：NODE_PATH=<workspace>/node_modules node tools/verify_chrome.js
+ * Chrome 路径按 CHROME_PATH 环境变量 → 常见安装位置探测 → playwright 自带 chromium 依次尝试。
+ * 没找到会打印候选列表并退出（不静默跳过）。 */
 "use strict";
+const fs = require("fs");
 const path = require("path");
 const { chromium } = require("playwright-core");
 
 const ROOT = path.join(__dirname, "..");
 const URL = "file:///" + path.join(ROOT, "index.html").replace(/\\/g, "/");
-const CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";
+
+// Chrome 可执行文件候选：环境变量优先，其次各平台常见安装位置
+const CHROME_CANDIDATES = [
+  process.env.CHROME_PATH,
+  // Windows
+  "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+  path.join(process.env.LOCALAPPDATA || "", "Google/Chrome/Application/chrome.exe"),
+  // macOS
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  // Linux
+  "/usr/bin/google-chrome",
+  "/usr/bin/google-chrome-stable",
+  "/usr/bin/chromium",
+  "/usr/bin/chromium-browser",
+].filter(Boolean);
+
+function findChrome() {
+  for (const c of CHROME_CANDIDATES) {
+    try { if (fs.existsSync(c)) return c; } catch (e) { /* ignore */ }
+  }
+  return null;
+}
 
 let pass = 0, fail = 0;
 function ok(c, name, extra) {
@@ -16,7 +42,15 @@ function ok(c, name, extra) {
 }
 
 (async function () {
-  const browser = await chromium.launch({ executablePath: CHROME, args: ["--no-proxy-server", "--allow-file-access-from-files"] });
+  const chrome = findChrome();
+  if (!chrome) {
+    console.error("✗ 找不到 Chrome 可执行文件，无法跑真实浏览器验证。");
+    console.error("  已探测：" + CHROME_CANDIDATES.join("\n            "));
+    console.error("  请安装 Chrome，或用环境变量指定：CHROME_PATH=/path/to/chrome");
+    process.exit(1);
+  }
+  console.log("Chrome: " + chrome);
+  const browser = await chromium.launch({ executablePath: chrome, args: ["--no-proxy-server", "--allow-file-access-from-files"] });
   const page = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
   await page.goto(URL, { waitUntil: "load" });
   await page.waitForTimeout(900);
