@@ -1,0 +1,22 @@
+{
+  "dim": "layout",
+  "zh": "构图版式",
+  "who": "随载体定",
+  "decides": "画面元素怎么排、信息怎么分层、留给文字的空间在哪——版式是给后续工序的接口",
+  "items": [
+    { "id": "LO-01", "zh": "单人主视觉", "prompt": "single-subject hero composition, figure occupying the central vertical mass with clear breathing room around, background simplified to support, one unobstructed focal path to the face", "note": "立绘与封面的默认底" },
+    { "id": "LO-02", "zh": "三角群像", "prompt": "triangle group composition, three figures arranged with the central one highest and largest, overlapping shoulders creating depth, unified eyeline toward one off-frame point", "note": "三人队的经典稳定结构" },
+    { "id": "LO-03", "zh": "三视图转面", "prompt": "character turnaround grid, the same figure shown front, three-quarter and side in three equal vertical columns, identical height and ground line across all views, construction marks faintly visible", "note": "等高等距是纪律，高低错一像素就废" },
+    { "id": "LO-04", "zh": "表情九宫格", "prompt": "expression grid composition, nine equal cells each holding one head-and-shoulders portrait of the same character under identical lighting, clean gutters between cells, one emotion per cell", "note": "格子之间必须完全一致，只换表情" },
+    { "id": "LO-05", "zh": "三格漫画", "prompt": "three-panel manga layout, stacked rectangular panels with generous gutters narrating one continuous beat top to bottom, border thickness uniform, one panel allowed a tighter crop for emphasis", "note": "格子服务节奏：起承转一屏读完" },
+    { "id": "LO-06", "zh": "跨页大格", "prompt": "full-bleed splash page composition, borderless image running the entire frame with maximum impact, subject staged for scale against the largest possible environment, no panel furniture", "note": "跨页是高潮专属，别当常态" },
+    { "id": "LO-07", "zh": "双联对比", "prompt": "diptych composition, two halves or two frames sharing identical camera angle and lighting with one decisive variable changed, clean dividing line, matched tonal weight so neither half dominates", "note": "对比成立的前提是其他变量全同" },
+    { "id": "LO-08", "zh": "横幅宽画幅", "prompt": "wide banner composition with strong horizontal thrust, subject or title mass on one side balancing layered depth on the other, clear horizon or architectural line organizing the width", "note": "宽幅的呼吸点在竖线上" },
+    { "id": "LO-09", "zh": "竖幅长图", "prompt": "tall vertical composition built for scrolling, visual beats stacked top to bottom with generous gaps, all critical shapes kept clear of the side margins, ending beat as the hook", "note": "竖屏先想停在哪，再想画什么" },
+    { "id": "LO-10", "zh": "徽标收尾", "prompt": "emblem end-card composition, simplified motif or character mark centered inside a shaped frame, flat colors with one metallic accent, generous margins, readable as a small icon", "note": "收尾卡要在缩略图尺寸还认得出" },
+    { "id": "LO-11", "zh": "道具平铺", "prompt": "flat-lay prop composition, several objects arranged in a grid or radial pattern on one plane, identical top-down light, even spacing, each object fully visible without overlap", "note": "平铺的间距要能被复现" },
+    { "id": "LO-12", "zh": "对话框预留", "prompt": "composition with speech balloon zones deliberately reserved as clean negative space, subject placed to one side, empty areas planned for later dialogue overlay, tail direction implied by gaze", "note": "留白的位置就是对话的位置" },
+    { "id": "LO-13", "zh": "框架式前景", "prompt": "framing foreground composition, dark architectural or foliage shapes bordering the frame with the subject seen through the opening, layered depth between foreground and subject, light gradient across the frame edge", "note": "前景压暗才有窥视感" },
+    { "id": "LO-14", "zh": "密集信息图", "prompt": "dense infographic composition, visual organized into labeled zones with numbered callouts and leader lines, consistent margin grid, one dominant anchor image with supporting detail blocks", "note": "信息图先分区，后填图" }
+  ]
+}

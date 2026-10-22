@@ -1,0 +1,18 @@
+{
+  "dim": "light",
+  "zh": "光影",
+  "who": "随风格定",
+  "decides": "光从哪来、什么颜色、多硬——光影是情绪的总开关，同一构图换光就是另一张脸",
+  "items": [
+    { "id": "LT-01", "zh": "黄金时段", "prompt": "golden hour side light, long warm shadows raking across surfaces, low sun angle with honey-colored rim on hair and shoulders, sky gradient from amber to pale blue", "note": "低日角的暖色轮廓光是签名" },
+    { "id": "LT-02", "zh": "霓虹夜光", "prompt": "neon practical lighting, competing magenta and cyan sources from opposite sides rimming the subject, shadows crushed toward black with almost no fill, colored reflections in every wet surface", "note": "夜戏靠光源颜色说话" },
+    { "id": "LT-03", "zh": "阴天柔光", "prompt": "soft overcast daylight, shadowless even illumination from the whole sky, muted gentle contrast, colors at their true value without directional drama", "note": "无影光适合日常与情绪内戏" },
+    { "id": "LT-04", "zh": "舞台聚光", "prompt": "stage spotlight lighting, one hard key beam from above with visible haze volume, sharp falloff into surrounding darkness, audience area completely unlit, one accent colored wash from the side", "note": "聚光的体积靠雾让光有形" },
+    { "id": "LT-05", "zh": "烛火暖光", "prompt": "candlelight interior, small flickering warm source with irrational dancing shadows, deep brown falloff into corners, everything within one meter lit and beyond swallowed", "note": "火光的 flicker 与短衰减是签名" },
+    { "id": "LT-06", "zh": "逆光剪影", "prompt": "strong backlight from behind the subject, silhouette with only a thin rim of hair and shoulder picked out, background light source visible or implied, foreground crushed to near-black", "note": "逆光先牺牲细节，换轮廓" },
+    { "id": "LT-07", "zh": "正午强光", "prompt": "harsh midday sun directly overhead, short dark shadows under the brow and nose, bleached highlights, saturated unmodulated colors, sharp-edged contact shadows", "note": "顶光的压迫感来自眼下三角阴影" },
+    { "id": "LT-08", "zh": "月光蓝调", "prompt": "moonlit blue night lighting, cool desaturated palette with one small warm practical accent, soft shadowless ambient from the sky, stars faintly visible in deep blue upper tones", "note": "冷调里留一个暖点，夜就不冷" },
+    { "id": "LT-09", "zh": "清晨薄雾", "prompt": "morning mist lighting, diffuse pale light with low saturation, air carrying visible depth between layered forms, distant shapes dissolving first, gentle dew sparkle on foreground edges", "note": "雾是按距离溶解的，不是均匀加白" },
+    { "id": "LT-10", "zh": "体积光穿透", "prompt": "volumetric god rays through gaps in cloud or canopy, distinct shafts with visible dust motes inside, strong contrast between lit air and unlit air, one grounded bounce filling shadows", "note": "丁达尔效应的关键是有介质" }
+  ]
+}

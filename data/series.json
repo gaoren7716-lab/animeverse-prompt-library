@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "dimension": "series",
+    "zh": "建系列图",
+    "desc": "给一个主题 → 按动漫视觉生产节奏自动建一组图：主视觉定调 → 角色卡立人 → 场景卡立世界 → 道具卡添细节 → 情节帧叙事 → 徽标收尾。全组统一风格与配色，看起来是一套；每张自带完整提示词与中文文案框架。",
+    "note": "角色分工与节奏是结构骨架；每张的具体机型/版式在角色指定范围内抽——抽到不满意的点「换一批」。",
+    "unknownTheme": "未收录的主题按原文注入提示词（theme: \"…\"），风格与配色仍全组统一。",
+    "defaultCount": 4,
+    "updated": "2026-10-22"
+  },
+  "counts": [3, 4, 5, 6],
+  "sets": {
+    "3": ["SR-01", "SR-02", "SR-03"],
+    "4": ["SR-01", "SR-02", "SR-03", "SR-04"],
+    "5": ["SR-01", "SR-02", "SR-03", "SR-04", "SR-05"],
+    "6": ["SR-01", "SR-02", "SR-03", "SR-04", "SR-05", "SR-06"]
+  },
+  "roles": [
+    {
+      "id": "SR-01",
+      "zh": "主视觉",
+      "job": "一张图定整套调子：主题、风格、配色、气质都在这里封版",
+      "media": ["MD-12", "MD-01"],
+      "shots": ["SH-01", "SH-04"],
+      "layouts": ["LO-01", "LO-02"],
+      "sizes": ["SZ-05", "SZ-02"],
+      "lights": ["LT-01", "LT-02", "LT-04"],
+      "titleFormula": "主题名 + 一句氛围（「{theme}·第一缕光落在樱枝上」）",
+      "copyGuide": "主标题≤10字点主题；副标题一句氛围，不放设定细节——细节是后面几张的事",
+      "why": "系列第一张是风格合同：后面所有张都向它对齐"
+    },
+    {
+      "id": "SR-02",
+      "zh": "角色卡",
+      "job": "立住一个可复现的角色：比例、服装、配色、表情逻辑",
+      "media": ["MD-02", "MD-06"],
+      "shots": ["SH-03", "SH-01"],
+      "layouts": ["LO-03", "LO-01"],
+      "sizes": ["SZ-02"],
+      "lights": ["LT-03", "LT-01"],
+      "titleFormula": "角色身份 + 识别特征（「剑客·竹影里的那一线刀光」）",
+      "copyGuide": "角色名/代号一行；服装与配色要点≤3条；表情说明一条",
+      "why": "角色是全系列的复用资产，设定越可复现，后面出图越稳"
+    },
+    {
+      "id": "SR-03",
+      "zh": "场景卡",
+      "job": "立住世界：空间逻辑、空气感、时间段的舞台",
+      "media": ["MD-01", "MD-06"],
+      "shots": ["SH-04", "SH-02"],
+      "layouts": ["LO-08", "LO-01"],
+      "sizes": ["SZ-03", "SZ-06"],
+      "lights": ["LT-01", "LT-09", "LT-08"],
+      "titleFormula": "地点 + 时间（「{theme}·黄昏的第几号巷」）",
+      "copyGuide": "地点名一行；时段与天气一条；空间关系一条（角色在这里会做什么）",
+      "why": "场景决定系列的呼吸感；空镜往往是最能被截图传播的一张"
+    },
+    {
+      "id": "SR-04",
+      "zh": "道具卡",
+      "job": "给世界一个可拿在手里的细节：信物、武器、食物、机械",
+      "media": ["MD-08", "MD-11"],
+      "shots": ["SH-11"],
+      "layouts": ["LO-11", "LO-10"],
+      "sizes": ["SZ-01"],
+      "lights": ["LT-01", "LT-04"],
+      "titleFormula": "道具名 + 来历一句（「{theme}·随身的那枚旧徽章」）",
+      "copyGuide": "道具名一行；材质与工艺一条；来历或用途一条",
+      "why": "道具是系列的记忆点，也是周边开发的种子"
+    },
+    {
+      "id": "SR-05",
+      "zh": "情节帧",
+      "job": "用一格画面讲一件事：冲突、相遇、抉择、日常",
+      "media": ["MD-04", "MD-01"],
+      "shots": ["SH-05", "SH-06", "SH-09"],
+      "layouts": ["LO-05", "LO-12"],
+      "sizes": ["SZ-02", "SZ-04"],
+      "lights": ["LT-02", "LT-06", "LT-05"],
+      "titleFormula": "事件 + 情绪（「{theme}·转身之前的那一秒」）",
+      "copyGuide": "事件一句话；情绪一个词；对白留空由后期排版",
+      "why": "叙事张力的来源；也是检验「角色+世界」组合是否成立的一格"
+    },
+    {
+      "id": "SR-06",
+      "zh": "徽标收尾",
+      "job": "把整套压缩成一个可缩略的符号：系列记忆的锚点",
+      "media": ["MD-12", "MD-14"],
+      "shots": ["SH-10", "SH-04"],
+      "layouts": ["LO-10", "LO-13"],
+      "sizes": ["SZ-01", "SZ-05"],
+      "lights": ["LT-04", "LT-01"],
+      "titleFormula": "系列名 + 年份或番外篇号",
+      "copyGuide": "系列名一行；徽标内不放任何小字",
+      "why": "收尾卡承担识别度：缩小到头像尺寸还要认得出"
+    }
+  ],
+  "themes": [
+    { "id": "TH-01", "zh": "春日校园", "en": "spring campus, cherry blossoms drifting across a schoolyard, late afternoon light through new leaves, uniform sleeves rolled for warmth", "style": "ST-02", "subject": "SU-07", "characters": ["CH-02", "CH-04"], "worlds": ["WD-01", "WD-16"], "hooks": ["春日的第一次告白，从樱树下开始", "学院春假·青春限定图鉴", "樱花季的放学路，光都变慢了"] },
+    { "id": "TH-02", "zh": "盛夏海边", "en": "midsummer seaside, blinding sunlight on wet sand, ice-cold soda condensation, wave edges backlit green-gold, cicada haze over the road", "style": "ST-01", "subject": "SU-09", "characters": ["CH-02", "CH-04"], "worlds": ["WD-08", "WD-16"], "hooks": ["盛夏海边的第一口冰汽水", "夏日终章·潮声与烟火倒计时", "八月巷口的橘子味晚风"] },
+    { "id": "TH-03", "zh": "深秋街景", "en": "late autumn streets, golden maple accumulation along curbs, wool scarf and breath visible, low amber sun between buildings, warm shop windows against cold air", "style": "ST-16", "subject": "SU-09", "characters": ["CH-03", "CH-02"], "worlds": ["WD-13", "WD-08"], "hooks": ["深秋街角的第一杯热红酒", "银杏落尽前的城市漫步路线", "十月黄昏·围巾与晚风"] },
+    { "id": "TH-04", "zh": "雪夜奇谭", "en": "snowbound winter night, footprints breaking pristine drifts, one lit window far off in dark forest, blue twilight with falling snow, muffled stillness", "style": "ST-04", "subject": "SU-10", "characters": ["CH-05", "CH-10"], "worlds": ["WD-12", "WD-14"], "hooks": ["雪夜奇谭·森林尽头的一盏灯", "初雪夜的来访者是谁", "冬日的约定在雪里发了芽"] },
+    { "id": "TH-05", "zh": "武道大会", "en": "martial arts tournament, dust erupting from an impact stance, tiered crowd rising into darkness, one spotlight on the arena floor, banner cloth snapping in the draft", "style": "ST-01", "subject": "SU-01", "characters": ["CH-01", "CH-13"], "worlds": ["WD-15", "WD-09"], "hooks": ["武道大会·决胜局的呼吸声", "擂台上没有偶然的胜利", "少年们的夏天从这一场开始"] },
+    { "id": "TH-06", "zh": "异世界冒险", "en": "isekai adventure, modern-clothed visitor at a fantasy market threshold, summoning circle embers fading at the feet, guildhall facades and floating isles beyond, nonhuman townsfolk at ordinary business", "style": "ST-02", "subject": "SU-03", "characters": ["CH-01", "CH-08"], "worlds": ["WD-10", "WD-14"], "hooks": ["异世界冒险·降落点选错的那天", "异世界新手村的第一份委托", "穿越者背包里最后一件现代物"] },
+    { "id": "TH-07", "zh": "赛博都市", "en": "cyberpunk megacity, rain-slicked alleys under six storeys of signage, chrome limb catching magenta and cyan rim light, puddles as broken neon mirrors, steam from grates", "style": "ST-14", "subject": "SU-05", "characters": ["CH-01", "CH-11"], "worlds": ["WD-03", "WD-05"], "hooks": ["赛博都市·雨夜第7号巷的快递", "义体时代的最后一次心跳", "霓虹尽头的旧人类街区"] },
+    { "id": "TH-08", "zh": "修仙问道", "en": "xianxia cultivation, a cultivator riding a flying sword above a cloud sea between jade peaks, talisman glow along the blade, hanfu sleeves streaming in the altitude wind", "style": "ST-08", "subject": "SU-06", "characters": ["CH-13", "CH-05"], "worlds": ["WD-04", "WD-09"], "hooks": ["修仙问道·御剑掠过云海的那一跃", "洞府千年·一朝雷劫", "问道者问的从来不是剑"] },
+    { "id": "TH-09", "zh": "星际远航", "en": "interstellar voyage, bridge crew silhouetted against a colored nebula, grime on floor plating and one small figure at the rail, instrumentation glowing in the dark", "style": "ST-11", "subject": "SU-15", "characters": ["CH-15", "CH-11"], "worlds": ["WD-05", "WD-06"], "hooks": ["星际远航·越过星云的那一天", "舰桥日志第1024条", "人类在宇宙里的第一盏灯"] },
+    { "id": "TH-10", "zh": "祭典烟火", "en": "summer festival night, lantern strings converging overhead, yukata figures holding sparklers, firework burst opening above tiled roofs, grilled food steam in warm light", "style": "ST-02", "subject": "SU-09", "characters": ["CH-02", "CH-04"], "worlds": ["WD-11", "WD-08"], "hooks": ["祭典烟火·人群里走散的那一分钟", "夏夜金鱼盆边的约定", "烟火升起时，话到嘴边又咽下"] },
+    { "id": "TH-11", "zh": "魔法学园", "en": "magic academy, floating runes orbiting a staff in a candlelit library, starry ceiling enchanted indoors, robes with celestial trim, one tome open mid-air", "style": "ST-03", "subject": "SU-04", "characters": ["CH-08", "CH-12"], "worlds": ["WD-10", "WD-14"], "hooks": ["魔法学园·禁书区的一课", "期末咒语考试的生存指南", "星图天花板上多了一颗星"] },
+    { "id": "TH-12", "zh": "竹林剑客", "en": "bamboo grove duel at dawn, blades still sheathed with tension unspent, low light shafts with suspended dust, indigo hakama and a trailing headband strand", "style": "ST-05", "subject": "SU-18", "characters": ["CH-13", "CH-16"], "worlds": ["WD-09", "WD-12"], "hooks": ["竹林剑客·拔刀前的三次呼吸", "雾散之前，胜负已分", "一剑客的清晨从露水开始"] },
+    { "id": "TH-13", "zh": "末日迁徙", "en": "post-apocalyptic migration, two scavengers crossing a rusted overpass reclaimed by tall grass, dust haze flattening the horizon, repaired mismatched survival gear", "style": "ST-16", "subject": "SU-17", "characters": ["CH-01", "CH-15"], "worlds": ["WD-06", "WD-03"], "hooks": ["末日迁徙·越过断桥的那两人", "废墟上长出的第一季麦子", "旧世界地图的最后一页"] },
+    { "id": "TH-14", "zh": "偶像舞台", "en": "idol stage performance, colored spotlights cutting through haze, audience glow sticks as a field of points, one singer silhouetted against a giant screen, confetti in the key beam", "style": "ST-02", "subject": "SU-13", "characters": ["CH-14"], "worlds": ["WD-15", "WD-11"], "hooks": ["偶像舞台·安可时的那句谢谢", "出道第100场，灯还亮着", "落幕之后，掌声还在胸口"] },
+    { "id": "TH-15", "zh": "午后咖啡", "en": "quiet afternoon cafe, steam lifting from a cup caught in window light, worn wooden table with use rings, a book left open face-down, soft north daylight", "style": "ST-04", "subject": "SU-09", "characters": ["CH-02", "CH-05"], "worlds": ["WD-13", "WD-16"], "hooks": ["午后咖啡·第三次端起又放下", "窗边座位的常客们", "雨天和拿铁更配这件事"] },
+    { "id": "TH-16", "zh": "机甲检阅", "en": "mecha review parade, towering machines in formation on an apron, warning stencils and numbered hatches, ground crew silhouettes for scale, morning light along armor bevels", "style": "ST-11", "subject": "SU-02", "characters": ["CH-07", "CH-11"], "worlds": ["WD-15", "WD-06"], "hooks": ["机甲检阅·列队接受检阅的清晨", "驾驶员们的一米八与十米", "机库大门开启之前"] }
+  ]
+}
