@@ -39,6 +39,7 @@ gallery/（文件名主干 = 案例 id）──gallery_sync.js──→ assets/g
 | series | themes 绑定 subject/characters/worlds/style；roles 各自带池子与 titleFormula/copyGuide；scriptRoles 五个幕次 + actOrder 分配表 | check_fields |
 | palettes | 每风格一张卡，4-6 个合法 hex + note/avoid/suits/scenes/lights | check_fields |
 | entities | rights 分级 R0-R3；R2/R3 必须带 deid 视觉等价描述 | check_fields |
+| gallery | 50 个槽位：CS-xx 用 case 字段复用案例（**不许再自带 recipe**，两处配方会漂移）；GL-xx 自带 zh/desc/validates/recipe | check_fields |
 | 维度 11 文件 | 每条须带 **kw 检索别名**（口语词入口，≥2 中文字或 ≥3 英文字母） | check_fields + apply_alias.js |
 
 ### 元层不进词面
@@ -88,22 +89,25 @@ gallery/（文件名主干 = 案例 id）──gallery_sync.js──→ assets/g
 NODE_PATH=<jsdom workspace>/node_modules node tools/build_web.js   # ① 先同步派生物
 node tools/check_fields.js      # ② 字段体检
 node tools/check_cases.js       # ③ 引用完整 + 覆盖矩阵
-node tools/smoke.js             # ④ 引擎冒烟 97 项
-NODE_PATH=... node tools/smoke-web.js  # ⑤ 界面冒烟 77 项（jsdom）
+node tools/smoke.js             # ④ 引擎冒烟 103 项
+NODE_PATH=... node tools/smoke-web.js  # ⑤ 界面冒烟 85 项（jsdom）
 node tools/gallery_sync.js --check     # ⑥ 画廊清单与目录一致
 node tools/inventory.js         # ⑦ 盘点数字喂文档
 node tools/apply_alias.js --check      # ⑧ 别名表体检（数据缺 kw 时改本脚本再重跑写入）
 ```
 
 改了 `data/cases.json` 的 tested 或 recipe → 画廊图可能过期，回第 3 节管线。
+改了 `data/gallery.json` 的槽位 → **必须重跑 `node tools/gallery_sync.js`** 重建清单，否则新槽位的图挂不上（页面只认清单里的 id）。
+加了新数据文件 → **要同时改三处**：build_web.js 的 FILES 列表、compose.js 的数据加载列表、check_fields.js 的加载列表。漏一处就是「文件在但引擎看不见」的静默失败（2026-10-22 加 gallery.json 时漏了 compose.js，inventory 报「画廊槽位 0」才暴露）。
 改了 index.html 的显隐相关 CSS → ⑤ 之外加跑真实 Chrome（playwright-core，**必须 file:// URL**，本机 localhost http 服务被坏代理拦死）。
 界面显隐类 bug jsdom 查不出 CSS 级联问题的一切嫌疑，都用真实 Chrome 逐页签断言 computed display。
 
 ## 5. 实测与文档的诚实纪律
 
 - **cases.tested=false 的案例，任何文档不许宣称有效**。出图目检通过才翻 true，翻之前对照 validates 逐条核
+- **画廊预留位（GL-xx）不算实测**：它的配方只保证「能装配、无冲突」，图没出就是没出。文档里写「引用覆盖 150/150」可以，写「实测 50/50」不行——实测分母是 cases（10），不是槽位（50）
 - 实测暴露的冲突当天补进 conflicts.json（when/notWith/verdict/why 四件套），并在 why 里记明出处（哪天哪个案例撞的）
-- README 与 FRAMEWORK 引用的数字（150 条、1.87 万亿、97/77 项冒烟）以 inventory.js 和 smoke 实跑为准，**手改数字前先重跑**
+- README 与 FRAMEWORK 引用的数字（150 条、1.87 万亿、103/85 项冒烟）以 inventory.js 和 smoke 实跑为准，**手改数字前先重跑**
 - 本项目无 build_md.js，**三份文档全手维护**（别套 art-forge 的生成链）
 
 ## 6. 本机环境坑（跨项目通用，2026-10 实测）

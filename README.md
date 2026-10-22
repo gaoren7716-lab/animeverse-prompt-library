@@ -14,7 +14,7 @@ Aniverse Prompt Library —— 覆盖全球动漫及关联创作的开放式提�
 
 | 境界 | 页面 | 干什么 |
 |---|---|---|
-| 直接复制 | 示例画廊 / 验证案例 | 10 个完整配方，每张都真实出过图、目检达标（tested=true），复制即用 |
+| 直接复制 | 示例画廊 / 验证案例 | 画廊 50 个位置：10 个已出图实测案例 + 40 个自带配方的预留位，复制即用 |
 | 组合构成 | 自定义出图 / 提示词合成器 / 抽卡 | 12 预设 + 自由组合、维度 chips 自选、约束随机抽卡；受控变形算子随时改写 |
 | 无限想象 | 系列出图 / **短剧分镜** / 全球地图 / 参考实体 | 一个主题自动建一套系列图；**一段短剧文案直接拆成分镜套图**；16 主题绑定题材/角色/世界/风格；28 个工作室/创作者/作品坐标 + 23 条影响关系 |
 
@@ -70,30 +70,37 @@ Aniverse Prompt Library —— 覆盖全球动漫及关联创作的开放式提�
 
 ## 十一页单页应用
 
-顶部横向导航（11 项，窄屏可横滚），十页单页应用如下：
+顶部横向导航（11 项，窄屏可横滚），按使用频次排序：
 
 | 页面 | 内容 |
 |---|---|
-| 示例画廊 | 10 张已配图案例卡，复制/送合成器 |
-| 全球地图 | 18 地区时代 + 28 参考实体检索 |
+| 示例画廊 | **50 个位置**：10 张已配图案例 + 40 个预留位（自带配方，可直接出图） |
 | 自定义出图 | 12 预设一键出词，或「自由组合 + 关键词」自动配一套 |
+| 抽卡 | 约束随机配方，「随机来一张」/ 1 / 4 / 8 张 |
 | 系列出图 | 主题 + 关键词 → 一套图（见上） |
 | 短剧分镜 | 短剧文案 → 一套分镜图（见上） |
+| 全球地图 | 18 地区时代 + 28 参考实体检索 |
 | 提示词合成器 | 11 维 chips + 算子工具条 + 分享码 |
-| 抽卡 | 约束随机配方，4/8 张 |
 | 验证案例 | 10 案例配方与验证点 |
 | 全部词条 | 150 条维度条目检索 + 详情抽屉 |
 | 风格配色 | 16 张配色卡（每风格一张） |
 | 框架与体检 | 维度表 + 覆盖缺口 + 实测进度 + 幕次分工表 |
 
+### 画廊的 50 个位置怎么填
+
+预留位（GL-11~GL-50）都是完整配方，**可以直接复制提示词去出图**，出完存成
+`gallery/<卡号>.jpg`（卡号见卡片左上角，如 `GL-23`）放进项目 `gallery/` 目录，
+重跑 `node tools/gallery_sync.js` 即自动挂上，页面即时显示。
+卡号规则：`CS-01~CS-10` 是已实测案例位，`GL-11~GL-50` 是预留位。
+
 ## 数据与代码
 
 ```
-data/*.json      17 个数据文件（11 维 + series/cases/conflicts/templates/palettes/entities）
+data/*.json      18 个数据文件（11 维 + series/cases/conflicts/templates/palettes/entities/gallery）
 tools/compose.js 引擎单一真源（UMD 双跑：Node CLI 与浏览器共用）
 tools/build_web.js  data → assets/data-bundle.js + compose.js → assets/engine.js
 index.html + assets/app.js  十一页单页应用（原生 JS，零依赖）
-gallery/         实测出图（文件名主干 = 案例 id）
+gallery/         实测出图（文件名主干 = 画廊槽位 id）
 tools/gallery_sync.js / gallery_compress.js  画廊清单与压缩（派生物勿手改）
 tools/apply_alias.js  检索别名维护脚本（写 kw 字段，幂等可重跑）
 ```
@@ -104,8 +111,8 @@ tools/apply_alias.js  检索别名维护脚本（写 kw 字段，幂等可重跑
 NODE_PATH=<jsdom 所在 node workspace>/node_modules node tools/build_web.js
 node tools/check_fields.js        # 字段体检（id 格式/prompt 禁中文/三件套/授权分级/kw 别名）
 node tools/check_cases.js         # 引用完整 + 覆盖矩阵 + 同维度堆料
-node tools/smoke.js               # 引擎冒烟 97 项
-NODE_PATH=... node tools/smoke-web.js   # 界面冒烟 77 项（jsdom，含 CSS 绊线）
+node tools/smoke.js               # 引擎冒烟 103 项
+NODE_PATH=... node tools/smoke-web.js   # 界面冒烟 85 项（jsdom，含 CSS 绊线）
 node tools/gallery_sync.js --check       # 画廊清单与目录一致
 node tools/inventory.js           # 盘点 + 覆盖缺口
 ```
@@ -116,9 +123,10 @@ node tools/inventory.js           # 盘点 + 覆盖缺口
 
 ## 路线图
 
-- 案例覆盖矩阵 91/150，缺口最大的维度：regions 8/18、subjects 11/18、layouts 7/14（计划内，见 FRAMEWORK.md）
-- 画廊从 10 张案例图扩展到 16 系列主题各一组
+- 画廊 50 个位置中，40 个预留位待出图（配方已备好，填图即挂上）
+- 16 个系列主题各出一组图（当前 10 张画廊图都是单案例，非系列组）
 - 更多地区坐标（东南亚、中东、拉美动画脉络）
+- 出图模型的实测结论只对被测模型有效，换模型需重测（cases.tested 的语义边界）
 
 ## 致谢
 

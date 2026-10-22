@@ -16,7 +16,7 @@ function load(name) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, "data", name + ".json"), "utf8"));
 }
 const data = {};
-DIMS.concat(["series", "cases", "conflicts", "templates", "palettes", "entities"]).forEach(d => { data[d] = load(d); });
+DIMS.concat(["series", "cases", "conflicts", "templates", "palettes", "entities", "gallery"]).forEach(d => { data[d] = load(d); });
 
 // 坏字符：西里尔、零宽、BOM、非 ASCII 控制符
 function badChars(s) {
@@ -137,6 +137,33 @@ data.cases.items.forEach(cs => {
     if (!d) { errors.push(cs.id + " recipe 键非法：" + k); return; }
     if (!knownIds[cs.recipe[k]] || idOwner[cs.recipe[k]] !== d) {
       errors.push(cs.id + " recipe." + k + " 引用不存在或错维度：" + cs.recipe[k]);
+    }
+  });
+});
+
+// gallery：槽位 id / 配方引用 / 与案例的一致性
+data.gallery.slots.forEach(sl => {
+  if (!/^(CS|GL)-\d{2}$/.test(sl.id)) errors.push(sl.id + " 画廊槽位 id 格式非法（应为 CS-xx 或 GL-xx）");
+  if (sl.case) {
+    // 复用案例：必须真的存在该案例，且不自带 recipe（避免两处配方漂移）
+    if (!data.cases.items.some(c => c.id === sl.case)) errors.push(sl.id + " 引用的案例不存在：" + sl.case);
+    if (sl.recipe) errors.push(sl.id + " 复用了案例却自带 recipe（两处配方会漂移）");
+    return;
+  }
+  if (!sl.zh || !sl.desc || !sl.validates) errors.push(sl.id + " 缺 zh/desc/validates");
+  if (!sl.recipe) errors.push(sl.id + " 缺 recipe");
+  // 槽位中文说明禁英文串味（与维度条目同一把尺）
+  var wl = /\bQ\b|CG|VTuber|Live2D|OVA|VHS|ins|IP/gi;
+  ["zh", "desc", "validates"].forEach(function (k) {
+    var rest = String(sl[k] || "").replace(wl, "");
+    if (/[A-Za-z]{3,}/.test(rest)) errors.push(sl.id + " " + k + " 混入英文单词（中英串味）：" + sl[k]);
+  });
+  var single = { region: "regions", style: "styles", media: "media", subject: "subjects", character: "characters", world: "worlds", shot: "shots", light: "lights", layout: "layouts", size: "sizes", decor: "decors" };
+  Object.keys(sl.recipe || {}).forEach(k => {
+    var d = single[k];
+    if (!d) { errors.push(sl.id + " recipe 键非法：" + k); return; }
+    if (!knownIds[sl.recipe[k]] || idOwner[sl.recipe[k]] !== d) {
+      errors.push(sl.id + " recipe." + k + " 引用不存在或错维度：" + sl.recipe[k]);
     }
   });
 });

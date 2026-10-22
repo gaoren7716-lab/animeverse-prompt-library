@@ -57,6 +57,10 @@ function run() {
     /* 1. 十一页骨架 */
     var views = ["v-gallery", "v-atlas", "v-custom", "v-series", "v-script", "v-synth", "v-gacha", "v-cases", "v-entries", "v-pairs", "v-frame"];
     ok($$("#nav button").length === 11, "导航 11 个按钮");
+    // 导航顺序（前 5 位是用户指定的频次顺序，改动会被这条断言挡住）
+    var navOrder = $$("#nav button").map(function (b) { return b.getAttribute("data-v"); });
+    ok(navOrder.slice(0, 5).join(",") === "v-gallery,v-custom,v-gacha,v-series,v-script",
+      "导航顺序：画廊/自定义/抽卡/系列/短剧", navOrder.slice(0, 5).join(","));
     views.forEach(function (v) { ok(!!$(v), "视图存在：" + v); });
 
     /* 2. 视图显隐（CSS 级：computed display） */
@@ -85,11 +89,20 @@ function run() {
 
     /* 4. 画廊 / 地图 / 词条 / 搭配 / 案例 渲染 */
     click($$("#nav button").filter(function (b) { return b.getAttribute("data-v") === "v-gallery"; })[0]);
-    ok($$("#gGrid .gcard").length === 10, "画廊 10 张案例卡");
-    ok($$("#gGrid .gcard img").length === 10, "画廊 10 张全部配图", String($$("#gGrid .gcard img").length));
+    ok($$("#gGrid .gcard").length === 50, "画廊 50 个位置", String($$("#gGrid .gcard").length));
+    ok($$("#gGrid .gcard img").length === 10, "画廊 10 张已配图", String($$("#gGrid .gcard img").length));
+    ok($$("#gGrid .gcard .colorcard").length === 40, "画廊 40 个待配图占位", String($$("#gGrid .gcard .colorcard").length));
     ok($("gCount").textContent.indexOf("已配图 10") !== -1, "画廊计数显示已配图 10", $("gCount").textContent);
     ok($$("#gGrid .gcard img")[0].getAttribute("src").indexOf("gallery/CS-") === 0, "配图 src 指向 gallery/ 目录");
     ok(typeof window.GALLERY_IMGS === "object" && Object.keys(window.GALLERY_IMGS).length === 10, "GALLERY_IMGS 清单 10 条");
+    // 预留位必须自带配方：点开详情能看到词面与验证点
+    var glCard = $$("#gGrid .gcard").filter(function (c) { return c.getAttribute("data-cs") === "GL-23"; })[0];
+    ok(!!glCard, "画廊含 GL-23 预留位");
+    if (glCard) {
+      click(glCard.querySelector('[data-act="detail"]'));
+      ok($("dtBody").innerHTML.indexOf("提示词") !== -1 && $("dtBody").innerHTML.indexOf("验证点") !== -1, "预留位详情含词面与验证点");
+      click($("dtClose"));
+    }
     click($$("#nav button").filter(function (b) { return b.getAttribute("data-v") === "v-atlas"; })[0]);
     ok($$("#rgGrid .card").length === 18, "全球地图 18 个地区");
     ok($$("#entGrid .card").length === 28, "实体 28 张");
@@ -217,6 +230,12 @@ function run() {
     ok($$("#gcGrid .card").length === 4, "抽卡默认 4 张");
     click($("gc8"));
     ok($$("#gcGrid .card").length === 8, "抽卡切 8 张");
+    click($("gcRand"));
+    ok($$("#gcGrid .card").length === 1, "随机来一张出 1 张");
+    ok($("gcGrid").innerHTML.indexOf("复制提示词") !== -1 && $("gcGrid").innerHTML.indexOf("再来一张") !== -1, "随机一张含复制与再来");
+    ok($("gcGrid").innerHTML.indexOf("no watermark") !== -1, "随机一张含硬约束词面");
+    click($("gcRAgain"));
+    ok($$("#gcGrid .card").length === 1, "再来一张仍 1 张");
 
     /* 8. 自定义出图 */
     click($$("#nav button").filter(function (b) { return b.getAttribute("data-v") === "v-custom"; })[0]);

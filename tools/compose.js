@@ -23,7 +23,7 @@
     var fs = require("fs"), path = require("path");
     var DATA_DIR = path.join(__dirname, "..", "data");
     data = {};
-    DIM_KEYS.concat(["series", "cases", "conflicts", "templates", "palettes", "entities"]).forEach(function (n) {
+    DIM_KEYS.concat(["series", "cases", "conflicts", "templates", "palettes", "entities", "gallery"]).forEach(function (n) {
       data[n] = JSON.parse(fs.readFileSync(path.join(DATA_DIR, n + ".json"), "utf8"));
     });
   }
@@ -672,7 +672,8 @@
       conflicts: data.conflicts.conflicts.length,
       palettes: data.palettes && data.palettes.items ? data.palettes.items.length : 0,
       seriesRoles: data.series.roles.length, seriesThemes: data.series.themes.length,
-      entities: data.entities.entities.length, relations: data.entities.relations.length };
+      entities: data.entities.entities.length, relations: data.entities.relations.length,
+      gallerySlots: data.gallery && data.gallery.slots ? data.gallery.slots.length : 0 };
   }
   function gaps() {
     var used = {}, list = [];
@@ -686,13 +687,21 @@
     data.templates.items.forEach(function (tp) {
       Object.keys(tp.fills || {}).forEach(function (k) { mark(tp.fills[k]); });
     });
+    // 画廊预留位自带完整配方，同样算「被引用」（不认它会虚报缺口）
+    var gal = data.gallery && data.gallery.slots ? data.gallery.slots : [];
+    gal.forEach(function (sl) {
+      if (!sl.recipe) return;
+      Object.keys(sl.recipe).forEach(function (k) { mark(sl.recipe[k]); });
+    });
     DIM_KEYS.forEach(function (d) {
       var unused = data[d].items.filter(function (it) { return !used[it.id]; })
         .map(function (it) { return it.id; });
       if (unused.length) list.push({ dim: d, zh: data[d].zh, unused: unused });
     });
     var untested = data.cases.items.filter(function (cs) { return cs.tested === false; }).length;
+    var slotsFilled = 0;
     return { unusedByCaseOrTpl: list, untestedCases: untested,
+      gallerySlots: gal.length, gallerySlotFilled: slotsFilled,
       testedCases: data.cases.items.length - untested };
   }
 

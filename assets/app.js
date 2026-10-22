@@ -79,27 +79,45 @@ function galleryImg(id) {
   return (typeof GALLERY_IMGS !== "undefined" && GALLERY_IMGS && GALLERY_IMGS[id]) ? GALLERY_IMGS[id] : null;
 }
 function galleryHasImg(id) { return !!galleryImg(id); }
+/* 槽位归一：CS-xx 复用验证案例的配方/描述/验证点，GL-xx 用自带的 */
+function gSlots() {
+  var byCase = {};
+  D.cases.items.forEach(function (c) { byCase[c.id] = c; });
+  return (D.gallery && D.gallery.slots ? D.gallery.slots : []).map(function (s) {
+    var c = s.case ? byCase[s.case] : null;
+    return {
+      id: s.id,
+      zh: s.zh || (c ? c.zh : s.id),
+      desc: s.desc || (c ? c.desc : ""),
+      validates: s.validates || (c ? c.validates : ""),
+      recipe: s.recipe || (c ? c.recipe : null),
+      tested: c ? c.tested : false
+    };
+  }).filter(function (s) { return !!s.recipe; });
+}
 function renderGallery() {
   var grid = $("gGrid");
-  var cases = D.cases.items;
-  var shown = cases.filter(function (cs) {
-    if (gFilter === "img") return galleryHasImg(cs.id);
-    if (gFilter === "todo") return !galleryHasImg(cs.id);
+  var slots = gSlots();
+  var shown = slots.filter(function (s) {
+    if (gFilter === "img") return galleryHasImg(s.id);
+    if (gFilter === "todo") return !galleryHasImg(s.id);
     return true;
   });
-  $("gCount").textContent = "共 " + shown.length + " 张（已配图 " + cases.filter(function (c) { return galleryHasImg(c.id); }).length + "）";
-  grid.innerHTML = shown.map(function (cs) {
-    var st = AV.index.styles[cs.recipe.style];
-    var pal = AV.paletteOf(cs.recipe.style);
-    var sw = pal ? pal.swatches.map(function (s) { return s.hex; }) : ["#2c2d55"];
+  var filled = slots.filter(function (s) { return galleryHasImg(s.id); }).length;
+  $("gCount").textContent = "共 " + slots.length + " 个位置（已配图 " + filled + " · 待配图 " + (slots.length - filled) + "）";
+  grid.innerHTML = shown.map(function (s) {
+    var st = AV.index.styles[s.recipe.style];
+    var pal = AV.paletteOf(s.recipe.style);
+    var sw = pal ? pal.swatches.map(function (x) { return x.hex; }) : ["#2c2d55"];
     var swHtml = sw.map(function (h) { return '<i style="background:' + h + '"></i>'; }).join("");
-    var img = galleryImg(cs.id);
+    var img = galleryImg(s.id);
     var imgHtml = img
-      ? '<img src="' + esc(img) + '" alt="' + esc(cs.zh) + '">'
-      : '<div class="colorcard"><div class="swrow">' + swHtml + '</div><span class="mut sm">待配图 · ' + esc(st ? st.zh : "") + '</span></div>';
-    return '<div class="gcard" data-cs="' + cs.id + '">' +
-      '<div class="imgwrap" data-act="detail"><span class="gid" data-act="gid">' + cs.id + '</span>' + imgHtml + "</div>" +
-      '<div class="body"><h4>' + esc(cs.zh) + "</h4><div class=\"desc\">" + esc(cs.desc) + "</div></div>" +
+      ? '<img src="' + esc(img) + '" alt="' + esc(s.zh) + '">'
+      : '<div class="colorcard"><div class="swrow">' + swHtml + '</div><span class="mut sm">待配图 · ' + esc(st ? st.zh : "") + '</span>' +
+        '<span class="mut sm" style="font-size:10.5px;opacity:.75">存成 gallery/' + esc(s.id) + '.jpg</span></div>';
+    return '<div class="gcard" data-cs="' + s.id + '">' +
+      '<div class="imgwrap" data-act="detail"><span class="gid" data-act="gid">' + s.id + '</span>' + imgHtml + "</div>" +
+      '<div class="body"><h4>' + esc(s.zh) + (s.tested ? ' <span class="badge b-gr">已实测</span>' : "") + "</h4><div class=\"desc\">" + esc(s.desc) + "</div></div>" +
       '<div class="acts">' +
       '<button class="gcopy" data-act="copy">复制提示词</button>' +
       '<button class="btn sm" data-act="synth">合成器改用</button>' +
@@ -109,12 +127,13 @@ function renderGallery() {
 $("gGrid").addEventListener("click", function (e) {
   var card = e.target.closest(".gcard");
   if (!card) return;
-  var cs = D.cases.items.filter(function (c) { return c.id === card.getAttribute("data-cs"); })[0];
+  var sid = card.getAttribute("data-cs");
+  var cs = gSlots().filter(function (c) { return c.id === sid; })[0];
   if (!cs) return;
   var act = e.target.getAttribute("data-act");
   if (act === "gid") {
     var img = galleryImg(cs.id);
-    copyText(img ? img.split("/").pop() : cs.id);
+    copyText(img ? img.split("/").pop() : cs.id + ".jpg");
     return;
   }
   if (act === "copy") { copyText(AV.compose(cs.recipe).prompt); return; }
@@ -254,7 +273,7 @@ var PRESETS = [
   { zh: "游戏抽卡立绘", desc: "小尺寸可读，轮廓光分离背景", theme: "", sel: { size: "SZ-02", media: "MD-07", subject: "SU-03", character: "CH-08", world: "WD-14", shot: "SH-01", light: "LT-02", style: "ST-11", region: "RG-18", layout: "LO-01" } },
   { zh: "道具图标", desc: "64 像素可读的符号层", theme: "", sel: { size: "SZ-01", media: "MD-08", subject: "SU-06", world: "WD-09", shot: "SH-11", light: "LT-01", style: "ST-10", region: "RG-18", layout: "LO-11", decor: "DC-03" } },
   { zh: "卡牌牌面", desc: "标题带留空，系列光线一致", theme: "", sel: { size: "SZ-05", media: "MD-09", subject: "SU-13", character: "CH-14", world: "WD-15", shot: "SH-01", light: "LT-04", style: "ST-02", region: "RG-05", layout: "LO-01", decor: "DC-07" } },
-  { zh: "虚拟主播立绘", desc: " thumbnail appeal， frontal pose", theme: "", sel: { size: "SZ-01", media: "MD-10", subject: "SU-07", character: "CH-02", world: "WD-13", shot: "SH-04", light: "LT-03", style: "ST-02", region: "RG-05", layout: "LO-01" } },
+  { zh: "虚拟主播立绘", desc: "缩略图吸引力优先，正面站姿", theme: "", sel: { size: "SZ-01", media: "MD-10", subject: "SU-07", character: "CH-02", world: "WD-13", shot: "SH-04", light: "LT-03", style: "ST-02", region: "RG-05", layout: "LO-01" } },
   { zh: "周边徽章图案", desc: "印刷工艺说了算：粗线少色", theme: "", sel: { size: "SZ-01", media: "MD-11", subject: "SU-04", character: "CH-12", world: "WD-16", shot: "SH-11", light: "LT-01", style: "ST-06", region: "RG-13", layout: "LO-11" } },
   { zh: "赛博海报", desc: "斜角动势 + 集中线，宽画幅", theme: "", sel: { size: "SZ-03", media: "MD-12", subject: "SU-05", character: "CH-01", world: "WD-03", shot: "SH-06", light: "LT-02", style: "ST-14", region: "RG-05", layout: "LO-02", decor: "DC-02" } },
   { zh: "轻小说彩页", desc: "水彩洇边，插图让位给文字", theme: "", sel: { size: "SZ-02", media: "MD-06", subject: "SU-09", character: "CH-02", world: "WD-11", shot: "SH-04", light: "LT-01", style: "ST-04", region: "RG-06", layout: "LO-01", decor: "DC-06" } }
@@ -664,6 +683,27 @@ function doGacha() {
 $("gc1").addEventListener("click", function () { gcN = 1; doGacha(); });
 $("gc4").addEventListener("click", function () { gcN = 4; doGacha(); });
 $("gc8").addEventListener("click", function () { gcN = 8; doGacha(); });
+/* 随机来一张：单张大卡，完整词面 + 复制 + 载入合成器（区别于「抽 1 张」的网格小卡） */
+$("gcRand").addEventListener("click", function () {
+  var r = AV.random(gcLock);
+  var prompt = AV.compose(r).prompt;
+  var card = document.createElement("div");
+  card.className = "card";
+  card.style.maxWidth = "760px";
+  card.innerHTML =
+    '<div class="row" style="justify-content:space-between"><b>🎲 随机一张</b>' +
+    '<span class="mut sm">' + ((r.warnings || []).length) + " 警告</span></div>" +
+    '<div class="sm" style="margin:9px 0">' + selChips(r) + "</div>" +
+    '<pre class="mono" style="font-size:12px;white-space:pre-wrap;word-break:break-all;background:var(--bg2);padding:12px;border-radius:8px">' + esc(prompt) + "</pre>" +
+    '<div class="row" style="margin-top:10px"><button class="gcopy" id="gcRCopy">复制提示词</button>' +
+    '<button class="btn" id="gcRSynth">载入合成器</button>' +
+    '<button class="btn" id="gcRAgain">再来一张</button></div>';
+  $("gcGrid").innerHTML = "";
+  $("gcGrid").appendChild(card);
+  card.querySelector("#gcRCopy").addEventListener("click", function () { copyText(prompt); });
+  card.querySelector("#gcRSynth").addEventListener("click", function () { S.sel = r; renderSynth(); switchView("v-synth"); toast("已载入"); });
+  card.querySelector("#gcRAgain").addEventListener("click", function () { $("gcRand").click(); });
+});
 // 锁定入口放在合成器输出区下方：由 renderSynth 注入
 var origRenderSynth = renderSynth;
 renderSynth = function () {

@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 /* 画廊同步（轻量版，吸收 art-prompt-forge / ecommerce 画廊约定）：
- * gallery/ 目录里，文件名主干 = 卡片 id（CS-01.jpg / CS-01.png），
+ * gallery/ 目录里，文件名主干 = 画廊槽位 id（CS-01.jpg / GL-23.png），
  * 扫一次目录重写 assets/gallery-imgs.js（派生物，勿手改）。
  * 野文件名（认不出的 id）进 GALLERY_UNCLAIMED，页面上出提示条。
  * --check 只体检：有未认领文件或清单与目录不一致 → 退出码 1。
- * 注：本库画廊是「实测出图落点」，没有图时清单为空、页面如实显示 0 张。 */
+ * 注：本库画廊是「实测出图落点」，没有图时清单为空、页面如实显示 0 张。
+ * 槽位表在 data/gallery.json（50 个位置），案例表在 data/cases.json（10 条验证案例），
+ * 两者 id 空间不同：CS-xx 已在 cases.json 登记，GL-xx 在 gallery.json 登记。 */
 "use strict";
 const fs = require("fs");
 const path = require("path");
@@ -15,8 +17,12 @@ const OUT = path.join(ROOT, "assets", "gallery-imgs.js");
 
 function knownIds() {
   const ids = {};
+  // 案例 id（CS-xx）——画廊前 10 位复用案例
   JSON.parse(fs.readFileSync(path.join(ROOT, "data", "cases.json"), "utf8"))
     .items.forEach(it => { ids[it.id] = it.zh; });
+  // 画廊槽位 id（GL-xx / CS-xx）——预留位
+  const gal = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "gallery.json"), "utf8"));
+  gal.slots.forEach(s => { ids[s.id] = s.zh || (s.case ? s.case : s.id); });
   return ids;
 }
 
@@ -49,7 +55,7 @@ function main() {
 
   const n = Object.keys(claimed).length;
   console.log("画廊：认领 " + n + " 张" + (checkOnly ? "（--check 不写清单）" : "，清单已重建"));
-  unclaimed.forEach(f => console.log("  ⚠ 未认领（文件名须是案例 id，如 CS-01.jpg）：" + f));
+  unclaimed.forEach(f => console.log("  ⚠ 未认领（文件名须是槽位 id，如 CS-01.jpg 或 GL-23.jpg）：" + f));
 
   if (checkOnly) {
     // 清单与目录逐张对比（注释承诺过的事必须真做）：

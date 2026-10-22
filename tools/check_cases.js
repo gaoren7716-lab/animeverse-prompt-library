@@ -16,7 +16,7 @@ function load(name) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, "data", name + ".json"), "utf8"));
 }
 const data = {};
-DIMS.concat(["cases", "templates", "series"]).forEach(d => { data[d] = load(d); });
+DIMS.concat(["cases", "templates", "series", "gallery"]).forEach(d => { data[d] = load(d); });
 
 const errors = [];
 const knownIds = {};
@@ -62,6 +62,8 @@ function mark(recipe) {
 }
 data.cases.items.forEach(cs => mark(cs.recipe));
 data.templates.items.forEach(tp => mark(tp.fills));
+// 画廊预留位自带完整配方，同样是有效引用（覆盖矩阵要反映真实状态）
+data.gallery.slots.forEach(sl => { if (sl.recipe) mark(sl.recipe); });
 
 var totalEntries = 0, covered = 0, gaps = [];
 DIMS.forEach(d => {

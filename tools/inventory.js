@@ -16,10 +16,11 @@ console.log("  任务模板：" + s.templates);
 console.log("  冲突规则：" + s.conflicts);
 console.log("  系列角色：" + s.seriesRoles + " · 系列主题：" + s.seriesThemes);
 console.log("  参考实体：" + s.entities + " · 关系边：" + s.relations);
+console.log("  画廊槽位：" + s.gallerySlots + "（含已出图与预留位）");
 
 var g = AV.gaps();
 console.log("== 覆盖缺口 ==");
-if (!g.unusedByCaseOrTpl.length) console.log("  全部条目都被案例或模板引用");
+if (!g.unusedByCaseOrTpl.length) console.log("  全部条目都被案例、模板或画廊槽位引用");
 else g.unusedByCaseOrTpl.forEach(function (x) {
   console.log("  " + x.zh + "（" + x.dim + "）未被引用：" + x.unused.join(", "));
 });

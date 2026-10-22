@@ -9,7 +9,7 @@ const ROOT = path.join(__dirname, "..");
 const FILES = [
   "regions", "styles", "media", "subjects", "characters",
   "worlds", "shots", "lights", "layouts", "sizes", "decors",
-  "series", "cases", "conflicts", "templates", "palettes", "entities",
+  "series", "cases", "conflicts", "templates", "palettes", "entities", "gallery",
 ];
 
 function main() {
@@ -20,7 +20,8 @@ function main() {
     out[name] = JSON.parse(fs.readFileSync(p, "utf8"));
     const n = out[name].items ? out[name].items.length
       : out[name].conflicts ? out[name].conflicts.length
-      : out[name].entities ? out[name].entities.length : 0;
+      : out[name].entities ? out[name].entities.length
+      : out[name].slots ? out[name].slots.length : 0;
     counts.push(name + "=" + n);
   }
   const js =

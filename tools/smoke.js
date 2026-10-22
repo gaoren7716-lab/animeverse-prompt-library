@@ -157,5 +157,16 @@ ok(scr.cards[0].prompt.indexOf("scene:") !== -1, "分镜：原文进入词面");
 ok(scr.cards.every(function (c) { return c.warnings.length === 0; }), "分镜：无冲突告警");
 ok(AV.scriptToSeries("t", "k", "   ", {}) === null, "分镜：空文案返回 null");
 
+/* 11. 画廊槽位（50 位） */
+var gslots = AV.data && AV.data.gallery ? AV.data.gallery.slots : [];
+ok(gslots.length === 50, "画廊：50 个槽位", String(gslots.length));
+var glOwn = gslots.filter(function (s) { return !!s.recipe; });
+ok(glOwn.length === 40, "画廊：40 个预留位自带配方", String(glOwn.length));
+ok(gslots.filter(function (s) { return !!s.case; }).length === 10, "画廊：10 位复用验证案例");
+ok(gslots.every(function (s) { return !s.recipe || AV.conflicts(s.recipe).length === 0; }), "画廊：全部预留位配方无冲突");
+ok(gslots.every(function (s) { return !s.recipe || AV.compose(s.recipe).prompt.length > 80; }), "画廊：全部预留位可装配出词面");
+var gids = gslots.map(function (s) { return s.id; });
+ok(new Set(gids).size === gids.length, "画廊：槽位 id 无重复");
+
 console.log("\n冒烟结果：通过 " + pass + " / 失败 " + fail);
 process.exit(fail ? 1 : 0);

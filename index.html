@@ -19,12 +19,12 @@ a{color:var(--cy);text-decoration:none}
 ::selection{background:rgba(139,92,255,.4)}
 
 /* ===== 顶部导航栏 ===== */
-#side{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:16px;padding:0 16px;height:54px;background:var(--bg2);border-bottom:1px solid var(--line)}
-#side .logo{font-size:16px;font-weight:700;white-space:nowrap;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.5px}
-#side .logo small{display:inline;font-size:9.5px;color:var(--tx3);font-weight:400;letter-spacing:1.5px;margin-left:7px;-webkit-text-fill-color:var(--tx3)}
-.nav{display:flex;flex-direction:row;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+#side{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:16px;padding:0 16px;height:60px;background:var(--bg2);border-bottom:1px solid var(--line)}
+#side .logo{font-size:17px;font-weight:700;white-space:nowrap;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.5px}
+#side .logo small{display:inline;font-size:10px;color:var(--tx3);font-weight:400;letter-spacing:1.5px;margin-left:7px;-webkit-text-fill-color:var(--tx3)}
+.nav{display:flex;flex-direction:row;gap:3px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
-.nav button{display:flex;align-items:center;gap:6px;width:auto;white-space:nowrap;text-align:left;background:none;border:0;color:var(--tx2);padding:7px 11px;border-radius:8px;font-size:13px;cursor:pointer;transition:.15s}
+.nav button{display:flex;align-items:center;gap:7px;width:auto;white-space:nowrap;text-align:left;background:none;border:0;color:var(--tx2);padding:10px 14px;border-radius:9px;font-size:14px;cursor:pointer;transition:.15s}
 .nav button:hover{background:var(--panel);color:var(--tx)}
 .nav button.on{background:var(--panel2);color:#fff;box-shadow:inset 0 -2px 0 var(--pk)}
 .nav button .ico{width:16px;text-align:center;flex:0 0 16px}
@@ -42,18 +42,19 @@ a{color:var(--cy);text-decoration:none}
 .hint b{color:var(--tx2)}
 
 /* ===== 通用控件 ===== */
-.btn{background:var(--panel2);border:1px solid var(--line);color:var(--tx);border-radius:9px;padding:8px 15px;font-size:13px;cursor:pointer;transition:.15s}
+.btn{background:var(--panel2);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:11px 20px;font-size:14px;line-height:1.5;min-height:42px;cursor:pointer;transition:.15s}
 .btn:hover{border-color:var(--pp);color:#fff}
 .btn.pri{background:var(--grad);border:0;color:#fff;font-weight:600}
 .btn.pri:hover{filter:brightness(1.12)}
-.btn.sm{padding:5px 11px;font-size:12px;border-radius:7px}
+.btn.sm{padding:8px 15px;font-size:13px;border-radius:8px;min-height:36px}
 .btn.on{border-color:var(--pk);color:var(--pk);background:rgba(255,92,138,.1)}
-.gcopy{background:var(--grad);border:0;color:#fff;border-radius:9px;padding:8px 16px;font-size:13px;cursor:pointer;font-weight:600}
+.gcopy{background:var(--grad);border:0;color:#fff;border-radius:10px;padding:11px 22px;font-size:14px;line-height:1.5;min-height:42px;cursor:pointer;font-weight:600}
 .gcopy:hover{filter:brightness(1.12)}
-input[type=text],textarea,select{background:var(--bg2);border:1px solid var(--line);border-radius:9px;color:var(--tx);padding:9px 12px;font-size:13.5px;font-family:inherit;outline:none}
-input[type=text]:focus,textarea:focus{border-color:var(--pp)}
-textarea{width:100%;min-height:150px;resize:vertical;line-height:1.75;margin-top:4px}
-.chip{display:inline-flex;align-items:center;gap:5px;background:var(--bg2);border:1px solid var(--line);color:var(--tx2);border-radius:20px;padding:4px 12px;font-size:12.5px;cursor:pointer;transition:.13s;user-select:none}
+input[type=text],textarea,select{background:var(--bg2);border:1px solid var(--line);border-radius:10px;color:var(--tx);padding:11px 15px;font-size:14.5px;line-height:1.6;min-height:44px;font-family:inherit;outline:none}
+input[type=text]:focus,textarea:focus,select:focus{border-color:var(--pp)}
+textarea{width:100%;min-height:210px;resize:vertical;line-height:1.85;margin-top:6px;font-size:14.5px}
+select{padding-right:34px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--line);color:var(--tx2);border-radius:20px;padding:7px 15px;font-size:13.5px;line-height:1.5;cursor:pointer;transition:.13s;user-select:none}
 .chip:hover{border-color:var(--pp);color:var(--tx)}
 .chip.on{background:rgba(139,92,255,.16);border-color:var(--pp);color:#fff}
 .chip .cid{color:var(--tx3);font-size:10.5px;font-family:ui-monospace,monospace}
@@ -160,12 +161,12 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
   <div class="logo">动漫宇宙<small>ANIMEVERSE PROMPT LIBRARY</small></div>
   <nav class="nav" id="nav">
     <button data-v="v-gallery" class="on"><span class="ico">🎨</span>示例画廊</button>
-    <button data-v="v-atlas"><span class="ico">🗺️</span>全球地图</button>
     <button data-v="v-custom"><span class="ico">⚡</span>自定义出图</button>
+    <button data-v="v-gacha"><span class="ico">🎲</span>抽卡</button>
     <button data-v="v-series"><span class="ico">🧩</span>系列出图</button>
     <button data-v="v-script"><span class="ico">🎬</span>短剧分镜</button>
+    <button data-v="v-atlas"><span class="ico">🗺️</span>全球地图</button>
     <button data-v="v-synth"><span class="ico">🛠️</span>提示词合成器</button>
-    <button data-v="v-gacha"><span class="ico">🎲</span>抽卡</button>
     <button data-v="v-cases"><span class="ico">📋</span>验证案例</button>
     <button data-v="v-entries"><span class="ico">📚</span>全部词条</button>
     <button data-v="v-pairs"><span class="ico">🎯</span>风格配色</button>
@@ -179,14 +180,15 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
 <!-- 1 示例画廊 -->
 <div class="view on" id="v-gallery">
   <div class="panel">
-    <h2>示例画廊 <span class="tag">复制即用</span></h2>
-    <div class="hint">每张卡都是一个完整配方（画幅·载体·题材·角色·世界·镜头·光影·风格·地区·版式·装饰），点图看详情，点编号复制配图文件名，<b>复制提示词</b>整段喂给出图模型即可。色卡头由配方风格的登记配色派生。</div>
-    <div class="row" style="margin-bottom:14px">
-      <button class="btn sm on" data-gd="all">全部</button>
-      <button class="btn sm" data-gd="img">已配图</button>
-      <button class="btn sm" data-gd="todo">待配图</button>
+    <h2>示例画廊 <span class="tag">50 个位置 · 复制即用</span></h2>
+    <div class="hint">共 50 个位置：前 10 个是已出图并实测的案例，后 40 个是预留位（自带完整配方与验证点，可直接复制提示词出图）。每张卡都是一个完整配方（画幅·载体·题材·角色·世界·镜头·光影·风格·地区·版式·装饰），点图看详情，点编号复制配图文件名，<b>复制提示词</b>整段喂给出图模型即可。色卡头由配方风格的登记配色派生。</div>
+    <div class="row" style="margin-bottom:8px">
+      <button class="btn on" data-gd="all">全部</button>
+      <button class="btn" data-gd="img">已配图</button>
+      <button class="btn" data-gd="todo">待配图</button>
       <span class="mut sm" id="gCount"></span>
     </div>
+    <div class="hint sm" style="margin:0 0 14px;padding:9px 12px;border:1px dashed var(--line);border-radius:9px">放图方式：把图片存成 <span class="mono">gallery/&lt;卡号&gt;.jpg</span>（卡号见卡片左上角，如 GL-23）放进项目 <span class="mono">gallery/</span> 目录，重跑 <span class="mono">node tools/gallery_sync.js</span> 即自动挂上。</div>
     <div class="grid g3" id="gGrid"></div>
   </div>
 </div>
@@ -318,9 +320,10 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
     <h2>抽卡 <span class="tag">要没见过组合</span></h2>
     <div class="hint">11 维全随机，冲突自动规避（最多重试 40 次）。可以锁定任意维度再抽——比如锁死画风抽世界。抽中的卡可直接复制或载入合成器细调。</div>
     <div class="row" style="margin-bottom:14px">
-      <button class="btn sm" id="gc1">抽 1 张</button>
-      <button class="btn sm" id="gc4">抽 4 张</button>
-      <button class="btn sm" id="gc8">抽 8 张</button>
+      <button class="gcopy" id="gcRand">🎲 随机来一张</button>
+      <button class="btn" id="gc1">抽 1 张</button>
+      <button class="btn" id="gc4">抽 4 张</button>
+      <button class="btn" id="gc8">抽 8 张</button>
       <span class="mut sm" id="gcLockInfo"></span>
     </div>
     <div class="grid g4" id="gcGrid"></div>
