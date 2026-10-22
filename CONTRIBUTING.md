@@ -42,7 +42,61 @@ node tools/smoke.js           # 引擎冒烟
 
 ## 提 PR 前
 
-跑一遍完整回归（见 README「回归清单」），十层全绿再提。
+跑一遍完整回归，十层全绿再提：
+
+```bash
+NODE_PATH=<jsdom 所在 node workspace>/node_modules node tools/build_web.js
+node tools/check_fields.js        # 字段体检（id 格式/prompt 禁中文/三件套/授权分级/kw 别名/story 词源）
+node tools/check_cases.js         # 引用完整 + 覆盖矩阵 + 同维度堆料
+node tools/smoke.js               # 引擎冒烟 130 项
+NODE_PATH=... node tools/smoke-web.js   # 界面冒烟 112 项（jsdom，含 CSS 绊线）
+node tools/gallery_sync.js --check       # 画廊清单与目录一致
+node tools/gallery_multiformat_test.js  # 画廊多格式专项 19 项（jpg/png 混排、同 id 多文件取舍）
+node tools/inventory.js           # 盘点 + 覆盖缺口
+node tools/apply_alias.js --check # 别名表体检
+NODE_PATH=... node tools/verify_chrome.js  # 真实 Chrome 验证 29 项（改了显隐/尺寸/配色必跑）
+node tools/verify_live_api.js    # 线上产物验收 15 项（发布后跑：清单/图片字节/文案/Pages 状态）
+```
+
+**改了画廊图片，还要多跑一步** `node tools/embed_gallery.js`——README 里的画廊展示是它生成的
+（`assets/gallery-thumbs/` 缩略图也是），不重跑 README 会停在旧清单上。
+
+## 品牌 LOGO
+
+- `assets/logo.svg` —— 图形标（正方形，透明通道）：动漫眼 + 轨道 + 星点，深色底
+- `assets/logo-lockup.svg` —— 横版组合（图形 + 「动漫宇宙」+ ANIMEVERSE PROMPT LIBRARY）
+- PNG 派生物：`assets/logo.png`（512）、`assets/logo-lockup.png`（1240×256）、`assets/favicon.png`（32）
+
+**SVG 是唯一真源**，改型只改 SVG，然后重跑 `node tools/logo_export.js` 重新导出 PNG（不要手改 PNG）。
+
+## 目录结构
+
+```
+data/*.json      19 个数据文件（11 维 + series/cases/conflicts/templates/palettes/entities/gallery/scripts）
+tools/compose.js 引擎单一真源（UMD 双跑：Node CLI 与浏览器共用）
+tools/build_web.js  data → assets/data-bundle.js + compose.js → assets/engine.js
+index.html + assets/app.js  十一页单页应用（原生 JS，零依赖）
+gallery/         实测出图（文件名主干 = 画廊槽位 id）
+assets/gallery-thumbs/  README 用的缩略图（embed_gallery.js 生成的派生物）
+tools/gallery_sync.js / gallery_compress.js  画廊清单与压缩（派生物勿手改）
+tools/apply_alias.js  检索别名维护脚本（写 kw 字段，幂等可重跑）
+tools/logo_export.js  LOGO 导出（SVG → PNG，改型后重跑）
+```
+
+`data/scripts.json` 是短剧抽卡的剧本种子池（10 条骨架 × 5 段 beats + 道具/时间/天气/声音词表）。
+`data/{worlds,lights}.json` 里的 `story` 字段是**中文叙事用词**（场景写「霓虹都市」、光影写「夜色」），
+词源必须落在该条目的 `zh`/`kw` 内——`check_fields` 强制这条，否则匹配器锁不住，抽出来的分镜就散了。
+
+## 短剧抽卡的三条设计纪律
+
+改动短剧抽卡（`randomScript`）时守住：
+
+1. **逐段硬锁**——生成器知道每段配了谁、什么场景、什么光，逐段传给分镜构建器（`opts.locks`）。
+   不从文案反推：反推时同维度多候选靠词序定胜负（「面具客」是 CH-16 还是 CH-12 说不准），
+   实测 40 seed × 5 段有 6 段锁错；改硬传后 300 段零失败。
+2. **占位符正则用 `/\{([^}]+)\}/`**——JS 的 `\w` 只认 ASCII，中文占位符（`{主角}`）永远匹配不上。
+3. **一致性靠生成器，不靠后置校验**——用户手改文案后要清掉 `themeEn` 与 `locks`
+   （按段数对应的锁会错位）。
 
 ## 不要做的事
 

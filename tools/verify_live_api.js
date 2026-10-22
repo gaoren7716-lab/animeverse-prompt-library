@@ -114,6 +114,19 @@ async function api(p) {
   const t = await api("/contents/tools/gallery_multiformat_test.js?ref=main");
   ok(!!t.sha, "线上已含多格式专项测试文件");
 
+  // 6b. README 画廊段与缩略图：嵌入标记在、引用的缩略图在远端存在
+  const rm = await api("/contents/README.md?ref=main");
+  const rmTxt = Buffer.from(rm.content, "base64").toString("utf8");
+  const inBlock = rmTxt.indexOf("GALLERY-EMBED:START") !== -1 &&
+    rmTxt.indexOf("GALLERY-EMBED:END") !== -1;
+  ok(inBlock, "README 含 GALLERY-EMBED 嵌入段");
+  const thumbRefs = (rmTxt.match(/assets\/gallery-thumbs\/[\w.-]+\.jpg/g) || []);
+  ok(thumbRefs.length >= 10, "README 画廊段引用 ≥10 张缩略图", String(thumbRefs.length));
+  const tl = await api("/contents/assets/gallery-thumbs/?ref=main");
+  const thumbNames = new Set(tl.map(f => f.name));
+  const thumbMiss = thumbRefs.map(p => p.split("/").pop()).filter(n => !thumbNames.has(n));
+  ok(thumbMiss.length === 0, "README 引用的缩略图在远端全部存在", thumbMiss.join(","));
+
   // 7. Pages 构建状态
   const pb = await api("/pages/builds/latest");
   ok(pb.status === "built", "Pages 构建完成", pb.status + " @ " + (pb.commit || "").slice(0, 7));

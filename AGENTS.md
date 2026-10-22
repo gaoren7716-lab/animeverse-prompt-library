@@ -1,6 +1,6 @@
 # AGENTS · 给后续维护者（人或 AI）的工程约定
 
-这个项目的工程纪律。改任何东西之前先读这里；跑回归的命令在 README「数据与代码」节。
+这个项目的工程纪律。改任何东西之前先读这里；完整回归命令在下面第 4 节。
 
 ## 0. 一句话架构
 
@@ -112,10 +112,11 @@ node tools/smoke.js             # ④ 引擎冒烟 130 项
 NODE_PATH=... node tools/smoke-web.js  # ⑤ 界面冒烟 112 项（jsdom）
 node tools/gallery_sync.js --check     # ⑥ 画廊清单与目录一致
 node tools/gallery_multiformat_test.js # ⑥b 画廊多格式专项 19 项（jpg/png 混排、同 id 多文件取舍）
+node tools/embed_gallery.js --check    # ⑥c README 画廊段与缩略图一致（改了 gallery/ 图后先不带 --check 重跑写入）
 node tools/inventory.js         # ⑦ 盘点数字喂文档
 node tools/apply_alias.js --check      # ⑧ 别名表体检（数据缺 kw 时改本脚本再重跑写入）
 NODE_PATH=... node tools/verify_chrome.js  # ⑨ 真实 Chrome 验证 29 项（改了显隐/尺寸/配色必跑）
-node tools/verify_live_api.js    # ⑩ 线上产物验收 15 项（发布后跑；Pages 域名本机 Chrome 连不上，走 GitHub API 核对远端真实字节）
+node tools/verify_live_api.js    # ⑩ 线上产物验收 18 项（发布后跑；Pages 域名本机 Chrome 连不上，走 GitHub API 核对远端真实字节）
 ```
 
 **⑩ 为什么要用 API 而不是 playwright 访问 Pages**：`github.io` 在本机 Chrome 的网络栈里连不上

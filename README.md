@@ -1,201 +1,93 @@
 # 动漫宇宙 · 全球动漫及关联创作提示词库
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Pages](https://img.shields.io/badge/在线体验-Pages-2ea44f)](https://gaoren7716-lab.github.io/animeverse-prompt-library/)
+[![在线体验](https://img.shields.io/badge/在线体验-Pages-2ea44f)](https://gaoren7716-lab.github.io/animeverse-prompt-library/)
 [![词条](https://img.shields.io/badge/词条-150-2ea44f)](data)
-[![组合空间](https://img.shields.io/badge/组合空间-1.87%20万亿-2ea44f)](#这个库是什么)
+[![组合空间](https://img.shields.io/badge/组合空间-1.87万亿-2ea44f)](#)
 
-Aniverse Prompt Library —— 覆盖全球动漫及关联创作的开放式提示词知识库。一个主题一套系列图，模块组合与受控变形构建新需求，三档使用境界：**现在有的直接复制 · 想要的可以组合 · 多组合生成无限想象空间**。
+覆盖全球动漫及关联创作的开放式提示词知识库。11 个正交维度、150 条精选条目，拼出 1.87 万亿组合空间。
 
-在线访问：https://gaoren7716-lab.github.io/animeverse-prompt-library/
+**现在有的直接复制 · 想要的可以组合 · 多组合生成无限想象空间**
 
-源码：[github.com/gaoren7716-lab/animeverse-prompt-library](https://github.com/gaoren7716-lab/animeverse-prompt-library) · MIT 协议开源 · 欢迎提 PR（见 [CONTRIBUTING.md](CONTRIBUTING.md)）
+- 在线体验：https://gaoren7716-lab.github.io/animeverse-prompt-library/
+- 源码：https://github.com/gaoren7716-lab/animeverse-prompt-library （MIT）
 
+<!-- GALLERY-EMBED:START -->
+<p>
+  以下 10 张是本库用自身配方实测出图的作品（其余 40 个位置是预留位，<strong>自带完整配方、可直接复制去出图</strong>）：
+</p>
 
-## 这个库是什么
-
-把「动漫视觉生产」拆成 11 个正交维度（地区时代 / 视觉风格 / 创作载体 / 题材 / 角色原型 / 世界场景 / 镜头机位 / 光影 / 构图版式 / 画幅规格 / 装饰元素），共 150 条精选条目。每条条目是一段经过推敲的英文视觉指令，引擎按固定装配顺序拼成成品词面，末尾统一挂硬约束（no watermark / no logo / no garbled text / no deformed anatomy / no extra limbs / clean readable composition）。
-
-组合空间 **1,872,809,164,800**（约 1.87 万亿）——不是虚数，是 150 条连乘的真实上限。
+<p>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-01.jpg" width="19%" alt="CS-01 赛博都市快递员（关键帧）"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-02.jpg" width="19%" alt="CS-02 竹林剑客三视图"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-03.jpg" width="19%" alt="CS-03 机甲检阅宽银幕"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-04.jpg" width="19%" alt="CS-04 学园告白漫画页"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-05.jpg" width="19%" alt="CS-05 水彩祭典夜（轻小说插画）"></a>
+</p>
+<p>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-06.jpg" width="19%" alt="CS-06 雨天咖啡馆条漫格"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-07.jpg" width="19%" alt="CS-07 古剑道具图标"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-08.jpg" width="19%" alt="CS-08 偶像舞台卡牌牌面"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-09.jpg" width="19%" alt="CS-09 水墨雪林狐（艺术帧）"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-10.jpg" width="19%" alt="CS-10 都市对决海报（美漫图形化）"></a>
+</p>
+<!-- GALLERY-EMBED:END -->
 
 ## 三档使用境界
 
-| 境界 | 页面 | 干什么 |
+| 境界 | 入口 | 干什么 |
 |---|---|---|
-| 直接复制 | 示例画廊 / 验证案例 | 画廊 50 个位置：10 个已出图实测案例 + 40 个自带配方的预留位，复制即用 |
-| 组合构成 | 自定义出图 / 提示词合成器 / 抽卡 | 12 预设 + 自由组合、维度 chips 自选、约束随机抽卡；受控变形算子随时改写 |
-| 无限想象 | 系列出图 / **短剧分镜** / 全球地图 / 参考实体 | 一个主题自动建一套系列图；**一段短剧文案直接拆成分镜套图**；16 主题绑定题材/角色/世界/风格；28 个工作室/创作者/作品坐标 + 23 条影响关系 |
+| 直接复制 | 示例画廊 / 验证案例 | 50 个位置：10 张实测图 + 40 个自带配方的预留位，复制即用 |
+| 组合构成 | 自定义出图 / 提示词合成器 / 抽卡 | 12 预设、维度自选、约束随机抽卡 |
+| 无限想象 | 系列出图 / 短剧分镜 | 一个主题一套图；一段短剧文案一套分镜 |
 
-## 系列出图（本库招牌）
+## 三件招牌能力
 
-给一个主题 → 按动漫视觉生产节奏自动建一组图，全组统一风格与配色，看起来是一套：
+**系列出图** —— 给一个主题，按动漫视觉生产节奏自动建一套图（主视觉 / 角色卡 / 场景卡 / 道具卡 / 情节帧 / 徽标），全组统一风格与配色。16 个内置主题，张数 3-6 可切，种子随机保证可复现。
 
-1. **SR-01 主视觉** 定调（封面/平台横幅）
-2. **SR-02 角色卡** 立人（设定图/三视图）
-3. **SR-03 场景卡** 立世界（氛围空镜）
-4. **SR-04 道具卡** 添细节（图标/装备）
-5. **SR-05 情节帧** 叙事（关键帧/分镜格）
-6. **SR-06 徽标收尾**（Logo/片尾卡）
+**短剧分镜** —— 粘一段短剧文案，直接出整套分镜。**有空行按段拆、无空行按句拆**，幕次按叙事顺序分工（建立→亮相→推进→高潮→收尾），段落没明说的角色与场景沿用上一段——所以这套图像一部片子。**没想法就点「🎲 抽一部短剧」**，从 10 条剧本骨架里随机抽一条，角色/场景/光影/道具自动填好，生成的文案可继续手改。
 
-16 个内置主题（TH-01~16，武道大会、学园祭、机甲检阅、夜市祭典、雪林狐影……）各自绑定题材/角色/世界/风格，未收录的主题按原文注入（`theme: "…"`），风格与配色仍全组统一。张数 3/4/5/6 可切，抽得不满意点「换一批」。种子随机（mulberry32）保证同主题同张数结果可复现。
+**受控变形** —— 10 个算子改写已有配方，每个声明 preserve（保持）/ change（改写）/ forbid（硬边界），带冲突守卫不会踩已知的维度互斥。
 
-**关键词**（逗号分隔）会锁定对应维度：写「机甲, 竹林」就把题材锁到机甲、场景锁到竹林深处，其余维度照常抽。点「**加入主题**」把当前主题+关键词存进本机「我的主题」，之后一键复用（存在浏览器 localStorage，不上传）。
-
-## 短剧分镜（文案 → 一套分镜）
-
-把写好的短剧文案粘进「短剧分镜」页，直接出整套分镜图：
-
-- **拆分规则**：**有空行按段拆，无空行按句拆**（也可手动指定粒度）。一段 = 一张图。
-- **幕次分工**：按叙事顺序而非随机——2 段是「建立+收尾」，3 段「建立+推进+收尾」，4 段加「角色亮相」，5 段是完整五幕（建立→亮相→推进→高潮→收尾），超过 5 段中段重复「推进」。
-- **文字识别**：段落里写到的场景、角色、光影会被识别并锁定（写「神秘面具客」→ 神秘面具客原型；写「雪原森林」→ 雪原森林场景）。
-- **叙事继承**：段落没明说的角色/场景/光影沿用上一段——所以这套图像一部片子，不是一组散图。
-- **全组统一**：风格、配色、地区、题材全组一致；画幅与版式随幕次变化（建立用宽画幅、推进用竖屏、收尾用海报）。
-
-关键词在短剧页同样可用：写「赛博朋克, 霓虹」会锁定全组的题材、场景与光影基调。
-
-### 没想法就抽一部短剧
-
-短剧页除了手写文案，还有「**🎲 抽一部短剧**」——从 **10 条剧本骨架**（`data/scripts.json`）里随机抽一条，角色/场景/光影/道具/时间/天气/声音自动填好，生成的就是一份能直接出图的完整文案（填进同一个文本框，可以继续手改）。
-
-- **骨架是结构，不是随机句子**：每条 5 段，对应「建立→亮相→推进→高潮→收尾」，叙事骨架固定（主角出场→配角登场→主角对峙→对手现身→主角收尾）。
-- **抽卡抽定的维度是硬锁**：生成器本来就知道每段配了谁、什么场景、什么光，逐段传给分镜构建器（`locks` 参数），不靠从文案反推——反推会打架（「面具客」是 CH-16 还是 CH-12 靠词序定，说不准）。
-- **中文词用「叙事用词」**：场景写「霓虹都市」、光影写「夜色」而不是条目原名「霓虹夜光」；这些词的每个 2-gram 都被约束在词条的 `zh`/`kw` 之内（`check_fields` 强制），所以照样能被匹配器锁住。
-- **关键词优先**：写「魔法少女」再抽，抽出来的就是魔法少女题材 + 少女主角。
-- 抽卡可复现：同 seed 同结果（mulberry32）。
-
-## 受控变形算子
-
-10 个算子，每个声明 preserve（保持）/ change（改写）/ forbid（硬边界）三件事，元数据在页面上可见：
-
-| 算子 | 干什么 |
-|---|---|
-| time-shift | 换时段（光影走日照循环链） |
-| style-flip | 换画风（沿风格链跳转） |
-| chibi-fy | Q 版化 |
-| medium-flip | 换创作载体（同家族内跳转） |
-| lens-shift | 换机位 |
-| era-shift | 换年代（时代链） |
-| dark-variant | 暗黑变体 |
-| manga-page | 漫画页化 |
-| detail-zoom | 细节特写 |
-| frame-shift | 换画幅 |
-
-算子内部带冲突守卫（CF 规则），变形结果不会踩已知的维度互斥。
-
-## 冲突裁决
-
-维度之间打架时听谁的，10 条规则三件套（when / notWith / verdict+why），优先级：**画幅铁律 > 载体逻辑 > 文化坐标自洽 > 可读性 > 装饰密度**。例：CF-02 道具图标（MD-08）不得与多物体平铺网格（LO-11）同现——这条是 2026-10-22 实测 CS-07 真撞出来的（九宫格道具集把「图标无文字、缩到 64px 仍可读」直接杀死），当天补入规则并修正了案例配方。
-
-## 十一页单页应用
-
-顶部横向导航（11 项，窄屏可横滚），按使用频次排序：
+## 十一页
 
 | 页面 | 内容 |
 |---|---|
-| 示例画廊 | **50 个位置**：10 张已配图案例 + 40 个预留位（自带配方，可直接出图）；**大图 / 小图两种图幅**可切 |
-| 自定义出图 | 12 预设一键出词，或「自由组合 + 关键词」自动配一套 |
-| 抽卡 | 约束随机配方，抽 1 / 4 / 8 张，或「🎲 随机来一张」出单张大卡 |
-| 系列出图 | 主题 + 关键词 → 一套图（见上） |
-| 短剧分镜 | 短剧文案 → 一套分镜图；**没想法就「🎲 抽一部短剧」**（见上） |
-| 提示词合成器 | 11 维 chips + 算子工具条 + 分享码 |
+| 示例画廊 | 50 个位置；**大图 / 小图两档图幅**可切 |
+| 自定义出图 | 12 预设，或「自由组合 + 关键词」自动配一套 |
+| 抽卡 | 抽 1 / 4 / 8 张，或「🎲 随机来一张」 |
+| 系列出图 | 主题 + 关键词 → 一套图 |
+| 短剧分镜 | 文案 → 分镜套图；没想法就抽一部短剧 |
+| 提示词合成器 | 11 维自选 + 算子工具条 + 分享码 |
 | 全球地图 | 18 地区时代 + 28 参考实体检索 |
 | 验证案例 | 10 案例配方与验证点 |
-| 全部词条 | 150 条维度条目检索 + 详情抽屉 |
-| 风格配色 | 16 张配色卡（每风格一张） |
-| 框架与体检 | 维度表 + 覆盖缺口 + 实测进度 + 幕次分工表 + **品牌 LOGO 下载** |
+| 全部词条 | 150 条条目检索 |
+| 风格配色 | 16 张配色卡 |
+| 框架与体检 | 维度表 + 覆盖缺口 + LOGO 下载 |
 
-### 品牌 LOGO
+## 快速开始
 
-- `assets/logo.svg` —— 图形标（正方形，透明通道）：动漫眼 + 轨道 + 星点，深色底
-- `assets/logo-lockup.svg` —— 横版组合（图形 + 「动漫宇宙」+ ANIMEVERSE PROMPT LIBRARY）
-- PNG 派生物：`assets/logo.png`（512）、`assets/logo-lockup.png`（1240×256）、`assets/favicon.png`（32）
-
-**SVG 是唯一真源**，改型只改 SVG，然后重跑 `node tools/logo_export.js` 重新导出 PNG（不要手改 PNG）。
-页面「框架与体检」页有现成的「复制 SVG / 下载 PNG」入口。
-
-### 画廊的 50 个位置怎么填
-
-预留位（GL-11~GL-50）都是完整配方，**可以直接复制提示词去出图**，出完存成
-`gallery/<卡号>.jpg` 或 `gallery/<卡号>.png`（卡号见卡片左上角，如 `GL-23`）放进项目 `gallery/` 目录，
-重跑 `node tools/gallery_sync.js` 即自动挂上，页面即时显示。
-**两种格式可混放**——同一个画廊里 JPG 和 PNG 并存没问题，同一卡号放了多个格式时取修改时间较新的一张。
-卡号规则：`CS-01~CS-10` 是已实测案例位，`GL-11~GL-50` 是预留位。
-
-**图幅可切**：画廊右上角有「图幅：大图 / 小图」——大图 3 列看细节，小图 5 列密排、收起描述，一屏扫全 50 个位置。
-
-## 本地运行
-
-这是纯静态项目，**没有构建步骤、没有运行时依赖**——克隆下来直接开就行：
+纯静态项目，**没有构建步骤、没有运行时依赖**：
 
 ```bash
 git clone https://github.com/gaoren7716-lab/animeverse-prompt-library.git
-cd animeverse-prompt-library
 ```
 
-- **看效果**：双击 `index.html`（浏览器直接打开即可，本地不需要起服务器）
-- **改数据**：编辑 `data/*.json` → 跑 `node tools/build_web.js` 重新生成 `assets/data-bundle.js`
-- **跑测试**：需要 Node 18+；界面冒烟与真实 Chrome 验证额外需要 `jsdom` 与 `playwright-core`
-  （`NODE_PATH` 指向装有这两个包的 `node_modules`）
+- **看效果**：双击 `index.html` 即可（不需起服务器）
+- **改数据**：编辑 `data/*.json` → `node tools/build_web.js` 重新生成 `assets/data-bundle.js`
 
-> ⚠️ 改动**界面显隐 / 尺寸 / 配色**后必须加跑 `tools/verify_chrome.js`——
-> jsdom 不加载 `<img>`、也不做 CSS 级联计算，这类问题它一条都查不出来（本库踩过多次）。
+## 授权
 
-## 数据与代码
+**代码与数据以 MIT 协议开源**，但词面层与实体层的授权是分开的——MIT 覆盖代码与原创提示词，不覆盖它引用的第三方 IP：
 
-```
-data/*.json      19 个数据文件（11 维 + series/cases/conflicts/templates/palettes/entities/gallery/scripts）
-tools/compose.js 引擎单一真源（UMD 双跑：Node CLI 与浏览器共用）
-tools/build_web.js  data → assets/data-bundle.js + compose.js → assets/engine.js
-index.html + assets/app.js  十一页单页应用（原生 JS，零依赖）
-assets/logo.svg + logo-lockup.svg  品牌 LOGO（SVG 真源）+ PNG 派生物
-gallery/         实测出图（文件名主干 = 画廊槽位 id）
-tools/gallery_sync.js / gallery_compress.js  画廊清单与压缩（派生物勿手改）
-tools/apply_alias.js  检索别名维护脚本（写 kw 字段，幂等可重跑）
-tools/logo_export.js  LOGO 导出（SVG → PNG，改型后重跑）
-```
-
-`data/scripts.json` 是短剧抽卡的剧本种子池（10 条骨架 × 5 段 beats + 道具/时间/天气/声音词表）。
-`data/{worlds,lights}.json` 里的 `story` 字段是**中文叙事用词**（场景写「霓虹都市」、光影写「夜色」），
-词源必须落在该条目的 `zh`/`kw` 内——`check_fields` 强制这条，否则匹配器锁不住，抽出来的分镜就散了。
-
-### 回归清单（改任何东西跑一遍）
-
-```bash
-NODE_PATH=<jsdom 所在 node workspace>/node_modules node tools/build_web.js
-node tools/check_fields.js        # 字段体检（id 格式/prompt 禁中文/三件套/授权分级/kw 别名/story 词源）
-node tools/check_cases.js         # 引用完整 + 覆盖矩阵 + 同维度堆料
-node tools/smoke.js               # 引擎冒烟 130 项
-NODE_PATH=... node tools/smoke-web.js   # 界面冒烟 112 项（jsdom，含 CSS 绊线）
-node tools/gallery_sync.js --check       # 画廊清单与目录一致
-node tools/gallery_multiformat_test.js  # 画廊多格式专项 19 项（jpg/png 混排、同 id 多文件取舍）
-node tools/inventory.js           # 盘点 + 覆盖缺口
-node tools/apply_alias.js --check # 别名表体检
-NODE_PATH=... node tools/verify_chrome.js  # 真实 Chrome 验证 29 项（改了显隐/尺寸/配色必跑）
-node tools/verify_live_api.js    # 线上产物验收 15 项（发布后跑：清单/图片字节/文案/Pages 状态）
-```
-
-## 授权与边界
-
-**代码与数据以 MIT 协议开源**（见 [LICENSE](LICENSE)），可自由使用、修改、再分发。
-
-但**词面层与实体层的授权是分开的**——MIT 覆盖的是本库的代码与原创提示词，不覆盖它引用的第三方 IP：
-
-- 参考实体层分 R0-R3 四级：R0 自由 / R1 署名 / R2 仅参考（在世创作者与品牌名，出图前先改写为 deid 视觉特征）/ R3 禁止直接商用（作品名与角色名）。实体条目是研究坐标，不是词面——把 R2/R3 实体送进商业出图前，先做视觉等价替换。
-- **词面层（`prompt` 字段）不含任何真实品牌、作品或角色名**——`tools/check_fields.js` 会硬拦（disney / pixar / ghibli 等专名一律不许进 `prompt`）。检索别名 `kw` 不受限，它只做匹配、绝不进词面。
-- 画廊图片是本项目为验证配方而出图的作品，随仓库以 MIT 协议分发；**出图模型的服务条款另算**，换模型重出请自行确认。
-
-## 路线图
-
-- 画廊 50 个位置中，40 个预留位待出图（配方已备好，填图即挂上）
-- 16 个系列主题各出一组图（当前 10 张画廊图都是单案例，非系列组）
-- 更多地区坐标（东南亚、中东、拉美动画脉络）
-- 出图模型的实测结论只对被测模型有效，换模型需重测（cases.tested 的语义边界）
+- 参考实体分 R0-R3 四级，R2（在世创作者与品牌名）/ R3（作品名与角色名）**不进词面**，商业出图前先做视觉等价替换
+- 词面层 `prompt` 字段不含任何真实品牌、作品或角色名（`tools/check_fields.js` 硬拦）
+- 画廊图片随仓库以 MIT 分发；**出图模型的服务条款另算**，换模型重出请自行确认
 
 ## 参与贡献
 
-欢迎提 PR、加词条、修 bug。规矩不多但有五条不可让步的（id 不改、词面禁品牌名、授权分级独立、中文不进 prompt、信息四类不混）——详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+欢迎提 PR、加词条、修 bug。五条不可让步的规矩（id 不改 / 词面禁品牌名 / 授权分级独立 / 中文不进 prompt / 信息四类不混）——详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 致谢
 
-思想来源：art-prompt-forge 的六层结构与 preserve/change/forbid 受控变形算子、ecommerce-prompt-library 的引擎与回归工程、xhs-prompt-library 的系列出图。实现独立编写。
-
+思想来源：art-prompt-forge 的六层结构与受控变形算子、ecommerce-prompt-library 的引擎与回归工程、xhs-prompt-library 的系列出图。实现独立编写。
