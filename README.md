@@ -14,7 +14,7 @@
 
 <!-- GALLERY-EMBED:START -->
 <p>
-  画廊已上墙 22 张：CS-01~CS-10 是自带配方的验证案例实测，GL 段 12 张是预留位按配方出图，剩余 28 个预留位<strong>自带完整配方、可直接复制去出图</strong>：
+  画廊已上墙 30 张：CS-01~CS-10 是自带配方的验证案例实测，GL 段 20 张是预留位按配方出图，剩余 20 个预留位<strong>自带完整配方、可直接复制去出图</strong>：
 </p>
 
 <p>
@@ -48,6 +48,16 @@
 <p>
   <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-21.jpg" width="19%" alt="GL-21 GL-21"></a>
   <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-22.jpg" width="19%" alt="GL-22 GL-22"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-23.jpg" width="19%" alt="GL-23 GL-23"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-24.jpg" width="19%" alt="GL-24 GL-24"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-25.jpg" width="19%" alt="GL-25 GL-25"></a>
+</p>
+<p>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-26.jpg" width="19%" alt="GL-26 GL-26"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-27.jpg" width="19%" alt="GL-27 GL-27"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-28.jpg" width="19%" alt="GL-28 GL-28"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-29.jpg" width="19%" alt="GL-29 GL-29"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-30.jpg" width="19%" alt="GL-30 GL-30"></a>
 </p>
 <!-- GALLERY-EMBED:END -->
 

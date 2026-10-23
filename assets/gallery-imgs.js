@@ -21,6 +21,14 @@ window.GALLERY_IMGS = {
   "GL-19": "gallery/GL-19.png",
   "GL-20": "gallery/GL-20.png",
   "GL-21": "gallery/GL-21.png",
-  "GL-22": "gallery/GL-22.png"
+  "GL-22": "gallery/GL-22.png",
+  "GL-23": "gallery/GL-23.png",
+  "GL-24": "gallery/GL-24.png",
+  "GL-25": "gallery/GL-25.png",
+  "GL-26": "gallery/GL-26.png",
+  "GL-27": "gallery/GL-27.png",
+  "GL-28": "gallery/GL-28.png",
+  "GL-29": "gallery/GL-29.png",
+  "GL-30": "gallery/GL-30.png"
 };
 window.GALLERY_UNCLAIMED = [];
