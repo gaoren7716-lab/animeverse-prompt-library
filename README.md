@@ -18,46 +18,46 @@
 </p>
 
 <p>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-01.jpg" width="19%" alt="CS-01 赛博都市快递员（关键帧）"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-02.jpg" width="19%" alt="CS-02 竹林剑客三视图"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-03.jpg" width="19%" alt="CS-03 机甲检阅宽银幕"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-04.jpg" width="19%" alt="CS-04 学园告白漫画页"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-05.jpg" width="19%" alt="CS-05 水彩祭典夜（轻小说插画）"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-01.jpg?v=20261024-0113" width="19%" alt="CS-01 赛博都市快递员（关键帧）"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-02.jpg?v=20261024-0113" width="19%" alt="CS-02 竹林剑客三视图"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-03.jpg?v=20261024-0113" width="19%" alt="CS-03 机甲检阅宽银幕"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-04.jpg?v=20261024-0113" width="19%" alt="CS-04 学园告白漫画页"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-05.jpg?v=20261024-0113" width="19%" alt="CS-05 水彩祭典夜（轻小说插画）"></a>
 </p>
 <p>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-06.jpg" width="19%" alt="CS-06 雨天咖啡馆条漫格"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-07.jpg" width="19%" alt="CS-07 古剑道具图标"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-08.jpg" width="19%" alt="CS-08 偶像舞台卡牌牌面"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-09.jpg" width="19%" alt="CS-09 水墨雪林狐（艺术帧）"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-10.jpg" width="19%" alt="CS-10 都市对决海报（美漫图形化）"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-06.jpg?v=20261024-0113" width="19%" alt="CS-06 雨天咖啡馆条漫格"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-07.jpg?v=20261024-0113" width="19%" alt="CS-07 古剑道具图标"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-08.jpg?v=20261024-0113" width="19%" alt="CS-08 偶像舞台卡牌牌面"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-09.jpg?v=20261024-0113" width="19%" alt="CS-09 水墨雪林狐（艺术帧）"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-10.jpg?v=20261024-0113" width="19%" alt="CS-10 都市对决海报（美漫图形化）"></a>
 </p>
 <p>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-11.jpg" width="19%" alt="GL-11 GL-11"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-12.jpg" width="19%" alt="GL-12 GL-12"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-13.jpg" width="19%" alt="GL-13 GL-13"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-14.jpg" width="19%" alt="GL-14 GL-14"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-15.jpg" width="19%" alt="GL-15 GL-15"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-11.jpg?v=20261024-0113" width="19%" alt="GL-11 GL-11"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-12.jpg?v=20261024-0113" width="19%" alt="GL-12 GL-12"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-13.jpg?v=20261024-0113" width="19%" alt="GL-13 GL-13"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-14.jpg?v=20261024-0113" width="19%" alt="GL-14 GL-14"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-15.jpg?v=20261024-0113" width="19%" alt="GL-15 GL-15"></a>
 </p>
 <p>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-16.jpg" width="19%" alt="GL-16 GL-16"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-17.jpg" width="19%" alt="GL-17 GL-17"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-18.jpg" width="19%" alt="GL-18 GL-18"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-19.jpg" width="19%" alt="GL-19 GL-19"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-20.jpg" width="19%" alt="GL-20 GL-20"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-16.jpg?v=20261024-0113" width="19%" alt="GL-16 GL-16"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-17.jpg?v=20261024-0113" width="19%" alt="GL-17 GL-17"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-18.jpg?v=20261024-0113" width="19%" alt="GL-18 GL-18"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-19.jpg?v=20261024-0113" width="19%" alt="GL-19 GL-19"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-20.jpg?v=20261024-0113" width="19%" alt="GL-20 GL-20"></a>
 </p>
 <p>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-21.jpg" width="19%" alt="GL-21 GL-21"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-22.jpg" width="19%" alt="GL-22 GL-22"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-23.jpg" width="19%" alt="GL-23 GL-23"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-24.jpg" width="19%" alt="GL-24 GL-24"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-25.jpg" width="19%" alt="GL-25 GL-25"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-21.jpg?v=20261024-0113" width="19%" alt="GL-21 GL-21"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-22.jpg?v=20261024-0113" width="19%" alt="GL-22 GL-22"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-23.jpg?v=20261024-0113" width="19%" alt="GL-23 GL-23"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-24.jpg?v=20261024-0113" width="19%" alt="GL-24 GL-24"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-25.jpg?v=20261024-0113" width="19%" alt="GL-25 GL-25"></a>
 </p>
 <p>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-26.jpg" width="19%" alt="GL-26 GL-26"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-27.jpg" width="19%" alt="GL-27 GL-27"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-28.jpg" width="19%" alt="GL-28 GL-28"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-29.jpg" width="19%" alt="GL-29 GL-29"></a>
-  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-30.jpg" width="19%" alt="GL-30 GL-30"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-26.jpg?v=20261024-0113" width="19%" alt="GL-26 GL-26"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-27.jpg?v=20261024-0113" width="19%" alt="GL-27 GL-27"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-28.jpg?v=20261024-0113" width="19%" alt="GL-28 GL-28"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-29.jpg?v=20261024-0113" width="19%" alt="GL-29 GL-29"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-30.jpg?v=20261024-0113" width="19%" alt="GL-30 GL-30"></a>
 </p>
 <!-- GALLERY-EMBED:END -->
 

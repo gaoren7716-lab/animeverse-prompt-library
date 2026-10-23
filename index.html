@@ -4,8 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>动漫宇宙 · 全球动漫及关联创作提示词库</title>
-<link rel="icon" type="image/png" href="assets/favicon.png">
-<link rel="apple-touch-icon" href="assets/logo.png">
+<!-- 静态资产版本号（缓存破坏）。改动 assets/*.js、data/*.json、画廊图之后，
+     跑 node tools/asset_ver.js bump 递增此值，浏览器与 Pages CDN 才会重新取字节。
+     不递增的后果：内容换了但 URL 不变，用户刷新一万次还是旧页面（踩过两轮）。 -->
+<script>window.ASSET_VER="20261024-0113";</script>
+<link rel="icon" type="image/png" href="assets/favicon.png?v=20261024-0113">
+<link rel="apple-touch-icon" href="assets/logo.png?v=20261024-0113">
 <style>
 /* ===== 主题变量（暗色） ===== */
 :root{
@@ -460,9 +464,9 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
 <div id="dtPanel"><button class="close" id="dtClose">×</button><div id="dtBody"></div></div>
 <div id="toast"></div>
 
-<script src="assets/data-bundle.js"></script>
-<script src="assets/engine.js"></script>
-<script src="assets/gallery-imgs.js"></script>
-<script src="assets/app.js"></script>
+<script src="assets/data-bundle.js?v=20261024-0113"></script>
+<script src="assets/engine.js?v=20261024-0113"></script>
+<script src="assets/gallery-imgs.js?v=20261024-0113"></script>
+<script src="assets/app.js?v=20261024-0113"></script>
 </body>
 </html>

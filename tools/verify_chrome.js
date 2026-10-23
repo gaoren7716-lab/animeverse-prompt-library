@@ -199,10 +199,11 @@ function ok(c, name, extra) {
     "画廊图全部真实加载成功（无碎图），张数与计数一致",
     imgs.length + " 张（计数 " + want + "），碎图 " + broken.length + (broken.length ? "：" + broken.map(function (b) { return b.src; }).join(",") : ""));
   const srcs = imgs.map(function (i) { return i.src; });
-  ok(srcs.every(function (s) { return /\.(png|jpe?g|webp)$/i.test(s); }),
+  // src 带 ?v= 缓存破坏参数（tools/asset_ver.js），扩展名后允许跟 query
+  ok(srcs.every(function (s) { return /\.(png|jpe?g|webp)(\?|$)/i.test(s); }),
     "画廊图片扩展名全部合法（jpg/png 均可识别）",
-    srcs.filter(function (s) { return /\.(png|jpe?g|webp)$/i.test(s); }).length + " 张已配图");
-  const pngImg = imgs.filter(function (i) { return /\.png$/i.test(i.src); })[0];
+    srcs.filter(function (s) { return /\.(png|jpe?g|webp)(\?|$)/i.test(s); }).length + " 张已配图");
+  const pngImg = imgs.filter(function (i) { return /\.png(\?|$)/i.test(i.src); })[0];
   // 竖构图（1024x1536）宽度不足 1200 是正常的——压缩规则是「宽 1200、不放大」，
   // 所以查长边，拿宽 ≥1200 一刀切会误报
   ok(pngImg && Math.max(pngImg.w, pngImg.h) >= 1200, "PNG 图真实像素长边正常（未被压坏）",

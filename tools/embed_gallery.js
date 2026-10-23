@@ -13,6 +13,7 @@
 "use strict";
 const fs = require("fs");
 const path = require("path");
+const { q, readVer } = require("./asset_ver.js");
 
 const ROOT = path.join(__dirname, "..");
 const README = path.join(ROOT, "README.md");
@@ -59,7 +60,8 @@ async function makeThumbs(list) {
   const made = [];
   const jobs = list.map(async ({ id, src }) => {
     const dst = path.join(THUMBS, id + ".jpg");
-    const abs = path.join(ROOT, src);
+    // 清单路径带 ?v= 缓存破坏参数，拼本地路径前剥掉（否则 existsSync 恒假，缩略图全跳过）
+    const abs = path.join(ROOT, src.split("?")[0]);
     if (!fs.existsSync(abs)) return;
     // 幂等：缩略图不比原图旧就跳过
     if (fs.existsSync(dst) && fs.statSync(dst).mtimeMs >= fs.statSync(abs).mtimeMs) {
@@ -81,12 +83,14 @@ async function makeThumbs(list) {
 }
 
 function buildBlock(ids, titles, thumbOk) {
+  const ver = readVer();
   const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
   const rows = [];
   for (let i = 0; i < ids.length; i += PER_ROW) {
     const row = ids.slice(i, i + PER_ROW).map(id => {
-      const img = thumbOk ? "assets/gallery-thumbs/" + id + ".jpg"
-        : "gallery/" + id + ".png";
+      // 缩略图与退回路径都拼版本号：重生成的同名缩略图也要让 GitHub 重新渲染
+      const img = thumbOk ? q(ver, "assets/gallery-thumbs/" + id + ".jpg")
+        : q(ver, "gallery/" + id + ".png");
       const title = titles[id] || id;
       // 图点击直接跳到线上画廊页；alt 带卡号+标题，悬停可读
       return '<a href="' + PAGES + '#v-gallery"><img src="' + img +
@@ -150,11 +154,11 @@ async function main() {
       console.log("✗ README 画廊段与清单不同步，重跑 node tools/embed_gallery.js");
       process.exit(1);
     }
-    // 引用到的图片文件是否真的存在
+    // 引用到的图片文件是否真的存在（路径带 ?v= 版本号，比对前先剥掉）
     const miss = [];
     const refs = inner.match(/src="([^"]+)"/g) || [];
     refs.forEach(r => {
-      const p = r.slice(5, -1);
+      const p = r.slice(5, -1).split("?")[0];
       if (!fs.existsSync(path.join(ROOT, p))) miss.push(p);
     });
     if (miss.length) { console.log("✗ README 引用了不存在的图片：" + miss.join(", ")); process.exit(1); }

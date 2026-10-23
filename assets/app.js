@@ -141,7 +141,8 @@ $("gGrid").addEventListener("click", function (e) {
   var act = e.target.getAttribute("data-act");
   if (act === "gid") {
     var img = galleryImg(cs.id);
-    copyText(img ? img.split("/").pop() : cs.id + ".jpg 或 .png");
+    // 清单路径带 ?v= 缓存破坏参数，复制给用户的要剥掉——只要文件名
+    copyText(img ? img.split("/").pop().split("?")[0] : cs.id + ".jpg 或 .png");
     return;
   }
   if (act === "copy") { if (cs.recipe) copyText(AV.compose(cs.recipe).prompt); return; }

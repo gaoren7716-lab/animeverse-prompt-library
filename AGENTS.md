@@ -95,8 +95,10 @@ gallery/（文件名主干 = 案例 id）──gallery_sync.js──→ assets/g
 - **图片格式不限**（2026-10-22 用户把 CS-01~03 换成 PNG）：`.png/.jpg/.jpeg/.webp` 全部认，
   同一画廊里混放没问题。`gallery_sync.js` 按 id 归组、**取 mtime 较新的一张**（早期版本 readdir 顺序直接覆盖，
   同 id 两格式时清单随机指向哪张）；同 id 多张会打 ⚠ 并让 `--check` 失败，要人工删掉多余的
-- **新图管线**：ImageGen 出图 → 立刻改名成槽位 id（并行出图会撞名！提示词首句唯一可避免）→ **`node tools/gallery_refresh.js`**（一条命令跑完：sync 重建清单 → compress 压缩 → embed 刷新 README 缩略图 → sync --check 体检）
+- **新图管线**：ImageGen 出图 → 立刻改名成槽位 id（并行出图会撞名！提示词首句唯一可避免）→ **`node tools/gallery_refresh.js`**（一条命令跑完：asset_ver bump → sync 重建清单 → compress 压缩 → embed 刷新 README 缩略图 → sync --check 体检）
 - **为什么必须跑 refresh**：往 `gallery/` 丢图只是第一步。页面读的是清单 `assets/gallery-imgs.js`，README 读的是缩略图 `assets/gallery-thumbs/`——不重建清单，页面还指向旧路径，用户刷新一万次也不会变（2026-10-23 用户连放 12 张图后就是撞在这个点上）
+- **缓存破坏（2026-10-24，别再删）**：清单重建了、推送了，浏览器与 Pages CDN 仍可能发旧字节——**文件名没变的资源**（gallery-imgs.js、同名换图、同名缩略图）都吃这一套。机制：版本号集中在 index.html 的 `window.ASSET_VER`，所有资源引用、清单图片路径、README 缩略图统一拼 `?v=<版本>`（`tools/asset_ver.js` 管理，refresh/build_web 自动 bump）。**手动改过 `assets/*.js` 或 `data/*.json` 也要跑 `node tools/asset_ver.js bump`**，否则线上不换。bump 与 sync 的顺序不能反（反了清单里是旧版本号，`sync --check` 会报红——这是故意的防呆）
+- **file:// 双击打开也验证过**：带 `?v=` 的 script 在 Chrome file:// 下能正常加载（2026-10-24 实测），本地预览不受影响
 - **compress 幂等**：宽 ≤1200 且 <1.2MB 视为已压过会跳过（调色板量化有损，反复压会出色带）；强制重压加 `--force`
 - **压缩必须保留原格式**（旧版只处理 PNG 且一律转 JPEG 再删原 PNG，会把用户手动换的 PNG 改回去）；
   统一转 JPEG 要显式 `--to jpg`。写盘走**临时文件 + rename**，直接覆盖被占用的文件会抛 UNKNOWN open 整批中断
@@ -111,14 +113,14 @@ NODE_PATH=<jsdom workspace>/node_modules node tools/build_web.js   # ① 先同�
 node tools/check_fields.js      # ② 字段体检
 node tools/check_cases.js       # ③ 引用完整 + 覆盖矩阵
 node tools/smoke.js             # ④ 引擎冒烟 130 项
-NODE_PATH=... node tools/smoke-web.js  # ⑤ 界面冒烟 112 项（jsdom）
+NODE_PATH=... node tools/smoke-web.js  # ⑤ 界面冒烟 114 项（jsdom；含缓存破坏在位断言）
 node tools/gallery_sync.js --check     # ⑥ 画廊清单与目录一致
 node tools/gallery_multiformat_test.js # ⑥b 画廊多格式专项 19 项（jpg/png 混排、同 id 多文件取舍）
 node tools/embed_gallery.js --check    # ⑥c README 画廊段与缩略图一致（改了 gallery/ 图后先不带 --check 重跑写入）
 node tools/inventory.js         # ⑦ 盘点数字喂文档
 node tools/apply_alias.js --check      # ⑧ 别名表体检（数据缺 kw 时改本脚本再重跑写入）
 NODE_PATH=... node tools/verify_chrome.js  # ⑨ 真实 Chrome 验证 29 项（改了显隐/尺寸/配色必跑）
-node tools/verify_live_api.js    # ⑩ 线上产物验收 18 项（发布后跑；Pages 域名本机 Chrome 连不上，走 GitHub API 核对远端真实字节）
+node tools/verify_live_api.js    # ⑩ 线上产物验收 20 项（发布后跑；Pages 域名本机 Chrome 连不上，走 GitHub API 核对远端真实字节）
 ```
 
 **⑩ 为什么要用 API 而不是 playwright 访问 Pages**：`github.io` 在本机 Chrome 的网络栈里连不上
@@ -131,6 +133,7 @@ node tools/verify_live_api.js    # ⑩ 线上产物验收 18 项（发布后跑�
 改了 `assets/logo*.svg` → **必须重跑 `node tools/logo_export.js`** 重新导出 PNG（PNG 是派生物）。
 加了新数据文件 → **要同时改三处**：build_web.js 的 FILES 列表、compose.js 的数据加载列表、check_fields.js 的加载列表。漏一处就是「文件在但引擎看不见」的静默失败（2026-10-22 加 gallery.json 时漏了 compose.js，inventory 报「画廊槽位 0」才暴露）。
 改了 index.html 的显隐相关 CSS → ⑤ 之外加跑真实 Chrome（playwright-core，**必须 file:// URL**，本机 localhost http 服务被坏代理拦死）。
+改了 index.html 的资源引用 / 版本号 → **必须重跑 gallery_sync.js 与 embed_gallery.js**（清单和 README 里的路径要带新版本），并确认 smoke-web 的「缓存破坏在位」断言仍绿。
 界面显隐类 bug jsdom 查不出 CSS 级联问题的一切嫌疑，都用真实 Chrome 逐页签断言 computed display。
 **真实 Chrome 量尺寸前必须先切到目标页**（2026-10-22 踩坑）：`display:none` 的视图里 `getBoundingClientRect()` 恒为 0，会把"控件太小"误判成"控件是 0 高度"。同理 `getElementById` 拿到的可能是另一页的同名元素（#entSearch 在地图页、#enSearch 在词条页）。
 

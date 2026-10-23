@@ -36,6 +36,12 @@ function main() {
 
   console.log("data-bundle.js 已重建：" + counts.join(" "));
   console.log("engine.js 已同步（tools/compose.js 的副本，勿手改）");
+
+  // 数据内容变了，页面引用的 data-bundle.js / engine.js URL 也必须变，
+  // 否则浏览器与 Pages CDN 继续发缓存的旧字节（「本地改了线上不换」同类坑）。
+  // 画廊换图走 gallery_refresh.js，那里已含 bump；这条路径覆盖改词条/改数据。
+  const { bumpVer } = require("./asset_ver.js");
+  console.log("资产版本号 → " + bumpVer() + "（index.html 资源引用已换新 URL）");
 }
 
 if (require.main === module) main();

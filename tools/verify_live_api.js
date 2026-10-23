@@ -61,7 +61,9 @@ async function api(p) {
     "线上清单与本地一致（" + keys.length + " 条）",
     "线上 " + keys.length + " / 本地 " + localKeys.length);
   const paths = keys.map(k => imgs[k]);
-  ok(paths.every(p => /\.(png|jpe?g|webp)$/i.test(p)),
+  // 路径带 ?v= 缓存破坏参数（tools/asset_ver.js），断言前先剥掉
+  const bare = paths.map(p => p.split("?")[0]);
+  ok(bare.every(p => /\.(png|jpe?g|webp)$/i.test(p)),
     "线上清单扩展名全部合法（jpg/png 均可，不写死格式）", paths.join(","));
   ok(!/CS-0[123]\.jpg/i.test(txt), "线上清单已不引用旧的 CS-0x.jpg");
 
@@ -69,7 +71,7 @@ async function api(p) {
   const list = await api("/contents/gallery/?ref=main");
   const byName = {};
   list.forEach(f => { byName[f.name] = f; });
-  const missing = paths.filter(p => !byName[p.split("/").pop()]);
+  const missing = bare.filter(p => !byName[p.split("/").pop()]);
   ok(missing.length === 0, "清单每条路径在远端都有对应文件", missing.join(","));
   const noStale = !list.some(f => /^CS-0[123]\.jpg$/.test(f.name));
   ok(noStale, "远端旧 CS-01~03.jpg 已彻底删除（不会 404 但仍被引用）");
@@ -116,9 +118,23 @@ async function api(p) {
   const html = Buffer.from(idx.content, "base64").toString("utf8");
   ok(html.indexOf("&lt;卡号&gt;.jpg") !== -1 && html.indexOf(".png") !== -1,
     "线上 index.html 放图提示同时列出 jpg 与 png");
+  // 5b. 缓存破坏在位：四个 JS + favicon/logo 必须带 ?v=，且与 window.ASSET_VER 一致。
+  //     不带的后果：内容换了 URL 不变，浏览器与 Pages CDN 一直发旧字节——
+  //     「本地更新了线上就是不换」的第二轮根因（2026-10-24 修，勿回退）。
+  const avM = html.match(/window\.ASSET_VER\s*=\s*"([^"]*)"/);
+  const av = avM ? avM[1] : "";
+  ok(!!av, "线上 index.html 带 window.ASSET_VER 版本号", av || "（缺失）");
+  const resRefs = html.match(/(?:src|href)="(assets\/[\w.-]+\.(?:js|png))"/g) || [];
+  const noVer = resRefs.filter(r => r.indexOf("?v=") === -1);
+  const wrongVer = resRefs.filter(r => r.indexOf("?v=" + av) === -1 && r.indexOf("?v=") !== -1);
+  ok(resRefs.length >= 6 && noVer.length === 0 && wrongVer.length === 0,
+    "线上资源引用全部带正确版本号（缓存破坏）",
+    resRefs.length + " 个引用，缺版本 " + noVer.length + "，版本不符 " + wrongVer.length +
+    (noVer.concat(wrongVer).length ? "：" + noVer.concat(wrongVer).join(" ") : ""));
   const app = await api("/contents/assets/app.js?ref=main");
   const appTxt = Buffer.from(app.content, "base64").toString("utf8");
   ok(appTxt.indexOf(".jpg / .png") !== -1, "线上 app.js 待配图提示已格式无关");
+  ok(appTxt.indexOf('split("?")[0]') !== -1, "线上 app.js 复制文件名会剥掉 ?v= 参数");
 
   // 6. 同步脚本在线上是最新版（含多格式归组逻辑）
   const gs = await api("/contents/tools/gallery_sync.js?ref=main");

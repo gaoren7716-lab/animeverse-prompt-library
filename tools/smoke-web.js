@@ -17,11 +17,13 @@ const app = fs.readFileSync(path.join(ROOT, "assets", "app.js"), "utf8");
 
 // 四个外链脚本内联进同一份 HTML（jsdom 不起本地服务器，file:// 下无 localStorage 也无需）
 // 注意：替换串必须用函数返回——字符串替换会把 app.js 里的 $$ 塌成 $（$$ 在替换串里是转义序列）
+// 正则匹配而非精确串：index.html 的资源引用带 ?v= 缓存破坏参数（tools/asset_ver.js），
+// 精确串 `<script src="assets/app.js"></script>` 会匹配不上，内联就静默失败。
 const inlined = html
-  .replace('<script src="assets/data-bundle.js"></script>', function () { return "<script>\n" + bundle + "\n</script>"; })
-  .replace('<script src="assets/engine.js"></script>', function () { return "<script>\n" + engine + "\n</script>"; })
-  .replace('<script src="assets/gallery-imgs.js"></script>', function () { return "<script>\n" + gallery + "\n</script>"; })
-  .replace('<script src="assets/app.js"></script>', function () { return "<script>\n" + app + "\n</script>"; });
+  .replace(/<script src="assets\/data-bundle\.js[^"]*"><\/script>/, function () { return "<script>\n" + bundle + "\n</script>"; })
+  .replace(/<script src="assets\/engine\.js[^"]*"><\/script>/, function () { return "<script>\n" + engine + "\n</script>"; })
+  .replace(/<script src="assets\/gallery-imgs\.js[^"]*"><\/script>/, function () { return "<script>\n" + gallery + "\n</script>"; })
+  .replace(/<script src="assets\/app\.js[^"]*"><\/script>/, function () { return "<script>\n" + app + "\n</script>"; });
 if (inlined.indexOf("assets/app.js") !== -1) {
   console.log("✗ 脚本内联失败：index.html 里仍有外链 script");
   process.exit(1);
@@ -116,10 +118,19 @@ function run() {
     ok(gGrid.className.indexOf("gs-sm") === -1, "画廊切回大图", gGrid.className);
     ok($$("#gGrid .gcard img")[0].getAttribute("src").indexOf("gallery/CS-") === 0, "配图 src 指向 gallery/ 目录");
     ok(typeof window.GALLERY_IMGS === "object" && Object.keys(window.GALLERY_IMGS).length === nImg, "GALLERY_IMGS 清单与页面一致");
+    /* 缓存破坏（tools/asset_ver.js）：版本号常量在、清单路径带 ?v=。
+     * 缺了这层，换了图 URL 不变，浏览器和 Pages CDN 一直发旧字节——
+     * 2026-10-24 之前「本地更新了线上不换」的第二轮根因，勿回退。 */
+    ok(typeof window.ASSET_VER === "string" && window.ASSET_VER.length > 0,
+      "页面带 window.ASSET_VER 资产版本号", window.ASSET_VER || "（缺失）");
+    ok(Object.keys(window.GALLERY_IMGS).every(function (k) {
+      return window.GALLERY_IMGS[k].indexOf("?v=" + window.ASSET_VER) !== -1;
+    }), "清单路径全部带当前版本 ?v=（缓存破坏在位）");
     /* 图片格式自适应：清单里的路径扩展名必须与磁盘一致，且混排（jpg+png）都要渲染出来。
-     * 早期把 .jpg 写死在文案与提示里，用户把图换成 PNG 后页面碎图、提示还教人存 .jpg。 */
+     * 早期把 .jpg 写死在文案与提示里，用户把图换成 PNG 后页面碎图、提示还教人存 .jpg。
+     * 路径带 ?v= 缓存破坏参数（见 tools/asset_ver.js），匹配前先剥掉。 */
     var exts = Object.keys(window.GALLERY_IMGS).map(function (k) {
-      return (window.GALLERY_IMGS[k].match(/\.(png|jpe?g|webp)$/i) || [])[1] || "";
+      return (window.GALLERY_IMGS[k].split("?")[0].match(/\.(png|jpe?g|webp)$/i) || [])[1] || "";
     });
     ok(exts.every(function (e) { return e; }), "清单每条都带合法图片扩展名", exts.join(","));
     // 混排能力由 gallery_multiformat_test 的构造目录覆盖（jpg/png/webp 并存）；
@@ -127,9 +138,9 @@ function run() {
     var imgs = $$("#gGrid .gcard img");
     ok(imgs.length === nImg, "已配图全部渲染", String(imgs.length));
     var srcs = imgs.map(function (i) { return i.getAttribute("src"); });
-    ok(srcs.every(function (s) { return /\.(png|jpe?g|webp)$/i.test(s); }),
+    ok(srcs.every(function (s) { return /\.(png|jpe?g|webp)(\?|$)/i.test(s); }),
        "页面图片 src 扩展名全部合法（格式无关，jpg/png 均可）", srcs.join(","));
-    ok(srcs.every(function (s) { return exts.indexOf(s.split(".").pop().toLowerCase()) !== -1; }),
+    ok(srcs.every(function (s) { return exts.indexOf(s.split("?")[0].split(".").pop().toLowerCase()) !== -1; }),
        "页面 src 扩展名与清单一致");
     var todoHint = $$("#gGrid .colorcard").map(function (c) { return c.textContent; }).join(" ");
     ok(todoHint.indexOf(".jpg / .png") !== -1, "待配图提示同时列出 jpg 与 png（不再写死格式）");
