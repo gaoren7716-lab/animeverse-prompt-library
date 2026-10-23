@@ -99,14 +99,20 @@ ok(gs.IMAGE_EXT.indexOf("png") !== -1 && gs.IMAGE_EXT.indexOf("jpg") !== -1 &&
 
 /* 7. 真实画廊目录体检：清单与磁盘一致、无未认领、无重复 */
 const real = gs.scanDir(path.join(__dirname, "..", "gallery"), gs.knownIds());
-ok(Object.keys(real.claimed).length === 10, "真实目录：10 张全认领",
-  String(Object.keys(real.claimed).length));
+// 张数动态推导：用户在不断加图，写死数字会随每次添图而红。
+// knownIds() 返回 {id: zh} 对象（不是数组），取 CS 前缀的键。
+const nCs = Object.keys(gs.knownIds()).filter(id => /^CS-/.test(id)).length;
+ok(Object.keys(real.claimed).length >= nCs, "真实目录：CS 案例位全部认领",
+  String(Object.keys(real.claimed).length) + " 张（其中 CS " + nCs + "）");
 ok(real.unclaimed.length === 0, "真实目录：无未认领文件", real.unclaimed.join(","));
 ok(real.dups.length === 0, "真实目录：无同 id 多格式残留",
   JSON.stringify(real.dups));
 const exts = Object.keys(real.claimed).map(k => real.claimed[k].split(".").pop().toLowerCase());
-ok(exts.indexOf("png") !== -1 && exts.indexOf("jpg") !== -1, "真实目录：png 与 jpg 混排并存",
-  exts.join(","));
+// 混排能力由上方的构造目录用例覆盖（jpg/png/webp 并存、同 id 多文件取舍）；
+// 真实目录现在可能全是同一种格式（用户把 10 张都换成了 PNG），
+// 这里只断言扩展名合法、且与磁盘对得上——不写死必须有两种格式
+ok(exts.length > 0 && exts.every(e => /^(png|jpe?g|webp)$/i.test(e)),
+  "真实目录：扩展名全部合法（jpg/png/webp 均可）", exts.join(","));
 
 fs.rmSync(tmp, { recursive: true, force: true });
 console.log("\n画廊多格式测试：通过 " + pass + " / 失败 " + fail);

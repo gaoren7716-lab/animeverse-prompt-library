@@ -14,7 +14,7 @@
 
 <!-- GALLERY-EMBED:START -->
 <p>
-  以下 10 张是本库用自身配方实测出图的作品（其余 40 个位置是预留位，<strong>自带完整配方、可直接复制去出图</strong>）：
+  画廊已上墙 22 张：CS-01~CS-10 是自带配方的验证案例实测，GL 段 12 张是预留位按配方出图，剩余 28 个预留位<strong>自带完整配方、可直接复制去出图</strong>：
 </p>
 
 <p>
@@ -31,13 +31,31 @@
   <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-09.jpg" width="19%" alt="CS-09 水墨雪林狐（艺术帧）"></a>
   <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/CS-10.jpg" width="19%" alt="CS-10 都市对决海报（美漫图形化）"></a>
 </p>
+<p>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-11.jpg" width="19%" alt="GL-11 GL-11"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-12.jpg" width="19%" alt="GL-12 GL-12"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-13.jpg" width="19%" alt="GL-13 GL-13"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-14.jpg" width="19%" alt="GL-14 GL-14"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-15.jpg" width="19%" alt="GL-15 GL-15"></a>
+</p>
+<p>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-16.jpg" width="19%" alt="GL-16 GL-16"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-17.jpg" width="19%" alt="GL-17 GL-17"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-18.jpg" width="19%" alt="GL-18 GL-18"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-19.jpg" width="19%" alt="GL-19 GL-19"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-20.jpg" width="19%" alt="GL-20 GL-20"></a>
+</p>
+<p>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-21.jpg" width="19%" alt="GL-21 GL-21"></a>
+  <a href="https://gaoren7716-lab.github.io/animeverse-prompt-library/#v-gallery"><img src="assets/gallery-thumbs/GL-22.jpg" width="19%" alt="GL-22 GL-22"></a>
+</p>
 <!-- GALLERY-EMBED:END -->
 
 ## 三档使用境界
 
 | 境界 | 入口 | 干什么 |
 |---|---|---|
-| 直接复制 | 示例画廊 / 验证案例 | 50 个位置：10 张实测图 + 40 个自带配方的预留位，复制即用 |
+| 直接复制 | 示例画廊 / 验证案例 | 50 个位置：22 张已上墙（10 张案例实测 + 12 张预留位出图）+ 28 个自带配方的预留位，复制即用 |
 | 组合构成 | 自定义出图 / 提示词合成器 / 抽卡 | 12 预设、维度自选、约束随机抽卡 |
 | 无限想象 | 系列出图 / 短剧分镜 | 一个主题一套图；一段短剧文案一套分镜 |
 

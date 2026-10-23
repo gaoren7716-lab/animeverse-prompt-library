@@ -79,7 +79,8 @@ function galleryImg(id) {
   return (typeof GALLERY_IMGS !== "undefined" && GALLERY_IMGS && GALLERY_IMGS[id]) ? GALLERY_IMGS[id] : null;
 }
 function galleryHasImg(id) { return !!galleryImg(id); }
-/* 槽位归一：CS-xx 复用验证案例的配方/描述/验证点，GL-xx 用自带的 */
+/* 槽位归一：CS-xx 复用验证案例的配方/描述/验证点，GL-xx 用自带的，
+ * CS-11~CS-14 实拍位（live）只挂图不带配方——不过滤，页面给「配方待补」态 */
 function gSlots() {
   var byCase = {};
   D.cases.items.forEach(function (c) { byCase[c.id] = c; });
@@ -91,9 +92,10 @@ function gSlots() {
       desc: s.desc || (c ? c.desc : ""),
       validates: s.validates || (c ? c.validates : ""),
       recipe: s.recipe || (c ? c.recipe : null),
+      live: !!s.live,
       tested: c ? c.tested : false
     };
-  }).filter(function (s) { return !!s.recipe; });
+  });
 }
 function renderGallery() {
   var grid = $("gGrid");
@@ -107,8 +109,8 @@ function renderGallery() {
   grid.className = "grid g3" + (gSize === "sm" ? " gs-sm" : "");
   $("gCount").textContent = "共 " + slots.length + " 个位置（已配图 " + filled + " · 待配图 " + (slots.length - filled) + "）";
   grid.innerHTML = shown.map(function (s) {
-    var st = AV.index.styles[s.recipe.style];
-    var pal = AV.paletteOf(s.recipe.style);
+    var st = s.recipe ? AV.index.styles[s.recipe.style] : null;
+    var pal = s.recipe ? AV.paletteOf(s.recipe.style) : null;
     var sw = pal ? pal.swatches.map(function (x) { return x.hex; }) : ["#2c2d55"];
     var swHtml = sw.map(function (h) { return '<i style="background:' + h + '"></i>'; }).join("");
     var img = galleryImg(s.id);
@@ -116,13 +118,18 @@ function renderGallery() {
       ? '<img src="' + esc(img) + '" alt="' + esc(s.zh) + '">'
       : '<div class="colorcard"><div class="swrow">' + swHtml + '</div><span class="mut sm">待配图 · ' + esc(st ? st.zh : "") + '</span>' +
         '<span class="mut sm" style="font-size:10.5px;opacity:.75">存成 gallery/' + esc(s.id) + '.jpg / .png</span></div>';
+    /* 实拍位（live）：有图无配方。不给「复制提示词 / 合成器改用」——
+     * 那等于凭空编一组配方冒充用户出图用的。换成一行实话。 */
+    var badge = s.tested ? ' <span class="badge b-gr">已实测</span>'
+      : (s.live ? ' <span class="badge b-yl">实拍位 · 配方待补</span>' : "");
+    var acts = s.recipe
+      ? '<button class="cp" data-act="copy">复制提示词</button>' +
+        '<button class="btn sm" data-act="synth">合成器改用</button>'
+      : '<span class="mut sm">这组是实拍图，配方未记录（要补配方改 data/gallery.json）</span>';
     return '<div class="gcard" data-cs="' + s.id + '">' +
       '<div class="imgwrap" data-act="detail"><span class="gid" data-act="gid">' + s.id + '</span>' + imgHtml + "</div>" +
-      '<div class="body"><h4>' + esc(s.zh) + (s.tested ? ' <span class="badge b-gr">已实测</span>' : "") + "</h4><div class=\"desc\">" + esc(s.desc) + "</div></div>" +
-      '<div class="acts">' +
-      '<button class="cp" data-act="copy">复制提示词</button>' +
-      '<button class="btn sm" data-act="synth">合成器改用</button>' +
-      "</div></div>";
+      '<div class="body"><h4>' + esc(s.zh) + badge + "</h4><div class=\"desc\">" + esc(s.desc) + "</div></div>" +
+      '<div class="acts">' + acts + "</div></div>";
   }).join("");
 }
 $("gGrid").addEventListener("click", function (e) {
@@ -137,9 +144,19 @@ $("gGrid").addEventListener("click", function (e) {
     copyText(img ? img.split("/").pop() : cs.id + ".jpg 或 .png");
     return;
   }
-  if (act === "copy") { copyText(AV.compose(cs.recipe).prompt); return; }
-  if (act === "synth") { S.sel = Object.assign({}, cs.recipe); S.theme = ""; renderSynth(); switchView("v-synth"); toast("已载入配方"); return; }
+  if (act === "copy") { if (cs.recipe) copyText(AV.compose(cs.recipe).prompt); return; }
+  if (act === "synth") { if (cs.recipe) { S.sel = Object.assign({}, cs.recipe); S.theme = ""; renderSynth(); switchView("v-synth"); toast("已载入配方"); } return; }
   // 详情
+  if (!cs.recipe) {
+    /* 实拍位没有配方，详情只给图与说明，不编配方 */
+    openDrawer(
+      "<h3>" + esc(cs.id) + " · " + esc(cs.zh) + "</h3>" +
+      '<p class="mut sm" style="margin:6px 0">' + esc(cs.desc) + "</p>" +
+      '<h4 style="margin:12px 0 6px">配方</h4><p class="sm">未记录。这组是实拍作品，出图配方还没归档——' +
+      "要补配方，在 data/gallery.json 给这个槽位加上 recipe（11 维）与 validates，页面会自动升级成完整卡片。</p>"
+    );
+    return;
+  }
   var r = AV.compose(cs.recipe);
   var pal = AV.paletteOf(cs.recipe.style);
   openDrawer(

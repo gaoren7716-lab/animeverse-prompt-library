@@ -179,6 +179,15 @@ data.cases.items.forEach(cs => {
 // gallery：槽位 id / 配方引用 / 与案例的一致性
 data.gallery.slots.forEach(sl => {
   if (!/^(CS|GL)-\d{2}$/.test(sl.id)) errors.push(sl.id + " 画廊槽位 id 格式非法（应为 CS-xx 或 GL-xx）");
+  if (sl.live) {
+    /* 实拍位：只挂图不带配方。诚实标注配方待补，不冒充已验证案例。
+     * 只要求 zh/desc；recipe/validates 一律不收——收了就等于默认它有验证点。 */
+    if (!/^CS-\d{2}$/.test(sl.id)) errors.push(sl.id + " 实拍位只能是 CS 前缀（GL 是预留配方位，不该 live）");
+    if (!sl.zh || !sl.desc) errors.push(sl.id + " 实拍位缺 zh/desc");
+    if (sl.recipe) errors.push(sl.id + " 实拍位不应带 recipe（要么给完整案例位，要么留空标配方待补）");
+    if (sl.validates) errors.push(sl.id + " 实拍位不应带 validates（没有配方就没有验证点）");
+    return;
+  }
   if (sl.case) {
     // 复用案例：必须真的存在该案例，且不自带 recipe（避免两处配方漂移）
     if (!data.cases.items.some(c => c.id === sl.case)) errors.push(sl.id + " 引用的案例不存在：" + sl.case);

@@ -193,16 +193,19 @@ function ok(c, name, extra) {
     function (i) { return { src: i.getAttribute("src"), w: i.naturalWidth, h: i.naturalHeight }; }
   ));
   const broken = imgs.filter(function (i) { return !i.w || !i.h; });
-  ok(imgs.length === 10 && broken.length === 0,
-    "画廊 10 张图全部真实加载成功（无碎图）",
-    imgs.length + " 张，碎图 " + broken.length + (broken.length ? "：" + broken.map(function (b) { return b.src; }).join(",") : ""));
+  // 张数动态推导：用户在不断加图（10 → 14 → …），与画廊计数条对齐
+  const want = await page.evaluate(() => (document.getElementById("gCount").textContent.match(/已配图 (\d+)/) || [])[1]);
+  ok(Number(want) === imgs.length && broken.length === 0,
+    "画廊图全部真实加载成功（无碎图），张数与计数一致",
+    imgs.length + " 张（计数 " + want + "），碎图 " + broken.length + (broken.length ? "：" + broken.map(function (b) { return b.src; }).join(",") : ""));
   const srcs = imgs.map(function (i) { return i.src; });
-  ok(srcs.some(function (s) { return /\.png$/i.test(s); }) &&
-     srcs.some(function (s) { return /\.jpe?g$/i.test(s); }),
-    "画廊 png 与 jpg 混排都被浏览器正确渲染",
-    srcs.filter(function (s) { return /\.(png|jpe?g)$/i.test(s); }).length + " 张已配图");
+  ok(srcs.every(function (s) { return /\.(png|jpe?g|webp)$/i.test(s); }),
+    "画廊图片扩展名全部合法（jpg/png 均可识别）",
+    srcs.filter(function (s) { return /\.(png|jpe?g|webp)$/i.test(s); }).length + " 张已配图");
   const pngImg = imgs.filter(function (i) { return /\.png$/i.test(i.src); })[0];
-  ok(pngImg && pngImg.w >= 1200, "PNG 图真实像素宽度正常（未被压坏）",
+  // 竖构图（1024x1536）宽度不足 1200 是正常的——压缩规则是「宽 1200、不放大」，
+  // 所以查长边，拿宽 ≥1200 一刀切会误报
+  ok(pngImg && Math.max(pngImg.w, pngImg.h) >= 1200, "PNG 图真实像素长边正常（未被压坏）",
     pngImg ? pngImg.w + "x" + pngImg.h : "无 PNG 图");
 
   // 10. 短剧抽卡（没想法就抽一部）

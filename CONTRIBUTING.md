@@ -37,8 +37,9 @@ node tools/smoke.js           # 引擎冒烟
 
 - 改了显隐 / 尺寸 / 配色，**必须**加跑真实 Chrome：`NODE_PATH=... node tools/verify_chrome.js`
   （jsdom 查不出 CSS 级联和图片加载问题，这是本库踩过最多的坑）
-- 画廊加图：把图存成 `gallery/<卡号>.jpg` 或 `gallery/<卡号>.png`（两种都认），
-  重跑 `node tools/gallery_sync.js` 即可挂上；母版文件用 `_` 前缀不进清单
+- 画廊加图：把图存成 `gallery/<卡号>.jpg` 或 `gallery/<卡号>.png`（`.png/.jpg/.jpeg/.webp` 都认，混放没问题），
+  然后跑 **`node tools/gallery_refresh.js`**（一条命令：重建清单 → 压缩到 1200px → 刷新 README 缩略图 → 体检）；
+  母版文件用 `_` 前缀不进清单。只丢图不跑 refresh 的话页面不会变——页面读的是清单不是目录
 
 ## 提 PR 前
 
@@ -58,8 +59,8 @@ NODE_PATH=... node tools/verify_chrome.js  # 真实 Chrome 验证 29 项（改�
 node tools/verify_live_api.js    # 线上产物验收 15 项（发布后跑：清单/图片字节/文案/Pages 状态）
 ```
 
-**改了画廊图片，还要多跑一步** `node tools/embed_gallery.js`——README 里的画廊展示是它生成的
-（`assets/gallery-thumbs/` 缩略图也是），不重跑 README 会停在旧清单上。
+**改了画廊图片**：丢图只是第一步，还要跑 `node tools/gallery_refresh.js`（重建清单 + 压缩 + 刷新 README 画廊段与缩略图 + 体检）。
+README 的画廊展示由 `tools/embed_gallery.js` 生成（`GALLERY-EMBED` 标记内手改会被覆盖），refresh 会自动带过。
 
 ## 品牌 LOGO
 

@@ -45,16 +45,24 @@ async function api(p) {
 }
 
 (async () => {
-  // 1. 线上清单：png 与 jpg 都有，且扩展名与远端真实文件一致
+  // 1. 线上清单：与本地清单一致（用户在不断加图，数字一律动态比）
   const mf = await api("/contents/assets/gallery-imgs.js?ref=main");
   const txt = Buffer.from(mf.content, "base64").toString("utf8");
   const m = txt.match(/window\.GALLERY_IMGS\s*=\s*(\{[\s\S]*?\});/);
   const imgs = m ? JSON.parse(m[1]) : {};
   const keys = Object.keys(imgs);
-  ok(keys.length === 10, "线上清单 10 条", String(keys.length));
+  let localKeys = keys;
+  try {
+    const lt = fs.readFileSync(path.join(__dirname, "..", "assets", "gallery-imgs.js"), "utf8");
+    const lm = lt.match(/window\.GALLERY_IMGS\s*=\s*(\{[\s\S]*?\});/);
+    if (lm) localKeys = Object.keys(JSON.parse(lm[1]));
+  } catch (e) { /* 跑在没 clone 的机器上就只验线上自身一致性 */ }
+  ok(keys.length === localKeys.length && keys.every(k => imgs[k]),
+    "线上清单与本地一致（" + keys.length + " 条）",
+    "线上 " + keys.length + " / 本地 " + localKeys.length);
   const paths = keys.map(k => imgs[k]);
-  ok(paths.some(p => /\.png$/i.test(p)), "线上清单含 png 路径", paths.filter(p => /\.png$/i.test(p)).join(","));
-  ok(paths.some(p => /\.jpe?g$/i.test(p)), "线上清单含 jpg 路径", paths.filter(p => /\.jpe?g$/i.test(p)).join(","));
+  ok(paths.every(p => /\.(png|jpe?g|webp)$/i.test(p)),
+    "线上清单扩展名全部合法（jpg/png 均可，不写死格式）", paths.join(","));
   ok(!/CS-0[123]\.jpg/i.test(txt), "线上清单已不引用旧的 CS-0x.jpg");
 
   // 2. 远端 gallery/ 目录：文件真实存在、格式与清单对得上、旧文件已删
@@ -67,7 +75,11 @@ async function api(p) {
   ok(noStale, "远端旧 CS-01~03.jpg 已彻底删除（不会 404 但仍被引用）");
   const pngFiles = list.filter(f => /\.png$/i.test(f.name));
   const jpgFiles = list.filter(f => /\.jpe?g$/i.test(f.name));
-  ok(pngFiles.length === 3 && jpgFiles.length === 7, "远端 3 PNG + 7 JPG 混排", pngFiles.length + "+" + jpgFiles.length);
+  // 混排能力由本地 gallery_multiformat_test 的构造目录覆盖；
+  // 这里只断言远端图片总数与清单条数对得上（用户可能全 PNG 也可能混放）
+  ok(pngFiles.length + jpgFiles.length >= keys.length,
+    "远端图片数与清单对得上（jpg/png 混放均可）",
+    pngFiles.length + " PNG + " + jpgFiles.length + " JPG / 清单 " + keys.length);
 
   // 3. 图片真实字节：PNG 头是 89504e47，JPEG 头是 ffd8ff + 标记字节，尺寸正常
   let pngOk = 0, jpgOk = 0, badBytes = [];
@@ -83,8 +95,10 @@ async function api(p) {
     else if (isPng) pngOk++; else jpgOk++;
     if (buf.length !== f.size) badBytes.push(f.name + " 长度不符");
   }
-  ok(badBytes.length === 0, "10 张图远端字节头正确且完整（无截断/无损坏）", badBytes.join(","));
-  ok(pngOk === 3 && jpgOk === 7, "PNG 头 89504e47 / JPG 头 ffd8ff 全部正确", "png " + pngOk + " jpg " + jpgOk);
+  ok(badBytes.length === 0, "远端图片字节头正确且完整（无截断/无损坏）",
+    (pngOk + jpgOk) + " 张，" + badBytes.join(","));
+  ok(pngOk + jpgOk === keys.length, "远端图片数与清单条数一致",
+    "png " + pngOk + " jpg " + jpgOk + " / 清单 " + keys.length);
 
   // 4. PNG 尺寸：长边 ≥ 1200（压缩规则是「宽 1200」，横图 1200×800、竖图 1024×1536 都正常；
   //    withoutEnlargement 不会把小图放大——别拿某一边的下限一刀切）
@@ -121,7 +135,9 @@ async function api(p) {
     rmTxt.indexOf("GALLERY-EMBED:END") !== -1;
   ok(inBlock, "README 含 GALLERY-EMBED 嵌入段");
   const thumbRefs = (rmTxt.match(/assets\/gallery-thumbs\/[\w.-]+\.jpg/g) || []);
-  ok(thumbRefs.length >= 10, "README 画廊段引用 ≥10 张缩略图", String(thumbRefs.length));
+  // 张数与线上清单条数对齐（用户在不断填预留位，不写死具体数字）
+  ok(thumbRefs.length === keys.length, "README 画廊段引用缩略图数与清单一致",
+    String(thumbRefs.length) + " / " + keys.length);
   const tl = await api("/contents/assets/gallery-thumbs/?ref=main");
   const thumbNames = new Set(tl.map(f => f.name));
   const thumbMiss = thumbRefs.map(p => p.split("/").pop()).filter(n => !thumbNames.has(n));

@@ -95,11 +95,20 @@ function buildBlock(ids, titles, thumbOk) {
     rows.push("<p>\n  " + row.join("\n  ") + "\n</p>");
   }
   const n = ids.length;
-  const total = 50; // 画廊槽位总数
+  // 槽位总数与两类来源都从数据读，不写死——用户在不断填预留位，
+  // 写死 50 的话每次加图这段文案就与事实脱节
+  let total = n;
+  try {
+    const gal = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "gallery.json"), "utf8"));
+    if (gal.slots && gal.slots.length) total = gal.slots.length;
+  } catch (e) { /* 读不到就退回用图数，别因此中断 */ }
+  const nCs = ids.filter(id => /^CS-/.test(id)).length;
+  const nGl = n - nCs;
   return [
     "<p>",
-    "  以下 " + n + " 张是本库用自身配方实测出图的作品（其余 " + (total - n) +
-    " 个位置是预留位，<strong>自带完整配方、可直接复制去出图</strong>）：",
+    "  画廊已上墙 " + n + " 张：CS-01~CS-" + String(nCs).padStart(2, "0") +
+    " 是自带配方的验证案例实测，" + (nGl ? "GL 段 " + nGl + " 张是预留位按配方出图，" : "") +
+    "剩余 " + (total - n) + " 个预留位<strong>自带完整配方、可直接复制去出图</strong>：",
     "</p>",
     "",
   ].concat(rows).join("\n");

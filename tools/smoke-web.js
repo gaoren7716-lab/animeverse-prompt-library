@@ -92,34 +92,45 @@ function run() {
 
     /* 4. 画廊 / 地图 / 词条 / 搭配 / 案例 渲染 */
     click($$("#nav button").filter(function (b) { return b.getAttribute("data-v") === "v-gallery"; })[0]);
-    ok($$("#gGrid .gcard").length === 50, "画廊 50 个位置", String($$("#gGrid .gcard").length));
-    ok($$("#gGrid .gcard img").length === 10, "画廊 10 张已配图", String($$("#gGrid .gcard img").length));
-    ok($$("#gGrid .gcard .colorcard").length === 40, "画廊 40 个待配图占位", String($$("#gGrid .gcard .colorcard").length));
-    ok($("gCount").textContent.indexOf("已配图 10") !== -1, "画廊计数显示已配图 10", $("gCount").textContent);
+    /* 数量一律动态推导：已配图数跟着 GALLERY_IMGS 清单走（用户在加图/换格式），
+     * 占位数固定为 40 个 GL 预留位。写死具体数字的话，用户每加一批图回归就红一次。 */
+    var nImg = $$("#gGrid .gcard img").length;
+    var nTodo = $$("#gGrid .gcard .colorcard").length;
+    ok(nImg === Object.keys(window.GALLERY_IMGS).length, "画廊已配图数与清单一致",
+      String(nImg) + " / " + Object.keys(window.GALLERY_IMGS).length);
+    // 占位数不写死：用户在不断把预留位填上（GL-11~GL-18 已有图），
+    // 与计数条的「待配图」数字对齐即可，两边都从同一份数据来
+    var gCountText = $("gCount").textContent;
+    var nTodoWant = (gCountText.match(/待配图 (\d+)/) || [])[1];
+    ok(Number(nTodoWant) === nTodo, "画廊待配图占位数与计数一致",
+      nTodo + " / " + nTodoWant);
+    ok(nImg + nTodo === $$("#gGrid .gcard").length, "已配图 + 占位 = 总卡数");
+    ok($("gCount").textContent.indexOf("已配图 " + nImg) !== -1, "画廊计数显示已配图 " + nImg, $("gCount").textContent);
     // 图幅切换：大图 → 小图（网格类名变化，卡片数量不变）
     var gGrid = $("gGrid");
     ok(gGrid.className.indexOf("gs-sm") === -1, "画廊默认大图", gGrid.className);
     click($$("[data-gs]").filter(function (b) { return b.getAttribute("data-gs") === "sm"; })[0]);
     ok(gGrid.className.indexOf("gs-sm") !== -1, "画廊切小图加 gs-sm 类", gGrid.className);
-    ok($$("#gGrid .gcard").length === 50, "小图下仍是 50 张", String($$("#gGrid .gcard").length));
+    ok($$("#gGrid .gcard").length === nImg + nTodo, "小图下卡片数不变", String($$("#gGrid .gcard").length));
     click($$("[data-gs]").filter(function (b) { return b.getAttribute("data-gs") === "lg"; })[0]);
     ok(gGrid.className.indexOf("gs-sm") === -1, "画廊切回大图", gGrid.className);
     ok($$("#gGrid .gcard img")[0].getAttribute("src").indexOf("gallery/CS-") === 0, "配图 src 指向 gallery/ 目录");
-    ok(typeof window.GALLERY_IMGS === "object" && Object.keys(window.GALLERY_IMGS).length === 10, "GALLERY_IMGS 清单 10 条");
+    ok(typeof window.GALLERY_IMGS === "object" && Object.keys(window.GALLERY_IMGS).length === nImg, "GALLERY_IMGS 清单与页面一致");
     /* 图片格式自适应：清单里的路径扩展名必须与磁盘一致，且混排（jpg+png）都要渲染出来。
      * 早期把 .jpg 写死在文案与提示里，用户把图换成 PNG 后页面碎图、提示还教人存 .jpg。 */
     var exts = Object.keys(window.GALLERY_IMGS).map(function (k) {
       return (window.GALLERY_IMGS[k].match(/\.(png|jpe?g|webp)$/i) || [])[1] || "";
     });
     ok(exts.every(function (e) { return e; }), "清单每条都带合法图片扩展名", exts.join(","));
-    var hasPng = exts.some(function (e) { return /^png$/i.test(e); });
-    var hasJpg = exts.some(function (e) { return /^jpe?g$/i.test(e); });
-    ok(hasPng && hasJpg, "画廊混排 png 与 jpg 都被认领", exts.join(","));
+    // 混排能力由 gallery_multiformat_test 的构造目录覆盖（jpg/png/webp 并存）；
+    // 这里只断言真实磁盘状态：清单与页面 src 一一对应，扩展名全部合法
     var imgs = $$("#gGrid .gcard img");
-    ok(imgs.length === 10, "混排后仍渲染 10 张图", String(imgs.length));
+    ok(imgs.length === nImg, "已配图全部渲染", String(imgs.length));
     var srcs = imgs.map(function (i) { return i.getAttribute("src"); });
-    ok(srcs.some(function (s) { return /\.png$/i.test(s); }) &&
-       srcs.some(function (s) { return /\.jpe?g$/i.test(s); }), "页面图片 src 含 png 与 jpg 两种扩展名");
+    ok(srcs.every(function (s) { return /\.(png|jpe?g|webp)$/i.test(s); }),
+       "页面图片 src 扩展名全部合法（格式无关，jpg/png 均可）", srcs.join(","));
+    ok(srcs.every(function (s) { return exts.indexOf(s.split(".").pop().toLowerCase()) !== -1; }),
+       "页面 src 扩展名与清单一致");
     var todoHint = $$("#gGrid .colorcard").map(function (c) { return c.textContent; }).join(" ");
     ok(todoHint.indexOf(".jpg / .png") !== -1, "待配图提示同时列出 jpg 与 png（不再写死格式）");
     // 预留位必须自带配方：点开详情能看到词面与验证点

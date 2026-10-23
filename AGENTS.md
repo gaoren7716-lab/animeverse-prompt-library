@@ -95,7 +95,9 @@ gallery/（文件名主干 = 案例 id）──gallery_sync.js──→ assets/g
 - **图片格式不限**（2026-10-22 用户把 CS-01~03 换成 PNG）：`.png/.jpg/.jpeg/.webp` 全部认，
   同一画廊里混放没问题。`gallery_sync.js` 按 id 归组、**取 mtime 较新的一张**（早期版本 readdir 顺序直接覆盖，
   同 id 两格式时清单随机指向哪张）；同 id 多张会打 ⚠ 并让 `--check` 失败，要人工删掉多余的
-- **新图管线**：ImageGen 出图 → 立刻改名成案例 id（并行出图会撞名！提示词首句唯一可避免）→ `gallery_compress.js`（1200px，**保留原格式**：PNG 仍出 PNG 走 256 色调色板、JPEG 仍出 JPEG q88）→ `gallery_sync.js` 重建清单
+- **新图管线**：ImageGen 出图 → 立刻改名成槽位 id（并行出图会撞名！提示词首句唯一可避免）→ **`node tools/gallery_refresh.js`**（一条命令跑完：sync 重建清单 → compress 压缩 → embed 刷新 README 缩略图 → sync --check 体检）
+- **为什么必须跑 refresh**：往 `gallery/` 丢图只是第一步。页面读的是清单 `assets/gallery-imgs.js`，README 读的是缩略图 `assets/gallery-thumbs/`——不重建清单，页面还指向旧路径，用户刷新一万次也不会变（2026-10-23 用户连放 12 张图后就是撞在这个点上）
+- **compress 幂等**：宽 ≤1200 且 <1.2MB 视为已压过会跳过（调色板量化有损，反复压会出色带）；强制重压加 `--force`
 - **压缩必须保留原格式**（旧版只处理 PNG 且一律转 JPEG 再删原 PNG，会把用户手动换的 PNG 改回去）；
   统一转 JPEG 要显式 `--to jpg`。写盘走**临时文件 + rename**，直接覆盖被占用的文件会抛 UNKNOWN open 整批中断
 - `assets/gallery-imgs.js` 是派生物，改它无效，真动作是动 gallery/ 目录再 sync

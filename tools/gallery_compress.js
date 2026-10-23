@@ -20,6 +20,15 @@ const EXT_RE = /\.(png|jpe?g|webp)$/i;
 const argv = process.argv.slice(2);
 const toJpg = argv.includes("--to") ? argv[argv.indexOf("--to") + 1] === "jpg" : false;
 const dry = argv.includes("--dry");
+const force = argv.includes("--force");
+
+/* 「已压过」判定：宽 ≤1200 且体积 < 1.2MB。
+ * 没有这条时，一键刷新每跑一次就把 PNG 再量化一遍——调色板量化有损，
+ * 反复几次渐变区域会出色带。判定阈值取 1.2MB：原始大图普遍 2MB 以上，
+ * 压过的 PNG 在 1MB 左右，能分开。要强制重压加 --force。 */
+function alreadyCompressed(m, size) {
+  return m.width <= 1200 && size < 1200 * 1024;
+}
 
 async function main() {
   let sharp;
@@ -29,13 +38,19 @@ async function main() {
   const files = fs.readdirSync(GAL).filter(f => !f.startsWith("_") && EXT_RE.test(f));
   if (!files.length) { console.log("画廊无图片，无需压缩"); return; }
 
-  let totalBefore = 0, totalAfter = 0;
+  let totalBefore = 0, totalAfter = 0, skipped = 0;
   for (const f of files) {
     const src = path.join(GAL, f);
     const before = fs.statSync(src).size;
     totalBefore += before;
 
     const m = await sharp(src).metadata();
+    if (!force && !toJpg && alreadyCompressed(m, before)) {
+      skipped++;
+      totalAfter += before;
+      console.log("- " + f + " 已是压缩态，跳过（要强制重压加 --force）");
+      continue;
+    }
     const isPng = m.format === "png";
     // PNG 走调色板量化（256 色）——纯 PNG 重编码对照片类图省不了多少，调色板才压得下来
     let pipe = sharp(src).resize({ width: 1200, withoutEnlargement: true });
@@ -70,6 +85,7 @@ async function main() {
   }
   console.log("压缩完成：" + files.length + " 张，" +
     Math.round(totalBefore / 1024) + " KB → " + Math.round(totalAfter / 1024) + " KB" +
+    (skipped ? "（跳过 " + skipped + " 张已压缩）" : "") +
     (toJpg ? "（已转 JPEG，扩展名变了，须重跑 gallery_sync.js）" : "（格式与文件名均未变）") +
     (dry ? "【dry-run，未写盘】" : ""));
 }
