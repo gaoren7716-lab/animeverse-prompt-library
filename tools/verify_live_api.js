@@ -124,10 +124,10 @@ async function api(p) {
   const avM = html.match(/window\.ASSET_VER\s*=\s*"([^"]*)"/);
   const av = avM ? avM[1] : "";
   ok(!!av, "线上 index.html 带 window.ASSET_VER 版本号", av || "（缺失）");
-  const resRefs = html.match(/(?:src|href)="(assets\/[\w.-]+\.(?:js|png))"/g) || [];
+  const resRefs = html.match(/(?:src|href|data-logo)="(assets\/[\w.-]+\.(?:js|png|svg))"/g) || [];
   const noVer = resRefs.filter(r => r.indexOf("?v=") === -1);
   const wrongVer = resRefs.filter(r => r.indexOf("?v=" + av) === -1 && r.indexOf("?v=") !== -1);
-  ok(resRefs.length >= 6 && noVer.length === 0 && wrongVer.length === 0,
+  ok(resRefs.length >= 13 && noVer.length === 0 && wrongVer.length === 0,
     "线上资源引用全部带正确版本号（缓存破坏）",
     resRefs.length + " 个引用，缺版本 " + noVer.length + "，版本不符 " + wrongVer.length +
     (noVer.concat(wrongVer).length ? "：" + noVer.concat(wrongVer).join(" ") : ""));

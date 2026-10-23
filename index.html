@@ -7,9 +7,9 @@
 <!-- 静态资产版本号（缓存破坏）。改动 assets/*.js、data/*.json、画廊图之后，
      跑 node tools/asset_ver.js bump 递增此值，浏览器与 Pages CDN 才会重新取字节。
      不递增的后果：内容换了但 URL 不变，用户刷新一万次还是旧页面（踩过两轮）。 -->
-<script>window.ASSET_VER="20261024-0113";</script>
-<link rel="icon" type="image/png" href="assets/favicon.png?v=20261024-0113">
-<link rel="apple-touch-icon" href="assets/logo.png?v=20261024-0113">
+<script>window.ASSET_VER="20261024-0124";</script>
+<link rel="icon" type="image/png" href="assets/favicon.png?v=20261024-0124">
+<link rel="apple-touch-icon" href="assets/logo.png?v=20261024-0124">
 <style>
 /* ===== 主题变量（暗色） ===== */
 :root{
@@ -192,7 +192,7 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
 
 <aside id="side">
   <div class="logo">
-    <img src="assets/logo.svg" alt="动漫宇宙 ANIMEVERSE PROMPT LIBRARY" width="42" height="42">
+    <img src="assets/logo.svg?v=20261024-0124" alt="动漫宇宙 ANIMEVERSE PROMPT LIBRARY" width="42" height="42">
     <span class="lt"><b>动漫宇宙</b><small>ANIMEVERSE PROMPT LIBRARY</small></span>
   </div>
   <nav class="nav" id="nav">
@@ -414,24 +414,24 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
     <div class="hint sm" style="margin-bottom:10px">图形标（正方形）与横版组合（图形 + 中英文名）均为矢量 SVG，可直接取用。SVG 是唯一真源，改型改 SVG 后重跑 <span class="mono">node tools/logo_export.js</span> 重新导出 PNG。</div>
     <div class="grid g2" style="margin-bottom:10px">
       <div class="card" style="display:flex;align-items:center;gap:18px">
-        <img src="assets/logo.svg" alt="动漫宇宙图形标" width="88" height="88" style="flex:0 0 88px">
+        <img src="assets/logo.svg?v=20261024-0124" alt="动漫宇宙图形标" width="88" height="88" style="flex:0 0 88px">
         <div>
           <b>图形标</b>
           <div class="mut sm" style="margin:4px 0 8px">深色底透明通道，适合头像、图标位、水印</div>
           <div class="row" style="gap:6px">
-            <button class="cp sm" data-logo="assets/logo.svg">复制 SVG</button>
-            <a class="btn sm" href="assets/logo.png" download="animeverse-logo.png">下载 PNG 512</a>
+            <button class="cp sm" data-logo="assets/logo.svg?v=20261024-0124">复制 SVG</button>
+            <a class="btn sm" href="assets/logo.png?v=20261024-0124" download="animeverse-logo.png">下载 PNG 512</a>
           </div>
         </div>
       </div>
       <div class="card" style="display:flex;align-items:center;gap:18px">
-        <img src="assets/logo-lockup.svg" alt="动漫宇宙 ANIMEVERSE PROMPT LIBRARY" style="flex:0 0 auto;max-width:300px;height:auto">
+        <img src="assets/logo-lockup.svg?v=20261024-0124" alt="动漫宇宙 ANIMEVERSE PROMPT LIBRARY" style="flex:0 0 auto;max-width:300px;height:auto">
         <div>
           <b>横版组合</b>
           <div class="mut sm" style="margin:4px 0 8px">带中英文名，适合页头、封面、横幅</div>
           <div class="row" style="gap:6px">
-            <button class="cp sm" data-logo="assets/logo-lockup.svg">复制 SVG</button>
-            <a class="btn sm" href="assets/logo-lockup.png" download="animeverse-lockup.png">下载 PNG</a>
+            <button class="cp sm" data-logo="assets/logo-lockup.svg?v=20261024-0124">复制 SVG</button>
+            <a class="btn sm" href="assets/logo-lockup.png?v=20261024-0124" download="animeverse-lockup.png">下载 PNG</a>
           </div>
         </div>
       </div>
@@ -464,9 +464,9 @@ table.tb tr:hover td{background:rgba(139,92,255,.05)}
 <div id="dtPanel"><button class="close" id="dtClose">×</button><div id="dtBody"></div></div>
 <div id="toast"></div>
 
-<script src="assets/data-bundle.js?v=20261024-0113"></script>
-<script src="assets/engine.js?v=20261024-0113"></script>
-<script src="assets/gallery-imgs.js?v=20261024-0113"></script>
-<script src="assets/app.js?v=20261024-0113"></script>
+<script src="assets/data-bundle.js?v=20261024-0124"></script>
+<script src="assets/engine.js?v=20261024-0124"></script>
+<script src="assets/gallery-imgs.js?v=20261024-0124"></script>
+<script src="assets/app.js?v=20261024-0124"></script>
 </body>
 </html>
